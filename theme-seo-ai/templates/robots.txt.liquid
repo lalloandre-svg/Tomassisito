@@ -1,0 +1,37 @@
+{%- comment -%}
+  robots.txt: regole di default di Shopify, invariate.
+  In più autorizza esplicitamente i crawler dei motori di ricerca AI, applicando loro
+  le stesse regole del gruppo generico (User-agent: *), così carrello, checkout e
+  pagine private restano esclusi anche per loro.
+{%- endcomment -%}
+{% for group in robots.default_groups %}
+  {{- group.user_agent }}
+
+  {%- for rule in group.rules -%}
+    {{ rule }}
+  {%- endfor -%}
+
+  {%- if group.sitemap != blank -%}
+    {{ group.sitemap }}
+  {%- endif %}
+{% endfor %}
+
+{%- for group in robots.default_groups -%}
+  {%- if group.user_agent.value == '*' %}
+# Motori di ricerca e assistenti AI
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+    {%- for rule in group.rules %}
+{{ rule }}
+    {%- endfor %}
+Allow: /
+  {%- endif -%}
+{%- endfor %}

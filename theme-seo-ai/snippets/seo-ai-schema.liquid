@@ -1,0 +1,289 @@
+{%- comment -%}
+  seo-ai-schema: dati strutturati (JSON-LD) per Google e motori di ricerca AI.
+  Renderizzato in <head> da layout/theme.liquid. Sostituisce i blocchi JSON-LD
+  che prima stavano in sections/header.liquid (Organization, WebSite) e
+  sections/main-product.liquid (Product). Gli articoli restano in main-article.
+
+  Dati aziendali: modificare qui sotto (sede, orari, contatti, social).
+  Dati dei caffè: metafield prodotto custom.* (origine, varieta, processo, ...).
+{%- endcomment -%}
+
+{%- liquid
+  assign seo_root = request.origin | append: routes.root_url
+  assign seo_org_id = request.origin | append: '/#organization'
+  assign seo_store_id = request.origin | append: '/#store'
+  assign seo_en = false
+  if request.locale.iso_code == 'en'
+    assign seo_en = true
+  endif
+
+  assign seo_same_as = ''
+  assign seo_socials = 'social_facebook_link,social_instagram_link,social_tiktok_link,social_youtube_link,social_twitter_link,social_pinterest_link,social_tumblr_link,social_snapchat_link,social_vimeo_link' | split: ','
+  for s in seo_socials
+    if settings[s] != blank
+      assign seo_same_as = seo_same_as | append: settings[s] | append: '|'
+    endif
+  endfor
+  unless seo_same_as contains 'tiktok.com'
+    assign seo_same_as = seo_same_as | append: 'https://www.tiktok.com/@tomassicoffee|'
+  endunless
+  assign seo_same_as = seo_same_as | split: '|'
+-%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": {{ seo_org_id | json }},
+        "name": {{ shop.name | json }},
+        "url": {{ seo_root | json }},
+        {%- if settings.logo %}
+          "logo": {{ settings.logo | image_url: width: 500 | prepend: 'https:' | json }},
+        {%- endif %}
+        {%- if shop.description != blank %}
+          "description": {{ shop.description | json }},
+        {%- endif %}
+        "email": "info@tomassicoffee.com",
+        "telephone": "+39 344 446 3108",
+        "foundingDate": "2013",
+        "founder": { "@type": "Person", "name": "Emanuele Tomassi" },
+        "member": [
+          { "@type": "Person", "name": "Emanuele Tomassi" },
+          { "@type": "Person", "name": "Andrè Tomassi" }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Via Verdi 24",
+          "postalCode": "04011",
+          "addressLocality": "Aprilia",
+          "addressRegion": "LT",
+          "addressCountry": "IT"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "telephone": "+39 344 446 3108",
+          "email": "info@tomassicoffee.com",
+          "availableLanguage": ["it", "en"]
+        },
+        "sameAs": [
+          {%- for link in seo_same_as -%}
+            {{ link | json }}{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      },
+      {
+        "@type": "Store",
+        "@id": {{ seo_store_id | json }},
+        "name": {{ shop.name | append: ' – Aprilia' | json }},
+        "description": {% if seo_en %}"Tomassi Coffee roastery shop and order pick-up point in Aprilia (LT)."{% else %}"Punto vendita e ritiro ordini Tomassi Coffee ad Aprilia (LT)."{% endif %},
+        "url": {{ seo_root | json }},
+        {%- if settings.logo %}
+          "image": {{ settings.logo | image_url: width: 500 | prepend: 'https:' | json }},
+        {%- endif %}
+        "parentOrganization": { "@id": {{ seo_org_id | json }} },
+        "telephone": "+39 344 446 3108",
+        "email": "info@tomassicoffee.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Via Verdi 24",
+          "postalCode": "04011",
+          "addressLocality": "Aprilia",
+          "addressRegion": "LT",
+          "addressCountry": "IT"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "07:00",
+            "closes": "22:00"
+          }
+        ]
+      }
+      {%- if request.page_type == 'index' -%}
+        ,
+        {
+          "@type": "WebSite",
+          "@id": {{ request.origin | append: '/#website' | json }},
+          "name": {{ shop.name | json }},
+          "url": {{ seo_root | json }},
+          "inLanguage": {{ request.locale.iso_code | json }},
+          "publisher": { "@id": {{ seo_org_id | json }} },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": {{ request.origin | append: routes.search_url | append: '?q={search_term_string}' | json }}
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }
+      {%- endif -%}
+    ]
+  }
+</script>
+
+{%- comment -%} Breadcrumb {%- endcomment -%}
+{%- liquid
+  assign seo_crumbs = ''
+  assign seo_home = 'Home'
+  case request.page_type
+    when 'product'
+      assign seo_col = collection
+      if seo_col == blank
+        assign seo_col = product.collections.first
+      endif
+      if seo_col != blank
+        assign seo_crumbs = seo_col.title | append: '§' | append: request.origin | append: seo_col.url | append: '¶'
+      endif
+      assign seo_crumbs = seo_crumbs | append: product.title | append: '§' | append: request.origin | append: product.url
+    when 'collection'
+      assign seo_crumbs = collection.title | append: '§' | append: request.origin | append: collection.url
+    when 'blog'
+      assign seo_crumbs = blog.title | append: '§' | append: request.origin | append: blog.url
+    when 'article'
+      assign seo_crumbs = blog.title | append: '§' | append: request.origin | append: blog.url | append: '¶' | append: article.title | append: '§' | append: request.origin | append: article.url
+    when 'page'
+      assign seo_crumbs = page.title | append: '§' | append: request.origin | append: page.url
+  endcase
+-%}
+{%- if seo_crumbs != blank -%}
+  {%- assign seo_crumb_list = seo_crumbs | split: '¶' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": {{ seo_home | json }},
+          "item": {{ seo_root | json }}
+        }
+        {%- for c in seo_crumb_list -%}
+          {%- assign c_parts = c | split: '§' -%}
+          ,
+          {
+            "@type": "ListItem",
+            "position": {{ forloop.index | plus: 1 }},
+            "name": {{ c_parts[0] | json }},
+            "item": {{ c_parts[1] | json }}
+          }
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{%- comment -%} Prodotto: offerte per variante + caratteristiche del caffè dai metafield custom.* {%- endcomment -%}
+{%- if request.page_type == 'product' and product -%}
+  {%- liquid
+    assign mf = product.metafields.custom
+    if seo_en
+      assign seo_text_keys = 'origine:Origin,varieta:Variety,processo:Process,in_tazza:In the cup,metodo_consigliato:Recommended brewing method,ricetta_consigliata:Recommended recipe,per_chi_e:Who it is for,livello_stranezza:Boldness level' | split: ','
+      assign seo_num_keys = 'dolcezza:Sweetness,corpo:Body,acidita:Acidity' | split: ','
+    else
+      assign seo_text_keys = 'origine:Origine,varieta:Varietà,processo:Processo,in_tazza:In tazza,metodo_consigliato:Metodo consigliato,ricetta_consigliata:Ricetta consigliata,per_chi_e:Per chi è,livello_stranezza:Livello di stranezza' | split: ','
+      assign seo_num_keys = 'dolcezza:Dolcezza,corpo:Corpo,acidita:Acidità' | split: ','
+    endif
+    assign seo_brand = product.vendor | default: shop.name
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": {{ request.origin | append: product.url | append: '#product' | json }},
+      "name": {{ product.title | json }},
+      "url": {{ request.origin | append: product.url | json }},
+      "description": {{ product.description | strip_html | strip_newlines | truncate: 5000 | json }},
+      {%- if product.media.size > 0 %}
+        "image": [
+          {%- for m in product.media limit: 5 -%}
+            {{ m.preview_image | image_url: width: 1200 | prepend: 'https:' | json }}{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ],
+      {%- endif %}
+      "brand": { "@type": "Brand", "name": {{ seo_brand | json }} },
+      "manufacturer": { "@id": {{ seo_org_id | json }} },
+      {%- if product.type != blank %}
+        "category": {{ product.type | json }},
+      {%- endif %}
+      {%- if product.selected_or_first_available_variant.sku != blank %}
+        "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      {%- endif %}
+      "additionalProperty": [
+        {%- assign seo_first = true -%}
+        {%- for kv in seo_text_keys -%}
+          {%- assign k = kv | split: ':' -%}
+          {%- assign v = mf[k[0]].value -%}
+          {%- if v != blank -%}
+            {%- unless seo_first %},{% endunless -%}
+            { "@type": "PropertyValue", "name": {{ k[1] | json }}, "value": {{ v | strip_newlines | json }} }
+            {%- assign seo_first = false -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- for kv in seo_num_keys -%}
+          {%- assign k = kv | split: ':' -%}
+          {%- assign v = mf[k[0]].value -%}
+          {%- if v != blank -%}
+            {%- unless seo_first %},{% endunless -%}
+            { "@type": "PropertyValue", "name": {{ k[1] | json }}, "value": {{ v | json }}, "minValue": 1, "maxValue": 10 }
+            {%- assign seo_first = false -%}
+          {%- endif -%}
+        {%- endfor -%}
+      ],
+      "offers": [
+        {%- for variant in product.variants -%}
+          {
+            "@type": "Offer",
+            {%- if variant.sku != blank %}
+              "sku": {{ variant.sku | json }},
+            {%- endif %}
+            {%- unless product.has_only_default_variant %}
+              "name": {{ product.title | append: ' – ' | append: variant.title | json }},
+            {%- endunless %}
+            "url": {{ request.origin | append: variant.url | json }},
+            "price": {{ variant.price | divided_by: 100.00 | json }},
+            "priceCurrency": {{ cart.currency.iso_code | json }},
+            "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+            "itemCondition": "https://schema.org/NewCondition",
+            "seller": { "@id": {{ seo_org_id | json }} }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{%- comment -%} Collezione: elenco dei prodotti {%- endcomment -%}
+{%- if request.page_type == 'collection' and collection -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": {{ collection.title | json }},
+      "url": {{ request.origin | append: collection.url | json }},
+      {%- if collection.description != blank %}
+        "description": {{ collection.description | strip_html | strip_newlines | truncate: 1000 | json }},
+      {%- endif %}
+      "isPartOf": { "@type": "WebSite", "url": {{ seo_root | json }}, "name": {{ shop.name | json }} },
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": {{ collection.products_count }},
+        "itemListElement": [
+          {%- for p in collection.products limit: 50 -%}
+            {
+              "@type": "ListItem",
+              "position": {{ forloop.index }},
+              "url": {{ request.origin | append: p.url | json }},
+              "name": {{ p.title | json }}
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      }
+    }
+  </script>
+{%- endif -%}
