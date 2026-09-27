@@ -1,0 +1,358 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "home_hero": {
+      "type": "home-hero",
+      "blocks": {
+        "t1": {
+          "type": "trust",
+          "settings": {
+            "text": "Tostatura su ordinazione"
+          }
+        },
+        "t2": {
+          "type": "trust",
+          "settings": {
+            "text": "Solo caffè Arabica"
+          }
+        },
+        "t3": {
+          "type": "trust",
+          "settings": {
+            "text": "Lotti freschi e tracciati"
+          }
+        },
+        "t4": {
+          "type": "trust",
+          "settings": {
+            "text": "Ricette e supporto reale"
+          }
+        },
+        "t5": {
+          "type": "trust",
+          "settings": {
+            "text": "Spedizione gratuita sopra €70"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/tomassi-hero-chicchi-raffreddamento.jpg",
+        "badge": "Campioni Italiani di Tostatura · 2018 & 2024",
+        "heading": "Lo specialty serio,",
+        "heading_accent": "senza prendersi sul serio.",
+        "subheading": "Caffè specialty selezionato e tostato ad Aprilia da una famiglia che gareggia. Qualità da gara, alla portata di tutti.",
+        "edge_label": "Est. 2013 — Aprilia",
+        "button_label_1": "Scegli il tuo caffè",
+        "button_link_1": "shopify://collections/tutti-i-caffe",
+        "button_label_2": "Scopri l’abbonamento",
+        "button_link_2": "shopify://pages/abbonamento",
+        "text_color": "#f6eedc",
+        "accent_color": "#c2922d",
+        "overlay_opacity": 30,
+        "min_height": 700,
+        "show_scroll_cue": false,
+        "vertical_align": "flex-end",
+        "text_align": "left"
+      }
+    },
+    "marquee_home": {
+      "type": "marquee",
+      "blocks": {
+        "m1": {
+          "type": "phrase",
+          "settings": {
+            "text": "Taste the difference"
+          }
+        },
+        "m2": {
+          "type": "phrase",
+          "settings": {
+            "text": "Feel the passion"
+          }
+        },
+        "m3": {
+          "type": "phrase",
+          "settings": {
+            "text": "Campioni 2018 & 2024"
+          }
+        },
+        "m6": {
+          "type": "phrase",
+          "settings": {
+            "text": "Selezionato a mano"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m6"
+      ],
+      "settings": {
+        "speed": 30,
+        "bg_color": "#1b1814",
+        "text_color": "#f6eedc",
+        "accent_color": "#c2922d",
+        "padding_block": 16,
+        "aria_label": "Frasi del brand Tomassi"
+      }
+    },
+    "product_paths": {
+      "type": "product-paths",
+      "blocks": {
+        "p1": {
+          "type": "path",
+          "settings": {
+            "image": "shopify://shop_images/tomassi-chemex-abbonamento.jpg",
+            "badge": "Abbonamento",
+            "title": "Il caffè che arriva da solo",
+            "description": "Fresco, scelto da noi, senza dover decidere ogni volta.",
+            "reason": "Il modo più semplice per iniziare.",
+            "button_label": "Come funziona",
+            "button_link": "shopify://pages/abbonamento",
+            "accent_color": "#c2922d",
+            "dark": false
+          }
+        },
+        "p2": {
+          "type": "path",
+          "settings": {
+            "image": "shopify://shop_images/TOMASSI_packagin-01_5d6237a5-71bc-4bb0-b76c-f51219269467.png",
+            "badge": "The Competition Series",
+            "title": "Over Your Limits",
+            "description": "Lotti rari, profili fuori scala. Caffè nati per spostare il limite.",
+            "reason": "Per chi vuole qualcosa di estremo.",
+            "button_label": "Entra nel mondo gara",
+            "button_link": "shopify://pages/over-your-limits",
+            "accent_color": "#c99a24",
+            "dark": true
+          }
+        },
+        "p3": {
+          "type": "path",
+          "settings": {
+            "image": "shopify://shop_images/tomassi-cupping-monorigine.jpg",
+            "badge": "Specialty",
+            "title": "Monorigine da esplorare",
+            "description": "Origini, processi e profili diversi, selezionati uno per uno.",
+            "reason": "Per capire davvero le origini.",
+            "button_label": "Esplora gli specialty",
+            "button_link": "shopify://collections/specialty-coffee",
+            "accent_color": "#0f4a27",
+            "dark": false
+          }
+        },
+        "p4": {
+          "type": "path",
+          "settings": {
+            "image": "shopify://shop_images/tomassi-hero-scarico-probat.jpg",
+            "badge": "Blend",
+            "title": "Il quotidiano, fatto bene",
+            "description": "Diretti, solidi, leggibili. Pensati per l'espresso di ogni giorno.",
+            "reason": "Per ogni giorno, senza pensieri.",
+            "button_label": "Scopri i blend",
+            "button_link": "shopify://collections/blend",
+            "accent_color": "#5a3523",
+            "dark": false
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {
+        "kicker": "",
+        "heading": "Quattro modi di",
+        "heading_accent": "bere Tomassi.",
+        "subheading": "Scegli da dove partire.\nOgni linea ha un carattere preciso, nessuna sbagliata.",
+        "bg_color": "#f6eedc",
+        "text_color": "#1b1814",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "stats_band": {
+      "type": "stats-band",
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "prefix": "",
+            "number": "2",
+            "suffix": "×",
+            "label": "Campioni Italiani di Tostatura"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "prefix": "",
+            "number": "86",
+            "suffix": "+",
+            "label": "Punteggio specialty in tazza"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "prefix": "dal",
+            "number": "2013",
+            "suffix": "",
+            "label": "Tostiamo ad Aprilia"
+          }
+        },
+        "s4": {
+          "type": "stat",
+          "settings": {
+            "prefix": "",
+            "number": "24",
+            "suffix": "h",
+            "label": "Dalla tostatura alla spedizione"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "kicker": "Perché Tomassi",
+        "heading": "Numeri, non promesse.",
+        "bg_color": "#1b1814",
+        "text_color": "#f6eedc",
+        "accent_color": "#c2922d",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "cta_primo": {
+      "type": "cta-band",
+      "settings": {
+        "kicker": "Primo acquisto",
+        "heading": "Non sai da dove iniziare?",
+        "heading_accent": "",
+        "text": "Gioca a Coffee Crush: scorri i gusti che ami e scarti quelli che non fanno per te. In un minuto ti diciamo quale caffè Tomassi è il tuo match.",
+        "button_label": "Trova il tuo match",
+        "button_link": "shopify://pages/coffee-crush",
+        "button_note": "Un minuto · Gratis · Risultato subito",
+        "image": "shopify://shop_images/tomassi-specialty-academy-cupping.jpg",
+        "bg_color": "#0f4a27",
+        "card_color": "#fcf8ee",
+        "text_color": "#f6eedc",
+        "accent_color": "#c2922d",
+        "layout": "full",
+        "text_align": "left",
+        "max_width": 88,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "cta_brand": {
+      "type": "cta-band",
+      "settings": {
+        "kicker": "La nostra radice",
+        "heading": "Nati ad Aprilia, cresciuti tra tostatura, gare e assaggi.",
+        "heading_accent": "",
+        "text": "Tomassicoffee nasce nel 2013 dalla visione di Emanuele Tomassi. Oggi Andrè porta questa visione nella nuova generazione: gare, ricette, assaggio e divulgazione.",
+        "button_label": "Scopri la nostra storia",
+        "button_link": "shopify://pages/chi-siamo",
+        "button_note": "Dal 2013, da Aprilia",
+        "image": "shopify://shop_images/tomassi-padre-figlio-assaggio-2026.jpg",
+        "bg_color": "#3a2317",
+        "card_color": "#fcf8ee",
+        "text_color": "#f6eedc",
+        "accent_color": "#c2922d",
+        "layout": "full",
+        "text_align": "left",
+        "max_width": 88,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "cta_business": {
+      "type": "cta-band",
+      "settings": {
+        "kicker": "Business",
+        "heading": "Vuoi portare Tomassicoffee nel tuo locale?",
+        "heading_accent": "",
+        "text": "Caffè, ricette, formazione, supporto e una torrefazione vera con cui parlare. Non vendiamo solo sacchi. Costruiamo un modo più serio e più semplice di servire caffè.",
+        "button_label": "Apri la sezione Business",
+        "button_link": "shopify://pages/servizi-b2b",
+        "button_note": "Risposta entro 24h · Senza impegno",
+        "image": "shopify://shop_images/tomassi-espresso-servizio-b2b.jpg",
+        "bg_color": "#14100c",
+        "card_color": "#fcf8ee",
+        "text_color": "#f6eedc",
+        "accent_color": "#c2922d",
+        "layout": "full",
+        "text_align": "left",
+        "max_width": 72,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "featured_blog": {
+      "type": "featured-blog",
+      "settings": {
+        "blog": "notizie",
+        "post_limit": 3,
+        "heading": "Impara a bere meglio, senza complicarti la vita.",
+        "heading_size": "h1",
+        "columns_desktop": 3,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "featured_blog_polish": {
+      "type": "featured-blog-polish",
+      "settings": {
+        "accent_color": "#c2922d"
+      }
+    },
+    "home_apps": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "home_hero",
+    "marquee_home",
+    "product_paths",
+    "stats_band",
+    "cta_primo",
+    "cta_brand",
+    "cta_business",
+    "featured_blog",
+    "featured_blog_polish",
+    "home_apps"
+  ]
+}
+
