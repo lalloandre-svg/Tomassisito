@@ -1,0 +1,50 @@
+{%- liquid
+  assign seo_root = request.origin | append: routes.root_url
+  assign seo_org_id = request.origin | append: '/#organization'
+  assign seo_store_id = request.origin | append: '/#store'
+  assign seo_en = false
+  if request.locale.iso_code == 'en'
+    assign seo_en = true
+  endif
+
+  assign seo_same_as = ''
+  assign seo_socials = 'social_facebook_link,social_instagram_link,social_tiktok_link,social_youtube_link,social_twitter_link,social_pinterest_link,social_tumblr_link,social_snapchat_link,social_vimeo_link' | split: ','
+  for s in seo_socials
+    if settings[s] != blank
+      assign seo_same_as = seo_same_as | append: settings[s] | append: '|'
+    endif
+  endfor
+  unless seo_same_as contains 'tiktok.com'
+    assign seo_same_as = seo_same_as | append: 'https://www.tiktok.com/@tomassicoffee|'
+  endunless
+  assign seo_same_as = seo_same_as | split: '|'
+-%}
+{%- comment -%} Collezione: elenco dei prodotti {%- endcomment -%}
+{%- if request.page_type == 'collection' and collection -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": {{ collection.title | json }},
+      "url": {{ request.origin | append: collection.url | json }},
+      {%- if collection.description != blank %}
+        "description": {{ collection.description | strip_html | strip_newlines | truncate: 1000 | json }},
+      {%- endif %}
+      "isPartOf": { "@type": "WebSite", "url": {{ seo_root | json }}, "name": {{ shop.name | json }} },
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": {{ collection.products_count }},
+        "itemListElement": [
+          {%- for p in collection.products limit: 50 -%}
+            {
+              "@type": "ListItem",
+              "position": {{ forloop.index }},
+              "url": {{ request.origin | append: p.url | json }},
+              "name": {{ p.title | json }}
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      }
+    }
+  </script>
+{%- endif -%}

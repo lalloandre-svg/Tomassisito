@@ -1,0 +1,101 @@
+{%- liquid
+  assign seo_root = request.origin | append: routes.root_url
+  assign seo_org_id = request.origin | append: '/#organization'
+  assign seo_store_id = request.origin | append: '/#store'
+  assign seo_en = false
+  if request.locale.iso_code == 'en'
+    assign seo_en = true
+  endif
+
+  assign seo_same_as = ''
+  assign seo_socials = 'social_facebook_link,social_instagram_link,social_tiktok_link,social_youtube_link,social_twitter_link,social_pinterest_link,social_tumblr_link,social_snapchat_link,social_vimeo_link' | split: ','
+  for s in seo_socials
+    if settings[s] != blank
+      assign seo_same_as = seo_same_as | append: settings[s] | append: '|'
+    endif
+  endfor
+  unless seo_same_as contains 'tiktok.com'
+    assign seo_same_as = seo_same_as | append: 'https://www.tiktok.com/@tomassicoffee|'
+  endunless
+  assign seo_same_as = seo_same_as | split: '|'
+-%}
+{%- comment -%} Prodotto: offerte per variante + caratteristiche del caffè dai metafield custom.* {%- endcomment -%}
+{%- if request.page_type == 'product' and product -%}
+  {%- liquid
+    assign mf = product.metafields.custom
+    if seo_en
+      assign seo_text_keys = 'origine:Origin,varieta:Variety,processo:Process,in_tazza:In the cup,metodo_consigliato:Recommended brewing method,ricetta_consigliata:Recommended recipe,per_chi_e:Who it is for,livello_stranezza:Boldness level' | split: ','
+      assign seo_num_keys = 'dolcezza:Sweetness,corpo:Body,acidita:Acidity' | split: ','
+    else
+      assign seo_text_keys = 'origine:Origine,varieta:Varietà,processo:Processo,in_tazza:In tazza,metodo_consigliato:Metodo consigliato,ricetta_consigliata:Ricetta consigliata,per_chi_e:Per chi è,livello_stranezza:Livello di stranezza' | split: ','
+      assign seo_num_keys = 'dolcezza:Dolcezza,corpo:Corpo,acidita:Acidità' | split: ','
+    endif
+    assign seo_brand = product.vendor | default: shop.name
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": {{ request.origin | append: product.url | append: '#product' | json }},
+      "name": {{ product.title | json }},
+      "url": {{ request.origin | append: product.url | json }},
+      "description": {{ product.description | strip_html | strip_newlines | truncate: 5000 | json }},
+      {%- if product.media.size > 0 %}
+        "image": [
+          {%- for m in product.media limit: 5 -%}
+            {{ m.preview_image | image_url: width: 1200 | prepend: 'https:' | json }}{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ],
+      {%- endif %}
+      "brand": { "@type": "Brand", "name": {{ seo_brand | json }} },
+      "manufacturer": { "@id": {{ seo_org_id | json }} },
+      {%- if product.type != blank %}
+        "category": {{ product.type | json }},
+      {%- endif %}
+      {%- if product.selected_or_first_available_variant.sku != blank %}
+        "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      {%- endif %}
+      "additionalProperty": [
+        {%- assign seo_first = true -%}
+        {%- for kv in seo_text_keys -%}
+          {%- assign k = kv | split: ':' -%}
+          {%- assign v = mf[k[0]].value -%}
+          {%- if v != blank -%}
+            {%- unless seo_first %},{% endunless -%}
+            { "@type": "PropertyValue", "name": {{ k[1] | json }}, "value": {{ v | strip_newlines | json }} }
+            {%- assign seo_first = false -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- for kv in seo_num_keys -%}
+          {%- assign k = kv | split: ':' -%}
+          {%- assign v = mf[k[0]].value -%}
+          {%- if v != blank -%}
+            {%- unless seo_first %},{% endunless -%}
+            { "@type": "PropertyValue", "name": {{ k[1] | json }}, "value": {{ v | json }}, "minValue": 1, "maxValue": 10 }
+            {%- assign seo_first = false -%}
+          {%- endif -%}
+        {%- endfor -%}
+      ],
+      "offers": [
+        {%- for variant in product.variants -%}
+          {
+            "@type": "Offer",
+            {%- if variant.sku != blank %}
+              "sku": {{ variant.sku | json }},
+            {%- endif %}
+            {%- unless product.has_only_default_variant %}
+              "name": {{ product.title | append: ' – ' | append: variant.title | json }},
+            {%- endunless %}
+            "url": {{ request.origin | append: variant.url | json }},
+            "price": {{ variant.price | divided_by: 100.00 | json }},
+            "priceCurrency": {{ cart.currency.iso_code | json }},
+            "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+            "itemCondition": "https://schema.org/NewCondition",
+            "seller": { "@id": {{ seo_org_id | json }} }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
