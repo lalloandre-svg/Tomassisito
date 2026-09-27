@@ -17,6 +17,7 @@ Esiste anche un tema duplicato intatto su Shopify: **"Backup prima di SEO AI (26
 | `sections/main-product.liquid` | Rimosso il vecchio JSON-LD Product (ora nello snippet) |
 | `snippets/meta-tags.liquid` | `og:image` in https |
 | `templates/robots.txt.liquid` (nuovo) | Regole default Shopify + autorizzazione esplicita ai crawler AI |
+| `templates/index.json` | Homepage: nascosto l'indicatore di scroll ("mouse") nella hero (`show_scroll_cue: false`) |
 
 ## Come tornare indietro
 - **Tutto:** pubblicare il tema "Backup prima di SEO AI (26-09-2026)", oppure ricaricare i file di `backup-pre-seo-ai/` ed eliminare `snippets/seo-ai-schema.liquid` e `templates/robots.txt.liquid`.
