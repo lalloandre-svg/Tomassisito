@@ -1,0 +1,173 @@
+{%- comment -%}
+  Tomassi — "La storia nella tazza": blocco editoriale 2 colonne (foto + racconto)
+  per la pagina prodotto. Foto con parallax leggero, testo con reveal.
+  Tutto gestibile dal customizer; immagine opzionale (fallback gradiente caldo).
+{%- endcomment -%}
+
+{%- style -%}
+  #ProductStory-{{ section.id }} {
+    --pst-bg: {{ section.settings.bg_color }};
+    --pst-fg: {{ section.settings.text_color }};
+    --pst-accent: {{ section.settings.accent_color }};
+    background: var(--pst-bg);
+    color: var(--pst-fg);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #ProductStory-{{ section.id }} .pst-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+    align-items: center;
+    max-width: 104rem;
+    margin-inline: auto;
+  }
+  @media screen and (min-width: 750px) {
+    #ProductStory-{{ section.id }} .pst-grid {
+      grid-template-columns: 1.05fr 1fr;
+      gap: clamp(2.8rem, 1.6rem + 4vw, 6rem);
+    }
+    {% if section.settings.image_position == 'right' %}
+      #ProductStory-{{ section.id }} .pst-media { order: 2; }
+    {% endif %}
+  }
+{%- endstyle -%}
+
+<section id="ProductStory-{{ section.id }}" class="product-story">
+  <div class="page-width">
+    <div class="pst-grid">
+      <div class="pst-media" data-reveal="zoom">
+        <div class="pst-media__frame">
+          {%- if section.settings.image != blank -%}
+            <div class="pst-media__inner" data-parallax="0.08">
+              {{
+                section.settings.image
+                | image_url: width: 1400
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '500, 750, 1000, 1400',
+                  sizes: '(min-width: 750px) 50vw, 100vw',
+                  class: 'pst-img',
+                  alt: section.settings.heading
+              }}
+            </div>
+          {%- else -%}
+            <div class="pst-media__inner pst-media__inner--ph"></div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="pst-body" data-reveal="right">
+        {%- if section.settings.kicker != blank -%}
+          <span class="pst-kicker">{% render 'tomassi-i18n', s: section.settings.kicker %}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="pst-title">
+            {%- render 'tomassi-i18n', s: section.settings.heading -%}
+            {%- if section.settings.heading_accent != blank -%}
+              <span class="pst-title-accent"> {% render 'tomassi-i18n', s: section.settings.heading_accent %}</span>
+            {%- endif -%}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="pst-text">{% render 'tomassi-i18n', s: section.settings.text, esc: false %}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          {%- comment -%} Link vuoto → pagina La nostra Torrefazione (prima era '#', che riportava in cima alla pagina) {%- endcomment -%}
+          {%- assign pst_fallback = routes.root_url | append: '/pages/la-nostra-torrefazione' | replace: '//', '/' -%}
+          <a class="pst-link" href="{{ section.settings.button_link | default: pst_fallback }}">
+            {% render 'tomassi-i18n', s: section.settings.button_label %}
+            <span class="pst-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- style -%}
+  .pst-media__frame { border-radius: 20px; overflow: hidden; }
+  .pst-media__inner {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: radial-gradient(120% 110% at 30% 20%, #7a5230, #5A3523 70%, #3d2418);
+  }
+  .pst-img { width: 100%; height: 112%; margin-top: -6%; object-fit: cover; display: block; }
+  .pst-kicker {
+    display: inline-block;
+    margin-bottom: 1.1rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--pst-accent);
+  }
+  .pst-title {
+    margin: 0 0 1.4rem;
+    font-family: var(--font-heading-family);
+    font-weight: 800;
+    font-size: clamp(2.4rem, 1.8rem + 2.2vw, 3.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+  }
+  .pst-title-accent { color: var(--pst-accent); }
+  .pst-text {
+    font-size: clamp(1.5rem, 1.35rem + 0.3vw, 1.75rem);
+    line-height: 1.6;
+    opacity: 0.92;
+    max-width: 58ch;
+  }
+  .pst-text p { margin: 0 0 1.2rem; }
+  .pst-text p:last-child { margin-bottom: 0; }
+  .pst-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 1.8rem;
+    font-weight: 700;
+    font-size: 1.55rem;
+    text-decoration: none;
+    color: var(--pst-accent);
+    color: color-mix(in srgb, var(--pst-accent) 82%, var(--pst-fg));
+  }
+  .pst-arrow { transition: transform 0.22s cubic-bezier(0.2, 1, 0.3, 1); }
+  .pst-link:hover .pst-arrow { transform: translateX(5px); }
+  @media (prefers-reduced-motion: reduce) {
+    .pst-arrow { transition: none; }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Storia prodotto",
+  "tag": "section",
+  "class": "section section--product-story",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Foto" },
+    {
+      "type": "select", "id": "image_position", "label": "Posizione foto",
+      "options": [
+        { "value": "left", "label": "Sinistra" },
+        { "value": "right", "label": "Destra" }
+      ],
+      "default": "left"
+    },
+    { "type": "text", "id": "kicker", "label": "Sopratitolo", "default": "La storia nella tazza" },
+    { "type": "text", "id": "heading", "label": "Titolo", "default": "Coltivato da tante mani," },
+    { "type": "text", "id": "heading_accent", "label": "Titolo — parte in ocra", "default": "tostato da una." },
+    { "type": "richtext", "id": "text", "label": "Testo", "default": "<p>Selezione a mano, in altura. Noi lo tostiamo il martedì ad Aprilia, in piccoli lotti, con un profilo costruito al banco. Dalla pianta alla tua tazza, senza scorciatoie.</p>" },
+    { "type": "text", "id": "button_label", "label": "Testo link" },
+    { "type": "url", "id": "button_link", "label": "Link" },
+    { "type": "header", "content": "Colori" },
+    { "type": "color", "id": "bg_color", "label": "Sfondo", "default": "#F6EEDC" },
+    { "type": "color", "id": "text_color", "label": "Testo", "default": "#1B1814" },
+    { "type": "color", "id": "accent_color", "label": "Accento (ocra)", "default": "#C2922D" },
+    { "type": "header", "content": "Spaziatura" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Spazio sopra", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Spazio sotto", "default": 72 }
+  ],
+  "presets": [
+    { "name": "Storia prodotto" }
+  ]
+}
+{% endschema %}

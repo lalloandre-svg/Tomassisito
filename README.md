@@ -20,6 +20,7 @@ Esiste anche un tema duplicato intatto su Shopify: **"Backup prima di SEO AI (26
 | `sections/footer-group.json` | Riattivato il box newsletter nel footer |
 | `templates/page.newsletter.json` | La pagina /pages/newsletter ora mostra il form di iscrizione (prima era vuota) |
 | `templates/index.json` | Homepage: nascosto l'indicatore di scroll ("mouse") nella hero (`show_scroll_cue: false`) |
+| `sections/product-story.liquid` | Pagina prodotto, sezione "Storia prodotto": senza foto scelta usa la 2ª foto del prodotto (o la principale); aggiunta riga Origine / Varietà / Processo dai metafield `custom.*`; nel customizer niente animazione d'ingresso |
 
 ## Come tornare indietro
 - **Tutto:** pubblicare il tema "Backup prima di SEO AI (26-09-2026)", oppure ricaricare i file di `backup-pre-seo-ai/` ed eliminare `snippets/seo-ai-schema.liquid` e `templates/robots.txt.liquid`.
