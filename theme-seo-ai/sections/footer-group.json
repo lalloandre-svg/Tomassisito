@@ -1,0 +1,114 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "newsletter_WhQEFF": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_dffpiz": {
+          "type": "heading",
+          "settings": {
+            "heading": "Iscriviti alla newsletter",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph_nagPJk": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Novità, lanci e consigli pratici sul caffè. Niente spam, solo cose utili.</p>"
+          }
+        },
+        "email_form_tj436h": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_dffpiz",
+        "paragraph_nagPJk",
+        "email_form_tj436h"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "footer_brand": {
+          "type": "text",
+          "settings": {
+            "heading": "Tomassicoffee",
+            "subtext": "<p>Micro torrefazione specialty ad Aprilia dal 2013. Tostiamo su ordinazione ogni martedì.</p><p><a href=\"/pages/loyalty-program\"><strong>Entra nella Tomassi Family →</strong></a></p>"
+          }
+        },
+        "footer_shop": {
+          "type": "text",
+          "settings": {
+            "heading": "Shop",
+            "subtext": "<ul><li><a href=\"/collections/tutti-i-caffe\">Tutti i caffè</a></li><li><a href=\"/pages/over-your-limits\">Over Your Limits</a></li><li><a href=\"/collections/specialty-coffee\">Specialty Coffee</a></li><li><a href=\"/collections/blend\">Blend</a></li><li><a href=\"/pages/abbonamento\">Abbonamento</a></li><li><a href=\"/pages/coffee-crush\">Coffee Crush: trova il tuo caffè</a></li></ul>"
+          }
+        },
+        "footer_help": {
+          "type": "text",
+          "settings": {
+            "heading": "Aiuto",
+            "subtext": "<ul><li><a href=\"/pages/contact\">Contatti</a></li><li><a href=\"/pages/spedizioni\">Spedizioni</a></li><li><a href=\"/pages/pagamenti\">Pagamenti</a></li><li><a href=\"/pages/faq\">FAQ</a></li><li><a href=\"/pages/joy-subscription\">Gestisci abbonamento</a></li></ul>"
+          }
+        },
+        "footer_business": {
+          "type": "text",
+          "settings": {
+            "heading": "Business",
+            "subtext": "<ul><li><a href=\"/pages/servizi-b2b\">Bar e ristorazione</a></li><li><a href=\"/pages/wholesale\">Wholesale</a></li><li><a href=\"/pages/un-team-vincente\">Campioni del caffè</a></li><li><a href=\"/pages/entra-a-far-parte-del-nostro-team-di-campioni\">Entra nel team</a></li></ul>"
+          }
+        },
+        "footer_trasparenza": {
+          "type": "text",
+          "settings": {
+            "heading": "Trasparenza",
+            "subtext": "<ul><li><a href=\"/pages/tomassi-international-2026\">Progetto UE — FESR</a></li><li><a href=\"/pages/tomassi-fiere-internazionali-2026\">Articolo UE — FESR</a></li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "footer_brand",
+        "footer_shop",
+        "footer_help",
+        "footer_business",
+        "footer_trasparenza"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": false,
+        "newsletter_heading": "Iscriviti alla newsletter",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 40,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "newsletter_WhQEFF",
+    "footer"
+  ]
+}

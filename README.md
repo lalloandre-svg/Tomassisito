@@ -17,6 +17,8 @@ Esiste anche un tema duplicato intatto su Shopify: **"Backup prima di SEO AI (26
 | `sections/main-product.liquid` | Rimosso il vecchio JSON-LD Product (ora nello snippet) |
 | `snippets/meta-tags.liquid` | `og:image` in https |
 | `templates/robots.txt.liquid` (nuovo) | Regole default Shopify + autorizzazione esplicita ai crawler AI |
+| `sections/footer-group.json` | Riattivato il box newsletter nel footer |
+| `templates/page.newsletter.json` | La pagina /pages/newsletter ora mostra il form di iscrizione (prima era vuota) |
 | `templates/index.json` | Homepage: nascosto l'indicatore di scroll ("mouse") nella hero (`show_scroll_cue: false`) |
 
 ## Come tornare indietro

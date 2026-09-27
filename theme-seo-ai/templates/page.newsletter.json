@@ -1,0 +1,49 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Iscriviti alla newsletter",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Nuovi caffè, lanci e consigli pratici per preparare meglio il tuo caffè a casa. Niente spam, solo cose utili. Ti cancelli quando vuoi.</p>"
+          }
+        },
+        "email_form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email_form"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "newsletter"
+  ]
+}
