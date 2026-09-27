@@ -1,0 +1,118 @@
+{%- liquid
+  assign seo_root = request.origin | append: routes.root_url
+  assign seo_org_id = request.origin | append: '/#organization'
+  assign seo_store_id = request.origin | append: '/#store'
+  assign seo_en = false
+  if request.locale.iso_code == 'en'
+    assign seo_en = true
+  endif
+
+  assign seo_same_as = ''
+  assign seo_socials = 'social_facebook_link,social_instagram_link,social_tiktok_link,social_youtube_link,social_twitter_link,social_pinterest_link,social_tumblr_link,social_snapchat_link,social_vimeo_link' | split: ','
+  for s in seo_socials
+    if settings[s] != blank
+      assign seo_same_as = seo_same_as | append: settings[s] | append: '|'
+    endif
+  endfor
+  unless seo_same_as contains 'tiktok.com'
+    assign seo_same_as = seo_same_as | append: 'https://www.tiktok.com/@tomassicoffee|'
+  endunless
+  assign seo_same_as = seo_same_as | split: '|'
+-%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": {{ seo_org_id | json }},
+        "name": {{ shop.name | json }},
+        "url": {{ seo_root | json }},
+        {%- if settings.logo %}
+          "logo": {{ settings.logo | image_url: width: 500 | prepend: 'https:' | json }},
+        {%- endif %}
+        {%- if shop.description != blank %}
+          "description": {{ shop.description | json }},
+        {%- endif %}
+        "email": "info@tomassicoffee.com",
+        "telephone": "+39 344 446 3108",
+        "foundingDate": "2013",
+        "founder": { "@type": "Person", "name": "Emanuele Tomassi" },
+        "member": [
+          { "@type": "Person", "name": "Emanuele Tomassi" },
+          { "@type": "Person", "name": "Andrè Tomassi" }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Via Verdi 24",
+          "postalCode": "04011",
+          "addressLocality": "Aprilia",
+          "addressRegion": "LT",
+          "addressCountry": "IT"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "telephone": "+39 344 446 3108",
+          "email": "info@tomassicoffee.com",
+          "availableLanguage": ["it", "en"]
+        },
+        "sameAs": [
+          {%- for link in seo_same_as -%}
+            {{ link | json }}{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      },
+      {
+        "@type": "Store",
+        "@id": {{ seo_store_id | json }},
+        "name": {{ shop.name | append: ' – Aprilia' | json }},
+        "description": {% if seo_en %}"Tomassi Coffee roastery shop and order pick-up point in Aprilia (LT)."{% else %}"Punto vendita e ritiro ordini Tomassi Coffee ad Aprilia (LT)."{% endif %},
+        "url": {{ seo_root | json }},
+        {%- if settings.logo %}
+          "image": {{ settings.logo | image_url: width: 500 | prepend: 'https:' | json }},
+        {%- endif %}
+        "parentOrganization": { "@id": {{ seo_org_id | json }} },
+        "telephone": "+39 344 446 3108",
+        "email": "info@tomassicoffee.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Via Verdi 24",
+          "postalCode": "04011",
+          "addressLocality": "Aprilia",
+          "addressRegion": "LT",
+          "addressCountry": "IT"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "07:00",
+            "closes": "22:00"
+          }
+        ]
+      }
+      {%- if request.page_type == 'index' -%}
+        ,
+        {
+          "@type": "WebSite",
+          "@id": {{ request.origin | append: '/#website' | json }},
+          "name": {{ shop.name | json }},
+          "url": {{ seo_root | json }},
+          "inLanguage": {{ request.locale.iso_code | json }},
+          "publisher": { "@id": {{ seo_org_id | json }} },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": {{ request.origin | append: routes.search_url | append: '?q={search_term_string}' | json }}
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }
+      {%- endif -%}
+    ]
+  }
+</script>
+
