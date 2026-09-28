@@ -91,3 +91,21 @@ Per ogni prodotto aggiornati anche:
   I valori numerici (dolcezza/corpo/acidità) sono presenti solo su 5 prodotti e non sono stati inventati.
 
 Copia dei testi precedenti: `backup-oyl-testi/2026-09-28-prima-della-riscrittura.json`.
+
+## 6. Valori sensoriali, ricette, inglese (28/09/2026)
+
+- Dolcezza / corpo / acidità (1–10) aggiunti ai 7 OYL che non li avevano (stime dalle descrizioni sensoriali delle schede Tomassi, sulla stessa scala dei 5 esistenti):
+
+| Caffè | Dolcezza | Corpo | Acidità |
+|---|---|---|---|
+| Abu Natural GN-3345 | 8.0 | 7.0 | 7.0 |
+| Abu Washed GW-3230 | 7.0 | 5.5 | 8.0 |
+| Finca Los Lajones 5A | 8.5 | 7.0 | 7.0 |
+| Finca Deborah Enigma | 7.5 | 7.0 | 7.5 |
+| Finca Deborah Illumination | 8.0 | 7.0 | 7.5 |
+| Daterra Guarani Aramosa | 7.5 | 6.0 | 6.5 |
+| Daterra Yellow Aramosa BV31 | 7.0 | 6.0 | 6.5 |
+
+- `custom.ricetta_consigliata` (non visibile nella pagina, letto da schema/AI) compilato per 7 caffè dalle schede Pages.
+- Traduzioni EN (titolo, descrizione, SEO, tipo prodotto "Competition-grade specialty coffee") per tutti i 12 OYL, sostituite le vecchie traduzioni.
+- Da chiarire: anno di raccolto Abu Natural (scheda 2025 / sito 2024) e Guarani (scheda 2024 / sito 2025).
