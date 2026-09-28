@@ -363,13 +363,6 @@ Problemi noti nel sito attuale da correggere:
 
 ---
 
-## 12. Stato del lavoro (28/09/2026)
-
-- `/menu` e `/en/menu` fatti: `data/menu.json` → `build.mjs` → `dist/`. Istruzioni in `LEGGIMI.md`.
-- Mancano nel repository: font (`public/fonts/LEGGIMI.md`), `img/logo-caos.svg`, `img/favicon.svg`, `img/og-menu.jpg`, e le altre pagine del sito attuale (da copiare in `public/` e poi allineare a §8).
-
----
-
 ## 10. Percorsi utili sul Mac
 
 - Sito: `~/Desktop/Claude code/caos-site/`
@@ -393,3 +386,10 @@ Nota: alcuni file originali sono hardlink; se un tool fa storie, copiali prima i
 4. Ogni testo nuovo segue §2 (tu, frasi corte, un fatto, chiusa con invito, niente parole vietate).
 5. Non inventare fatti (premi, numeri, nomi, allergeni). Se manca un dato, lascia un segnaposto evidente `[DA CONFERMARE]` e aggiungilo a §9.
 6. Verifica a ogni giro: HTML valido, Lighthouse mobile, contrasto, prova su telefono vero via QR.
+
+---
+
+## 12. Stato del lavoro (28/09/2026)
+
+- `/menu` e `/en/menu` fatti: `data/menu.json` → `build.mjs` → `dist/`. Istruzioni in `LEGGIMI.md`.
+- Mancano nel repository: font (`public/fonts/LEGGIMI.md`), `img/logo-caos.svg`, `img/favicon.svg`, `img/og-menu.jpg`, e le altre pagine del sito attuale (da copiare in `public/` e poi allineare a §8).
