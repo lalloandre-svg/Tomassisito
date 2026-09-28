@@ -61,3 +61,20 @@ Daterra Guarani, Daterra Yellow, Deborah Enigma, Deborah Illumination, Los Lajon
 ## 3. Rimandato
 - Rwanda: Rusatira Anaerobic Sleeping Bag – indirizzo pagina `…honey-sleeping-bag-copia` da correggere.
 - Revisione completa dei testi di tutti i prodotti (TMS inclusi).
+
+## 4. Stato al 28/09/2026
+
+**Fatto su Shopify**
+- Immagini collegate (colorata + trasparente): Abu Natural, Abu Washed, Daterra Guarani, Daterra Yellow,
+  Deborah Enigma, Deborah Illumination, Los Lajones 5A, Mikava Reserve (rimosse IMG_3691 e IMG_3698).
+- Testi, tag `Over Your Limits`, vendor `Tomassi Coffee` aggiornati su tutti i 12 OYL.
+- Titoli: "Lino 7B", "Finca Los Lajones 5A", "Daterra Yellow Aramosa BV31".
+- Daterra Guarani Aramosa: descrizione riscritta (Guarani = linea selezionata della famiglia Aramosa; raccolto 2025).
+- Mikava: CoE Colombia (Nord) 2019, 92,71 punti; produttore Paul Kevin Doyle.
+- Abu Washed: fermentazione in sacchi GrainPro immersi in acqua corrente (chicchi non a contatto con l'acqua); raccolto 2024 anche per Abu Natural.
+- Los Lajones: Boquete, pendici del Volcán Barú, lavorazione senza acqua.
+
+**Da fare**
+- Caricare in Contenuti → File le immagini di Lino, Hiu 21B, Ombligon e collegarle (togliere IMG_3692/3693/3694 e le eventuali vecchie trasparenti).
+- Vendor "Tomassi Coffee" sul resto del catalogo (TMS, attrezzatura, ecc.).
+- Revisione testi linea TMS.
