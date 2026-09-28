@@ -78,3 +78,16 @@ Daterra Guarani, Daterra Yellow, Deborah Enigma, Deborah Illumination, Los Lajon
 - Caricare in Contenuti → File le immagini di Lino, Hiu 21B, Ombligon e collegarle (togliere IMG_3692/3693/3694 e le eventuali vecchie trasparenti).
 - Vendor "Tomassi Coffee" sul resto del catalogo (TMS, attrezzatura, ecc.).
 - Revisione testi linea TMS.
+
+## 5. Riscrittura testi per la vendita (28/09/2026)
+
+Nuova struttura per tutti i 12 OYL (senza ricette):
+frase d'apertura → In tazza → Perfetto se… → Scheda tecnica → La storia → Perché Over Your Limits.
+
+Per ogni prodotto aggiornati anche:
+- SEO Google: titolo (≈60 caratteri) e meta description (≈155 caratteri) con nome, varietà, processo, origine e note.
+- Metafield `custom.*` letti dallo schema JSON-LD del tema (Google + assistenti AI):
+  `origine`, `varieta`, `processo`, `metodo_consigliato`, `in_tazza`, `per_chi_e`, `perche_oyl`.
+  I valori numerici (dolcezza/corpo/acidità) sono presenti solo su 5 prodotti e non sono stati inventati.
+
+Copia dei testi precedenti: `backup-oyl-testi/2026-09-28-prima-della-riscrittura.json`.
