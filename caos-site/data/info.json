@@ -1,0 +1,35 @@
+{
+  "nome": "Caos Caffè",
+  "est": 1969,
+  "sito": "https://caoscaffe.com",
+  "indirizzo": {
+    "via": "Via G. Verdi 24",
+    "cap": "04011",
+    "citta": "Aprilia",
+    "provincia": "LT",
+    "paese": "IT"
+  },
+  "maps": "https://www.google.com/maps/search/?api=1&query=Caos+Caff%C3%A8+Via+G.+Verdi+24+Aprilia",
+  "email": "info@caoscaffe.com",
+  "telefono": "+39 06 928 1900",
+  "instagram": "https://www.instagram.com/caoscaffe.aprilia/",
+  "facebook": "https://www.facebook.com/caos.caffe",
+  "payoff": "Sempre presenti, sempre umani.",
+
+  "_nota_orari": "Cambia 'orario_attivo' in \"estate\" o \"inverno\" quando cambia stagione. Giorni: 0 = domenica … 6 = sabato. Il mercoledì (3) è chiuso.",
+  "orario_attivo": "inverno",
+  "giorno_chiuso": 3,
+  "orari": {
+    "inverno": {
+      "it": "Inverno 7:00 → 22:00",
+      "en": "Winter 7:00 → 22:00",
+      "turni": [["07:00", "22:00"]]
+    },
+    "estate": {
+      "it": "Estate 8:00 → 15:00 e 16:00 → 22:00",
+      "en": "Summer 8:00 → 15:00 and 16:00 → 22:00",
+      "turni": [["08:00", "15:00"], ["16:00", "22:00"]]
+    }
+  },
+  "chiuso": { "it": "Chiuso il mercoledì", "en": "Closed on Wednesdays" }
+}

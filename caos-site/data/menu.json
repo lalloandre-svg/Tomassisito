@@ -1,0 +1,549 @@
+{
+  "_leggimi": "Menù di caoscaffe.com/menu. Istruzioni in LEGGIMI.md. Prezzi con la virgola, come in carta. 'da': true = prezzo a partire da. 'verificato': false = allergeni ancora da confermare in cucina (online escono come 'da confermare, chiedi').",
+
+  "aggiornato": "2026-09-28",
+
+  "allergeni": {
+    "1": { "it": "Glutine", "en": "Gluten" },
+    "2": { "it": "Crostacei", "en": "Crustaceans" },
+    "3": { "it": "Uova", "en": "Eggs" },
+    "4": { "it": "Pesce", "en": "Fish" },
+    "5": { "it": "Arachidi", "en": "Peanuts" },
+    "6": { "it": "Soia", "en": "Soy" },
+    "7": { "it": "Latte", "en": "Milk" },
+    "8": { "it": "Frutta a guscio", "en": "Tree nuts" },
+    "9": { "it": "Sedano", "en": "Celery" },
+    "10": { "it": "Senape", "en": "Mustard" },
+    "11": { "it": "Sesamo", "en": "Sesame" },
+    "12": { "it": "Solfiti", "en": "Sulphites" },
+    "13": { "it": "Lupini", "en": "Lupin" },
+    "14": { "it": "Molluschi", "en": "Molluscs" }
+  },
+
+  "testi": {
+    "filosofia_titolo": { "it": "Facciamo le cose bene, ogni giorno.", "en": "We do things well, every day." },
+    "filosofia": {
+      "it": ["Ingredienti veri, stagioni che cambiano e produttori scelti con cura. Prepariamo in casa lievitati, pasta fresca e fermentazioni: dalla colazione all'aperitivo, ogni proposta segue lo stesso filo.", "Alcune cose restano.", "Altre cambiano spesso.", "Per il resto, chiedi."],
+      "en": ["Real ingredients, changing seasons and producers chosen with care. We make our own leavened bakes, fresh pasta and ferments: from breakfast to aperitivo, everything follows the same thread.", "Some things stay.", "Others change often.", "For the rest, ask."]
+    },
+    "come_funziona": {
+      "it": "In carta trovi quello che resta. Quello che cambia è in vetrina, in frigo e sul foglio del giorno. Tutto, con gli allergeni, lo trovi qui.",
+      "en": "The menu holds what stays. What changes is in the counter, in the fridge and on today's sheet. All of it, with allergens, is here."
+    },
+    "contaminazione": {
+      "it": "In cucina si lavorano tutti gli allergeni: possibili tracce. Chiedi allo staff.",
+      "en": "Our kitchen handles every allergen: traces are possible. Ask the staff."
+    },
+    "piede": {
+      "it": "Prezzi in euro, IVA inclusa. Niente coperto.",
+      "en": "Prices in euro, VAT included. No cover charge."
+    }
+  },
+
+  "sezioni": [
+    {
+      "id": "brunch",
+      "titolo": "BRUNCH",
+      "orario": { "it": "8:00–15:00", "en": "8:00–15:00" },
+      "fascia_oraria": ["08:00", "15:00"],
+      "registro": "food",
+      "blocchi": [
+        {
+          "tipo": "voci",
+          "voci": [
+            {
+              "nome": "EGGS BENEDICT",
+              "desc": {
+                "it": "Uovo poché *PEPPOVO* su pan brioche *VIVY BAKERY*, salsa hollandaise, spinacino e una punta di paprika e pepe rosa",
+                "en": "Poached *PEPPOVO* egg on *VIVY BAKERY* brioche, hollandaise, baby spinach and a pinch of paprika and pink pepper"
+              },
+              "prezzo": "10",
+              "allergeni": [1, 3, 7, 10]
+            },
+            {
+              "nome": "SCRAMBLED EGGS",
+              "desc": {
+                "it": "Uova *PEPPOVO* strapazzate piano nel burro *BEPPE E SUOI FORMAGGI*, con pane integrale *VIVY BAKERY*",
+                "en": "*PEPPOVO* eggs scrambled slowly in *BEPPE E SUOI FORMAGGI* butter, with *VIVY BAKERY* wholemeal bread"
+              },
+              "prezzo": "8",
+              "allergeni": [1, 3, 7]
+            },
+            {
+              "nome": "BUTTER BREAD",
+              "desc": {
+                "it": "Pane integrale *VIVY BAKERY* con burro montato e Tomone *BEPPE E SUOI FORMAGGI*, e sopra la confettura di more *APE D'ORO*",
+                "en": "*VIVY BAKERY* wholemeal bread with whipped butter and *BEPPE E SUOI FORMAGGI* Tomone, topped with *APE D'ORO* blackberry jam"
+              },
+              "prezzo": "6",
+              "allergeni": [1, 7, 12]
+            },
+            {
+              "nome": "GRØD UP",
+              "desc": {
+                "it": "Il risengrød, riso al latte danese, il dolce preferito del bimbo. Qui cresciuto con riso giapponese cotto al latte, vaniglia, cannella e caramello salato al caffè *TOMASSICOFFEE*",
+                "en": "Risengrød, Danish rice pudding, the kid's favourite. Grown up here with Japanese rice cooked in milk, vanilla, cinnamon and *TOMASSICOFFEE* coffee salted caramel"
+              },
+              "prezzo": "9",
+              "allergeni": [7]
+            },
+            {
+              "nome": "SESAME STREET",
+              "veg": true,
+              "senza_glutine": true,
+              "desc": {
+                "it": "Verdura di stagione arrostita, con ceci croccanti al cumino, hummus, cipolle rosse marinate, pomodorini confit e germogli freschi. Senza glutine",
+                "en": "Roasted seasonal vegetables, with crispy cumin chickpeas, hummus, marinated red onions, confit cherry tomatoes and fresh sprouts. Gluten free"
+              },
+              "prezzo": "9",
+              "allergeni": [11],
+              "verificato": false
+            }
+          ]
+        },
+        {
+          "tipo": "fascia",
+          "titolo": "ADD SOME C∀OS",
+          "stile": "lista",
+          "voci": [
+            { "nome": { "it": "Pancetta affumicata", "en": "Smoked pancetta" }, "prezzo": "2" },
+            { "nome": { "it": "Salmone", "en": "Salmon" }, "prezzo": "3 (4)" },
+            { "nome": { "it": "Tonno scottato", "en": "Seared tuna" }, "prezzo": "3 (4)" },
+            { "nome": { "it": "Cipolle rosse marinate", "en": "Marinated red onions" }, "prezzo": "1" },
+            { "nome": { "it": "Avocado", "en": "Avocado" }, "prezzo": "2" },
+            { "nome": { "it": "Uovo CBT", "en": "Slow-cooked egg" }, "prezzo": "1,5 (3)" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "all-day",
+      "titolo": "ALL DAY",
+      "orario": { "it": "7:00–22:00", "en": "7:00–22:00" },
+      "fascia_oraria": ["07:00", "22:00"],
+      "registro": "food",
+      "blocchi": [
+        {
+          "tipo": "voci",
+          "voci": [
+            {
+              "nome": "AVOCADO TOAST",
+              "desc": {
+                "it": "Avocado su pane integrale *VIVY BAKERY*, con uova strapazzate *PEPPOVO*, limone, semi tostati e un filo d'olio *CALISSONI BULGARI*. Anche vegano: senza uovo, con spinacino in più",
+                "en": "Avocado on *VIVY BAKERY* wholemeal bread, with *PEPPOVO* scrambled eggs, lemon, toasted seeds and a drizzle of *CALISSONI BULGARI* oil. Also vegan: no egg, extra baby spinach"
+              },
+              "prezzo": "9",
+              "allergeni": [1, 3, 7, 11]
+            },
+            {
+              "nome": "CROQUE MONSIEUR",
+              "desc": {
+                "it": "Pan brioche *VIVY BAKERY* con prosciutto cotto *BOTTEGA ROCCIA* e Tomone *BEPPE E SUOI FORMAGGI*, coperto di besciamella e gratinato",
+                "en": "*VIVY BAKERY* brioche with *BOTTEGA ROCCIA* cooked ham and *BEPPE E SUOI FORMAGGI* Tomone, covered in béchamel and grilled"
+              },
+              "prezzo": "12",
+              "allergeni": [1, 3, 7]
+            },
+            {
+              "nome": "NUTS FOR CHOCO",
+              "desc": {
+                "it": "Yogurt con burro d'arachidi fatto da noi, cioccolato *DIVINO*, banana, crumble croccante e sciroppo d'acero",
+                "en": "Yogurt with peanut butter made here, *DIVINO* chocolate, banana, crunchy crumble and maple syrup"
+              },
+              "prezzo": "8",
+              "allergeni": [1, 5, 6, 7, 8]
+            },
+            {
+              "nome": "GOOD MESS",
+              "desc": {
+                "it": "Yogurt con composta e frutta fresca, semi tostati e miele di castagno *APE D'ORO*",
+                "en": "Yogurt with compote and fresh fruit, toasted seeds and *APE D'ORO* chestnut honey"
+              },
+              "prezzo": "7",
+              "allergeni": [7, 11]
+            },
+            {
+              "nome": "STICKY BUSINESS",
+              "desc": {
+                "it": "Pan brioche *VIVY BAKERY* con burro d'arachidi fatto da noi e confettura *APE D'ORO*. Si attacca alle dita, ed è il bello",
+                "en": "*VIVY BAKERY* brioche with peanut butter made here and *APE D'ORO* jam. It sticks to your fingers. That's the point"
+              },
+              "prezzo": "6",
+              "allergeni": [1, 3, 5, 7, 12]
+            },
+            {
+              "nome": "WAFFLE",
+              "desc": {
+                "it": "Waffle dolce con sciroppo d'acero o la crema del giorno",
+                "en": "Sweet waffle with maple syrup or the cream of the day"
+              },
+              "prezzo": "5,8",
+              "allergeni": [1, 3, 7]
+            },
+            {
+              "nome": "WAFFLE ALLA FRUTTA",
+              "desc": {
+                "it": "Waffle dolce con frutta fresca, granola croccante e caramello salato al caffè *TOMASSICOFFEE*",
+                "en": "Sweet waffle with fresh fruit, crunchy granola and *TOMASSICOFFEE* coffee salted caramel"
+              },
+              "prezzo": "7,5",
+              "allergeni": [1, 3, 7, 8]
+            }
+          ]
+        },
+        {
+          "tipo": "fascia",
+          "titolo": "CAMBIANO SPESSO",
+          "titolo_en": "CHANGE OFTEN",
+          "voci": [
+            {
+              "nome": "NEW YORK ROLLS",
+              "desc": {
+                "it": "Un cornetto salato diventato tondo: sfogliato, farcito bene e decisamente fuori forma. La farcia cambia spesso, chiedi quella di oggi",
+                "en": "A savoury croissant that turned round: laminated, well filled and clearly out of shape. The filling changes often, ask for today's"
+              },
+              "prezzo": "6",
+              "da": true,
+              "allergeni": [1, 3, 7],
+              "allergeni_nota": { "it": "+ farcia: chiedi", "en": "+ filling: ask" }
+            },
+            {
+              "nome": "VOLEVO ESSERE UN TOAST",
+              "desc": {
+                "it": "Pan brioche farcito e passato sulla piastra. Non è proprio un toast, ma ci teneva. Farcia del giorno",
+                "en": "Filled brioche, pressed on the grill. Not quite a toastie, but it tried hard. Filling of the day"
+              },
+              "prezzo": "6",
+              "da": true,
+              "allergeni": [1, 3, 7],
+              "allergeni_nota": { "it": "+ farcia: chiedi", "en": "+ filling: ask" }
+            },
+            {
+              "nome": "DOLCI & LIEVITATI",
+              "_nota": "Nome provvisorio: da confermare con Andrè.",
+              "desc": {
+                "it": "Croissant, lievitati, torte e dolci fatti da noi: cambiano spesso, guarda la vetrina",
+                "en": "Croissants, leavened bakes, cakes and sweets made here: they change often, check the counter"
+              },
+              "prezzo": "1,8",
+              "da": true,
+              "allergeni": [],
+              "allergeni_nota": { "it": "chiedi", "en": "ask" }
+            },
+            {
+              "nome": "CAOS IN A SPOON",
+              "desc": {
+                "it": "Dolci al cucchiaio fatti da noi, in lattina. Li trovi in frigo",
+                "en": "Spoon desserts made here, in a can. Find them in the fridge"
+              },
+              "prezzo": "5",
+              "da": true,
+              "allergeni": [],
+              "allergeni_nota": { "it": "per gusto: chiedi", "en": "by flavour: ask" }
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "hungry",
+      "titolo": "HUNGRY?",
+      "orario": { "it": "solo a pranzo, 12:00–15:00", "en": "lunch only, 12:00–15:00" },
+      "fascia_oraria": ["12:00", "15:00"],
+      "registro": "food",
+      "blocchi": [
+        {
+          "tipo": "fascia",
+          "titolo": "PASTA & CO.",
+          "voci": [
+            {
+              "nome": "PASTA & CO.",
+              "desc": {
+                "it": "Pasta, secondi e contorni. Quello che bolle in pentola cambia spesso. Tu chiedi.",
+                "en": "Pasta, mains and sides. What's in the pot changes often. You ask."
+              },
+              "prezzo": "10",
+              "da": true,
+              "allergeni": [],
+              "allergeni_nota": { "it": "chiedi allo staff", "en": "ask the staff" }
+            }
+          ],
+          "rotazione_titolo": { "it": "In rotazione", "en": "In rotation" },
+          "rotazione": [
+            { "nome": "SICILY ME SOFTLY", "veg": true, "prezzo": "10", "allergeni": [8, 9, 12] },
+            { "nome": "ZUCCHINI BUSINESS", "veg": true, "prezzo": "12", "allergeni": [1, 6, 10] }
+          ]
+        },
+        {
+          "tipo": "voci",
+          "voci": [
+            {
+              "nome": "CHICKEN ME OUT",
+              "desc": {
+                "it": "Pollo arrosto su quinoa o riso, con verdure di stagione, crema acida, erbe e semi tostati",
+                "en": "Roast chicken on quinoa or rice, with seasonal vegetables, sour cream, herbs and toasted seeds"
+              },
+              "prezzo": "12",
+              "allergeni": [7, 11]
+            },
+            {
+              "nome": "QUINOA ME CRAZY",
+              "veg": true,
+              "senza_glutine": true,
+              "desc": {
+                "it": "Quinoa o riso con verdure di stagione arrosto e crude, pomodorini confit, crema di mandorle, vinaigrette di sedano ed erbe, semi tostati e olio *CALISSONI BULGARI*. Senza glutine",
+                "en": "Quinoa or rice with roasted and raw seasonal vegetables, confit cherry tomatoes, almond cream, celery and herb vinaigrette, toasted seeds and *CALISSONI BULGARI* oil. Gluten free"
+              },
+              "prezzo": "11",
+              "allergeni": [8, 9, 11, 12]
+            },
+            {
+              "nome": "(HA)TUNA MATATA",
+              "desc": {
+                "it": "Tonno scottato su quinoa o riso, con avocado, verdure croccanti, vinaigrette agli agrumi ed erbe",
+                "en": "Seared tuna on quinoa or rice, with avocado, crunchy vegetables, citrus and herb vinaigrette"
+              },
+              "prezzo": "13",
+              "allergeni": [4]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "social",
+      "titolo": "SOCIAL!",
+      "orario": { "it": "dalle 16:00, ultimi ordini 21:30", "en": "from 16:00, last orders 21:30" },
+      "_nota_orario": "Da confermare: ultimi ordini 21:30 o chiusura 21:00.",
+      "fascia_oraria": ["16:00", "21:30"],
+      "registro": "food",
+      "sottotitolo": { "it": "Piatti aperitivo", "en": "Aperitivo plates" },
+      "intro": {
+        "it": "Cinque assaggi tra caldo e freddo, croccante e cremoso, pensati per stare bene insieme. E sì, anche tu sei invitato.",
+        "en": "Five bites, hot and cold, crunchy and creamy, made to get along. And yes, you're invited too."
+      },
+      "blocchi": [
+        {
+          "tipo": "voci",
+          "voci": [
+            {
+              "nome": "SEA YOU",
+              "desc": {
+                "it": "Mini avocado toast al salmone · Millefoglie di patata, panna acida e alice · Chips di cornetto e bottarga · Riso croccante e tonno scottato · Apple Sea Brioche, con mela verde, ricotta salata e alga",
+                "en": "Mini salmon avocado toast · Potato millefeuille, sour cream and anchovy · Croissant chips and bottarga · Crispy rice and seared tuna · Apple Sea Brioche, with green apple, ricotta salata and seaweed"
+              },
+              "prezzo": "13",
+              "allergeni": [1, 3, 4, 7, 11, 12]
+            },
+            {
+              "nome": "MEAT ME",
+              "desc": {
+                "it": "Mini croque monsieur · Pane, burro al caffè e formaggio stagionato · Waffle salato con pancetta all'acero e mela verde · Mini eggs benedict · Millefoglie di patata e pancetta",
+                "en": "Mini croque monsieur · Bread, coffee butter and aged cheese · Savoury waffle with maple pancetta and green apple · Mini eggs benedict · Potato and pancetta millefeuille"
+              },
+              "prezzo": "11",
+              "allergeni": [1, 3, 7, 10, 12]
+            },
+            {
+              "nome": "BEAN MISSING YOU",
+              "_nota": "Nome provvisorio: da confermare con Andrè.",
+              "veg": true,
+              "desc": {
+                "it": "Mini avocado toast · Millefoglie di patata, fagiolini e maionese vegana · Cialda di riso, hummus e pomodorino confit · Crostino di polenta e caponata · Mini burger di zucchine",
+                "en": "Mini avocado toast · Potato millefeuille, green beans and vegan mayo · Rice cracker, hummus and confit cherry tomato · Polenta crostino and caponata · Mini courgette burger"
+              },
+              "prezzo": "12",
+              "allergeni": [1, 6, 8, 9, 10, 11, 12]
+            },
+            {
+              "nome": "YOU & ME",
+              "nome_nota": { "it": "per due", "en": "for two" },
+              "desc": {
+                "it": "Il meglio di Sea You, Meat Me e Bean Missing You nello stesso piatto, scelto dalla cucina",
+                "en": "The best of Sea You, Meat Me and Bean Missing You on one plate, picked by the kitchen"
+              },
+              "prezzo": "22",
+              "allergeni": [],
+              "allergeni_nota": { "it": "secondo gli assaggi: chiedi", "en": "depends on the bites: ask" }
+            }
+          ]
+        },
+        {
+          "tipo": "fascia",
+          "titolo": "SNACKS!",
+          "intro": {
+            "it": "Piccole cose salate, da prendere con le mani e finire senza troppe domande.",
+            "en": "Small salty things, to eat with your hands and finish without too many questions."
+          },
+          "voci": [
+            {
+              "nome": "CRISPY BRIOCHE CUBES",
+              "desc": { "it": "Cubetti di pan brioche tostati nel burro, croccanti e salati", "en": "Brioche cubes toasted in butter, crunchy and salty" },
+              "prezzo": "3",
+              "allergeni": [1, 3, 7]
+            },
+            {
+              "nome": "DAMN GOOD FRIES",
+              "desc": { "it": "Patate sottili, dorate e croccanti, con la salsa Caos", "en": "Thin fries, golden and crunchy, with Caos sauce" },
+              "prezzo": "4",
+              "allergeni": [],
+              "verificato": false,
+              "allergeni_nota": { "it": "salsa: chiedi", "en": "sauce: ask" }
+            },
+            {
+              "nome": "TOTALLY NUTS",
+              "desc": { "it": "Mandorle, nocciole e semi tostati nel burro, con limone e rosmarino", "en": "Almonds, hazelnuts and seeds toasted in butter, with lemon and rosemary" },
+              "prezzo": "4",
+              "allergeni": [7, 8, 11]
+            },
+            {
+              "nome": "CROISSANT CHIPS",
+              "desc": { "it": "Sfoglie di croissant salato con burro, parmigiano, pepe e sale al caffè", "en": "Savoury croissant crisps with butter, parmesan, pepper and coffee salt" },
+              "prezzo": "3",
+              "allergeni": [1, 7]
+            },
+            {
+              "nome": "SALSE IN PIÙ",
+              "nome_en": "EXTRA SAUCES",
+              "desc": { "it": "Chiedi quali ci sono oggi", "en": "Ask which ones we have today" },
+              "prezzo": "0,5",
+              "allergeni": [],
+              "allergeni_nota": { "it": "chiedi", "en": "ask" }
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "caffe",
+      "titolo": "CAFFÈ E CALDO",
+      "titolo_en": "COFFEE & HOT",
+      "_nota_titolo": "Titolo da confermare: gli altri titoli di sezione sono in inglese.",
+      "registro": "hot",
+      "sottotitolo": { "it": "Il caffè della casa · Blend 1969", "en": "House coffee · Blend 1969" },
+      "intro": {
+        "it": "Espresso e classici nascono dal Blend 1969 di *TOMASSICOFFEE*: dolce, equilibrato, per tutto il giorno.",
+        "en": "Espresso and the classics come from the *TOMASSICOFFEE* Blend 1969: sweet, balanced, for all day."
+      },
+      "blocchi": [
+        {
+          "tipo": "fascia",
+          "titolo": "SPECIALTY COFFEE",
+          "oggi_in_macchina": true,
+          "intro": {
+            "it": "Ogni giorno caffè diversi per espresso, filtro e batch brew. Quelli di oggi sono sul foglio del giorno.",
+            "en": "Different coffees every day for espresso, filter and batch brew. Today's are on today's sheet."
+          },
+          "stile": "lista",
+          "voci": [
+            { "nome": { "it": "Espresso del giorno", "en": "Espresso of the day" }, "prezzo": "3", "da": true },
+            { "nome": { "it": "Filtro a mano", "en": "Hand filter" }, "prezzo": "4", "da": true },
+            { "nome": { "it": "Batch brew", "en": "Batch brew" }, "prezzo": "4", "da": true }
+          ],
+          "nota": {
+            "it": "Cortado e flat white anche con lo specialty: prezzo secondo il caffè.",
+            "en": "Cortado and flat white with specialty too: price depends on the coffee."
+          }
+        },
+        {
+          "tipo": "lista",
+          "titolo": { "it": "I classici", "en": "The classics" },
+          "voci": [
+            { "nome": { "it": "Espresso", "en": "Espresso" }, "prezzo": "1,5", "allergeni": [] },
+            { "nome": { "it": "Doppio", "en": "Double" }, "prezzo": "3", "allergeni": [] },
+            { "nome": { "it": "Decaffeinato", "en": "Decaf" }, "prezzo": "1,6", "allergeni": [] },
+            { "nome": { "it": "Americano", "en": "Americano" }, "prezzo": "1,8", "allergeni": [] },
+            { "nome": { "it": "Cappuccino", "en": "Cappuccino" }, "prezzo": "2", "allergeni": [7] },
+            { "nome": { "it": "Caffellatte", "en": "Caffellatte" }, "prezzo": "2,2", "allergeni": [7] },
+            { "nome": { "it": "Latte macchiato", "en": "Latte macchiato" }, "prezzo": "2,2", "allergeni": [7] },
+            { "nome": { "it": "Marocchino", "en": "Marocchino" }, "prezzo": "1,6", "allergeni": [7], "verificato": false },
+            { "nome": { "it": "Corretto", "en": "Corretto" }, "prezzo": "2,5", "allergeni": [] }
+          ]
+        },
+        {
+          "tipo": "voci",
+          "voci": [
+            { "nome": "CORTADO", "desc": { "it": "Espresso tagliato con poco latte caldo", "en": "Espresso cut with a little hot milk" }, "prezzo": "1,8", "allergeni": [7] },
+            { "nome": "FLAT WHITE", "desc": { "it": "Doppio espresso, latte vellutato e poca schiuma", "en": "Double espresso, silky milk and little foam" }, "prezzo": "3,5", "allergeni": [7] },
+            { "nome": "CHAI LATTE", "desc": { "it": "Tè nero Assam e sette spezie tostate e macinate da noi, sotto una nuvola di latte", "en": "Assam black tea and seven spices toasted and ground here, under a cloud of milk" }, "prezzo": "4", "allergeni": [7] },
+            { "nome": "MATCHA LATTE", "desc": { "it": "Tè verde matcha e latte montato. Verde, morbido, sveglio", "en": "Matcha green tea and steamed milk. Green, soft, awake" }, "prezzo": "4", "allergeni": [7] },
+            { "nome": "GOLDEN MILK", "desc": { "it": "Latte montato con il nostro mix di curcuma, pepe nero e cannella. Color oro, zero caffeina", "en": "Steamed milk with our mix of turmeric, black pepper and cinnamon. Gold coloured, zero caffeine" }, "prezzo": "4", "allergeni": [7] },
+            { "nome": "CIOCCOLATA CALDA", "nome_en": "HOT CHOCOLATE", "desc": { "it": "Cioccolato fuso da noi, densa come deve essere: il cucchiaino è d'obbligo", "en": "Chocolate melted here, thick as it should be: you'll need the spoon" }, "prezzo": "3,5", "allergeni": [7] },
+            { "nome": "TÈ E INFUSI", "nome_en": "TEA & INFUSIONS", "desc": { "it": "Verdi, neri, bianchi e tisane in rotazione: chiedi la selezione di oggi", "en": "Green, black, white and herbal, in rotation: ask for today's selection" }, "prezzo": "3", "allergeni": [] }
+          ]
+        }
+      ],
+      "nota": {
+        "it": "Ogni bevanda col latte si può fare con una bevanda vegetale, +0,3.",
+        "en": "Any milk drink can be made with a plant-based drink, +0.3."
+      }
+    },
+
+    {
+      "id": "freddo",
+      "titolo": "FREDDO",
+      "titolo_en": "COLD",
+      "_nota_titolo": "Titolo da confermare: gli altri titoli di sezione sono in inglese.",
+      "registro": "chill",
+      "blocchi": [
+        {
+          "tipo": "fascia",
+          "titolo": "CAOS IN A SIP",
+          "voci": [
+            {
+              "nome": "CAOS IN A SIP",
+              "desc": {
+                "it": "Bevande fatte da noi e chiuse in lattina: Cold Brew · Tè freddo limone e verbena · Tè freddo pesca e sambuco. Le trovi in frigo.",
+                "en": "Drinks made here and sealed in a can: Cold Brew · Lemon and verbena iced tea · Peach and elderflower iced tea. Find them in the fridge."
+              },
+              "prezzo": "4",
+              "da": true,
+              "allergeni": []
+            }
+          ]
+        },
+        {
+          "tipo": "voci",
+          "voci": [
+            { "nome": "ICED BLACK", "desc": { "it": "Espresso, acqua fredda e ghiaccio. Nero, senza drammi", "en": "Espresso, cold water and ice. Black, no drama" }, "prezzo": "2,5", "allergeni": [] },
+            { "nome": "FREDDO", "desc": { "it": "Espresso montato col ghiaccio: freddo e cremoso", "en": "Espresso shaken with ice: cold and creamy" }, "prezzo": "2", "allergeni": [] },
+            { "nome": "ICED LATTE", "desc": { "it": "Espresso, latte freddo e ghiaccio", "en": "Espresso, cold milk and ice" }, "prezzo": "3,5", "allergeni": [7] },
+            { "nome": "FLASH BREW", "desc": { "it": "Filtro caldo estratto direttamente sul ghiaccio. Pulito, aromatico, subito freddo", "en": "Hot filter brewed straight onto ice. Clean, aromatic, cold right away" }, "prezzo": "4", "da": true, "allergeni": [] },
+            { "nome": "ESPRESSO TONIC", "desc": { "it": "Doppio espresso e acqua tonica. Acido e frizzante", "en": "Double espresso and tonic water. Bright and fizzy" }, "prezzo": "4", "da": true, "allergeni": [] },
+            { "nome": "MATCHA TONIC", "desc": { "it": "Matcha, tonica e ghiaccio. Verde, frizzante, sveglio", "en": "Matcha, tonic and ice. Green, fizzy, awake" }, "prezzo": "5", "da": true, "allergeni": [] },
+            { "nome": "SPREMUTA D'ARANCIA", "nome_en": "FRESH ORANGE JUICE", "desc": { "it": "Arance spremute al momento. Il resto non serve", "en": "Oranges squeezed to order. Nothing else needed" }, "prezzo": "4", "allergeni": [] },
+            { "nome": "LE MORRE", "nome_nota": { "it": "nettari di frutta", "en": "fruit nectars" }, "desc": { "it": "Frutta da bere: chiedi i gusti di oggi", "en": "Fruit to drink: ask for today's flavours" }, "prezzo": "5", "allergeni": [] },
+            { "nome": "KOMBUCHA", "desc": { "it": "Fermentata, fresca, appena frizzante", "en": "Fermented, fresh, lightly sparkling" }, "prezzo": "4", "da": true, "allergeni": [] },
+            { "nome": "BIBITE", "nome_en": "SOFT DRINKS", "desc": { "it": "MoleCola 3 · altre bolle da 3,5. Le altre cambiano spesso: guarda cosa c'è in frigo", "en": "MoleCola 3 · other fizzy drinks from 3.5. They change often: check the fridge" }, "prezzo": "3", "da": true, "allergeni": [] },
+            { "nome": "ACQUA WAMI 0,5 L", "nome_en": "WAMI WATER 0.5 L", "prezzo": "1", "allergeni": [] },
+            { "nome": "ACQUA MICROFILTRATA", "nome_en": "MICROFILTERED WATER", "desc": { "it": "Microfiltrata da noi, naturale o frizzante. 0,5 L 0,5 · 1 L 1", "en": "Microfiltered here, still or sparkling. 0.5 L 0.5 · 1 L 1" }, "prezzo": "0,5", "allergeni": [] }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "drink",
+      "titolo": "DRINK LIST",
+      "draft": true,
+      "_nota": "NON PUBBLICATA: drink list ancora in sviluppo (dati di luglio). Quando è chiusa, completa le voci e togli 'draft'.",
+      "registro": "sweet",
+      "blocchi": [
+        {
+          "tipo": "lista",
+          "titolo": { "it": "Dati di luglio, solo riferimento", "en": "July data, reference only" },
+          "voci": [
+            { "nome": { "it": "Spritz (Aperitivo, Bitter, Hugo, Violetta, Caos)", "en": "Spritz" }, "prezzo": "8–9", "allergeni": [12] },
+            { "nome": { "it": "Gin tonic (Boia, Boigin Saffron, Brockmans, J.Rose JR°03, Acqueverdi)", "en": "Gin tonic" }, "prezzo": "10–12", "allergeni": [] },
+            { "nome": { "it": "Classici (Negroni, Americano, Whisky Sour, Mojito, Moscow Mule, Daiquiri)", "en": "Classics" }, "prezzo": "8–11", "allergeni": [] },
+            { "nome": { "it": "Caos in a Shot, cocktail in lattina", "en": "Caos in a Shot" }, "prezzo": "6", "allergeni": [] }
+          ]
+        }
+      ]
+    }
+  ]
+}

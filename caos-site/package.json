@@ -1,0 +1,10 @@
+{
+  "name": "caos-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node build.mjs && npx --yes serve dist"
+  },
+  "engines": { "node": ">=18" }
+}

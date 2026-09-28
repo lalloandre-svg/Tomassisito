@@ -1,0 +1,5 @@
+{
+  "_leggimi": "Oggi in macchina: i caffè specialty di oggi. Aggiorna 'data' e 'caffe'. Se la lista è vuota, o la data non è quella di oggi, online compare solo 'sono sul foglio del giorno, chiedi al banco'. Esempio di voce: { \"metodo\": \"Espresso\", \"caffe\": \"Nome del caffè\", \"origine\": \"Paese, regione\", \"note\": \"due o tre note\" }",
+  "data": "",
+  "caffe": []
+}

@@ -1,0 +1,209 @@
+/* CAOS Caffè · menù online
+   Colori e font dal brand manual v2 (vedi CLAUDE.md §2). Non si inventano tinte. */
+
+/* ---------- font (self-hosted, vedi public/fonts/LEGGIMI.md) ---------- */
+@font-face{font-family:"Caos Mano";src:url(/fonts/CaosMano-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Caos Mano";src:url(/fonts/CaosMano-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Source Code Pro";src:local("Source Code Pro Light"),local("SourceCodePro-Light"),url(/fonts/SourceCodePro-Light.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Source Code Pro";src:local("Source Code Pro"),local("SourceCodePro-Regular"),url(/fonts/SourceCodePro-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Source Code Pro";src:local("Source Code Pro Medium"),local("SourceCodePro-Medium"),url(/fonts/SourceCodePro-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Source Code Pro";src:local("Source Code Pro Bold"),local("SourceCodePro-Bold"),url(/fonts/SourceCodePro-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Source Code Pro";src:local("Source Code Pro Italic"),local("SourceCodePro-It"),url(/fonts/SourceCodePro-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+
+:root{
+  --off-white:#f1ede2; --bianco:#ffffff; --nero:#000000; --arancio:#f8a11d;
+  --rosso-logo:#e8380d;
+  --food-bg:#f8e0d0;  --food-title:#f0a018;  --food-text:#a8480c;
+  --sweet-bg:#d8d8f8; --sweet-title:#5840e8; --sweet-text:#5840e8;
+  --hot-bg:#d0d8d8;   --hot-title:#284058;   --hot-text:#284058;
+  --chill-bg:#f8d8e8; --chill-title:#f83898; --chill-text:#c01a6a;
+
+  --mono:"Source Code Pro",ui-monospace,Menlo,Consolas,monospace;
+  --mano:"Caos Mano",var(--mono);
+  --misura:44rem;
+  --gutter:16px;
+  --focus:#5840e8;
+  --nav-h:52px;
+}
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + 8px)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--off-white);color:var(--nero);font:400 1rem/1.55 var(--mono);hyphens:none;text-align:left}
+img{max-width:100%;height:auto}
+a{color:inherit;text-underline-offset:.2em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+h1,h2,h3,h4,h5{margin:0;line-height:1.1}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+abbr[title]{text-decoration:none;cursor:help}
+[hidden]{display:none!important}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.skip{position:absolute;left:var(--gutter);top:-100px;background:var(--nero);color:var(--bianco);padding:.75rem 1rem;z-index:10}
+.skip:focus{top:8px}
+
+/* Caos Mano: si scrive in minuscolo (la A maiuscola è la ∀). Mai text-transform qui. */
+.mano{font-family:var(--mano);font-weight:400;font-synthesis:none;letter-spacing:.01em}
+.mano .fb{font-family:var(--mono);font-weight:700}
+/* Se Caos Mano non carica, js/menu.js aggiunge .no-mano: allora SCP Bold maiuscolo. */
+.no-mano .mano{font-family:var(--mono);font-weight:700;text-transform:uppercase;letter-spacing:0}
+
+/* ---------- testata ---------- */
+.testa{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:12px var(--gutter);background:var(--off-white)}
+.logo{display:inline-flex;min-height:44px;align-items:center}
+.logo img{display:block;height:44px;width:auto}
+.lingua{display:inline-flex;align-items:center;min-height:44px;padding:0 .75rem;font-weight:700;font-size:.875rem;border:2px solid var(--nero);text-decoration:none}
+.lingua:hover{background:var(--nero);color:var(--bianco)}
+
+/* nav delle sezioni: sticky, scorre in orizzontale */
+.nav-sez{position:sticky;top:0;z-index:5;background:var(--nero);color:var(--bianco)}
+.nav-sez ul{display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none;padding:0 calc(var(--gutter) - .5rem);max-width:none}
+.nav-sez ul::-webkit-scrollbar{display:none}
+.nav-sez a{display:flex;align-items:center;min-height:var(--nav-h);padding:0 .6rem;white-space:nowrap;text-decoration:none;font-size:1.05rem}
+.nav-sez li:last-child a{font-weight:700;font-size:.875rem}
+.nav-sez a:hover,.nav-sez a[aria-current="true"]{color:var(--arancio)}
+
+/* ---------- apertura ---------- */
+.apertura{max-width:var(--misura);margin:0 auto;padding:2.5rem var(--gutter) 2rem}
+.apertura h1{font-size:clamp(3.5rem,16vw,6rem);margin-bottom:1.5rem}
+.filosofia-titolo{font-weight:700;font-size:1.125rem;margin-bottom:.75rem}
+.filosofia{max-width:65ch;margin-bottom:.75rem}
+.filosofia-chiusa{font-weight:500;margin-bottom:1.25rem}
+.come{max-width:65ch;font-weight:300;border-left:4px solid var(--arancio);padding-left:.875rem}
+
+.striscia{margin-top:1.5rem;font-weight:700}
+.striscia a{display:inline-flex;align-items:center;min-height:44px;margin-right:.5rem}
+.striscia .pill{display:inline-block;background:var(--nero);color:var(--arancio);padding:.1rem .5rem;margin-right:.5rem;font-size:.8125rem}
+
+/* filtri (compaiono solo con JS) */
+.filtri{margin-top:1.75rem}
+.filtri fieldset{border:2px solid var(--nero);padding:1rem;margin:0}
+.filtri legend{font-weight:700;padding:0 .4rem}
+.check{display:flex;align-items:center;gap:.6rem;min-height:44px;font-weight:500}
+.check input,.chip input{width:1.25rem;height:1.25rem;accent-color:var(--nero);margin:0}
+.senza-label{font-weight:500;margin:.5rem 0 .4rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{position:relative;display:inline-flex}
+.chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;min-height:44px;padding:0 .7rem;border:2px solid var(--nero);font-size:.875rem;background:var(--bianco)}
+.chip input:checked+span{background:var(--nero);color:var(--bianco)}
+.chip input:focus-visible+span{outline:3px solid var(--focus);outline-offset:2px}
+.azzera{margin-top:.75rem;min-height:44px;padding:0 1rem;font:700 .875rem var(--mono);background:transparent;border:2px solid var(--nero);cursor:pointer}
+.esito{margin-top:.5rem;font-size:.875rem;min-height:1.4em}
+
+/* ---------- sezioni (registro colore) ---------- */
+.sez{--bg:var(--food-bg);--accento:var(--food-title);--dettaglio:var(--food-text);
+  background:var(--bg);padding:2.5rem var(--gutter) 3rem}
+.sez>*{max-width:var(--misura);margin-inline:auto}
+.reg-food{--bg:var(--food-bg);--accento:var(--food-title);--dettaglio:var(--food-text)}
+.reg-hot{--bg:var(--hot-bg);--accento:var(--hot-title);--dettaglio:var(--hot-text)}
+/* magenta su rosa = 4,4:1: per i dettagli piccoli si usa il nero */
+.reg-chill{--bg:var(--chill-bg);--accento:var(--chill-title);--dettaglio:var(--nero)}
+.reg-sweet{--bg:var(--sweet-bg);--accento:var(--sweet-title);--dettaglio:var(--sweet-text)}
+
+.sez-testa{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem 1rem;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:6px solid var(--accento)}
+.sez-testa h2{font-size:clamp(2.75rem,13vw,4.5rem);flex-basis:100%}
+.sez-testa .nome-nota{flex-basis:100%;margin-top:-.25rem}
+.orario{font-weight:500;font-size:.9375rem}
+.adesso{background:var(--nero);color:var(--arancio);font-weight:700;font-size:.75rem;padding:.15rem .5rem;letter-spacing:.05em}
+.sottotitolo{font-weight:700;font-size:1.0625rem;margin-bottom:.4rem}
+.sez .intro{margin-bottom:1.5rem;font-weight:300}
+.sez>.nota{margin-top:1.5rem;font-weight:500;font-size:.9375rem}
+
+/* voci */
+.voci{display:grid;gap:1.4rem}
+.voce .riga{display:flex;align-items:baseline;gap:.5rem}
+.voce .nome{font-size:1.5rem;font-weight:400;flex:1 1 auto;min-width:0}
+.nome-nota{display:inline-block;font:500 .8125rem var(--mono);margin-left:.25rem}
+.no-mano .nome-nota{text-transform:none}
+.flag{font:700 .75rem var(--mono);border:2px solid currentColor;padding:0 .3rem;align-self:center}
+.prezzo{flex:0 0 auto;font-size:1.5rem;white-space:nowrap;margin-left:auto}
+.prezzo .da{font:500 .8125rem var(--mono)}
+.desc{margin-top:.25rem;max-width:65ch;font-weight:300;font-size:.9375rem}
+.forn{font-style:italic;font-weight:400;color:var(--dettaglio)}
+.meta{margin-top:.25rem;font-size:.8125rem;color:var(--dettaglio);font-weight:500}
+.meta .dubbio{font-weight:400;font-style:italic}
+.tag:not(:empty){display:inline-block;margin-left:.5rem;background:var(--nero);color:var(--bianco);padding:0 .35rem;font-weight:700}
+
+/* lista breve con puntini (classici, aggiunte) */
+.lista-blocco{margin:2rem auto}
+.sotto{font:700 1rem var(--mono);margin:0 0 .75rem}
+.lista{display:grid;gap:.6rem}
+.breve{display:grid;grid-template-columns:auto 1fr auto;align-items:baseline;column-gap:.4rem}
+.breve .nome-breve{font-weight:500}
+.breve .punti{border-bottom:2px dotted currentColor;opacity:.5;transform:translateY(-.25em)}
+.breve .prezzo{font-size:1.25rem}
+.breve .meta{grid-column:1/-1;margin-top:0}
+.breve .meta:has(>.tag:only-child:empty){display:none}
+.nota-all{margin-top:.75rem}
+
+/* fascia arancio: testo nero, anche i prezzi (rosso su arancio = 2:1, non leggibile) */
+.fascia{background:var(--arancio);color:var(--nero);--dettaglio:var(--nero);
+  margin:2rem calc(var(--gutter) * -1);padding:1.5rem var(--gutter)}
+@media (min-width:48rem){.fascia{margin-inline:auto;padding:1.5rem 1.5rem}}
+.sez>.fascia:first-of-type{margin-top:0}
+.fascia-titolo{font-size:clamp(1.75rem,8vw,2.5rem);font-weight:400;margin-bottom:.75rem}
+.fascia .intro{font-weight:400}
+.fascia .voci{gap:1.1rem}
+.fascia .sotto{margin-top:1.25rem}
+.fascia>.nota{margin-top:1rem;font-size:.875rem;font-weight:500}
+.voce-sola .riga{justify-content:flex-end}
+.voce-sola .desc{margin-top:0}
+
+/* oggi in macchina */
+.oggi{border:2px solid var(--nero);padding:.75rem .875rem;margin:0 0 1.25rem;background:var(--bianco)}
+.oggi-titolo{font:700 .875rem var(--mono);margin-bottom:.35rem}
+.oggi-lista{display:grid;gap:.3rem;font-size:.9375rem}
+.oggi-lista .nota{font-weight:300}
+.oggi-vuoto{font-size:.9375rem}
+
+/* stato filtri */
+/* attenuo il contenuto ma non l'etichetta, che deve restare leggibile */
+.off .riga,.off .desc,.off .all,.off.breve>:not(.meta){opacity:.4}
+
+/* ---------- legenda ---------- */
+.legenda{max-width:var(--misura);margin:0 auto;padding:3rem var(--gutter)}
+.legenda h2{font:700 1.25rem var(--mono);margin-bottom:1rem}
+.legenda-lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(11rem,1fr));gap:.4rem 1rem;margin-bottom:1.5rem}
+.legenda-lista .n{display:inline-block;min-width:2ch;font-weight:700}
+.contaminazione{font-weight:700;margin-bottom:.5rem}
+.piede{margin-bottom:.5rem}
+.aggiornato{font-size:.8125rem;font-weight:300}
+
+/* ---------- piede del sito ---------- */
+.piede-sito{background:var(--nero);color:var(--bianco);padding:2.5rem var(--gutter);display:grid;gap:1.5rem}
+.piede-sito>*{width:100%;max-width:var(--misura);margin-inline:auto}
+.piede-sito h2{font:700 .875rem var(--mono);color:var(--arancio);margin-bottom:.4rem;letter-spacing:.05em}
+.piede-sito a{display:inline-block;padding:.35rem 0}
+.piede-sito a:hover{color:var(--arancio)}
+.payoff{font-weight:500}
+
+@media (min-width:48rem){
+  :root{--gutter:32px}
+  .piede-sito{grid-template-columns:repeat(3,minmax(0,1fr));max-width:none}
+  .piede-sito>*{max-width:none}
+  .payoff{grid-column:1/-1}
+}
+
+/* ---------- stampa ---------- */
+@media print{
+  @page{margin:12mm}
+  body{background:#fff;font-size:10pt}
+  .skip,.nav-sez,.filtri,.striscia,.lingua,.adesso,.tag,.piede-sito a[href^="http"]{display:none!important}
+  .sez,.fascia,.oggi{background:#fff!important;padding:0;margin:1.2em 0}
+  .sez{break-before:auto}
+  .sez-testa{border-bottom-width:2px;break-after:avoid}
+  .voce,.breve{break-inside:avoid}
+  .off{opacity:1}
+  .fascia{border:1.5px solid #000;padding:.6em}
+  .piede-sito{background:#fff;color:#000;padding:0}
+  .piede-sito h2{color:#000}
+}
+
+/* voce senza nome (il nome è già il titolo della fascia): prezzo accanto alla descrizione */
+.voce-sola{display:grid;grid-template-columns:1fr auto;column-gap:1rem;align-items:baseline}
+.voce-sola .riga{grid-column:2;grid-row:1}
+.voce-sola .desc{grid-column:1;grid-row:1}
+.voce-sola .meta{grid-column:1/-1}

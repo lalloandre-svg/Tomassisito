@@ -1,3 +1,10 @@
+# Tomassisito
+
+- **Tema Shopify Tomassicoffee** – `backup-pre-seo-ai/`, `theme-seo-ai/` (sotto).
+- **Sito CAOS Caffè** – `caos-site/`: menù online per caoscaffe.com/menu (QR della carta). Istruzioni in `caos-site/LEGGIMI.md`, brief in `caos-site/CLAUDE.md`.
+
+---
+
 # Tomassicoffee – modifiche tema Shopify
 
 Tema Shopify di lavoro: **"Copia aggiornata di Copia di Craft + Over your limits"** (non pubblicato).
