@@ -1,21 +1,21 @@
 {%- comment -%}
-  Tomassi — Countdown tostatura come BANDA UNICA nell'header. Bilingue IT/EN.
-  Unica fascia informativa del sito: conto alla rovescia + spedizione gratuita.
-  Orario unico della tostatura: martedì alle 12:00, ora di Roma.
-  Lo stesso orario è usato dalla scheda prodotto (snippets/tomassi-roast-line.liquid)
-  e da ogni altro <roasting-countdown> della pagina, perché questo script è il primo
-  a definire il custom element.
+  Tomassi — Countdown tostatura come BANDA nell'header. Bilingue IT/EN.
   I testi arrivano come parametri (italiani) dal render in header.liquid; qui
   vengono tradotti in EN via mappa quando request.locale.iso_code == 'en'.
+  Il conto alla rovescia arriva a martedì alle 12:00 (ora di Roma), chiusura
+  degli ordini per la tostatura del martedì: logica in snippets/roasting-countdown-script.liquid,
+  la stessa della scheda prodotto.
 {%- endcomment -%}
 
 {%- assign rb = uid | default: 'rb' -%}
 {%- assign L = request.locale.iso_code -%}
 {%- assign _label = label -%}{%- assign _text = text -%}{%- assign _btn = button_label -%}
-{%- assign _ship = shipping_note | default: 'Spedizione gratuita da €69' -%}
+{%- case label -%}
+  {%- when 'Prossima tostatura' -%}{%- assign _label = 'Ordina entro martedì alle 12' -%}
+{%- endcase -%}
 {%- if L == 'en' -%}
   {%- case label -%}
-    {%- when 'Prossima tostatura' -%}{%- assign _label = 'Next roast' -%}
+    {%- when 'Prossima tostatura' -%}{%- assign _label = 'Order by Tuesday 12:00' -%}
   {%- endcase -%}
   {%- case text -%}
     {%- when 'Tostiamo su ordinazione, ogni martedì.' -%}{%- assign _text = 'We roast to order, every Tuesday.' -%}
@@ -25,23 +25,26 @@
     {%- when 'Scegli il tuo caffè' -%}{%- assign _btn = 'Choose your coffee' -%}
     {%- when 'Scegli quale limite oltrepassare' -%}{%- assign _btn = 'Choose which limit to break' -%}
   {%- endcase -%}
-  {%- if _ship == 'Spedizione gratuita da €69' -%}{%- assign _ship = 'Free shipping from €69' -%}{%- endif -%}
 {%- endif -%}
 
 <div class="roast-bar roast-bar--{{ rb }}" style="--rb-bg: {{ bg_color | default: '#0F4A27' }}; --rb-fg: {{ fg_color | default: '#F6EEDC' }}; --rb-accent: {{ accent_color | default: '#C2922D' }};">
   <roasting-countdown class="roast-bar__inner page-width" data-roast-day="2" data-roast-hour="12" data-lang="{{ L }}">
     <div class="roast-bar__state" data-roast-counting>
-      {%- if _label != blank -%}<span class="roast-bar__kicker"><span class="roast-bar__pulse" aria-hidden="true"></span>{{ _label | escape }}</span>{%- endif -%}
-      <span class="roast-bar__clock" role="timer" aria-hidden="true">
-        <b data-roast-days>--</b><i>{% if L == 'en' %}d{% else %}g{% endif %}</i>
-        <b data-roast-hours>--</b><i>h</i>
-        <b data-roast-minutes>--</b><i>m</i>
-        {%- if show_seconds -%}<b data-roast-seconds>--</b><i>s</i>{%- endif -%}
-      </span>
-      {%- if _text != blank -%}<span class="roast-bar__text">{{ _text | escape }}</span>{%- endif -%}
-      {%- if _ship != blank -%}<span class="roast-bar__ship">{{ _ship | escape }}</span>{%- endif -%}
+      <div class="roast-bar__copy">
+        {%- if _label != blank -%}<span class="roast-bar__kicker"><span class="roast-bar__pulse" aria-hidden="true"></span>{{ _label | escape }}</span>{%- endif -%}
+        {%- if _text != blank -%}<span class="roast-bar__text">{{ _text | escape }}</span>{%- endif -%}
+      </div>
+      <div class="roast-bar__clock" role="timer" aria-hidden="true">
+        <span class="roast-bar__unit"><b data-roast-days>--</b><i>{% if L == 'en' %}days{% else %}giorni{% endif %}</i></span>
+        <span class="roast-bar__sep">:</span>
+        <span class="roast-bar__unit"><b data-roast-hours>--</b><i>{% if L == 'en' %}hours{% else %}ore{% endif %}</i></span>
+        <span class="roast-bar__sep">:</span>
+        <span class="roast-bar__unit"><b data-roast-minutes>--</b><i>{% if L == 'en' %}minutes{% else %}minuti{% endif %}</i></span>
+        <span class="roast-bar__sep">:</span>
+        <span class="roast-bar__unit"><b data-roast-seconds>--</b><i>{% if L == 'en' %}seconds{% else %}secondi{% endif %}</i></span>
+      </div>
       {%- if _btn != blank and button_link != blank -%}
-        <a class="roast-bar__btn" href="{{ button_link }}">{{ _btn | escape }}</a>
+        <a class="roast-bar__btn" href="{{ button_link }}"><span class="roast-bar__btn-label">{{ _btn | escape }}</span></a>
       {%- endif -%}
       <span class="visually-hidden" data-roast-sr aria-live="off"></span>
     </div>
@@ -51,11 +54,38 @@
 
 {%- style -%}
   .roast-bar {
+    position: relative;
+    overflow: hidden;
     background: var(--rb-bg);
     color: var(--rb-fg);
     width: 100%;
   }
-  .roast-bar__inner { padding-top: 0.7rem; padding-bottom: 0.7rem; }
+  .roast-bar::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 34%;
+    background: linear-gradient(105deg, transparent, rgba(230, 194, 104, 0.09), transparent);
+    transform: translateX(-140%) skewX(-16deg);
+    animation: roast-bar-sweep 7s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes roast-bar-sweep {
+    0% { transform: translateX(-140%) skewX(-16deg); }
+    38% { transform: translateX(440%) skewX(-16deg); }
+    100% { transform: translateX(440%) skewX(-16deg); }
+  }
+  .roast-bar__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 3vw, 2.4rem);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    transition: opacity 0.18s ease;
+  }
   .header-wrapper:has(.header__inline-menu details[open]) .roast-bar--std .roast-bar__inner {
     opacity: 0;
     visibility: hidden;
@@ -65,68 +95,119 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem 1.6rem;
-    font-size: 1.3rem;
-    line-height: 1.3;
-    text-align: center;
+    gap: clamp(1rem, 3vw, 2.4rem);
+    width: 100%;
   }
   .roast-bar__state[hidden] { display: none; }
+  .roast-bar__copy { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 0.2rem; }
   .roast-bar__kicker {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.7rem;
+    font-size: clamp(1.3rem, 1.1rem + 0.6vw, 1.7rem);
     font-weight: 600;
     letter-spacing: 0.02em;
     color: #E6C268;
   }
   .roast-bar__pulse {
-    width: 0.6rem; height: 0.6rem;
+    width: 0.7rem; height: 0.7rem;
     border-radius: 50%;
     background: #E6C268;
     animation: roast-bar-ping 2.4s ease-out infinite;
   }
   @keyframes roast-bar-ping {
     0% { box-shadow: 0 0 0 0 rgba(230, 194, 104, 0.55); }
-    70% { box-shadow: 0 0 0 6px rgba(230, 194, 104, 0); }
+    70% { box-shadow: 0 0 0 7px rgba(230, 194, 104, 0); }
     100% { box-shadow: 0 0 0 0 rgba(230, 194, 104, 0); }
   }
+  .roast-bar__text { font-size: clamp(1.1rem, 1rem + 0.3vw, 1.3rem); opacity: 0.9; }
   .roast-bar__clock {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: clamp(0.4rem, 1.2vw, 1rem);
     font-variant-numeric: tabular-nums;
-    font-feature-settings: 'tnum' 1;
   }
-  .roast-bar__clock b { font-size: 1.5rem; font-weight: 700; color: var(--rb-accent); min-width: 1.6ch; text-align: right; }
-  .roast-bar__clock i { font-style: normal; opacity: 0.75; margin-right: 0.4rem; }
-  .roast-bar__clock i:last-child { margin-right: 0; }
-  .roast-bar__text { opacity: 0.85; }
-  .roast-bar__ship { font-weight: 600; }
+  .roast-bar__unit { display: flex; flex-direction: column; align-items: center; min-width: 3.2rem; }
+  .roast-bar__unit b {
+    font-size: clamp(2.2rem, 1.6rem + 2.2vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1;
+    font-feature-settings: 'tnum' 1;
+    text-shadow: 0 0 18px color-mix(in srgb, var(--rb-accent) 40%, transparent);
+  }
+  @keyframes roast-bar-tick {
+    from { transform: translateY(-0.32em); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+  .roast-bar__unit b.roast-tick { animation: roast-bar-tick 0.5s cubic-bezier(0.2, 1, 0.3, 1); }
+  .roast-bar__unit i {
+    margin-top: 0.3rem;
+    font-style: normal;
+    font-size: clamp(0.85rem, 0.8rem + 0.2vw, 1rem);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+  .roast-bar__sep {
+    font-size: clamp(1.8rem, 1.4rem + 1.5vw, 2.6rem);
+    font-weight: 300;
+    line-height: 1;
+    opacity: 0.4;
+    margin-top: 0.05em;
+    animation: roast-bar-blink 1.1s ease-in-out infinite alternate;
+  }
+  @keyframes roast-bar-blink {
+    from { opacity: 0.45; }
+    to { opacity: 0.15; }
+  }
   .roast-bar__btn {
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
-    min-height: 2.8rem;
-    padding: 0.3rem 1.4rem;
+    justify-content: center;
+    min-height: 3.8rem;
+    padding: 0.8rem 2rem;
     border-radius: 999px;
     background: var(--rb-accent);
     color: var(--rb-bg);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 600;
+    letter-spacing: 0.02em;
     text-decoration: none;
     white-space: nowrap;
+    transition: transform 0.18s ease-out, opacity 0.18s ease-out;
   }
-  .roast-bar__btn:hover { opacity: 0.9; }
-  .roast-bar__btn:focus-visible { outline: 2px solid var(--rb-fg); outline-offset: 2px; }
+  .roast-bar__btn::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 55%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: translateX(-160%) skewX(-18deg);
+    transition: transform 0.65s ease;
+    pointer-events: none;
+  }
+  .roast-bar__btn:hover::after,
+  .roast-bar__btn:focus-visible::after { transform: translateX(320%) skewX(-18deg); }
+  .roast-bar__btn-label { position: relative; z-index: 1; }
+  .roast-bar__btn:hover { transform: translateY(-2px); opacity: 0.92; }
+  .roast-bar__btn:focus-visible { outline: 3px solid var(--rb-fg); outline-offset: 3px; }
   @media (prefers-reduced-motion: reduce) {
+    .roast-bar::after { display: none; }
+    .roast-bar__btn { transition: none; }
+    .roast-bar__btn:hover { transform: none; }
+    .roast-bar__btn::after { display: none; }
     .roast-bar__pulse { animation: none; }
-  }
-  @media screen and (max-width: 989px) {
-    .roast-bar__text, .roast-bar__btn { display: none; }
+    .roast-bar__sep { animation: none; }
+    .roast-bar__unit b { text-shadow: none; }
+    .roast-bar__unit b.roast-tick { animation: none; }
   }
   @media screen and (max-width: 749px) {
-    .roast-bar__inner { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-    .roast-bar__state { font-size: 1.2rem; gap: 0.2rem 1rem; }
-    .roast-bar__clock b { font-size: 1.3rem; }
+    .roast-bar__copy { align-items: center; text-align: center; width: 100%; }
+    .roast-bar__inner, .roast-bar__state { gap: 1rem; }
+    .roast-bar__unit { min-width: 2.8rem; }
   }
 {%- endstyle -%}
 

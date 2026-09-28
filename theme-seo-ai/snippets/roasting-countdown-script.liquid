@@ -1,6 +1,7 @@
 {%- comment -%}
   Tomassi — logica unica del conto alla rovescia della tostatura.
-  Definisce <roasting-countdown>: martedì alle 12:00, ora di Roma
+  Definisce <roasting-countdown>: conta fino a martedì alle 12:00, ora di Roma,
+  cioè la chiusura degli ordini per la tostatura del martedì
   (sovrascrivibile con data-roast-day / data-roast-hour).
   Renderizzato dalla fascia dell'header e dalla riga della scheda prodotto;
   la guardia su customElements evita doppie definizioni.
@@ -13,6 +14,7 @@
           this.targetDay = parseInt(this.dataset.roastDay || '2', 10);
           this.targetHour = parseInt(this.dataset.roastHour || '12', 10);
           this.en = (this.dataset.lang || '').toLowerCase().indexOf('en') === 0;
+          this.reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           this.counting = this.querySelector('[data-roast-counting]');
           this.today = this.querySelector('[data-roast-today]');
           this.elDays = this.querySelector('[data-roast-days]');
@@ -27,6 +29,16 @@
         disconnectedCallback() { if (this.timer) clearInterval(this.timer); }
         romeNow() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome' })); }
         pad(n) { return String(n).padStart(2, '0'); }
+        setVal(el, v) {
+          if (!el) return;
+          const t = this.pad(v);
+          if (el.textContent === t) return;
+          el.textContent = t;
+          if (this.reduce) return;
+          el.classList.remove('roast-tick');
+          void el.offsetWidth;
+          el.classList.add('roast-tick');
+        }
         tick() {
           const now = this.romeNow();
           const add = (this.targetDay - now.getDay() + 7) % 7;
@@ -39,13 +51,13 @@
           const h = Math.floor(diff / 3600000); diff -= h * 3600000;
           const m = Math.floor(diff / 60000); diff -= m * 60000;
           const s = Math.floor(diff / 1000);
-          if (this.elDays) this.elDays.textContent = this.pad(d);
-          if (this.elHours) this.elHours.textContent = this.pad(h);
-          if (this.elMinutes) this.elMinutes.textContent = this.pad(m);
-          if (this.elSeconds) this.elSeconds.textContent = this.pad(s);
+          this.setVal(this.elDays, d);
+          this.setVal(this.elHours, h);
+          this.setVal(this.elMinutes, m);
+          this.setVal(this.elSeconds, s);
           if (this.elSr) this.elSr.textContent = this.en
-            ? ('Next roast in ' + d + ' days, ' + h + ' hours and ' + m + ' minutes.')
-            : ('Prossima tostatura tra ' + d + ' giorni, ' + h + ' ore e ' + m + ' minuti.');
+            ? ('Orders for the next roast close in ' + d + ' days, ' + h + ' hours and ' + m + ' minutes.')
+            : ('Gli ordini per la prossima tostatura chiudono tra ' + d + ' giorni, ' + h + ' ore e ' + m + ' minuti.');
         }
       }
       customElements.define('roasting-countdown', RoastingCountdown);

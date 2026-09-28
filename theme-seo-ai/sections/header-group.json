@@ -56,7 +56,6 @@
     },
     "announcement-bar": {
       "type": "announcement-bar",
-      "disabled": true,
       "blocks": {
         "announcement-bar-0": {
           "type": "announcement",
@@ -64,10 +63,18 @@
             "text": "Spedizione gratuita in Italia per ordini da €69",
             "link": ""
           }
+        },
+        "announcement_BNR4Eb": {
+          "type": "announcement",
+          "settings": {
+            "text": "Tostiamo solo su richiesta, ogni martedì, per garantirvi sempre un caffè il più fresco possibile",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "announcement-bar-0"
+        "announcement-bar-0",
+        "announcement_BNR4Eb"
       ],
       "settings": {
         "auto_rotate": true,

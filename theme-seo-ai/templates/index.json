@@ -296,7 +296,7 @@
         "kicker": "Business",
         "heading": "Vuoi portare Tomassicoffee nel tuo locale?",
         "heading_accent": "",
-        "text": "Caffè, ricette, formazione, supporto e una torrefazione vera con cui parlare. Non vendiamo solo sacchi. Costruiamo un modo più serio e più semplice di servire caffè.",
+        "text": "Assaggiamo con te i campioni, scegliamo il caffè, impostiamo la ricetta sulla tua macchina e torniamo quando l'estrazione cambia.",
         "button_label": "Apri la sezione Business",
         "button_link": "shopify://pages/servizi-b2b",
         "button_note": "Risposta entro 24h · Senza impegno",
@@ -355,4 +355,3 @@
     "home_apps"
   ]
 }
-

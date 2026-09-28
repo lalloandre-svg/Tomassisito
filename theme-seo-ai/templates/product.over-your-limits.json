@@ -1,0 +1,193 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "oyl_styles": {
+      "type": "oyl-styles",
+      "settings": {}
+    },
+    "oyl_product_styles": {
+      "type": "oyl-product-styles",
+      "settings": {
+        "bg_color": "#1b1814",
+        "text_color": "#ffffff",
+        "accent_color": "#c99a24"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 68
+      }
+    },
+    "oyl_teca": {
+      "type": "pdp-oyl-teca",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "kicker": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-pdp', product: product, part: 'kicker' %}"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "chips": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-pdp', product: product, part: 'chips' %}"
+          }
+        },
+        "bars": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>.oyl-bars .tpdp-bars{display:grid;gap:.7rem;margin:1.2rem 0 .6rem;max-width:32rem}.oyl-bars .tpdp-bar{display:flex;align-items:center;gap:1rem}.oyl-bars .tpdp-bar__label{width:7rem;font-size:1.2rem;color:#F6EEDC}.oyl-bars .tpdp-bar__track{flex:1;height:.6rem;background:rgba(246,238,220,.16);border-radius:999px;overflow:hidden}.oyl-bars .tpdp-bar__fill{display:block;height:100%;background:#F6EEDC;border-radius:999px}.oyl-bars .tpdp-bar__fill--accent{background:#C99A24}.oyl-bars .tpdp-bar__val{color:#F6EEDC}</style><div class=\"oyl-bars\">{% render 'tomassi-pdp', product: product, part: 'bars' %}</div>"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "roast": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-roast-line' %}"
+          }
+        },
+        "trust": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"oyl-trust\">{% if request.locale.iso_code == 'en' %}<span>Off the charts</span><span>Not for everyone</span><span>Collector's lots</span>{% else %}<span>Fuori scala</span><span>Non per tutti</span><span>Pezzi da collezione</span>{% endif %}</div>"
+          }
+        },
+        "pairing": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-pdp', product: product, part: 'pairing' %}"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "acc": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-pdp', product: product, part: 'accordion' %}"
+          }
+        }
+      },
+      "block_order": [
+        "kicker",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "roast",
+        "chips",
+        "bars",
+        "trust",
+        "pairing",
+        "description",
+        "acc"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-5",
+        "media_size": "medium",
+        "constrain_to_viewport": false,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 44
+      }
+    },
+    "sticky_atc": {
+      "type": "sticky-atc",
+      "settings": {
+        "label": "Rivendicalo",
+        "bg_color": "#1b1814",
+        "text_color": "#ffffff",
+        "accent_color": "#c99a24"
+      }
+    },
+    "oyl_more": {
+      "type": "oyl-collection",
+      "settings": {
+        "kicker": "",
+        "heading": "Altri caffè della serie",
+        "description": "",
+        "collection": "over-your-limits",
+        "products_to_show": 3,
+        "columns_desktop": 3,
+        "buy_label": "Acquista",
+        "show_view_all": true,
+        "view_all_label": "Vedi tutta la serie",
+        "view_all_link": "shopify://collections/over-your-limits",
+        "bg_color": "#1b1814",
+        "text_color": "#ffffff",
+        "accent_color": "#c99a24",
+        "padding_top": 64,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "oyl_styles",
+    "oyl_product_styles",
+    "related-products",
+    "oyl_teca",
+    "main",
+    "sticky_atc",
+    "oyl_more"
+  ]
+}
