@@ -17,14 +17,14 @@
         "heading_dffpiz": {
           "type": "heading",
           "settings": {
-            "heading": "Quando arriva un caffè nuovo, te lo diciamo.",
+            "heading": "Iscriviti alla newsletter",
             "heading_size": "h1"
           }
         },
         "paragraph_nagPJk": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>Ti scriviamo quando arrivano nuovi lotti e nuovi raccolti, con le ricette per prepararli a casa e gli avvisi quando cambiano i giorni di tostatura. Ti cancelli quando vuoi.</p>"
+            "text": "<p>Novità, lanci e consigli pratici sul caffè. Niente spam, solo cose utili.</p>"
           }
         },
         "email_form_tj436h": {

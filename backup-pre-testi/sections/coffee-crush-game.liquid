@@ -1,0 +1,226 @@
+{%- comment -%}
+  Coffee Crush — gioco swipe alla Tinder (v2, 2026-09-24).
+  - Si gioca SUBITO: l'email si chiede solo alla fine per sbloccare il codice sconto (iscrizione newsletter esplicita).
+  - Le card sono "domande da dating" legate ai VALORI VERI del caffè:
+    corpo / acidità / dolcezza = metafield prodotto custom.corpo / custom.acidita / custom.dolcezza (1-10, si modificano in Admin),
+    famiglie aromatiche = note del profilo sensoriale (descrizione). Le card mostrano SOLO la domanda (niente spiegazioni).
+  - Compatibilità calcolata davvero (distanza dai valori + affinità aromatica), non più fissa 86-99%.
+  - Risultato: aggiungi al carrello (varianti del prodotto), codice sconto dopo email, condividi il match (?match=handle).
+  Pool: collezione tutti-i-caffe, disponibili, esclusi abbonamenti e serie Over Your Limits (2026-09-24: niente match OYL).
+  Layout (v3): su questa pagina la testata NON è fissa, il gioco occupa lo schermo; home a 2 colonne con mazzo d'esempio.
+  Modalità fiera: ?fiera=1 (resta sul dispositivo, ?fiera=0 spegne). Email obbligatoria (fine o inizio, da impostazioni),
+  consenso newsletter esplicito, niente menu/footer/widget, reset automatico, email salvate anche sul tablet
+  (localStorage 'ccg_leads') ed esportabili in CSV da ?fiera=export.
+  Domande (v4): blocchi "Domanda" nella sezione (Personalizza tema). 1 blocco = 1 tipo (es. Corpo pieno, Frutti rossi)
+  con fino a 5 varianti (IT + EN + emoji). Ogni partita estrae UNA variante per blocco, a rotazione, in ordine mischiato:
+  il risultato dipende solo dal tipo, quindi stesse risposte = stesso caffè. Senza blocchi usa le 13 domande di riserva nel JS.
+  Codice sconto e testi principali: impostazioni della sezione (Personalizza tema).
+{%- endcomment -%}
+
+{%- assign L = request.locale.iso_code -%}
+{%- assign ccg_code = section.settings.discount_code | default: 'COFFEECRUSH10' | strip | upcase -%}
+{%- assign ccg_pct = section.settings.discount_percent | default: 10 -%}
+
+{%- capture ccg_products -%}
+{%- assign ccg_seen = '' -%}
+{%- assign ccg_n = 0 -%}
+{%- assign ccg_cols = 'tutti-i-caffe' | split: ',' -%}
+{%- for ccg_col in ccg_cols -%}
+  {%- for product in collections[ccg_col].products limit: 50 -%}
+    {%- assign ccg_key = '|' | append: product.handle | append: '|' -%}
+    {%- if ccg_seen contains ccg_key -%}{%- continue -%}{%- endif -%}
+    {%- assign ccg_seen = ccg_seen | append: ccg_key -%}
+    {%- assign ccg_tags = product.tags | join: ', ' | downcase -%}
+    {%- if ccg_tags contains 'subscription' or product.handle contains 'abbonamento' -%}{%- continue -%}{%- endif -%}
+    {%- unless product.available -%}{%- continue -%}{%- endunless -%}
+    {%- if product.template_suffix == 'over-your-limits' or ccg_tags contains 'over your limits' -%}{%- continue -%}{%- endif -%}
+    {%- if ccg_n > 0 -%},{%- endif -%}
+    {%- assign ccg_img = '' -%}
+    {%- if product.featured_image -%}{%- assign ccg_img = product.featured_image | image_url: width: 640 -%}{%- endif -%}
+    {"handle":{{ product.handle | json }},"title":{{ product.title | json }},"url":{{ product.url | json }},"img":{{ ccg_img | json }},"price":{{ product.price | money | json }},"desc":{{ product.description | strip_html | truncate: 700 | json }},"tags":{{ ccg_tags | json }},"sweet":{{ product.metafields.custom.dolcezza.value | json }},"body":{{ product.metafields.custom.corpo.value | json }},"acid":{{ product.metafields.custom.acidita.value | json }},"opts":{{ product.options | json }},"vars":[
+      {%- for v in product.variants limit: 40 -%}
+        {%- if forloop.index > 1 -%},{%- endif -%}
+        {"id":{{ v.id }},"o":{{ v.options | json }},"a":{{ v.available }},"p":{{ v.price | money | json }}}
+      {%- endfor -%}]}
+    {%- assign ccg_n = ccg_n | plus: 1 -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- endcapture -%}
+
+{%- comment -%} domande dai blocchi: [{id,k,v:[{e,t,en}]}] {%- endcomment -%}
+{%- assign ccg_nq = 0 -%}
+{%- capture ccg_qs -%}
+{%- for b in section.blocks -%}
+  {%- if b.type != 'question' -%}{%- continue -%}{%- endif -%}
+  {%- capture ccg_vs -%}
+    {%- assign ccg_first = true -%}
+    {%- for i in (1..5) -%}
+      {%- if i == 1 -%}{%- assign kt = 'heading' -%}{%- else -%}{%- assign kt = 'q' | append: i -%}{%- endif -%}
+      {%- assign ke = 'e' | append: i -%}
+      {%- assign kn = 'en' | append: i -%}
+      {%- assign qt = b.settings[kt] | strip -%}
+      {%- if qt == blank -%}{%- continue -%}{%- endif -%}
+      {%- unless ccg_first -%},{%- endunless -%}{%- assign ccg_first = false -%}
+      {"e":{{ b.settings[ke] | strip | json }},"t":{{ qt | json }},"en":{{ b.settings[kn] | strip | json }}}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- if ccg_vs == blank -%}{%- continue -%}{%- endif -%}
+  {%- if ccg_nq > 0 -%},{%- endif -%}
+  {"id":{{ b.id | json }},"k":{{ b.settings.kind | json }},"v":[{{ ccg_vs }}]}
+  {%- assign ccg_nq = ccg_nq | plus: 1 -%}
+{%- endfor -%}
+{%- endcapture -%}
+{%- if ccg_nq == 0 -%}{%- assign ccg_nq = 13 -%}{%- endif -%}
+
+{%- assign ccg_fcode = section.settings.fair_code | strip | upcase -%}
+{%- if ccg_fcode == blank -%}{%- assign ccg_fcode = ccg_code -%}{%- endif -%}
+
+<div class="ccg" id="CoffeeCrush" data-lang="{{ L }}" data-code="{{ ccg_code | escape }}" data-faircode="{{ ccg_fcode | escape }}" data-pct="{{ ccg_pct }}" data-when="{{ section.settings.fair_email_when | default: 'end' }}" data-endpoint="{{ section.settings.lead_endpoint | escape }}">
+
+  {%- comment -%} ---------- 1. schermata iniziale ---------- {%- endcomment -%}
+  <div class="ccg__screen ccg__gate" data-ccg-gate>
+    <div class="ccg__gcopy">
+      <div class="ccg__export" data-ccg-export hidden></div>
+      <div class="ccg__shared" data-ccg-shared hidden></div>
+      <p class="ccg__badge">Coffee Crush</p>
+      <p class="ccg__single" data-ccg-single hidden><span class="ccg__avs" data-ccg-avs></span><span data-ccg-singletext></span></p>
+      <h1 class="ccg__title">{% if L == 'en' %}Find the coffee <em>of your life</em>{% else %}Trova il caff&egrave; <em>della tua vita</em>{% endif %}</h1>
+      <p class="ccg__lead">{% if L == 'en' %}{{ ccg_nq }} first-date questions. You swipe, we make the introductions.{% else %}{{ ccg_nq }} domande da primo appuntamento. Tu swipe, noi facciamo le presentazioni.{% endif %}</p>
+      <div class="ccg__gstart" data-ccg-gstart>
+        <button type="button" class="ccg__btn ccg__btn--go ccg__btn--xl" data-ccg-start>{% if L == 'en' %}Start swiping{% else %}Inizia a swipare{% endif %} <span aria-hidden="true">&rarr;</span></button>
+        <p class="ccg__note" data-ccg-webnote>{% if L == 'en' %}One minute. No sign-up needed to play.{% else %}Un minuto. Per giocare non serve iscriversi.{% endif %}</p>
+        <p class="ccg__note" data-ccg-fairnote hidden>{% if L == 'en' %}At the end, leave your email to meet your match.{% else %}Alla fine lasci la tua email e ti presentiamo il tuo match.{% endif %}</p>
+      </div>
+      <div class="ccg__gslot" data-ccg-gateslot hidden></div>
+      <ol class="ccg__steps">
+        <li><span>1</span>{{ ccg_nq }} swipe</li>
+        <li><span>2</span>{% if L == 'en' %}your match{% else %}il tuo match{% endif %}</li>
+        <li><span>3</span>&minus;{{ ccg_pct }}% {% if L == 'en' %}on the first date{% else %}sul primo appuntamento{% endif %}</li>
+      </ol>
+    </div>
+    <div class="ccg__preview">
+      <span class="ccg__sticker" aria-hidden="true">&minus;{{ ccg_pct }}%<small>{% if L == 'en' %}gift{% else %}in regalo{% endif %}</small></span>
+      <div class="ccg__pc ccg__pc--1" aria-hidden="true"><span class="ccg__pe" data-ccg-pe="2">&#127827;</span><span class="ccg__pt" data-ccg-pt="2"></span></div>
+      <div class="ccg__pc ccg__pc--2" aria-hidden="true"><span class="ccg__pe" data-ccg-pe="1">&#127798;&#65039;</span><span class="ccg__pt" data-ccg-pt="1"></span></div>
+      <div class="ccg__pc ccg__pc--3" data-ccg-pcard><span class="ccg__pstamp">Like</span><span class="ccg__pstamp ccg__pstamp--nope">Nope</span><span class="ccg__pe" data-ccg-pe="0">&#129730;</span><span class="ccg__pt" data-ccg-pt="0"></span></div>
+      <div class="ccg__pbtns">
+        <button type="button" class="ccg__pb ccg__pb--no" data-ccg-pno aria-label="{% if L == 'en' %}No — start the game{% else %}No — inizia il gioco{% endif %}">&#10005;</button>
+        <button type="button" class="ccg__pb ccg__pb--yes" data-ccg-pyes aria-label="{% if L == 'en' %}Yes — start the game{% else %}S&igrave; — inizia il gioco{% endif %}">&#9829;</button>
+      </div>
+      <p class="ccg__phint" aria-hidden="true">{% if L == 'en' %}&#128070; Swipe the card to start{% else %}&#128070; Swipa la card per iniziare{% endif %}</p>
+    </div>
+  </div>
+
+  {%- comment -%} ---------- 2. gioco ---------- {%- endcomment -%}
+  <div class="ccg__screen ccg__play" data-ccg-play hidden>
+    <div class="ccg__top">
+      <p class="ccg__badge ccg__badge--sm">Coffee Crush</p>
+      <p class="ccg__count"><span data-ccg-step>1</span> / <span data-ccg-total>{{ ccg_nq }}</span></p>
+    </div>
+    <div class="ccg__bar"><span data-ccg-bar></span></div>
+    <div class="ccg__stage">
+      <button type="button" class="ccg__ctrl ccg__ctrl--no" data-ccg-no aria-label="{% if L == 'en' %}No, not for me{% else %}No, non fa per me{% endif %}">&#10005;</button>
+      <div class="ccg__deck" data-ccg-deck aria-live="polite"></div>
+      <button type="button" class="ccg__ctrl ccg__ctrl--yes" data-ccg-yes aria-label="{% if L == 'en' %}Yes, I like it{% else %}S&igrave;, mi piace{% endif %}">&#9829;</button>
+    </div>
+    <p class="ccg__hint">{% if L == 'en' %}Drag the card, use the buttons or the arrows &larr; &rarr;{% else %}Trascina la card, usa i tasti o le frecce &larr; &rarr;{% endif %}</p>
+  </div>
+
+  {%- comment -%} ---------- 3. fiera: email per svelare il match ---------- {%- endcomment -%}
+  <div class="ccg__screen ccg__reveal" data-ccg-reveal hidden>
+    <div class="ccg__rvimg" data-ccg-rvimg></div>
+    <p class="ccg__itsa">It&rsquo;s a match! &#128152;</p>
+    <h2 class="ccg__title ccg__title--sm">{% if L == 'en' %}Your match is ready{% else %}Il tuo match &egrave; pronto{% endif %}</h2>
+    <p class="ccg__lead">{% if L == 'en' %}Leave your email and we&rsquo;ll introduce you. As a gift: {{ ccg_pct }}% off your first online order.{% else %}Lascia la tua email e te lo presentiamo. In regalo: il {{ ccg_pct }}% sul primo ordine online.{% endif %}</p>
+    <div data-ccg-revealslot></div>
+  </div>
+
+  {%- comment -%} ---------- 4. risultato ---------- {%- endcomment -%}
+  <div class="ccg__screen ccg__result" data-ccg-result hidden></div>
+
+  {%- comment -%} Form newsletter: renderizzato da Liquid, il JS lo sposta dove serve (risultato, fiera) {%- endcomment -%}
+  <div hidden data-ccg-formwrap>
+    {% form 'customer', id: 'CoffeeCrushSignup', class: 'ccg__form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter, coffee-crush" data-ccg-tags>
+      <input type="hidden" name="return_to" value="{{ request.path }}?ccg=unlocked">
+      <div class="ccg__field">
+        <label class="visually-hidden" for="CcgEmail">Email</label>
+        <input type="email" name="contact[email]" id="CcgEmail" class="ccg__input" placeholder="{% if L == 'en' %}Your email{% else %}La tua email{% endif %}" autocomplete="email" inputmode="email" required>
+        <button type="submit" class="ccg__btn ccg__btn--go" data-ccg-submit>{% if L == 'en' %}Sign me up &amp; unlock{% else %}Iscrivimi e sblocca{% endif %}</button>
+      </div>
+      <label class="ccg__consent" data-ccg-consentwrap hidden>
+        <input type="checkbox" data-ccg-consent>
+        <span>{% if L == 'en' %}Yes, send me the Tomassi newsletter (new coffees, launches, tips). I can unsubscribe anytime.{% else %}S&igrave;, voglio la newsletter Tomassi (nuovi caff&egrave;, lanci, consigli). Mi cancello quando voglio.{% endif %} <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" target="_blank" rel="noopener">Privacy</a></span>
+      </label>
+      <p class="ccg__note" data-ccg-formnote>{% if L == 'en' %}By tapping the button you subscribe to the Tomassi newsletter: new coffees, launches and practical tips. Unsubscribe anytime.{% else %}Premendo il bottone ti iscrivi alla newsletter Tomassi: nuovi caff&egrave;, lanci e consigli pratici. Ti cancelli quando vuoi.{% endif %} <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}">Privacy</a></p>
+      <p class="ccg__err" data-ccg-err hidden>{% if L == 'en' %}Enter a valid email.{% else %}Inserisci un&rsquo;email valida.{% endif %}</p>
+      <p class="ccg__err" data-ccg-err2 hidden>{% if L == 'en' %}Tick the box to continue.{% else %}Spunta la casella per continuare.{% endif %}</p>
+    {% endform %}
+  </div>
+
+  <script type="application/json" data-ccg-products>[{{ ccg_products }}]</script>
+  <script type="application/json" data-ccg-questions>[{{ ccg_qs }}]</script>
+</div>
+
+{{ 'coffee-crush-game.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'coffee-crush-game.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Coffee Crush gioco",
+  "settings": [
+    { "type": "text", "id": "discount_code", "label": "Codice sconto mostrato", "default": "COFFEECRUSH10", "info": "Deve esistere ed essere attivo in Admin > Sconti." },
+    { "type": "range", "id": "discount_percent", "label": "Percentuale sconto (testo)", "min": 5, "max": 50, "step": 5, "unit": "%", "default": 10 },
+    { "type": "header", "content": "Modalità fiera (apri la pagina con ?fiera=1)" },
+    { "type": "paragraph", "content": "Tablet in fiera: apri /pages/coffee-crush?fiera=1 (resta attiva sul dispositivo, ?fiera=0 la spegne). Email obbligatoria, niente menu, reset automatico. Le email restano salvate sul tablet: /pages/coffee-crush?fiera=export per scaricare il CSV." },
+    { "type": "select", "id": "fair_email_when", "label": "In fiera chiedi l'email", "default": "end", "options": [ { "value": "end", "label": "Alla fine, per svelare il match" }, { "value": "start", "label": "All'inizio, prima di giocare" } ] },
+    { "type": "text", "id": "fair_code", "label": "Codice sconto in fiera", "info": "Vuoto = stesso codice del sito." },
+    { "type": "url", "id": "lead_endpoint", "label": "Endpoint email (opzionale)" }
+  ],
+  "max_blocks": 50,
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Domanda (5 varianti)",
+      "settings": [
+        { "type": "select", "id": "kind", "label": "Cosa misura", "default": "body_hi", "info": "Il ♥ spinge il match in questa direzione. A ogni partita esce UNA variante di questo blocco.", "options": [
+        { "value": "body_hi", "label": "Corpo pieno (♥ = più corpo)" },
+        { "value": "body_lo", "label": "Corpo leggero (♥ = meno corpo)" },
+        { "value": "acid_hi", "label": "Acidità vivace (♥ = più acidità)" },
+        { "value": "acid_lo", "label": "Acidità bassa (♥ = meno acidità)" },
+        { "value": "sweet_hi", "label": "Dolcezza alta (♥ = più dolce)" },
+        { "value": "sweet_lo", "label": "Poco dolce (♥ = meno dolce)" },
+        { "value": "f0", "label": "Aroma: fiori" },
+        { "value": "f1", "label": "Aroma: tropicale" },
+        { "value": "f2", "label": "Aroma: frutti rossi" },
+        { "value": "f3", "label": "Aroma: agrumi" },
+        { "value": "f4", "label": "Aroma: cioccolato e nocciola" },
+        { "value": "f5", "label": "Aroma: fermentazioni spinte" },
+        { "value": "f6", "label": "Aroma: tè" }
+        ] },
+        { "type": "header", "content": "Variante 1" },
+        { "type": "text", "id": "e1", "label": "Emoji", "default": "💘" },
+        { "type": "text", "id": "heading", "label": "Domanda (IT)", "default": "Nuova domanda?" },
+        { "type": "text", "id": "en1", "label": "Domanda (EN)" },
+        { "type": "header", "content": "Variante 2" },
+        { "type": "text", "id": "e2", "label": "Emoji" },
+        { "type": "text", "id": "q2", "label": "Domanda (IT)" },
+        { "type": "text", "id": "en2", "label": "Domanda (EN)" },
+        { "type": "header", "content": "Variante 3" },
+        { "type": "text", "id": "e3", "label": "Emoji" },
+        { "type": "text", "id": "q3", "label": "Domanda (IT)" },
+        { "type": "text", "id": "en3", "label": "Domanda (EN)" },
+        { "type": "header", "content": "Variante 4" },
+        { "type": "text", "id": "e4", "label": "Emoji" },
+        { "type": "text", "id": "q4", "label": "Domanda (IT)" },
+        { "type": "text", "id": "en4", "label": "Domanda (EN)" },
+        { "type": "header", "content": "Variante 5" },
+        { "type": "text", "id": "e5", "label": "Emoji" },
+        { "type": "text", "id": "q5", "label": "Domanda (IT)" },
+        { "type": "text", "id": "en5", "label": "Domanda (EN)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Coffee Crush gioco" }]
+}
+{% endschema %}

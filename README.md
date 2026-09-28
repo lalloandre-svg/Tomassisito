@@ -38,6 +38,15 @@ Backup su Shopify: tema **"Backup prima dei testi (28-09-2026)"**; originali dei
 | `snippets/tomassi-i18n.liquid`, `snippets/tomassi-en.liquid` | Dizionari EN aggiornati sui nuovi testi italiani |
 | Prodotto El Vergel (metafield `custom.in_tazza`) | Note in catalogo allineate alla scheda: fragola, banana, mela rossa, gelsomino… |
 
+### Seconda tornata (28-09-2026)
+| File | Modifica |
+|---|---|
+| `templates/index.json` | Hero: «Il caffè lo prendiamo sul serio. / Noi stessi, un po’ meno.»; secondo bottone «Aiutami a scegliere» → Coffee Crush |
+| `sections/coffee-crush-game.liquid`, `assets/coffee-crush-game.js` | Via «Tu swipe / swipare / swipato»; nel risultato nuovo riquadro «Perché proprio lui» (corpo/acidità/dolcezza reali del caffè + aroma a cui hai messo ♥) |
+| `sections/footer-group.json`, `templates/page.newsletter.json` | Newsletter: «Quando arriva un caffè nuovo, te lo diciamo.» + promessa concreta (nuovi lotti, ricette, giorni di tostatura) |
+| `snippets/tomassi-i18n.liquid`, `snippets/tomassi-en.liquid` | Traduzioni EN dei nuovi testi |
+| Blog «notizie» (16 articoli) | Titoli che dicono di cosa parla l’articolo; URL invariati. Vecchi titoli in `backup-pre-testi/blog/titoli-articoli.md` |
+
 ## Come tornare indietro
 - **Tutto:** pubblicare il tema "Backup prima di SEO AI (26-09-2026)", oppure ricaricare i file di `backup-pre-seo-ai/` ed eliminare `snippets/seo-ai-schema.liquid` e `templates/robots.txt.liquid`.
 - **Un solo file:** ricaricare quel file da `backup-pre-seo-ai/`.
