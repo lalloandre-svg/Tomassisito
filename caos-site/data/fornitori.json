@@ -1,0 +1,13 @@
+{
+  "_leggimi": "Produttori che compaiono in carta, con quello che ci danno. Si mostrano nella home. Aggiungi o togli righe; 'cosa' è una parola o due.",
+  "fornitori": [
+    { "nome": "TOMASSICOFFEE", "cosa": "caffè, dalla torrefazione di famiglia" },
+    { "nome": "PEPPOVO", "cosa": "uova" },
+    { "nome": "VIVY BAKERY", "cosa": "pane integrale e pan brioche" },
+    { "nome": "BEPPE E SUOI FORMAGGI", "cosa": "burro e Tomone" },
+    { "nome": "APE D'ORO", "cosa": "confetture e miele di castagno" },
+    { "nome": "CALISSONI BULGARI", "cosa": "olio" },
+    { "nome": "BOTTEGA ROCCIA", "cosa": "prosciutto cotto" },
+    { "nome": "DIVINO", "cosa": "cioccolato" }
+  ]
+}

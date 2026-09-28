@@ -1,0 +1,4 @@
+{
+  "_leggimi": "Persone del team per la pagina /noi. Finché la lista è vuota la sezione non compare. Esempio: { \"nome\": \"Nome\", \"ruolo\": \"Banco e caffè\", \"foto\": \"team-nome.jpg\" } (foto in public/img/foto/, facoltativa).",
+  "team": []
+}

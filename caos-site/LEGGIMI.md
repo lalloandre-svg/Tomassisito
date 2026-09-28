@@ -75,6 +75,44 @@ Nota: la pagina si rigenera a ogni modifica. Se aggiorni `oggi.json` la sera pri
 In `data/info.json` cambia `"orario_attivo"` in `"estate"` o `"inverno"`. Si aggiornano da soli il piede della pagina, la striscia "Adesso in cucina" e i dati per Google.
 Le fasce del menù (Brunch 8–15 ecc.) sono in `data/menu.json`, in ogni sezione: `"orario"` (il testo) e `"fascia_oraria"` (per la striscia "adesso").
 
+## Foto
+Le foto vanno in `public/img/foto/` con **questi nomi esatti** (JPG, lato lungo massimo 1600 px):
+
+| File | Pagina | Cosa |
+|---|---|---|
+| `home-sala.jpg` | home | la sala di mattina, luce dalla vetrata |
+| `home-caffe.jpg` | home | un espresso al banco |
+| `home-cornetti.jpg` | home | cornetti appena sfornati |
+| `caffe-tostatura.jpg` | caffè | chicchi appena tostati |
+| `caffe-banco.jpg` | caffè | il banco con la macchina espresso |
+| `forno-vetrina.jpg` | cornetteria | la vetrina dei lievitati |
+| `forno-sfoglia.jpg` | cornetteria | mani che lavorano la sfoglia |
+| `locale-sala.jpg` | il locale | sala, tavoli e banco |
+| `noi-team.jpg` | noi | il team al lavoro |
+
+Regole del brand: luce naturale, niente flash, niente foto stock o fatte con l'IA. Se una foto manca, sul sito semplicemente non compare (e la build lo segnala).
+Per cambiare descrizione di una foto: nella pagina in `pagine/`, cerca `{{foto:nome.jpg|descrizione}}`.
+
+## Testi delle pagine
+Le pagine sono in `pagine/` (`home.html`, `caffe.html`, `forno.html`, `locale.html`, `noi.html`, `privacy.html`, `cookie.html`). Il testo si cambia direttamente; quello tra `{{ }}` lo riempie la build:
+
+| Segnaposto | Cosa diventa |
+|---|---|
+| `{{mano:testo}}` | testo in Caos Mano (scrivi ∀ per la A rovesciata) |
+| `{{orari}}`, `{{indirizzo}}`, `{{contatti}}`, `{{telefono}}`, `{{email}}` | da `data/info.json` |
+| `{{fasce}}` | le fasce del menù, con "adesso" su quella in corso |
+| `{{stato}}` | "Adesso siamo aperti / chiusi" |
+| `{{oggi}}` | "oggi in macchina" da `data/oggi.json` |
+| `{{piatti:NOME|NOME}}` | piatti presi da `data/menu.json`, con prezzo |
+| `{{fornitori}}` | da `data/fornitori.json` |
+| `{{team}}` | da `data/team.json` (vuoto = non compare) |
+| `{{foto:file.jpg|descrizione}}` | la foto, se c'è |
+| `{{bozza:cosa manca}}` | promemoria: si vede solo con `node build.mjs --bozza` |
+
+## Team e dati legali
+- Team: `data/team.json`. Finché è vuoto, la sezione "le persone" in /noi non compare.
+- Ragione sociale, P.IVA, sede legale, hosting: `data/info.json` → `legale`. Servono per il piede e per la privacy.
+
 ## Drink list
 È già in `data/menu.json` con `"draft": true`: **non compare online**. Quando è pronta, completa le voci e cancella la riga `"draft": true`.
 
@@ -83,14 +121,15 @@ Le fasce del menù (Brunch 8–15 ecc.) sono in `data/menu.json`, in ogni sezion
 ## Per chi sviluppa
 
 ```
-data/          menu.json, info.json, oggi.json  ← i dati
+data/          menu.json, info.json, oggi.json, fornitori.json, team.json  ← i dati
+pagine/        testi delle pagine (home, caffè, cornetteria, locale, noi, privacy, cookie, 404)
 public/        file copiati così come sono (css, js, font, immagini, _redirects)
-build.mjs      genera dist/menu/index.html e dist/en/menu/index.html
+build.mjs      genera tutte le pagine, sitemap.xml e robots.txt in dist/
 dist/          il sito pronto (non va nel repository)
 CLAUDE.md      brief completo del progetto
 ```
 
-- Build: `node build.mjs` (Node 18+, nessuna dipendenza). Se un prezzo o un allergene non è valido, la build si ferma e dice dove. In fondo elenca cosa controllare prima di pubblicare.
+- Build: `node build.mjs` (Node 18+, nessuna dipendenza). `node build.mjs --bozza` mostra anche i riquadri delle foto mancanti e i promemoria. Se un prezzo o un allergene non è valido, la build si ferma e dice dove. In fondo elenca cosa controllare prima di pubblicare.
 - Anteprima: `npm run serve`.
 - Hosting: Netlify (c'è `netlify.toml`) o Cloudflare Pages con comando `node build.mjs` e cartella `dist`. `/menu` è servito da `dist/menu/index.html`, quindi l'URL pulito funziona senza rewrite.
 - Il menù si legge anche con JavaScript spento. `js/menu.js` aggiunge filtri, striscia "adesso", scadenza di "oggi in macchina" e il ripiego se Caos Mano non carica.

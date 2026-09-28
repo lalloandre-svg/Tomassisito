@@ -16,6 +16,14 @@
   "facebook": "https://www.facebook.com/caos.caffe",
   "payoff": "Sempre presenti, sempre umani.",
 
+  "_nota_legale": "Dati per piede e privacy. Finché sono vuoti, la build avvisa e la privacy mostra [DA CONFERMARE].",
+  "legale": {
+    "ragione_sociale": "",
+    "piva": "",
+    "sede_legale": "",
+    "hosting": ""
+  },
+
   "_nota_orari": "Cambia 'orario_attivo' in \"estate\" o \"inverno\" quando cambia stagione. Giorni: 0 = domenica … 6 = sabato. Il mercoledì (3) è chiuso.",
   "orario_attivo": "inverno",
   "giorno_chiuso": 3,

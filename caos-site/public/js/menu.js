@@ -1,20 +1,9 @@
 // CAOS Caffè · menù online. Tutto è progressivo: senza JS il menù si legge lo stesso.
 (function () {
   "use strict";
-  var root = document.documentElement;
   var datiEl = document.getElementById("dati-menu");
   if (!datiEl) return;
   var D = JSON.parse(datiEl.textContent);
-
-  // ---------- Caos Mano: se non carica, ripiego in SCP maiuscolo ----------
-  if (document.fonts && document.fonts.load) {
-    document.fonts.load('1em "Caos Mano"', "caos").then(
-      function (facce) { if (!facce.length) root.classList.add("no-mano"); },
-      function () { root.classList.add("no-mano"); }
-    );
-  } else {
-    root.classList.add("no-mano");
-  }
 
   // ---------- ora di Aprilia ----------
   function oraRoma() {
@@ -68,14 +57,6 @@
     }
   }
   if (striscia.childNodes.length) striscia.hidden = false;
-
-  // ---------- oggi in macchina: vale solo per la data indicata ----------
-  document.querySelectorAll(".oggi").forEach(function (box) {
-    var lista = box.querySelector(".oggi-lista");
-    var valido = !!lista && box.dataset.oggi === adesso.iso;
-    if (lista) lista.hidden = !valido;
-    box.querySelector(".oggi-vuoto").hidden = valido;
-  });
 
   // ---------- filtri ----------
   var form = document.getElementById("filtri");

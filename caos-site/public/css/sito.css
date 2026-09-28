@@ -1,0 +1,199 @@
+/* CAOS Caffè · stile comune del sito
+   Colori e font dal brand manual v2 (vedi CLAUDE.md §2). Non si inventano tinte. */
+
+/* ---------- font (self-hosted, vedi public/fonts/LEGGIMI.md) ---------- */
+@font-face{font-family:"Caos Mano";src:url(/fonts/CaosMano-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Caos Mano";src:url(/fonts/CaosMano-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+/* Source Code Pro variabile (pesi 200–900), licenza OFL: fonts/SourceCodePro-OFL.txt */
+@font-face{font-family:"Source Code Pro";src:url(/fonts/SourceCodePro-VF.woff) format("woff");font-weight:200 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Source Code Pro";src:url(/fonts/SourceCodePro-Italic-VF.woff) format("woff");font-weight:200 900;font-style:italic;font-display:swap}
+
+:root{
+  --off-white:#f1ede2; --bianco:#ffffff; --nero:#000000; --arancio:#f8a11d;
+  --rosso-logo:#e8380d;
+  --food-bg:#f8e0d0;  --food-title:#f0a018;  --food-text:#a8480c;
+  --sweet-bg:#d8d8f8; --sweet-title:#5840e8; --sweet-text:#5840e8;
+  --hot-bg:#d0d8d8;   --hot-title:#284058;   --hot-text:#284058;
+  --chill-bg:#f8d8e8; --chill-title:#f83898; --chill-text:#c01a6a;
+
+  --mono:"Source Code Pro",ui-monospace,Menlo,Consolas,monospace;
+  --mano:"Caos Mano",var(--mono);
+  --misura:44rem;
+  --gutter:16px;
+  --focus:#5840e8;
+  --nav-h:52px;
+}
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--nav-h) + 8px)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--off-white);color:var(--nero);font:400 1rem/1.55 var(--mono);hyphens:none;text-align:left}
+img{max-width:100%;height:auto}
+a{color:inherit;text-underline-offset:.2em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+h1,h2,h3,h4,h5{margin:0;line-height:1.1}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+abbr[title]{text-decoration:none;cursor:help}
+[hidden]{display:none!important}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.skip{position:absolute;left:var(--gutter);top:-100px;background:var(--nero);color:var(--bianco);padding:.75rem 1rem;z-index:10}
+.skip:focus{top:8px}
+
+/* Caos Mano: si scrive in minuscolo (la A maiuscola è la ∀). Mai text-transform qui. */
+.mano{font-family:var(--mano);font-weight:400;font-synthesis:none;letter-spacing:.01em}
+.mano .fb{font-family:var(--mono);font-weight:700}
+/* Se Caos Mano non carica, js/sito.js aggiunge .no-mano: allora SCP Bold maiuscolo. */
+.no-mano .mano{font-family:var(--mono);font-weight:700;text-transform:uppercase;letter-spacing:0}
+
+/* ---------- testata ---------- */
+.testa{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:12px var(--gutter);background:var(--off-white)}
+.logo{display:inline-flex;min-height:44px;align-items:center}
+.logo img{display:block;height:64px;width:auto}
+.lingua{display:inline-flex;align-items:center;min-height:44px;padding:0 .75rem;font-weight:700;font-size:.875rem;border:2px solid var(--nero);text-decoration:none}
+.lingua:hover{background:var(--nero);color:var(--bianco)}
+
+/* oggi in macchina */
+.oggi{border:2px solid var(--nero);padding:.75rem .875rem;margin:0 0 1.25rem;background:var(--bianco)}
+.oggi-titolo{font:700 .875rem var(--mono);margin-bottom:.35rem}
+.oggi-lista{display:grid;gap:.3rem;font-size:.9375rem}
+.oggi-lista .nota{font-weight:300}
+.oggi-vuoto{font-size:.9375rem}
+
+/* ---------- piede del sito ---------- */
+.piede-sito{background:var(--nero);color:var(--bianco);padding:2.5rem var(--gutter);display:grid;gap:1.5rem}
+.piede-sito>*{width:100%;max-width:var(--misura);margin-inline:auto}
+.piede-sito h2{font:700 .875rem var(--mono);color:var(--arancio);margin-bottom:.4rem;letter-spacing:.05em}
+.piede-sito a{display:inline-block;padding:.35rem 0}
+.piede-sito a:hover{color:var(--arancio)}
+.payoff{font-weight:500}
+
+@media (min-width:48rem){
+  :root{--gutter:32px}
+  .piede-sito{grid-template-columns:repeat(3,minmax(0,1fr));max-width:none}
+  .piede-sito>*{max-width:none}
+  .payoff{grid-column:1/-1}
+}
+
+/* ---------- navigazione del sito (nella testata) ---------- */
+.testa{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"logo . lingua" "nav nav nav";align-items:center;gap:.25rem 1rem}
+.logo{grid-area:logo}
+.lingua{grid-area:lingua}
+.nav-sito{grid-area:nav;margin-inline:calc(var(--gutter) * -1)}
+.nav-sito ul{display:flex;gap:0 1.1rem;overflow-x:auto;scrollbar-width:none;padding:0 var(--gutter)}
+.nav-sito ul::-webkit-scrollbar{display:none}
+.nav-sito a{display:flex;align-items:center;min-height:44px;font-weight:700;font-size:.9375rem;white-space:nowrap;text-decoration:none}
+.nav-sito a:hover{text-decoration:underline}
+.nav-sito a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:4px;text-decoration-color:var(--arancio);text-underline-offset:.35em}
+@media (min-width:48rem){
+  .testa{grid-template-areas:"logo nav lingua"}
+  .nav-sito{margin:0}
+  .nav-sito ul{justify-content:flex-end;padding:0}
+}
+
+/* ---------- pagine: il 70% caldo e nordico ---------- */
+.banda{padding:2.75rem var(--gutter)}
+.banda>*{max-width:var(--misura);margin-inline:auto}
+.banda.largo>*{max-width:64rem}
+.banda.pesca{background:var(--food-bg)}
+.banda.bianco{background:var(--bianco)}
+.banda.arancio{background:var(--arancio)}
+.banda.nero{background:var(--nero);color:var(--bianco)}
+
+.eroe{padding-top:3rem;padding-bottom:3rem}
+.eroe h1{font-size:clamp(2.75rem,13vw,6.5rem);overflow-wrap:break-word;line-height:.95;margin-bottom:1.25rem;font-weight:400}
+.eroe-sotto{font-weight:700;font-size:1.125rem;margin-bottom:.75rem}
+.eroe-testo{font-size:1.125rem;max-width:44ch}
+
+.banda h2{font-size:clamp(2rem,9vw,3.5rem);overflow-wrap:break-word;font-weight:400;margin-bottom:1rem}
+.banda h3{font:700 1.125rem/1.3 var(--mono);margin:1.75rem 0 .5rem}
+.banda p{max-width:65ch;margin-bottom:.9rem}
+.banda p:last-child{margin-bottom:0}
+.leggero{font-weight:300}
+
+.stato{display:inline-flex;align-items:center;gap:.6rem;margin-top:1.5rem;background:var(--nero);color:var(--bianco);padding:.5rem .8rem;font-weight:700;font-size:.875rem}
+.stato::before{content:"";width:.65rem;height:.65rem;border-radius:50%;background:var(--arancio);flex:none}
+.stato.chiuso::before{background:transparent;border:2px solid var(--bianco)}
+
+.azioni{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
+.bottone{display:inline-flex;align-items:center;min-height:48px;padding:0 1.25rem;background:var(--nero);color:var(--bianco);border:2px solid var(--nero);font-weight:700;text-decoration:none}
+.bottone:hover{background:var(--arancio);border-color:var(--arancio);color:var(--nero)}
+.bottone.secondario{background:transparent;color:var(--nero)}
+.bottone.secondario:hover{background:var(--nero);color:var(--bianco);border-color:var(--nero)}
+.freccia{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
+.freccia::after{content:" →";white-space:pre}
+
+.due{display:grid;gap:1.75rem;align-items:center}
+@media (min-width:48rem){.due{grid-template-columns:1fr 1fr;gap:3rem}.due.inverti>:first-child{order:2}}
+
+/* foto: vere e basta. Se manca, in bozza compare un riquadro */
+.foto{margin:0}
+.foto img{display:block;width:100%;height:auto}
+.foto figcaption{font-size:.8125rem;font-weight:300;margin-top:.5rem}
+.foto-mancante{display:grid;place-items:center;aspect-ratio:4/3;border:2px dashed var(--nero);padding:1rem;text-align:center;font-size:.8125rem;font-weight:700;background:repeating-linear-gradient(45deg,transparent 0 10px,rgba(0,0,0,.05) 10px 20px)}
+.foto-mancante span{display:block;font-weight:400;margin-top:.25rem}
+.bozza{outline:2px dashed var(--rosso-logo);outline-offset:4px;font-weight:700}
+
+/* la giornata: fasce del menù */
+.fasce-home{display:grid;border-top:2px solid var(--nero)}
+.fasce-home a{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:.25rem 1rem;padding:1rem 0;border-bottom:2px solid var(--nero);text-decoration:none}
+.fasce-home .mano{font-size:clamp(1.75rem,8vw,2.5rem)}
+.fasce-home .ore{font-weight:500;font-size:.9375rem;text-align:right}
+.fasce-home .adesso{grid-column:1/-1;justify-self:start;background:var(--nero);color:var(--arancio);font-weight:700;font-size:.75rem;padding:.1rem .5rem}
+.fasce-home a:hover .mano{text-decoration:underline}
+
+/* fornitori */
+.fornitori{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:0 1.5rem;border-top:2px solid var(--nero)}
+.fornitori li{padding:.8rem 0;border-bottom:1px solid var(--nero)}
+.fornitori strong{display:block;font-style:italic}
+.fornitori span{font-weight:300;font-size:.9375rem}
+
+/* elenchi di fatti (cornetteria) */
+.fatti{display:grid;gap:.35rem;margin:1.5rem 0}
+.fatti li{font-weight:700;font-size:clamp(1.25rem,5.5vw,1.75rem);line-height:1.25}
+
+/* piatti presi dal menù */
+.piatti{display:grid;gap:1.4rem;margin-top:1.5rem}
+.piatti .riga{display:flex;align-items:baseline;gap:.5rem}
+.piatti .nome{flex:1;font-size:1.5rem;font-weight:400}
+.piatti .prezzo{font-size:1.5rem;white-space:nowrap}
+.piatti .da{font:500 .8125rem var(--mono)}
+.piatti .desc{font-weight:300;font-size:.9375rem;margin-top:.25rem}
+
+/* frase in evidenza: una per pagina */
+.claim{font-size:clamp(2rem,9vw,3.5rem);line-height:1.05}
+.banda.arancio .claim{max-width:var(--misura)}
+
+/* orari e contatti */
+.info{display:grid;gap:.5rem}
+.info dt{font-weight:700}
+.info dd{margin:0 0 .6rem}
+.orari-lista li{display:flex;justify-content:space-between;gap:1rem;padding:.55rem 0;border-bottom:1px solid var(--nero)}
+.orari-lista li.attivo{font-weight:700}
+.orari-lista .chiuso{font-weight:700}
+
+/* team (compare solo quando ci sono i dati) */
+.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(12rem,1fr));gap:1.5rem}
+.team strong{display:block;margin-top:.5rem}
+
+/* pagine legali */
+.legale h2{font:700 1.25rem var(--mono);margin:2rem 0 .6rem}
+.legale ul{list-style:disc;padding-left:1.25rem;margin-bottom:.9rem}
+.legale li{margin-bottom:.35rem;max-width:65ch}
+
+/* piede: navigazione e dati legali */
+.piede-nav ul{display:flex;flex-wrap:wrap;gap:0 1.25rem}
+.piede-legale{font-size:.8125rem;font-weight:300}
+.piede-legale a{padding:.2rem 0}
+/* ---------- stampa ---------- */
+@media print{
+  @page{margin:12mm}
+  body{background:#fff;font-size:10pt}
+  .skip,.nav-sito,.lingua,.stato{display:none!important}
+  .piede-sito{background:#fff;color:#000;padding:0}
+  .piede-sito h2{color:#000}
+  .piede-sito a[href^="http"]{display:none}
+}
+.piede-sito .intera{grid-column:1/-1}

@@ -398,4 +398,7 @@ Decisioni di Andrè (28/09/2026):
 
 - `/menu` e `/en/menu` fatti: `data/menu.json` → `build.mjs` → `dist/`. Istruzioni in `LEGGIMI.md`.
 - Font (Caos Mano, Source Code Pro variabile), logo positivo/negativo in SVG, favicon, icona iPhone e immagine per i social: fatti. Il menù è pronto da pubblicare.
-- Prossimi passi: hosting + dominio caoscaffe.com, prova col QR su telefono vero, poi le altre pagine da zero.
+- Pagine fatte (solo italiano): `/`, `/caffe`, `/forno` (cornetteria, senza il nome "Lievito 1969"), `/locale`, `/noi`, `/privacy`, `/cookie`, 404. Testi in `pagine/*.html`, layout comune in `build.mjs`, stile in `css/sito.css` (+ `css/menu.css` solo per il menù), script comune `js/sito.js`.
+- `/ordina` non fatta: manca la decisione su ordine online (§9). Per ora /locale dice "tavoli da 10 in su: chiama o scrivi".
+- Mancano: foto (elenco in `LEGGIMI.md`), storia di /noi, team, come arrivare, dati legali, versione inglese delle pagine (il menù è già IT/EN).
+- Prossimi passi: hosting + dominio caoscaffe.com, prova col QR su telefono vero.
