@@ -19,3 +19,10 @@ Cambiato solo il titolo: handle/URL, testo e title SEO restano invariati.
 | 998040928601 | La mia esperienza con la tostatura ad aria e la tostatura a tamburo | Tostatura ad aria o a tamburo: cosa cambia in tazza |
 | 998040994137 | La mia esperienza indimenticabile al Campionato Mondiale di Roasting 2024 | Sesto al Mondiale di tostatura 2024: com’è andata a Copenaghen |
 | 998041092441 | Guida Completa per l'Estrazione AeroPress di un Caffè Specialty Tomassi Specialty Coffee | Ricetta per l’AeroPress: dosi, macinatura e tempi |
+
+# Pagina gare (/pages/un-team-vincente) — 28-09-2026
+| Campo | Prima | Dopo |
+|---|---|---|
+| Titolo | UN TEAM VINCENTE, UNA FAMIGLIA DI CAMPIONI | Le nostre gare di caffè: risultati e campioni |
+| Title SEO | Un team vincente: la famiglia di campioni Tomassi Coffee | Le nostre gare di caffè: risultati e campioni \| Tomassi Coffee |
+| Meta description | Unisciti a Tomassi Coffee, una squadra di campioni dove passione, impegno e successi si intrecciano. Vivi l’esperienza delle competizioni al massimo livello. | Emanuele Tomassi, due volte campione italiano di tostatura e 6° ai Mondiali 2024; Andrè 2° ai Campionati italiani Ibrik 2025. Risultati, discipline e chi gareggia con noi. |
