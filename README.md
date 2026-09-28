@@ -21,8 +21,8 @@ Esiste anche un tema duplicato intatto su Shopify: **"Backup prima di SEO AI (26
 | `templates/page.newsletter.json` | La pagina /pages/newsletter ora mostra il form di iscrizione (prima era vuota) |
 | `templates/index.json` | Homepage: nascosto l'indicatore di scroll ("mouse") nella hero (`show_scroll_cue: false`) |
 | `templates/page.mi-sorella-zoccola.json` | Pagina Over Your Limits, sezione Grammatica: la card "Thè" usava l'icona del Miele (8.png) → ora "Tè verde" con 7.png; "Passion Fruit" → "Frutto della passione"; icone tutte PNG (Anguria e Mango erano SVG 50px); aggiunta una nota breve a ogni gusto |
-| `snippets/tomassi-i18n.liquid` | Traduzioni EN per i nuovi testi delle card della Grammatica OYL |
-| `templates/page.grammatica.json` | Pagina Grammatica sensoriale: refusi ("olce", "esprimono", "sentrore"), 2 pulsanti "Etichetta pulsante" → "Scopri di più", titoli senza grassetto sparso, punto finale nei testi |
+| `snippets/tomassi-i18n.liquid` | Traduzioni EN per i gusti e le note delle griglie Grammatica (pagina OYL e pagina Grammatica sensoriale) |
+| `templates/page.grammatica.json` | Pagina Grammatica sensoriale rifatta in stile OYL: al posto delle 30 righe Craft su fondo chiaro ora c'è la griglia `oyl-grammatica` (fondo nero, oro) con i 30 gusti, icona PNG grande, nota breve e link al prodotto; bottone finale verso i caffè Over Your Limits |
 
 ## Come tornare indietro
 - **Tutto:** pubblicare il tema "Backup prima di SEO AI (26-09-2026)", oppure ricaricare i file di `backup-pre-seo-ai/` ed eliminare `snippets/seo-ai-schema.liquid` e `templates/robots.txt.liquid`.
