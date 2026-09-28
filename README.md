@@ -36,6 +36,7 @@ Backup del tema su Shopify prima di queste modifiche: **"Backup prima di timer e
 | `templates/index.json` | Hero: "Spedizione gratuita da €69"; testo Business riscritto con fatti concreti |
 | `templates/product.json` | Prezzo, varianti, quantità e acquisto subito sotto il titolo (etichette e barrette dopo); badge "Tostato il martedì, spedito entro 24h"; sezione storia riscritta senza "tante mani" e "in altura" |
 | `templates/product.over-your-limits.json` | Stesso riordino; riga tostatura unica |
+| `snippets/tomassi-pdp.liquid` | Scheda nell'accordion: il valore di ogni voce finisce a fine riga (prima si attaccava il testo seguente, es. "Azienda: Finca El Paraíso Colombia … Tra le vette…"); aggiunte le voci "Raccolto" e "Metodo consigliato" usate dalle schede OYL |
 | `sections/cart-flair.liquid` | Carrello: stesso orario (martedì 12:00, Roma) al posto di "martedì 9:00 / entro le 14"; "Spedito entro 24h dalla tostatura" |
 | `templates/page.abbonamento.json` | FAQ: aggiunto rinnovo automatico fino a disdetta; "Dal 26 in poi" (prima "Dal 25", in conflitto con "entro il 25") |
 
