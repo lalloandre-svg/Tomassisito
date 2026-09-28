@@ -95,7 +95,9 @@ CLAUDE.md      brief completo del progetto
 - Hosting: Netlify (c'è `netlify.toml`) o Cloudflare Pages con comando `node build.mjs` e cartella `dist`. `/menu` è servito da `dist/menu/index.html`, quindi l'URL pulito funziona senza rewrite.
 - Il menù si legge anche con JavaScript spento. `js/menu.js` aggiunge filtri, striscia "adesso", scadenza di "oggi in macchina" e il ripiego se Caos Mano non carica.
 
-### Mancano ancora (da copiare dal Mac)
-- `public/fonts/`: Source Code Pro (Caos Mano c'è già; vedi `public/fonts/LEGGIMI.md`).
-- `public/img/logo-caos.svg` (logo ufficiale, versione positiva), `public/img/favicon.svg`, `public/img/og-menu.jpg` (1200×630, per le anteprime nei social).
+### Immagini e font
+- `public/img/logo-caos.svg` (positivo, fondi chiari) e `logo-caos-negativo.svg` (fondi scuri): estratti dal sorgente `Caos - logo v2 sorgente.ai`, tracciati originali, non ridisegnati.
+- `public/img/og-menu.png` (anteprima nei social) e `apple-touch-icon.png`: si rigenerano con `node tools/immagini.mjs` (serve Playwright).
+- `brand/icone-marchio.svg`: tazzina, faccine, riempimento e cornetto dalla pagina 2 del sorgente, per usi futuri.
+- Font: vedi `public/fonts/LEGGIMI.md`.
 - Le altre pagine del sito (home, caffè, forno…) sono da fare da zero: vedi `CLAUDE.md` §12.

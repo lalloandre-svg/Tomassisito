@@ -370,17 +370,21 @@ function pagina(lang) {
 <meta property="og:title" content="${esc(ui.title)}">
 <meta property="og:description" content="${esc(ui.description)}">
 <meta property="og:url" content="${info.sito}${ui.path}">
-<meta property="og:image" content="${info.sito}/img/og-menu.jpg">
-<link rel="preload" href="/fonts/SourceCodePro-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:image" content="${info.sito}/img/og-menu.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CAOS Caffè, est. 1969 · Menù">
+<link rel="preload" href="/fonts/SourceCodePro-VF.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="/fonts/CaosMano-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/menu.css">
-<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/img/logo-caos.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <script type="application/ld+json">${jsonLd(lang, sezioni)}</script>
 </head>
 <body>
 <a class="skip" href="#contenuto">${ui.skip}</a>
 <header class="testa">
-  <a class="logo" href="/"><img src="/img/logo-caos.svg" alt="CAOS Caffè, est. 1969" width="132" height="44"></a>
+  <a class="logo" href="/"><img src="/img/logo-caos.svg" alt="CAOS Caffè, est. 1969" width="53" height="64"></a>
   <a class="lingua" href="${ui.linguaHref}" hreflang="${ui.linguaCode}" lang="${ui.linguaCode}">${ui.lingua}</a>
 </header>
 

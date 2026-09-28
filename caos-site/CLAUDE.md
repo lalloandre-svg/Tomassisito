@@ -397,4 +397,5 @@ Decisioni di Andrè (28/09/2026):
 - **Non esiste un altro sito**: §8 non vale. Le pagine oltre a `/menu` sono da fare da zero.
 
 - `/menu` e `/en/menu` fatti: `data/menu.json` → `build.mjs` → `dist/`. Istruzioni in `LEGGIMI.md`.
-- Caos Mano Regular e Bold in `public/fonts/`. Mancano: Source Code Pro (`public/fonts/LEGGIMI.md`), `img/logo-caos.svg`, `img/favicon.svg`, `img/og-menu.jpg`.
+- Font (Caos Mano, Source Code Pro variabile), logo positivo/negativo in SVG, favicon, icona iPhone e immagine per i social: fatti. Il menù è pronto da pubblicare.
+- Prossimi passi: hosting + dominio caoscaffe.com, prova col QR su telefono vero, poi le altre pagine da zero.

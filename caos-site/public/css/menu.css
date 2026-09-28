@@ -4,11 +4,9 @@
 /* ---------- font (self-hosted, vedi public/fonts/LEGGIMI.md) ---------- */
 @font-face{font-family:"Caos Mano";src:url(/fonts/CaosMano-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Caos Mano";src:url(/fonts/CaosMano-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
-@font-face{font-family:"Source Code Pro";src:local("Source Code Pro Light"),local("SourceCodePro-Light"),url(/fonts/SourceCodePro-Light.woff2) format("woff2");font-weight:300;font-display:swap}
-@font-face{font-family:"Source Code Pro";src:local("Source Code Pro"),local("SourceCodePro-Regular"),url(/fonts/SourceCodePro-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
-@font-face{font-family:"Source Code Pro";src:local("Source Code Pro Medium"),local("SourceCodePro-Medium"),url(/fonts/SourceCodePro-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
-@font-face{font-family:"Source Code Pro";src:local("Source Code Pro Bold"),local("SourceCodePro-Bold"),url(/fonts/SourceCodePro-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
-@font-face{font-family:"Source Code Pro";src:local("Source Code Pro Italic"),local("SourceCodePro-It"),url(/fonts/SourceCodePro-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+/* Source Code Pro variabile (pesi 200–900), licenza OFL: fonts/SourceCodePro-OFL.txt */
+@font-face{font-family:"Source Code Pro";src:url(/fonts/SourceCodePro-VF.woff) format("woff");font-weight:200 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Source Code Pro";src:url(/fonts/SourceCodePro-Italic-VF.woff) format("woff");font-weight:200 900;font-style:italic;font-display:swap}
 
 :root{
   --off-white:#f1ede2; --bianco:#ffffff; --nero:#000000; --arancio:#f8a11d;
@@ -53,7 +51,7 @@ abbr[title]{text-decoration:none;cursor:help}
 /* ---------- testata ---------- */
 .testa{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:12px var(--gutter);background:var(--off-white)}
 .logo{display:inline-flex;min-height:44px;align-items:center}
-.logo img{display:block;height:44px;width:auto}
+.logo img{display:block;height:64px;width:auto}
 .lingua{display:inline-flex;align-items:center;min-height:44px;padding:0 .75rem;font-weight:700;font-size:.875rem;border:2px solid var(--nero);text-decoration:none}
 .lingua:hover{background:var(--nero);color:var(--bianco)}
 
