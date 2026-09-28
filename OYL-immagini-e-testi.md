@@ -113,3 +113,4 @@ Copia dei testi precedenti: `backup-oyl-testi/2026-09-28-prima-della-riscrittura
 - Guarani: handle cambiato in `brasile-daterra-guarani-aramosa` con redirect da `…-tumoru-guarani`.
 - Lino, 21B, Ombligon avevano già le immagini nuove (IMG_3692/3693/3694.jpg + IMG_3700/3701/3702.png): nessuna modifica necessaria.
 - Aggiunta a tutte le 12 schede OYL (IT + EN) la sezione "Freschezza da competizione" / "Competition-grade freshness": caffè conservati crudi, sottovuoto e in freezer, tostati solo al momento dell'ordine.
+- Handle EN corretti: Abu Natural → `panama-abu-natural-gn-3345`, Abu Washed → `panama-abu-washed-gw-3230`, Guarani → `brazil-daterra-guarani-aramosa`, 5A → `panama-finca-los-lajones-5a`; Enigma e Illumination usano l'handle italiano (rimossa la traduzione `-ing`). Redirect creati dai vecchi URL `/en/products/...`.
