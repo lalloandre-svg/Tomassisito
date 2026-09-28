@@ -20,9 +20,11 @@ Esiste anche un tema duplicato intatto su Shopify: **"Backup prima di SEO AI (26
 | `sections/footer-group.json` | Riattivato il box newsletter nel footer |
 | `templates/page.newsletter.json` | La pagina /pages/newsletter ora mostra il form di iscrizione (prima era vuota) |
 | `templates/index.json` | Homepage: nascosto l'indicatore di scroll ("mouse") nella hero (`show_scroll_cue: false`) |
-| `templates/page.mi-sorella-zoccola.json` | Pagina Over Your Limits, sezione Grammatica: la card "Thè" usava l'icona del Miele (8.png) → ora "Tè verde" con 7.png; "Passion Fruit" → "Frutto della passione"; icone tutte PNG (Anguria e Mango erano SVG 50px); aggiunta una nota breve a ogni gusto |
+| `templates/page.mi-sorella-zoccola.json` | Pagina Over Your Limits, sezione Grammatica: "Thè" → "Tè verde", "Passion Fruit" → "Frutto della passione"; icone tutte PNG uguali a quelle dei prodotti (Anguria e Mango erano SVG 50px); aggiunta una nota breve a ogni gusto |
 | `snippets/tomassi-i18n.liquid` | Traduzioni EN per i gusti e le note delle griglie Grammatica (pagina OYL e pagina Grammatica sensoriale) |
-| `templates/page.grammatica.json` | Pagina Grammatica sensoriale rifatta in stile OYL: al posto delle 30 righe Craft su fondo chiaro ora c'è la griglia `oyl-grammatica` (fondo nero, oro) con i 30 gusti, icona PNG grande, nota breve e link al prodotto; bottone finale verso i caffè Over Your Limits |
+| `templates/page.grammatica.json` | Pagina Grammatica sensoriale rifatta in stile OYL: al posto delle 30 righe Craft su fondo chiaro ora c'è la griglia `oyl-grammatica` (fondo nero, oro) con i 30 gusti, icona = immagine del prodotto, nota breve e link al prodotto; bottone finale verso i caffè Over Your Limits |
+| `assets/oyl.css` | Newsletter del footer scura (nero/oro) sulle pagine OYL; sul resto del sito resta chiara |
+| `templates/page.contatti-2.json` | Contatti Over Your Limits: aggiunta la sezione invisibile "OYL — Stili" (serve per la newsletter scura) |
 
 ## Come tornare indietro
 - **Tutto:** pubblicare il tema "Backup prima di SEO AI (26-09-2026)", oppure ricaricare i file di `backup-pre-seo-ai/` ed eliminare `snippets/seo-ai-schema.liquid` e `templates/robots.txt.liquid`.

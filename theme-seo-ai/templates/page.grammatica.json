@@ -19,7 +19,7 @@
         "flavor_01": {
           "type": "flavor",
           "settings": {
-            "image": "shopify://shop_images/2_b99cb268-6d4b-4afc-bce1-528562152db1.png",
+            "image": "shopify://shop_images/aroma_0000_bluberry.png",
             "title": "Mirtillo",
             "text": "Dolce e vinoso, come il bosco dopo la pioggia.",
             "link_label": "Scopri di più",
@@ -29,7 +29,7 @@
         "flavor_02": {
           "type": "flavor",
           "settings": {
-            "image": "shopify://shop_images/1_93e48180-1e1b-4306-a97a-50b96d5e539c.png",
+            "image": "shopify://shop_images/2_b99cb268-6d4b-4afc-bce1-528562152db1.png",
             "title": "Ciliegia",
             "text": "Dolce, succosa e vivace.",
             "link_label": "Scopri di più",
@@ -49,7 +49,7 @@
         "flavor_04": {
           "type": "flavor",
           "settings": {
-            "image": "shopify://shop_images/4.png",
+            "image": "shopify://shop_images/aroma_0003_strawberry_bb9dbd78-9d1b-4a47-a7c7-b23bf8e77f08.png",
             "title": "Fragola",
             "text": "La dolcezza immediata della frutta matura.",
             "link_label": "Scopri di più",
@@ -69,7 +69,7 @@
         "flavor_06": {
           "type": "flavor",
           "settings": {
-            "image": "shopify://shop_images/6_75ee97a6-a339-446f-852b-ccc6cb07595b.png",
+            "image": "shopify://shop_images/aroma_0005_raspberry_7246b20b-eaba-4010-9c8c-e2107575b77b.png",
             "title": "Lampone",
             "text": "Freschezza rossa e brillante.",
             "link_label": "Scopri di più",
@@ -79,7 +79,7 @@
         "flavor_07": {
           "type": "flavor",
           "settings": {
-            "image": "shopify://shop_images/7.png",
+            "image": "shopify://shop_images/8.png",
             "title": "Tè verde",
             "text": "Erba dolce e fiori bianchi.",
             "link_label": "Scopri di più",
@@ -89,7 +89,7 @@
         "flavor_08": {
           "type": "flavor",
           "settings": {
-            "image": "shopify://shop_images/8.png",
+            "image": "shopify://shop_images/7.png",
             "title": "Miele",
             "text": "Dolce, morbido e vellutato.",
             "link_label": "Scopri di più",

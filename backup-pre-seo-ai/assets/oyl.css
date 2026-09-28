@@ -1,0 +1,93 @@
+/* Tomassi — Over Your Limits
+   Oro shimmer (champagne -> ambra) + schede prodotto a cornice scura.
+   Caricato SOLO sulle pagine OYL tramite la sezione "oyl-styles",
+   quindi le regole qui sotto non toccano il resto del sito. */
+
+/* ============================================================
+   1. ORO — headline / parole chiave OYL (.oyl-gold) = oro solido
+   L'enfasi è data dal colore oro pieno + peso del titolo, non da
+   effetti decorativi sul testo. Massima leggibilità e contrasto.
+   ============================================================ */
+.oyl-gold {
+  color: #C99A24;
+}
+/* vince sul color del tema */
+.oyl-hero__title.oyl-gold,
+h1.oyl-gold,
+h2.oyl-gold,
+.oyl-gold a {
+  color: #C99A24;
+}
+
+/* ============================================================
+   2. SCHEDE PRODOTTO OYL — cornice scura, foto pop incorniciata
+   ============================================================ */
+.product-card-wrapper .card {
+  background: #16110d;
+  border: 1px solid #2e2620;
+  border-radius: 16px;
+  padding: 10px;
+}
+.product-card-wrapper .card.card--standard {
+  box-shadow: none;
+}
+.product-card-wrapper .card__inner {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.product-card-wrapper .card__media {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.product-card-wrapper .card__content {
+  padding: 14px 6px 6px;
+}
+.product-card-wrapper .card__heading {
+  margin-top: 0;
+}
+.product-card-wrapper .card__heading a {
+  color: #f3e9d2;
+}
+.product-card-wrapper .card__heading a:hover {
+  color: #ffffff;
+}
+.product-card-wrapper .price,
+.product-card-wrapper .price .price-item,
+.product-card-wrapper .price__regular .price-item {
+  color: #d8b257;
+}
+
+/* bottone "Scegli opzioni" -> ghost oro pulito (una sola cornice) */
+.product-card-wrapper .quick-add__submit.button--secondary {
+  background: transparent;
+  border: 1.5px solid #c9962b;
+  color: #e6c268;
+  border-radius: 999px;
+  box-shadow: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+/* il tema disegna una seconda cornice (verde, angoli squadrati) + ombra
+   con lo pseudo-elemento .button::after: lo neutralizziamo qui. */
+.product-card-wrapper .quick-add__submit.button--secondary::after,
+.product-card-wrapper .quick-add__submit.button--secondary::before {
+  content: none;
+  display: none;
+  border: 0;
+  box-shadow: none;
+}
+.product-card-wrapper .quick-add__submit.button--secondary:hover {
+  background: #c9962b;
+  color: #16110d;
+}
+.product-card-wrapper .quick-add__submit.button--secondary:focus-visible {
+  outline: 2px solid #c9962b;
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   3. ACCENTI OYL — bottoni "view all" / link collezione
+   ============================================================ */
+.collection .button--secondary,
+.collection .button--tertiary {
+  color: #e6c268;
+}
