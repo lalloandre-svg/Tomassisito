@@ -1,0 +1,440 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_BA4xAQ": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_VrAT8f": {
+          "type": "heading",
+          "settings": {
+            "heading": "Grammatica sensoriale",
+            "heading_size": "h1"
+          }
+        },
+        "text_jYXP4f": {
+          "type": "text",
+          "settings": {
+            "text": "<h6>La Grammatica Sensoriale è il nostro modo di raccontare il linguaggio del caffè.<br/>Ogni aroma, ogni sfumatura, ogni sensazione ha la sua “parola”, e in questa collezione impariamo a riconoscerle, una alla volta.</h6><h6>Le immagini di copertina rappresentano gli aromi più iconici che puoi trovare in tazza: frutta, fiori, spezie, zuccheri, sensazioni tattili.<br/>Dietro ognuna di loro c’è una piccola lezione sensoriale: un invito a capire <strong>come</strong> e <strong>perché</strong> un caffè può ricordare una ciliegia, un fiore di gelsomino o un pezzo di cioccolato fondente.</h6><h6>È la grammatica che unisce chi tosta, chi prepara e chi assaggia.<br/>Un linguaggio comune fatto di profumi, ricordi e curiosità, per imparare a “leggere” il caffè con tutti i sensi.</h6>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_VrAT8f",
+        "text_jYXP4f"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-5",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "multirow_tT6fkd": {
+      "type": "multirow",
+      "blocks": {
+        "row_6QeBT9": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/2.svg",
+            "caption": "",
+            "heading": "Mirtillo",
+            "text": "<p>Il mirtillo è una delle note più affascinanti nel caffè: dolce ma mai stucchevole, con una freschezza che ricorda il bosco dopo la pioggia.<br/>Nei caffè lavati etiopi o nei naturali del Centro America si esprime come una dolcezza rotonda e una leggera acidità vinosa, capace di rendere la tazza viva e succosa.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/ciliegia-copia"
+          }
+        },
+        "row_FEnzdT": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/1.svg",
+            "caption": "",
+            "heading": "Ciliegia",
+            "text": "<p>Dolce, succosa e vivace. Il sentore di ciliegia racconta la parte più fruttata e luminosa del caffè.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/ciliegia"
+          }
+        },
+        "row_hbmgrP": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/3.svg",
+            "caption": "",
+            "heading": "Melone",
+            "text": "<p>Il melone racconta la parte più matura e solare del fruttato.<br/>In tazza regala sensazioni di dolcezza rotonda, polpa succosa e una freschezza morbida, simile a quella di un frutto estivo appena tagliato.<br/>È un sentore raro e prezioso, segno di fermentazioni pulite e ben controllate.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/lampone-copia"
+          }
+        },
+        "row_3nQdAr": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/4.svg",
+            "caption": "",
+            "heading": "Fragola",
+            "text": "<p>I sentori di fragola portano in tazza la dolcezza immediata della frutta matura. È un profilo luminoso e pulito, spesso legato ai caffè naturali d’altura o a fermentazioni complesse.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/miele-copia"
+          }
+        },
+        "row_cTb7CK": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/5.svg",
+            "caption": "",
+            "heading": "Rosa",
+            "text": "<p>I sentori di rosa si manifestano come un profumo dolce e persistente, che richiama petali freschi e tè profumati. È tipico dei caffè d’altura e delle varietà più delicate come il Gesha.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/melone-copia"
+          }
+        },
+        "row_khwFxE": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/6.svg",
+            "caption": "",
+            "heading": "Lampone",
+            "text": "<p>I sentori di lampone portano una freschezza rossa e brillante. È tipico dei caffè lavati, dove l’acidità citrica si trasforma in fruttata, creando energia e definizione.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/fragola-copia"
+          }
+        },
+        "row_ecUafm": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/7.svg",
+            "caption": "",
+            "heading": "Tè verde",
+            "text": "<p>I sentori di tè verde donano sensazioni vegetali e floreali, ricordando erba dolce, fiori bianchi e miele leggero. È tipico dei caffè lavati con tostature chiare.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/te-verde"
+          }
+        },
+        "row_WyUYEK": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/8.svg",
+            "caption": "",
+            "heading": "Miele",
+            "text": "<p>Dolce, morbido e naturale.<br/>Il sentore di miele esprime la parte più pura e rotonda del caffè, dove la dolcezza si intreccia con delicate sfumature floreali e fruttate.<br/>È tipico dei caffè maturi e ben tostati, soprattutto di quelli con processi honey o fermentazioni lente, che ne esaltano la sensazione cremosa e vellutata in tazza.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/mirtillo-copia"
+          }
+        },
+        "row_MUHfwh": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/9.svg",
+            "caption": "",
+            "heading": "Chiodi di garofano",
+            "text": "<p>Questo sentore nasce dall’interazione tra zuccheri e calore durante la tostatura o da fermentazioni ricche. Aggiunge complessità e una sensazione di speziato dolce, quasi balsamico.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/chiodi-di-garofano"
+          }
+        },
+        "row_PRFEbM": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/10.svg",
+            "caption": "",
+            "heading": "Camomilla",
+            "text": "<p>Delicata ma riconoscibile, la camomilla è un sentore floreale dolce e vellutato che ricorda infusi caldi e miele chiaro.<br/>Porta equilibrio e serenità in tazza, ammorbidendo l’acidità e illuminando il profilo con una dolcezza naturale e pulita.<br/>Si ritrova spesso nei caffè lavati d’altura, soprattutto nelle varietà Typica, Bourbon e Gesha.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/rosa-copia"
+          }
+        },
+        "row_33DPU7": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/11.svg",
+            "caption": "",
+            "heading": "Sciroppo",
+            "text": "<p>Descrive la consistenza e la dolcezza del caffè in bocca: ricorda zucchero fuso, miele o melassa. È segno di tostatura precisa e maturazione perfetta.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/camomilla-copia"
+          }
+        },
+        "row_zdwRpA": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/12.svg",
+            "caption": "",
+            "heading": "Rosa nera",
+            "text": "<p>È una nota rara e intensa, che unisce floreale e speziato, dolcezza e oscurità.<br/>Si trova nei caffè complessi e fermentati, dove eleganza e forza convivono.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/sciroppo-copia"
+          }
+        },
+        "row_8LCmQP": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/13.svg",
+            "caption": "",
+            "heading": "Lemongrass",
+            "text": "<p>Ricorda la scorza di lime e le erbe aromatiche. È un sentore brillante, tonico, spesso presente nei caffè lavati etiopi o nei fermentati leggeri.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/lemongrass"
+          }
+        },
+        "row_7PMRLM": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/14.svg",
+            "caption": "",
+            "heading": "Prugna",
+            "text": "<p>Dolce, vellutata e profonda.<br/>Il sentore di prugna racconta la maturità del frutto e la dolcezza che nasce dal tempo.<br/>Ricorda la polpa scura e succosa, con sfumature di miele, vino dolce e mandorla.<br/>È tipica dei caffè naturali o fermentati lunghi, dove la dolcezza evolve e diventa morbida, persistente e armoniosa in tazza.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/caramello"
+          }
+        },
+        "row_zpnCRk": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/15.svg",
+            "caption": "",
+            "heading": "Bubblegum",
+            "text": "<p>Un profilo zuccherino e fruttato che richiama caramelle e frutti tropicali fermentati.<br/>Spesso compare in fermentazioni anaerobiche o carboniche complesse.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/lemongrass-copia"
+          }
+        },
+        "row_ULhjQw": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/16.svg",
+            "caption": "",
+            "heading": "Nettarina",
+            "text": "<p>Ricorda la pesca, ma più intensa e vivace. In tazza porta una dolcezza solare e una freschezza fruttata tipica dei caffè naturali d’altura.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/nettarina"
+          }
+        },
+        "row_9CNXeT": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/17.svg",
+            "caption": "",
+            "heading": "Citronella",
+            "text": "<p>Ricorda scorza di limone, erba tagliata e fiori di campo.<br/>Porta un tocco fresco e balsamico, tipico dei caffè lavati con acidità citrica brillante.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/citronella"
+          }
+        },
+        "row_MVbGtC": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/18.svg",
+            "caption": "",
+            "heading": "Mora",
+            "text": "<p>Richiama i frutti di bosco maturi e il vino rosso.<br/>In tazza aggiunge corpo, calore e un tocco di acidità elegante.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/mora"
+          }
+        },
+        "row_fc8RDM": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/19.svg",
+            "caption": "",
+            "heading": "Marmellata d’arancia",
+            "text": "<p>Vivace e dolce-amara. La marmellata d’arancia unisce energia, calore e complessità in un solo sentore.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/marmellata-d-arancia"
+          }
+        },
+        "row_wDKWBB": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/20.svg",
+            "caption": "",
+            "heading": "Lavanda",
+            "text": "<p>Porta note di fiore secco, miele e spezia leggera.<br/>È un profumo sottile, spesso presente nei Gesha e nei caffè etiopi d’altura.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/lavanda"
+          }
+        },
+        "row_6f39JC": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/21.svg",
+            "caption": "",
+            "heading": "Fiori d’arancio",
+            "text": "<p>Ricorda miele d’agrumi e petali freschi.<br/>Porta in tazza delicatezza e una dolcezza agrumata tipica dei caffè leggeri e aromatici.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/fiori-d-arancio"
+          }
+        },
+        "row_m9rW8X": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/22.svg",
+            "caption": "",
+            "heading": "Gelsomino",
+            "text": "<p>Un sentore dolce e pulito, che ricorda tè bianco e fiori d’estate.<br/>È tipico dei caffè etiopi lavati e delle varietà Gesha.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/gelsomino"
+          }
+        },
+        "row_VVpdBE": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/23.svg",
+            "caption": "",
+            "heading": "Anice stellato",
+            "text": "<p>Il suo sentore richiama pasticceria e infusi orientali.<br/>Aggiunge profondità e dolcezza balsamica, spesso presente nei caffè con fermentazioni complesse.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/anice-stellato"
+          }
+        },
+        "row_XJjEgG": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/24.svg",
+            "caption": "",
+            "heading": "Mango",
+            "text": "<p>Ricorda frutti maturi e miele d’acacia.<br/>È un sentore ricco, tipico dei caffè naturali o delle fermentazioni tropicali.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/mango"
+          }
+        },
+        "row_NyPhjh": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/25.svg",
+            "caption": "",
+            "heading": "Succo di pesca",
+            "text": "<p>Ricorda la pesca matura appena frullata.<br/>In tazza offre dolcezza vellutata e consistenza setosa, segno di maturazione perfetta.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/succo-di-pesca"
+          }
+        },
+        "row_Me7wtW": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/26.svg",
+            "caption": "",
+            "heading": "Mandarino",
+            "text": "<p>Ricorda scorza d’agrumi e miele d’arancio.<br/>È tipico dei caffè lavati e dei profili con acidità vivace e luminosa.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/mandarino"
+          }
+        },
+        "row_f83g9T": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/27.svg",
+            "caption": "",
+            "heading": "Limone",
+            "text": "<p>Porta in tazza energia e precisione.<br/>È il simbolo dell’acidità luminosa, tipica dei caffè lavati d’altura.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/limone"
+          }
+        },
+        "row_Edqxgn": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/28.svg",
+            "caption": "",
+            "heading": "Caramella alla fragola",
+            "text": "<p>Un sentore zuccherino e vivace che richiama l’infanzia e i frutti rossi canditi.<br/>Spesso associato a fermentazioni naturali e anaerobiche sperimentali.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/caramella-alla-fragola"
+          }
+        },
+        "row_pXbkKX": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/30.svg",
+            "caption": "",
+            "heading": "Anguria",
+            "text": "<p>Ricorda la polpa rossa e dolce dell’anguria matura.<br/>Un sentore raro che dona freschezza e pulizia al profilo.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/anguria"
+          }
+        },
+        "row_Gyhr8p": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/29.svg",
+            "caption": "",
+            "heading": "Frutto della passione",
+            "text": "<p>Porta in tazza acidità vivace e aromi esotici.<br/>È una firma dei caffè fermentati con profilo tropicale o anaerobico.</p>",
+            "button_label": "Scopri di più",
+            "button_link": "shopify://products/frutto-della-passione"
+          }
+        }
+      },
+      "block_order": [
+        "row_6QeBT9",
+        "row_FEnzdT",
+        "row_hbmgrP",
+        "row_3nQdAr",
+        "row_cTb7CK",
+        "row_khwFxE",
+        "row_ecUafm",
+        "row_WyUYEK",
+        "row_MUHfwh",
+        "row_PRFEbM",
+        "row_33DPU7",
+        "row_zdwRpA",
+        "row_8LCmQP",
+        "row_7PMRLM",
+        "row_zpnCRk",
+        "row_ULhjQw",
+        "row_9CNXeT",
+        "row_MVbGtC",
+        "row_fc8RDM",
+        "row_wDKWBB",
+        "row_6f39JC",
+        "row_m9rW8X",
+        "row_VVpdBE",
+        "row_XJjEgG",
+        "row_NyPhjh",
+        "row_Me7wtW",
+        "row_f83g9T",
+        "row_Edqxgn",
+        "row_pXbkKX",
+        "row_Gyhr8p"
+      ],
+      "name": "t:sections.multirow.presets.name",
+      "settings": {
+        "image_height": "adapt",
+        "desktop_image_width": "small",
+        "image_layout": "alternate-left",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-5",
+        "row_color_scheme": "scheme-5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_BA4xAQ",
+    "multirow_tT6fkd"
+  ]
+}

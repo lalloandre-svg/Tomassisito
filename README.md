@@ -20,6 +20,9 @@ Esiste anche un tema duplicato intatto su Shopify: **"Backup prima di SEO AI (26
 | `sections/footer-group.json` | Riattivato il box newsletter nel footer |
 | `templates/page.newsletter.json` | La pagina /pages/newsletter ora mostra il form di iscrizione (prima era vuota) |
 | `templates/index.json` | Homepage: nascosto l'indicatore di scroll ("mouse") nella hero (`show_scroll_cue: false`) |
+| `templates/page.mi-sorella-zoccola.json` | Pagina Over Your Limits, sezione Grammatica: la card "Thè" usava l'icona del Miele (8.png) → ora "Tè verde" con 7.png; "Passion Fruit" → "Frutto della passione"; icone tutte PNG (Anguria e Mango erano SVG 50px); aggiunta una nota breve a ogni gusto |
+| `snippets/tomassi-i18n.liquid` | Traduzioni EN per i nuovi testi delle card della Grammatica OYL |
+| `templates/page.grammatica.json` | Pagina Grammatica sensoriale: refusi ("olce", "esprimono", "sentrore"), 2 pulsanti "Etichetta pulsante" → "Scopri di più", titoli senza grassetto sparso, punto finale nei testi |
 
 ## Come tornare indietro
 - **Tutto:** pubblicare il tema "Backup prima di SEO AI (26-09-2026)", oppure ricaricare i file di `backup-pre-seo-ai/` ed eliminare `snippets/seo-ai-schema.liquid` e `templates/robots.txt.liquid`.
