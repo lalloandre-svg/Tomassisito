@@ -109,3 +109,6 @@ Copia dei testi precedenti: `backup-oyl-testi/2026-09-28-prima-della-riscrittura
 - `custom.ricetta_consigliata` (non visibile nella pagina, letto da schema/AI) compilato per 7 caffè dalle schede Pages.
 - Traduzioni EN (titolo, descrizione, SEO, tipo prodotto "Competition-grade specialty coffee") per tutti i 12 OYL, sostituite le vecchie traduzioni.
 - Da chiarire: anno di raccolto Abu Natural (scheda 2025 / sito 2024) e Guarani (scheda 2024 / sito 2025).
+- Traduzioni EN anche dei metafield testuali (processo, metodo, in tazza, per chi è, perché OYL, ricetta; origine/varietà dove diverse).
+- Guarani: handle cambiato in `brasile-daterra-guarani-aramosa` con redirect da `…-tumoru-guarani`.
+- Lino, 21B, Ombligon avevano già le immagini nuove (IMG_3692/3693/3694.jpg + IMG_3700/3701/3702.png): nessuna modifica necessaria.
