@@ -1,6 +1,6 @@
 # Font
 
-Qui vanno i file `.woff2`: non sono ancora nel repository. Finché mancano, il menù usa il monospaziato di sistema e i titoli escono in maiuscolo semplice.
+Qui vanno i file `.woff2`. Caos Mano (Regular e Bold) c'è già. Source Code Pro manca: finché non c'è, il testo usa il monospaziato di sistema.
 
 ## Caos Mano
 Dal Mac: `~/Desktop/Materiale ristrutturazione CAOS/01 Brand/Font Caos Mano/web/`
@@ -9,7 +9,7 @@ Copia qui almeno:
 - `CaosMano-Bold.woff2`
 
 ## Source Code Pro (licenza OFL, self-hosted: niente Google Fonts)
-Scarica i file da https://fontsource.org/fonts/source-code-pro (sottoinsieme latin) e rinominali così:
+Vai su https://fontsource.org/fonts/source-code-pro → pulsante **Download**. Nello zip, nella cartella `webfonts`, prendi i file `source-code-pro-latin-300-normal.woff2`, `-400-normal`, `-500-normal`, `-700-normal`, `-400-italic` e rinominali così:
 - `SourceCodePro-Light.woff2` (300)
 - `SourceCodePro-Regular.woff2` (400)
 - `SourceCodePro-Medium.woff2` (500)

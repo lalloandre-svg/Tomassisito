@@ -346,19 +346,15 @@ Problemi noti nel sito attuale da correggere:
 
 ## 9. Aperto / da chiedere ad Andrè
 
-- Nome del piatto aperitivo vegano (**Bean Missing You** provvisorio) e della riga "**Dolci & lievitati**".
 - Nome della cornetteria: **Lievito 1969** si usa o no?
-- Orario Social!: ultimi ordini 21:30 o chiusura 21:00?
-- Allergeni `*` da validare in cucina (Sesame Street, salsa Caos, Caos in a Spoon per gusto, pane VIVY BAKERY: contiene latte/uova?).
 - Germogli (quali e su quali piatti; se di senape → allergene 10).
-- Drink list definitiva e prezzi Caos in a Shot.
+- Drink list definitiva e prezzi Caos in a Shot (online resta nascosta finché non è chiusa).
 - Nomi e ruoli del team, foto originali al posto dei fermi dei reel.
 - Hosting e dominio: dove è registrato caoscaffe.com, chi ha l'accesso DNS.
 - Serve l'ordine online vero (Shopify) o basta una richiesta via email?
 - Dati legali per il footer (ragione sociale, P.IVA).
-- Titoli **CAFFÈ E CALDO** e **FREDDO**: sono in italiano mentre gli altri titoli di sezione sono in inglese (regola §2). Confermare o dare i nomi inglesi.
-- Aggiunte "Salmone 3 (4)", "Uovo CBT 1,5 (3)": cosa indica il prezzo tra parentesi? Online esce così com'è.
-- Allergeni delle aggiunte (ADD SOME C∀OS) e dello specialty: non in carta → online "chiedi allo staff".
+- Allergeni dello specialty (espresso del giorno, filtro, batch brew): non in carta → online "chiedi allo staff".
+- Salsa Caos (Damn Good Fries): quali allergeni? Online "salsa: chiedi".
 - Prezzi in rosso logo sulla fascia arancio: contrasto 2:1, non leggibile a schermo → online i prezzi sulla fascia sono neri.
 
 ---
@@ -391,5 +387,14 @@ Nota: alcuni file originali sono hardlink; se un tool fa storie, copiali prima i
 
 ## 12. Stato del lavoro (28/09/2026)
 
+Decisioni di Andrè (28/09/2026):
+- Allergeni prima segnati `*` confermati (Sesame Street 11, Marocchino 7, Damn Good Fries).
+- Titoli di sezione tutti in inglese: CAFFÈ E CALDO → **HOT STUFF**, FREDDO → **CHILL** (i nomi dei registri colore). Da cambiare in `data/menu.json` se si preferisce altro.
+- ADD SOME C∀OS: in "Salmone 3 (4)" il primo numero è il prezzo, tra parentesi l'allergene.
+- Social!: **16:00–21:00**.
+- Bean Missing You e Dolci & lievitati: nomi confermati.
+- Drink list: resta nascosta.
+- **Non esiste un altro sito**: §8 non vale. Le pagine oltre a `/menu` sono da fare da zero.
+
 - `/menu` e `/en/menu` fatti: `data/menu.json` → `build.mjs` → `dist/`. Istruzioni in `LEGGIMI.md`.
-- Mancano nel repository: font (`public/fonts/LEGGIMI.md`), `img/logo-caos.svg`, `img/favicon.svg`, `img/og-menu.jpg`, e le altre pagine del sito attuale (da copiare in `public/` e poi allineare a §8).
+- Caos Mano Regular e Bold in `public/fonts/`. Mancano: Source Code Pro (`public/fonts/LEGGIMI.md`), `img/logo-caos.svg`, `img/favicon.svg`, `img/og-menu.jpg`.

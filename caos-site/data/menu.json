@@ -96,8 +96,7 @@
                 "en": "Roasted seasonal vegetables, with crispy cumin chickpeas, hummus, marinated red onions, confit cherry tomatoes and fresh sprouts. Gluten free"
               },
               "prezzo": "9",
-              "allergeni": [11],
-              "verificato": false
+              "allergeni": [11]
             }
           ]
         },
@@ -106,12 +105,12 @@
           "titolo": "ADD SOME C∀OS",
           "stile": "lista",
           "voci": [
-            { "nome": { "it": "Pancetta affumicata", "en": "Smoked pancetta" }, "prezzo": "2" },
-            { "nome": { "it": "Salmone", "en": "Salmon" }, "prezzo": "3 (4)" },
-            { "nome": { "it": "Tonno scottato", "en": "Seared tuna" }, "prezzo": "3 (4)" },
-            { "nome": { "it": "Cipolle rosse marinate", "en": "Marinated red onions" }, "prezzo": "1" },
-            { "nome": { "it": "Avocado", "en": "Avocado" }, "prezzo": "2" },
-            { "nome": { "it": "Uovo CBT", "en": "Slow-cooked egg" }, "prezzo": "1,5 (3)" }
+            { "nome": { "it": "Pancetta affumicata", "en": "Smoked pancetta" }, "prezzo": "2", "allergeni": [] },
+            { "nome": { "it": "Salmone", "en": "Salmon" }, "prezzo": "3", "allergeni": [4] },
+            { "nome": { "it": "Tonno scottato", "en": "Seared tuna" }, "prezzo": "3", "allergeni": [4] },
+            { "nome": { "it": "Cipolle rosse marinate", "en": "Marinated red onions" }, "prezzo": "1", "allergeni": [] },
+            { "nome": { "it": "Avocado", "en": "Avocado" }, "prezzo": "2", "allergeni": [] },
+            { "nome": { "it": "Uovo CBT", "en": "Slow-cooked egg" }, "prezzo": "1,5", "allergeni": [3] }
           ]
         }
       ]
@@ -221,7 +220,6 @@
             },
             {
               "nome": "DOLCI & LIEVITATI",
-              "_nota": "Nome provvisorio: da confermare con Andrè.",
               "desc": {
                 "it": "Croissant, lievitati, torte e dolci fatti da noi: cambiano spesso, guarda la vetrina",
                 "en": "Croissants, leavened bakes, cakes and sweets made here: they change often, check the counter"
@@ -316,9 +314,8 @@
     {
       "id": "social",
       "titolo": "SOCIAL!",
-      "orario": { "it": "dalle 16:00, ultimi ordini 21:30", "en": "from 16:00, last orders 21:30" },
-      "_nota_orario": "Da confermare: ultimi ordini 21:30 o chiusura 21:00.",
-      "fascia_oraria": ["16:00", "21:30"],
+      "orario": { "it": "16:00–21:00", "en": "16:00–21:00" },
+      "fascia_oraria": ["16:00", "21:00"],
       "registro": "food",
       "sottotitolo": { "it": "Piatti aperitivo", "en": "Aperitivo plates" },
       "intro": {
@@ -349,7 +346,6 @@
             },
             {
               "nome": "BEAN MISSING YOU",
-              "_nota": "Nome provvisorio: da confermare con Andrè.",
               "veg": true,
               "desc": {
                 "it": "Mini avocado toast · Millefoglie di patata, fagiolini e maionese vegana · Cialda di riso, hummus e pomodorino confit · Crostino di polenta e caponata · Mini burger di zucchine",
@@ -390,7 +386,6 @@
               "desc": { "it": "Patate sottili, dorate e croccanti, con la salsa Caos", "en": "Thin fries, golden and crunchy, with Caos sauce" },
               "prezzo": "4",
               "allergeni": [],
-              "verificato": false,
               "allergeni_nota": { "it": "salsa: chiedi", "en": "sauce: ask" }
             },
             {
@@ -420,9 +415,7 @@
 
     {
       "id": "caffe",
-      "titolo": "CAFFÈ E CALDO",
-      "titolo_en": "COFFEE & HOT",
-      "_nota_titolo": "Titolo da confermare: gli altri titoli di sezione sono in inglese.",
+      "titolo": "HOT STUFF",
       "registro": "hot",
       "sottotitolo": { "it": "Il caffè della casa · Blend 1969", "en": "House coffee · Blend 1969" },
       "intro": {
@@ -460,7 +453,7 @@
             { "nome": { "it": "Cappuccino", "en": "Cappuccino" }, "prezzo": "2", "allergeni": [7] },
             { "nome": { "it": "Caffellatte", "en": "Caffellatte" }, "prezzo": "2,2", "allergeni": [7] },
             { "nome": { "it": "Latte macchiato", "en": "Latte macchiato" }, "prezzo": "2,2", "allergeni": [7] },
-            { "nome": { "it": "Marocchino", "en": "Marocchino" }, "prezzo": "1,6", "allergeni": [7], "verificato": false },
+            { "nome": { "it": "Marocchino", "en": "Marocchino" }, "prezzo": "1,6", "allergeni": [7] },
             { "nome": { "it": "Corretto", "en": "Corretto" }, "prezzo": "2,5", "allergeni": [] }
           ]
         },
@@ -485,9 +478,7 @@
 
     {
       "id": "freddo",
-      "titolo": "FREDDO",
-      "titolo_en": "COLD",
-      "_nota_titolo": "Titolo da confermare: gli altri titoli di sezione sono in inglese.",
+      "titolo": "CHILL",
       "registro": "chill",
       "blocchi": [
         {

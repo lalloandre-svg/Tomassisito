@@ -54,7 +54,7 @@ Numeri da 1 a 14 (la legenda è in fondo alla pagina):
 - Se dipende dalla farcia o dal gusto: `"allergeni_nota": { "it": "+ farcia: chiedi", "en": "+ filling: ask" }`.
 - **Allergeni non ancora confermati dalla cucina**: aggiungi `"verificato": false`. Online escono con "(da confermare in cucina, chiedi)". Quando la cucina conferma, togli quella riga.
 
-Oggi sono da confermare: **Sesame Street** (11), **Damn Good Fries** (salsa), **Marocchino** (7).
+Oggi sono tutti confermati (28/09/2026).
 
 ## Oggi in macchina (specialty del giorno)
 In `data/oggi.json`:
@@ -96,6 +96,6 @@ CLAUDE.md      brief completo del progetto
 - Il menù si legge anche con JavaScript spento. `js/menu.js` aggiunge filtri, striscia "adesso", scadenza di "oggi in macchina" e il ripiego se Caos Mano non carica.
 
 ### Mancano ancora (da copiare dal Mac)
-- `public/fonts/`: Caos Mano e Source Code Pro (vedi `public/fonts/LEGGIMI.md`).
+- `public/fonts/`: Source Code Pro (Caos Mano c'è già; vedi `public/fonts/LEGGIMI.md`).
 - `public/img/logo-caos.svg` (logo ufficiale, versione positiva), `public/img/favicon.svg`, `public/img/og-menu.jpg` (1200×630, per le anteprime nei social).
-- Le altre pagine del sito attuale (`index.html`, `caffe.html`, …) vanno in `public/`: vedi `CLAUDE.md` §8.
+- Le altre pagine del sito (home, caffè, forno…) sono da fare da zero: vedi `CLAUDE.md` §12.
