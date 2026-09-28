@@ -36,5 +36,13 @@ Backup del tema su Shopify prima di queste modifiche: **"Backup prima di timer e
 | `templates/index.json` | Hero: "Spedizione gratuita da €69"; testo Business riscritto con fatti concreti |
 | `templates/product.json` | Prezzo, varianti, quantità e acquisto subito sotto il titolo (etichette e barrette dopo); badge "Tostato il martedì, spedito entro 24h"; sezione storia riscritta senza "tante mani" e "in altura" |
 | `templates/product.over-your-limits.json` | Stesso riordino; riga tostatura unica |
+| `templates/page.abbonamento.json` | FAQ: aggiunto rinnovo automatico fino a disdetta; "Dal 26 in poi" (prima "Dal 25", in conflitto con "entro il 25") |
 
-Già applicato direttamente sui prodotti (live): metafield `custom.origine` di Blend 1969 → "Brasile · Perù · Etiopia"; descrizione El Vergel: rimossa l'affermazione errata "Sidra significa cedro".
+Applicato direttamente sui prodotti (live, vale per tutti i temi):
+- Blend 1969: metafield `custom.origine` → "Brasile · Perù · Etiopia" (era "Brasile · India").
+- El Vergel: rimossa l'affermazione errata "Sidra significa cedro"; origine genetica della varietà indicata come discussa.
+- Abbonamento: descrizione riscritta (invio mensile, 3 modi di pagare, tostatura chiara/media, impegno minimo, rinnovo e disdetta), allineata alla landing e ai piani Joy.
+- Rusatira Anaerobic e Family Blend: tolto "Natural" dal processo.
+- Family Blend: Makhore raccolto 2024/2025.
+- Mikava Reserve: "Paul & Kevin Doyle".
+- El Diviso e Zarza: barrette (erano 8/8/3 come San Rafael) → El Diviso 8,5/6,5/6,5, Zarza 8,5/6,5/7,5. Valori stimati dalle descrizioni, da confermare all'assaggio.
