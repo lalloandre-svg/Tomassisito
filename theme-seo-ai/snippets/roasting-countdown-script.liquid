@@ -15,6 +15,16 @@
           this.targetHour = parseInt(this.dataset.roastHour || '12', 10);
           this.en = (this.dataset.lang || '').toLowerCase().indexOf('en') === 0;
           this.reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          this.tick = this.tick.bind(this);
+          this.tick();
+          // Se l'elemento compare dopo la definizione (es. scheda prodotto), i figli
+          // non sono ancora stati letti dal parser: riprova appena possibile.
+          setTimeout(this.tick, 0);
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', this.tick);
+          if (this.timer) clearInterval(this.timer);
+          this.timer = setInterval(this.tick, 1000);
+        }
+        bind() {
           this.counting = this.querySelector('[data-roast-counting]');
           this.today = this.querySelector('[data-roast-today]');
           this.elDays = this.querySelector('[data-roast-days]');
@@ -22,9 +32,7 @@
           this.elMinutes = this.querySelector('[data-roast-minutes]');
           this.elSeconds = this.querySelector('[data-roast-seconds]');
           this.elSr = this.querySelector('[data-roast-sr]');
-          this.tick = this.tick.bind(this);
-          this.tick();
-          this.timer = setInterval(this.tick, 1000);
+          this.bound = !!(this.elDays || this.elHours);
         }
         disconnectedCallback() { if (this.timer) clearInterval(this.timer); }
         romeNow() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome' })); }
@@ -40,6 +48,7 @@
           el.classList.add('roast-tick');
         }
         tick() {
+          if (!this.bound) this.bind();
           const now = this.romeNow();
           const add = (this.targetDay - now.getDay() + 7) % 7;
           let target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + add, this.targetHour, 0, 0, 0);

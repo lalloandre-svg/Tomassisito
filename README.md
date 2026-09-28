@@ -29,13 +29,14 @@ Esiste anche un tema duplicato intatto su Shopify: **"Backup prima di SEO AI (26
 Backup del tema su Shopify prima di queste modifiche: **"Backup prima di timer e fascia (28-09-2026)"**. I file caricati coincidono con quelli del repo (MD5 verificato).
 | File | Modifica |
 |---|---|
-| `snippets/roasting-countdown-script.liquid` (nuovo) | Logica unica del countdown: conta fino a martedì ore 12:00, ora di Roma (chiusura ordini per la tostatura del martedì) |
+| `snippets/roasting-countdown-script.liquid` (nuovo) | Logica unica del countdown: conta fino a martedì ore 12:00, ora di Roma (chiusura ordini per la tostatura del martedì). Collega gli elementi figli in modo ritardato: senza questo la riga della scheda prodotto restava su "--g --h --m" |
 | `snippets/roast-countdown-header.liquid` | Stesso design; usa la logica unica; etichetta "Ordina entro martedì alle 12"; niente più stato "Oggi si tosta" per tutto il martedì |
 | `snippets/tomassi-roast-line.liquid` (nuovo) | Riga della scheda prodotto: "Si tosta il martedì: ordina entro le 12 per entrare nel prossimo lotto. Mancano …". Sostituisce la parte `roast` di `tomassi-pdp` (che usava le 9 del fuso del visitatore e "entro le 14") |
 | `sections/header-group.json` | Barra annunci: "Spedizione gratuita in Italia per ordini da €69" (era €70; il carrello usa già 69) |
 | `templates/index.json` | Hero: "Spedizione gratuita da €69"; testo Business riscritto con fatti concreti |
 | `templates/product.json` | Prezzo, varianti, quantità e acquisto subito sotto il titolo (etichette e barrette dopo); badge "Tostato il martedì, spedito entro 24h"; sezione storia riscritta senza "tante mani" e "in altura" |
 | `templates/product.over-your-limits.json` | Stesso riordino; riga tostatura unica |
+| `sections/cart-flair.liquid` | Carrello: stesso orario (martedì 12:00, Roma) al posto di "martedì 9:00 / entro le 14"; "Spedito entro 24h dalla tostatura" |
 | `templates/page.abbonamento.json` | FAQ: aggiunto rinnovo automatico fino a disdetta; "Dal 26 in poi" (prima "Dal 25", in conflitto con "entro il 25") |
 
 Applicato direttamente sui prodotti (live, vale per tutti i temi):

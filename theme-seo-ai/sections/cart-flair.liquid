@@ -1,0 +1,356 @@
+{%- comment -%}
+  Carrello Tomassi: veste il cart drawer di Dawn e la pagina /cart.
+  Barra spedizione gratuita, countdown tostatura, punti Tomassi Family, cross-sell abbinato, vuoto con personalita.
+  Sezione CSS+JS site-wide (vive in header-group). Soglia configurabile dallo schema.
+{%- endcomment -%}
+
+<div data-cflair data-threshold="{{ section.settings.soglia | default: 69 }}" hidden></div>
+
+<style>
+  /* ------ drawer: palette e tipografia ------ */
+  cart-drawer .drawer__inner { background: #F6EEDC; border-left: 1px solid rgba(194,146,45,.5); }
+  cart-drawer .drawer__header { border-bottom: 1px solid rgba(20,16,12,.12); }
+  cart-drawer .drawer__heading { font-size: 2.2rem; font-weight: 700; color: #14100C; }
+  cart-drawer .cart-item__name { font-weight: 700; color: #14100C; }
+  cart-drawer .cart-item { border-bottom: 1px solid rgba(20,16,12,.1); }
+  cart-drawer .cart-item__media img,
+  cart-drawer .cart-item__image { border-radius: 1.2rem; background: #FFFFFF; border: 1px solid #E4D9C0; }
+  cart-drawer .price { color: #14100C; font-weight: 700; }
+
+  /* quantita: UN bordo solo (lezione imparata) */
+  cart-drawer .quantity, .cart .quantity { border-radius: 999px; border: 1px solid rgba(20,16,12,.35); background: #FFFFFF; box-shadow: none !important; }
+  cart-drawer .quantity::before, cart-drawer .quantity::after,
+  .cart .quantity::before, .cart .quantity::after { content: none !important; box-shadow: none !important; border: 0 !important; display: none !important; }
+  cart-drawer .quantity__input, .cart .quantity__input { box-shadow: none !important; border: 0 !important; }
+
+  /* CTA cassa: pillola ocra con sheen, niente contorni doppi */
+  .cart__checkout-button { background: #C2922D !important; color: #14100C !important; border: 0 !important; outline: 0 !important; border-radius: 999px !important; font-weight: 800 !important; min-height: 5.2rem; box-shadow: 0 8px 20px rgba(194,146,45,.35) !important; position: relative; overflow: hidden; transition: transform .15s ease, background .2s ease; }
+  .cart__checkout-button:hover { transform: translateY(-2px); background: #1B1814 !important; color: #F6EEDC !important; }
+  .cart__checkout-button::before { content: none !important; box-shadow: none !important; }
+  .drawer__footer .cart__checkout-button::after, .cart__ctas .cart__checkout-button::after { content: '' !important; display: block !important; position: absolute; top: 0; height: 100%; width: 60%; left: -140%; background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,.7) 50%, transparent 80%); transform: skewX(-18deg); animation: cflairSheen 3.5s ease-in-out 1s infinite; pointer-events: none; box-shadow: none !important; border: 0 !important; }
+  @keyframes cflairSheen { 0% { left: -140%; } 30% { left: 150%; } 100% { left: 150%; } }
+  cart-drawer .drawer__footer { border-top: 1px solid rgba(20,16,12,.12); }
+
+  /* ------ pagina /cart ------ */
+  .cart__items .cart-item__media img { border-radius: 1.2rem; background: #FFFFFF; border: 1px solid #E4D9C0; }
+  main .title--primary { position: relative; }
+  main .cart__title::after, .cart-header .title::after { content: ''; display: block; width: 9rem; height: .5rem; background: #C2922D; border-radius: 99px; margin-top: 1rem; }
+
+  /* ------ barra spedizione gratuita ------ */
+  .cflair-ship { margin: 1.2rem 1.6rem .4rem; padding: 1.2rem 1.4rem; background: #FFFFFF; border: 1px solid #E4D9C0; border-radius: 1.4rem; }
+  .cart .cflair-ship, .cart__footer .cflair-ship { margin: 0 0 1.6rem; }
+  .cflair-ship__text { margin: 0 0 .8rem; font-size: 1.3rem; color: #14100C; }
+  .cflair-ship__text b { color: #0F4A27; }
+  .cflair-ship__track { display: block; height: .8rem; background: #EFE5CE; border-radius: 99px; overflow: hidden; }
+  .cflair-ship__fill { display: block; height: 100%; width: 0; background: #C2922D; border-radius: 99px; transition: width .7s cubic-bezier(.22,.9,.35,1); }
+
+  /* la modale aggiunta-rapida delle collezioni resta essenziale: niente pezzi scheda */
+  quick-add-modal .tpdp-kicker, quick-add-modal .tpdp-chips, quick-add-modal .tpdp-bars,
+  quick-add-modal .tpdp-roast, quick-add-modal .tpdp-pair, quick-add-modal .tpdp-acc,
+  quick-add-modal .tomassi-champ, quick-add-modal .tomassi-trust { display: none !important; }
+  .cflair-ship.done .cflair-ship__fill { background: #0F4A27; }
+  .cflair-ship.done .cflair-ship__text { color: #0F4A27; font-weight: 700; }
+  .cflair-ship.done { animation: cflairPop .4s cubic-bezier(.34,1.56,.64,1); border-color: rgba(15,74,39,.5); }
+  @keyframes cflairPop { 0% { transform: scale(.97); } 100% { transform: scale(1); } }
+
+  /* ------ countdown tostatura ------ */
+  .cflair-roast { display: flex; align-items: center; gap: .9rem; margin: .6rem 1.6rem; padding: .9rem 1.3rem; border: 1px dashed #C2922D; border-radius: 1.2rem; background: rgba(194,146,45,.07); }
+  .cflair-roast__dot { width: .8rem; height: .8rem; border-radius: 50%; background: #C2922D; flex: 0 0 auto; animation: cflairPulse 2.2s ease-in-out infinite; }
+  @keyframes cflairPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(194,146,45,.5); } 50% { box-shadow: 0 0 0 .5rem rgba(194,146,45,0); } }
+  .cflair-roast__text { font-size: 1.2rem; color: #14100C; font-weight: 600; }
+
+  /* ------ punti Tomassi Family ------ */
+  .cflair-fam { display: flex; align-items: center; gap: .9rem; margin: .6rem 1.6rem; padding: .9rem 1.3rem; border-radius: 1.2rem; background: rgba(15,74,39,.09); color: #0F4A27; font-size: 1.25rem; line-height: 1.35; }
+  .cart__footer .cflair-fam { margin: 0 0 1.6rem; }
+  .cflair-fam svg { width: 1.8rem; height: 1.8rem; flex: 0 0 auto; color: #C2922D; }
+  .cflair-fam b { font-weight: 800; }
+  .cflair-fam a { margin-left: auto; color: inherit; font-weight: 700; white-space: nowrap; text-underline-offset: .3rem; }
+
+  /* ------ cross-sell ------ */
+  .cflair-pair { margin: .6rem 1.6rem 1rem; }
+  .cflair-pair__kicker { margin: 0 0 .6rem; font-size: 1.1rem; letter-spacing: .16em; text-transform: uppercase; color: #5A3523; font-weight: 700; }
+  .cflair-pair__card { display: flex; align-items: center; gap: 1.1rem; background: #FFFFFF; border: 1px solid #E4D9C0; border-radius: 1.4rem; padding: .9rem 1.2rem; }
+  .cflair-pair__img { width: 5.2rem; height: 5.2rem; object-fit: cover; border-radius: 50%; background: #F6EEDC; flex: 0 0 auto; }
+  .cflair-pair__body { flex: 1; min-width: 0; }
+  .cflair-pair__name { margin: 0; font-size: 1.25rem; font-weight: 700; color: #14100C; line-height: 1.25; }
+  .cflair-pair__price { margin: 0; font-size: 1.15rem; color: #5A3523; }
+  .cflair-pair__btn { border: 0; background: #0F4A27; color: #F6EEDC; border-radius: 999px; padding: .7rem 1.5rem; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: transform .15s ease, background .15s ease; flex: 0 0 auto; }
+  .cflair-pair__btn:hover { transform: translateY(-2px); background: #C2922D; color: #14100C; }
+  .cflair-pair__btn[disabled] { opacity: .6; cursor: wait; }
+
+  /* ------ trust ------ */
+  .cflair-trust { display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; justify-content: center; margin: .8rem 1.6rem .4rem; font-size: 1.1rem; color: #5A3523; font-weight: 600; }
+  .cflair-trust span { display: inline-flex; align-items: center; gap: .4rem; }
+  .cflair-trust svg { width: 1.4rem; height: 1.4rem; color: #0F4A27; }
+
+  /* ------ vuoto con personalita ------ */
+  cart-drawer .drawer__inner-empty { background: #F6EEDC; }
+  cart-drawer .cart-drawer__warnings .cart__empty-text { display: none; }
+  .cflair-empty { text-align: center; padding: 1rem 2rem 0; }
+  .cflair-empty__title { margin: 0 0 .6rem; font-size: 2.2rem; font-weight: 700; color: #14100C; }
+  .cflair-empty__sub { margin: 0 0 1.8rem; font-size: 1.4rem; color: #5A3523; }
+  .cflair-empty__btn { display: inline-block; background: #C2922D; color: #14100C; font-weight: 800; border-radius: 999px; padding: 1.2rem 2.6rem; font-size: 1.4rem; text-decoration: none; box-shadow: 0 8px 20px rgba(194,146,45,.35); transition: transform .15s ease; }
+  .cflair-empty__btn:hover { transform: translateY(-2px); }
+  .cflair-empty__cc { display: block; margin-top: 1.4rem; font-size: 1.25rem; color: #0F4A27; font-weight: 700; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .drawer__footer .cart__checkout-button::after, .cart__ctas .cart__checkout-button::after { animation: none; content: none !important; }
+    .cflair-roast__dot { animation: none; }
+    .cflair-ship__fill { transition: none; }
+  }
+</style>
+
+<script>
+  (function () {
+    if (window.__cflair) return;
+    window.__cflair = true;
+    var cfg = document.querySelector('[data-cflair]');
+    var THRESHOLD = (parseFloat(cfg && cfg.dataset.threshold || '69') || 69) * 100;
+    var EN = ((document.documentElement.lang || '').toLowerCase().indexOf('en') === 0);
+    var T = {
+      shipLeft: EN ? 'You’re <b>{X}</b> away from free shipping' : 'Ti mancano <b>{X}</b> per la spedizione gratuita',
+      shipDone: EN ? 'Free shipping unlocked ✓' : 'Spedizione gratuita sbloccata ✓',
+      roastNext: EN ? 'We roast on Tuesdays: order by 12:00 to make the next batch ({T} left).' : 'Si tosta il martedì: ordina entro le 12 per entrare nel prossimo lotto (mancano {T}).',
+      fam: EN ? 'This order earns you <b>{P} Tomassi Family points</b>' : 'Con questo ordine guadagni <b>{P} punti Tomassi Family</b>',
+      famLink: EN ? 'How it works' : 'Come funziona',
+      famTier: EN ? ' · {M} as {T}' : ' · {M} da {T}',
+      trust1: EN ? 'Roasted to order' : 'Tostato su ordinazione',
+      trust2: EN ? 'Ships within 24h of roasting' : 'Spedito entro 24h dalla tostatura',
+      trust3: EN ? 'Secure payments' : 'Pagamenti sicuri',
+      pairKicker: EN ? 'Goes well with' : 'Sta bene con',
+      add: EN ? 'Add' : 'Aggiungi',
+      emptyTitle: EN ? 'Your cart is empty.' : 'Il carrello è vuoto.',
+      emptySub: EN ? 'The right coffee is out there. Find it.' : 'Il caffè giusto esiste. Trovalo.',
+      emptyBtn: EN ? 'Discover the coffees' : 'Scopri i caffè',
+      emptyCC: EN ? 'Or let Coffee Crush match you →' : 'Oppure fatti matchare da Coffee Crush →'
+    };
+    var PAIR = {
+      'colombia-el-vergel-bourbon-sidra-mosto': 'blend-1969',
+      'colombia-finca-el-paraiso-lychee': 'etiopia-messier-washed',
+      'colombia-zarza-bourbon-aji': 'etiopia-makhore-natural',
+      'colombia-el-diviso-typica-mejorado': 'family-blend',
+      'colombia-mikava-santuario-reserve': 'kenya-nyeri-specialty-coffee',
+      'costa-rica-las-lajas-finca-carrizal': 'colombia-zarza-bourbon-aji',
+      'kenya-nyeri-specialty-coffee': 'etiopia-messier-washed',
+      'etiopia-messier-washed': 'kenya-nyeri-specialty-coffee',
+      'family-blend': 'etiopia-makhore-natural',
+      'peru-anas-blues-washed': 'blend-futuro',
+      'etiopia-makhore-natural': 'peru-anas-blues-washed',
+      'blend-futuro': 'peru-anas-blues-washed',
+      'brasile-cerrado-mineiro-natural': 'blend-1969',
+      'blend-1969': 'brasile-cerrado-mineiro-natural',
+      'panama-hiu-los-lajones-21b': 'panama-hacienda-la-esmeralda-lino',
+      'panama-hacienda-la-esmeralda-lino': 'panama-janson-gn-474',
+      'panama-janson-gn-474': 'colombia-ombligon-floral-symphony',
+      'colombia-ombligon-floral-symphony': 'panama-hiu-los-lajones-21b'
+    };
+
+    function money(c) { return '€' + (c / 100).toFixed(2).replace('.', ','); }
+
+    /* Stesso orario di header e scheda prodotto: martedì alle 12:00, ora di Roma
+       (chiusura ordini per la tostatura del martedì). */
+    function roastText() {
+      var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome' }));
+      var add = (2 - now.getDay() + 7) % 7;
+      var t = new Date(now.getFullYear(), now.getMonth(), now.getDate() + add, 12, 0, 0);
+      if (t <= now) t = new Date(now.getFullYear(), now.getMonth(), now.getDate() + add + 7, 12, 0, 0);
+      var ms = t - now, g = Math.floor(ms / 864e5), h = Math.floor(ms % 864e5 / 36e5), m = Math.floor(ms % 36e5 / 6e4);
+      var span = (g > 0 ? g + (EN ? 'd ' : 'g ') : '') + h + 'h ' + m + 'm';
+      return T.roastNext.replace('{T}', span);
+    }
+
+    function ensure(host, cls, html, before) {
+      if (!host) return null;
+      var el = host.querySelector('.' + cls);
+      if (!el) {
+        el = document.createElement('div');
+        el.className = cls;
+        el.innerHTML = html;
+        if (before && before.parentNode === host) host.insertBefore(el, before);
+        else host.insertBefore(el, host.firstChild);
+      }
+      return el;
+    }
+
+    function buildShip(host, before) {
+      return ensure(host, 'cflair-ship', '<p class="cflair-ship__text"></p><span class="cflair-ship__track"><span class="cflair-ship__fill"></span></span>', before);
+    }
+
+    function updateShip(el, total) {
+      if (!el) return;
+      var txt = el.querySelector('.cflair-ship__text');
+      var fill = el.querySelector('.cflair-ship__fill');
+      var pct = Math.min(100, total / THRESHOLD * 100);
+      var html = total >= THRESHOLD ? T.shipDone : T.shipLeft.replace('{X}', money(THRESHOLD - total));
+      el.classList.toggle('done', total >= THRESHOLD);
+      if (txt.innerHTML !== html) txt.innerHTML = html;
+      requestAnimationFrame(function () { fill.style.width = pct + '%'; });
+    }
+
+    function buildRoast(host, before) {
+      var el = ensure(host, 'cflair-roast', '<span class="cflair-roast__dot" aria-hidden="true"></span><span class="cflair-roast__text"></span>', before);
+      if (el) { var rt = el.querySelector('.cflair-roast__text'), rv = roastText(); if (rt.textContent !== rv) rt.textContent = rv; }
+      return el;
+    }
+
+    /* Livello del cliente loggato (app Essential Loyalty): moltiplicatore punti */
+    function famTier() {
+      try {
+        var c = window.essentialLoyaltyConfig;
+        if (!c || !c.customer || !c.customer.tier) return null;
+        var t = c.customer.tier, m = t.multiplier || 1;
+        ((c.tierProgram && c.tierProgram.tiers) || []).forEach(function (x) {
+          if (String(x.id) === String(t.id) || (x.title || '').trim() === (t.title || '').trim()) m = x.multiplier || m;
+        });
+        return { m: m, t: (t.title || '').trim() };
+      } catch (e) { return null; }
+    }
+
+    /* Punti Tomassi Family: 1 punto per ogni euro speso x moltiplicatore del livello (regola Essential Loyalty) */
+    function buildFam(host, before, cart) {
+      var el = ensure(host, 'cflair-fam', '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.8l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 16.8l-5.4 2.9 1-6.1L3.2 9.3l6.1-.9L12 2.8z"/></svg><span class="cflair-fam__text"></span><a href="/pages/loyalty-program">' + T.famLink + '</a>', before);
+      if (el) { var ft = el.querySelector('.cflair-fam__text'), ti = famTier(), fv = T.fam.replace('{P}', Math.floor(cart.total_price / 100 * (ti ? ti.m : 1))) + (ti ? T.famTier.replace('{M}', String(ti.m).replace('.', EN ? '.' : ',') + '×').replace('{T}', ti.t) : ''); if (ft.innerHTML !== fv) ft.innerHTML = fv; }
+      return el;
+    }
+
+    function buildTrust(host) {
+      return ensure(host, 'cflair-trust',
+        '<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 20c0-7 4-11 11-12-1 7-5 11-11 12Z"/></svg>' + T.trust1 + '</span>' +
+        '<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg>' + T.trust2 + '</span>' +
+        '<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg>' + T.trust3 + '</span>');
+    }
+
+    function buildPair(host, cart) {
+      if (!host || !cart.items.length) return;
+      var handle = cart.items[0].handle || (cart.items[0].url || '').split('/products/')[1];
+      if (handle) handle = handle.split('?')[0];
+      var pair = PAIR[handle] || 'blend-1969';
+      if (pair === handle) pair = 'brasile-cerrado-mineiro-natural';
+      var inCart = cart.items.some(function (i) { return (i.handle || '') === pair || (i.url || '').indexOf('/products/' + pair) > -1; });
+      var old = host.querySelector('.cflair-pair');
+      if (inCart) { if (old) old.remove(); return; }
+      if (old && old.dataset.pair === pair) return;
+      if (old) old.remove();
+      fetch('/products/' + pair + '.js').then(function (r) { return r.ok ? r.json() : null; }).then(function (p) {
+        if (!p || !p.available) return;
+        var v = null;
+        for (var i = 0; i < p.variants.length; i++) if (p.variants[i].available) { v = p.variants[i]; break; }
+        if (!v) return;
+        var el = document.createElement('div');
+        el.className = 'cflair-pair';
+        el.dataset.pair = pair;
+        var img = (p.featured_image || '').replace(/(\.[a-z]+)(\?|$)/, '_160x$1$2');
+        el.innerHTML = '<p class="cflair-pair__kicker">' + T.pairKicker + '</p><div class="cflair-pair__card">' +
+          (img ? '<img class="cflair-pair__img" src="' + img + '" alt="" loading="lazy">' : '') +
+          '<div class="cflair-pair__body"><p class="cflair-pair__name">' + p.title + '</p><p class="cflair-pair__price">' + money(p.price) + '</p></div>' +
+          '<button type="button" class="cflair-pair__btn" data-vid="' + v.id + '">' + T.add + '</button></div>';
+        var f = host.querySelector('.drawer__footer');
+        if (f) host.insertBefore(el, f); else host.appendChild(el);
+      }).catch(function () {});
+    }
+
+    function buildEmpty(host) {
+      if (!host || host.querySelector('.cflair-empty')) return;
+      var el = document.createElement('div');
+      el.className = 'cflair-empty';
+      el.innerHTML = '<p class="cflair-empty__title">' + T.emptyTitle + '</p>' +
+        '<p class="cflair-empty__sub">' + T.emptySub + '</p>' +
+        '<a class="cflair-empty__btn" href="/collections/tutti-i-caffe">' + T.emptyBtn + '</a>' +
+        '<a class="cflair-empty__cc" href="/pages/coffee-crush">' + T.emptyCC + '</a>';
+      host.insertBefore(el, host.firstChild);
+    }
+
+    var busy = false;
+    function refresh() {
+      if (busy) return;
+      busy = true;
+      fetch('/cart.js').then(function (r) { return r.json(); }).then(function (cart) {
+        busy = false;
+        var drawer = document.querySelector('cart-drawer');
+        if (drawer) {
+          var inner = drawer.querySelector('.drawer__inner');
+          var emptyBox = drawer.querySelector('.cart-drawer__warnings') || drawer.querySelector('.drawer__inner-empty');
+          if (cart.item_count === 0 && emptyBox) buildEmpty(emptyBox);
+          if (cart.item_count > 0 && inner) {
+            var header = inner.querySelector('.drawer__header');
+            var ship = buildShip(inner, header ? header.nextSibling : null);
+            updateShip(ship, cart.total_price);
+            var footer = inner.querySelector('.drawer__footer');
+            if (footer) {
+              buildPair(footer.parentNode === inner ? inner : footer, cart);
+              /* ordine: pair > roast > fam > footer. Sposta solo se serve (evita loop col MutationObserver) */
+              var place = function (el, before) { if (el && before && el.nextSibling !== before) inner.insertBefore(el, before); };
+              var fam = buildFam(inner, footer, cart);
+              place(fam, footer);
+              var roast = buildRoast(inner, fam || footer);
+              place(roast, fam || footer);
+              place(inner.querySelector('.cflair-pair'), roast || fam || footer);
+              buildTrust(footer);
+            }
+          }
+        }
+        var cartFooter = document.querySelector('.cart__footer');
+        if (cartFooter && cart.item_count > 0) {
+          var ship2 = buildShip(cartFooter, cartFooter.firstChild);
+          updateShip(ship2, cart.total_price);
+          var fam2 = buildFam(cartFooter, ship2 ? ship2.nextSibling : null, cart);
+        }
+      }).catch(function () { busy = false; });
+    }
+
+    document.addEventListener('click', function (ev) {
+      var b = ev.target.closest && ev.target.closest('.cflair-pair__btn');
+      if (!b) return;
+      b.disabled = true;
+      b.textContent = '...';
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: [{ id: parseInt(b.dataset.vid, 10), quantity: 1 }], sections: 'cart-drawer' })
+      }).then(function (r) { return r.json(); }).then(function (res) {
+        var drawer = document.querySelector('cart-drawer');
+        if (drawer && res.sections && res.sections['cart-drawer']) {
+          var doc = new DOMParser().parseFromString(res.sections['cart-drawer'], 'text/html');
+          var fresh = doc.querySelector('#CartDrawer');
+          var cur = drawer.querySelector('#CartDrawer');
+          if (fresh && cur) {
+            cur.innerHTML = fresh.innerHTML;
+            var ov = drawer.querySelector('#CartDrawer-Overlay');
+            if (ov && typeof drawer.close === 'function') ov.addEventListener('click', drawer.close.bind(drawer));
+          }
+          refresh();
+        } else if (location.pathname.indexOf('/cart') === 0) {
+          location.reload();
+        } else {
+          refresh();
+        }
+      }).catch(function () { b.disabled = false; b.textContent = T.add; });
+    });
+
+    var mo = new MutationObserver(function () {
+      clearTimeout(mo._t);
+      mo._t = setTimeout(refresh, 250);
+    });
+    function arm() {
+      var d = document.querySelector('cart-drawer');
+      if (d && !d.dataset.cflair) { d.dataset.cflair = '1'; mo.observe(d, { childList: true, subtree: true }); }
+    }
+    function init() { arm(); refresh(); setInterval(function () { var r = document.querySelector('.cflair-roast__text'); if (r) r.textContent = roastText(); }, 60000); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+    document.addEventListener('shopify:section:load', function () { arm(); refresh(); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Carrello Tomassi",
+  "settings": [
+    {
+      "type": "number",
+      "id": "soglia",
+      "label": "Soglia spedizione gratuita (EUR)",
+      "default": 69
+    }
+  ]
+}
+{% endschema %}
