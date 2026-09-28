@@ -24,3 +24,16 @@ Esiste anche un tema duplicato intatto su Shopify: **"Backup prima di SEO AI (26
 ## Come tornare indietro
 - **Tutto:** pubblicare il tema "Backup prima di SEO AI (26-09-2026)", oppure ricaricare i file di `backup-pre-seo-ai/` ed eliminare `snippets/seo-ai-schema.liquid` e `templates/robots.txt.liquid`.
 - **Un solo file:** ricaricare quel file da `backup-pre-seo-ai/`.
+
+## Timer tostatura, fascia unica, soglia 69 € (28-09-2026) — PREPARATO, NON ANCORA CARICATO
+File pronti in `theme-seo-ai/`, in attesa di approvazione prima del caricamento sul tema "Copia aggiornata di Copia di Craft + Over your limits".
+Backup del tema su Shopify: **"Backup prima di timer e fascia (28-09-2026)"**.
+| File | Modifica |
+|---|---|
+| `snippets/roasting-countdown-script.liquid` (nuovo) | Logica unica del countdown: martedì ore 12:00, ora di Roma |
+| `snippets/roast-countdown-header.liquid` | Fascia unica compatta: countdown + "Spedizione gratuita da €69"; testo e pulsante nascosti sotto 990px |
+| `snippets/tomassi-roast-line.liquid` (nuovo) | Riga "Prossima tostatura" della scheda prodotto, stessa logica (sostituirà la parte `roast` di `tomassi-pdp`) |
+| `sections/header-group.json` | Barra annunci disattivata; testo soglia corretto a €69 |
+| `templates/index.json` | Hero: "Spedizione gratuita da €69" |
+
+Già applicato direttamente sui prodotti (live): metafield `custom.origine` di Blend 1969 → "Brasile · Perù · Etiopia"; descrizione El Vergel: rimossa l'affermazione errata "Sidra significa cedro".

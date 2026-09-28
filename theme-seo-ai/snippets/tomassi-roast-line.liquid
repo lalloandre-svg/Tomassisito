@@ -1,0 +1,19 @@
+{%- comment -%}
+  Tomassi — riga "prossima tostatura" della scheda prodotto.
+  Usa lo stesso <roasting-countdown> della fascia nell'header
+  (snippets/roast-countdown-header.liquid): stesso orario, martedì alle 12:00 ora di Roma.
+  Uso: {% render 'tomassi-roast-line' %}
+{%- endcomment -%}
+
+{%- assign L = request.locale.iso_code -%}
+<div class="tpdp-roast">
+  <span class="tpdp-roast__dot" aria-hidden="true"></span>
+  <roasting-countdown class="tpdp-roast__text" data-roast-day="2" data-roast-hour="12" data-lang="{{ L }}">
+    <span data-roast-counting>
+      {%- if L == 'en' -%}We roast only on Tuesdays. Next roast in{%- else -%}Si tosta solo il marted&igrave;. Prossima tostatura tra{%- endif %}
+      <span style="font-variant-numeric: tabular-nums"><span data-roast-days>--</span>{% if L == 'en' %}d{% else %}g{% endif %} <span data-roast-hours>--</span>h <span data-roast-minutes>--</span>m</span>.
+    </span>
+    <span data-roast-today hidden></span>
+  </roasting-countdown>
+</div>
+{%- render 'roasting-countdown-script' -%}

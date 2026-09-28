@@ -1,0 +1,54 @@
+{%- comment -%}
+  Tomassi — logica unica del conto alla rovescia della tostatura.
+  Definisce <roasting-countdown>: martedì alle 12:00, ora di Roma
+  (sovrascrivibile con data-roast-day / data-roast-hour).
+  Renderizzato dalla fascia dell'header e dalla riga della scheda prodotto;
+  la guardia su customElements evita doppie definizioni.
+{%- endcomment -%}
+<script>
+  (function () {
+    if (!customElements.get('roasting-countdown')) {
+      class RoastingCountdown extends HTMLElement {
+        connectedCallback() {
+          this.targetDay = parseInt(this.dataset.roastDay || '2', 10);
+          this.targetHour = parseInt(this.dataset.roastHour || '12', 10);
+          this.en = (this.dataset.lang || '').toLowerCase().indexOf('en') === 0;
+          this.counting = this.querySelector('[data-roast-counting]');
+          this.today = this.querySelector('[data-roast-today]');
+          this.elDays = this.querySelector('[data-roast-days]');
+          this.elHours = this.querySelector('[data-roast-hours]');
+          this.elMinutes = this.querySelector('[data-roast-minutes]');
+          this.elSeconds = this.querySelector('[data-roast-seconds]');
+          this.elSr = this.querySelector('[data-roast-sr]');
+          this.tick = this.tick.bind(this);
+          this.tick();
+          this.timer = setInterval(this.tick, 1000);
+        }
+        disconnectedCallback() { if (this.timer) clearInterval(this.timer); }
+        romeNow() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome' })); }
+        pad(n) { return String(n).padStart(2, '0'); }
+        tick() {
+          const now = this.romeNow();
+          const add = (this.targetDay - now.getDay() + 7) % 7;
+          let target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + add, this.targetHour, 0, 0, 0);
+          if (target <= now) target = new Date(now.getFullYear(), now.getMonth(), now.getDate() + add + 7, this.targetHour, 0, 0, 0);
+          if (this.counting) this.counting.hidden = false;
+          if (this.today) this.today.hidden = true;
+          let diff = Math.max(0, target - now);
+          const d = Math.floor(diff / 86400000); diff -= d * 86400000;
+          const h = Math.floor(diff / 3600000); diff -= h * 3600000;
+          const m = Math.floor(diff / 60000); diff -= m * 60000;
+          const s = Math.floor(diff / 1000);
+          if (this.elDays) this.elDays.textContent = this.pad(d);
+          if (this.elHours) this.elHours.textContent = this.pad(h);
+          if (this.elMinutes) this.elMinutes.textContent = this.pad(m);
+          if (this.elSeconds) this.elSeconds.textContent = this.pad(s);
+          if (this.elSr) this.elSr.textContent = this.en
+            ? ('Next roast in ' + d + ' days, ' + h + ' hours and ' + m + ' minutes.')
+            : ('Prossima tostatura tra ' + d + ' giorni, ' + h + ' ore e ' + m + ' minuti.');
+        }
+      }
+      customElements.define('roasting-countdown', RoastingCountdown);
+    }
+  })();
+</script>
