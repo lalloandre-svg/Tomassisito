@@ -15,14 +15,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Non nasce da una formula di marketing.",
+            "heading": "Una torrefazione di famiglia, ad Aprilia dal 2013.",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Nasce da una scelta controcorrente fatta ad Aprilia nel 2013.</p><p>Tomassi Specialty Coffee è una torrefazione nata dalla visione di Emanuele Tomassi e cresciuta con Andrè attraverso ricerca, tostatura artigianale, competizioni, assaggio ed educazione.</p>"
+            "text": "<p>Tomassi Specialty Coffee nasce nel 2013, quando in Italia lo specialty era ancora una scelta controcorrente.</p><p>Oggi ci lavorano due generazioni: Emanuele alla tostatrice, Andrè tra gare, ricette e assaggi.</p>"
           }
         }
       },
@@ -45,14 +45,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Emanuele. La tostatura come scelta.",
+            "heading": "Emanuele, alla tostatrice.",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Nel 2009, in Danimarca, Emanuele incontra il mondo delle micro roastery e dello specialty coffee internazionale. Da quel momento il caffè diventa origine, tostatura, studio, assaggio e relazione. Tornato in Italia, porta questa visione ad Aprilia e la trasforma in un progetto reale.</p>",
+            "text": "<p>Nel 2009, in Danimarca, Emanuele scopre le micro roastery: piccole torrefazioni che scelgono il caffè lotto per lotto e lo tostano per far sentire da dove viene. Tornato in Italia, nel 2013 apre la sua ad Aprilia.</p><p>Nel 2018 e nel 2024 vince il Campionato italiano di tostatura; ai Mondiali del 2024 arriva sesto.</p>",
             "text_style": "body"
           }
         }
@@ -82,14 +82,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Andrè. La nuova generazione.",
+            "heading": "Andrè, cresciuto accanto alla tostatrice.",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Andrè cresce osservando il padre tostare. Oggi porta Tomassicoffee nelle gare, nella selezione dei caffè, nello sviluppo delle ricette e nella divulgazione. Il suo lavoro è rendere il caffè più comprensibile senza togliere profondità.</p>",
+            "text": "<p>Andrè cresce osservando il padre tostare. Oggi segue la selezione dei caffè, le ricette e la divulgazione, e porta Tomassicoffee in gara: secondo ai Campionati italiani Ibrik nel 2025, tra i migliori ai Campionati italiani Brewers da quattro anni.</p>",
             "text_style": "body"
           }
         }
@@ -119,14 +119,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Padre e figlio sono la radice. La tazza è la promessa.",
+            "heading": "Cosa facciamo, ogni settimana.",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>La storia familiare è vera, ma non è una scorciatoia commerciale. Il motivo per scegliere Tomassicoffee è il lavoro che quella storia produce: qualità del crudo, tostatura, assaggio continuo, competenze testate in gara ed educazione.</p>"
+            "text": "<p>Assaggiamo i campioni di caffè verde e scegliamo i lotti. Li tostiamo ogni martedì, su ordinazione, e li spediamo appena tostati. Scriviamo le ricette per prepararli a casa. Quello che impariamo in gara torna nella tostatura di tutti i giorni.</p>"
           }
         }
       },
@@ -227,14 +227,15 @@
         "swipe_on_mobile": false,
         "padding_top": 48,
         "padding_bottom": 48
-      }
+      },
+      "disabled": true
     },
     "cta": {
       "type": "cta-band",
       "settings": {
         "kicker": "Dalla radice alla tazza",
         "heading": "Adesso tocca a te assaggiare.",
-        "text": "Scegli il caffè che racconta tutto questo lavoro.",
+        "text": "Parti da un blend per l’espresso o da un monorigine per il filtro.",
         "button_label": "Scegli il tuo caffè",
         "button_link": "shopify://collections/tutti-i-caffe",
         "bg_color": "#0F4A27",

@@ -19,7 +19,7 @@
         "kicker": "the competition series",
         "title_line_1": "Over",
         "title_line_2": "Your Limits",
-        "subtitle": "Lotti rari, profili fuori scala, caffè nati nel nostro mondo gara per spostare il limite del gusto.",
+        "subtitle": "Microlotti rari da Panama, Colombia e Brasile, disponibili in quantità minime. Li scegliamo con lo stesso metro che usiamo quando prepariamo una gara.",
         "cta1_label": "Scegli il tuo caffè",
         "cta1_link": "shopify://collections/over-your-limits",
         "cta2_label": "Guarda la storia",
@@ -38,19 +38,19 @@
         "pill1": {
           "type": "pill",
           "settings": {
-            "text": "Fuori scala"
+            "text": "Microlotti"
           }
         },
         "pill2": {
           "type": "pill",
           "settings": {
-            "text": "Non per tutti"
+            "text": "Quantità minime"
           }
         },
         "pill3": {
           "type": "pill",
           "settings": {
-            "text": "Pezzi da collezione"
+            "text": "Scelti con metro da gara"
           }
         }
       },
@@ -63,7 +63,7 @@
         "kicker": "The Competition Series",
         "heading": "Guarda la storia.",
         "heading_accent": "",
-        "text": "Dietro ogni lotto c'è una gara vera: assaggi, ricette, errori e medaglie. Questo è il mondo da cui nascono i caffè Over Your Limits.",
+        "text": "Questo è il nostro mondo gara: assaggi, ricette, errori e medaglie. È lì che abbiamo imparato a riconoscere i caffè che trovi in questa serie.",
         "video": "shopify://files/videos/tomassi finito.mp4",
         "audio_label": "Guarda il film",
         "audio_label_off": "Silenzia",
@@ -81,7 +81,7 @@
       "settings": {
         "kicker": "",
         "heading": "I caffè della serie",
-        "description": "<p>Lotti rari e profili estremi. Ogni caffè è un pezzo da collezione, scelto per spostare il limite.</p>",
+        "description": "<p>Pochi chili per lotto e profili molto diversi tra loro: dal floreale leggero come un tè al fruttato più succoso. Quando un lotto finisce, spesso non torna.</p>",
         "collection": "over-your-limits",
         "products_to_show": 12,
         "columns_desktop": 3,
@@ -171,7 +171,7 @@
       "settings": {
         "kicker": "Una grammatica sensoriale",
         "heading": "Impara a leggere il gusto.",
-        "intro": "<p>Ogni lotto racconta una nota dominante. Questi sono i gusti che cerchiamo nei nostri caffè fuori scala.</p>",
+        "intro": "<p>Ogni lotto racconta una nota dominante. Questi sono i gusti che cerchiamo nei caffè di questa serie.</p>",
         "columns_desktop": 3,
         "button_label": "Scopri la grammatica",
         "button_link": "shopify://pages/grammatica-sensoriale",

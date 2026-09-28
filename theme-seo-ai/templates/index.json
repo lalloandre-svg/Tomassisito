@@ -33,7 +33,7 @@
         "t4": {
           "type": "trust",
           "settings": {
-            "text": "Ricette e supporto reale"
+            "text": "Ricette per prepararlo a casa"
           }
         },
         "t5": {
@@ -52,10 +52,10 @@
       ],
       "settings": {
         "image": "shopify://shop_images/tomassi-hero-chicchi-raffreddamento.jpg",
-        "badge": "Campioni Italiani di Tostatura · 2018 & 2024",
-        "heading": "Lo specialty serio,",
-        "heading_accent": "senza prendersi sul serio.",
-        "subheading": "Caffè specialty selezionato e tostato ad Aprilia da una famiglia che gareggia. Qualità da gara, alla portata di tutti.",
+        "badge": "Campione italiano di tostatura · 2018 & 2024",
+        "heading": "Caffè specialty ad Aprilia,",
+        "heading_accent": "da prima che fosse di moda.",
+        "subheading": "Dal 2013 scegliamo e tostiamo i nostri caffè in famiglia. Alla tostatrice c’è Emanuele Tomassi, due volte campione italiano di tostatura. Per espresso, moka o filtro, in grani o già macinato.",
         "edge_label": "Est. 2013 — Aprilia",
         "button_label_1": "Scegli il tuo caffè",
         "button_link_1": "shopify://collections/tutti-i-caffe",
@@ -76,25 +76,25 @@
         "m1": {
           "type": "phrase",
           "settings": {
-            "text": "Taste the difference"
+            "text": "Tostato ad Aprilia dal 2013"
           }
         },
         "m2": {
           "type": "phrase",
           "settings": {
-            "text": "Feel the passion"
+            "text": "Tostiamo ogni martedì, su ordinazione"
           }
         },
         "m3": {
           "type": "phrase",
           "settings": {
-            "text": "Campioni 2018 & 2024"
+            "text": "Campione italiano di tostatura 2018 · 2024"
           }
         },
         "m6": {
           "type": "phrase",
           "settings": {
-            "text": "Selezionato a mano"
+            "text": "Lotti scelti all’assaggio"
           }
         }
       },
@@ -136,9 +136,9 @@
             "image": "shopify://shop_images/TOMASSI_packagin-01_5d6237a5-71bc-4bb0-b76c-f51219269467.png",
             "badge": "The Competition Series",
             "title": "Over Your Limits",
-            "description": "Lotti rari, profili fuori scala. Caffè nati per spostare il limite.",
-            "reason": "Per chi vuole qualcosa di estremo.",
-            "button_label": "Entra nel mondo gara",
+            "description": "Microlotti da Panama, Colombia e Brasile, in quantità minime: dal floreale leggero come un tè al fruttato più succoso. Molti li abbiamo scoperti preparando le gare.",
+            "reason": "Per chi vuole assaggiare qualcosa che non ha mai bevuto.",
+            "button_label": "Scopri la serie",
             "button_link": "shopify://pages/over-your-limits",
             "accent_color": "#c99a24",
             "dark": true
@@ -148,11 +148,11 @@
           "type": "path",
           "settings": {
             "image": "shopify://shop_images/tomassi-cupping-monorigine.jpg",
-            "badge": "Specialty",
-            "title": "Monorigine da esplorare",
-            "description": "Origini, processi e profili diversi, selezionati uno per uno.",
-            "reason": "Per capire davvero le origini.",
-            "button_label": "Esplora gli specialty",
+            "badge": "Monorigine",
+            "title": "Un caffè, un’origine",
+            "description": "Ogni busta viene da un’unica origine, spesso da una sola azienda agricola: dalla Colombia fruttata all’Etiopia floreale, fino al Brasile che sa di cioccolato.",
+            "reason": "Per sentire quanto cambia il caffè da una terra all’altra.",
+            "button_label": "Scopri i monorigine",
             "button_link": "shopify://collections/specialty-coffee",
             "accent_color": "#0f4a27",
             "dark": false
@@ -164,8 +164,8 @@
             "image": "shopify://shop_images/tomassi-hero-scarico-probat.jpg",
             "badge": "Blend",
             "title": "Il quotidiano, fatto bene",
-            "description": "Diretti, solidi, leggibili. Pensati per l'espresso di ogni giorno.",
-            "reason": "Per ogni giorno, senza pensieri.",
+            "description": "Miscele per l’espresso e la moka di tutti i giorni: dalla più rotonda, cioccolato e nocciola, alla più fruttata.",
+            "reason": "Per il caffè di ogni mattina, senza pensarci troppo.",
             "button_label": "Scopri i blend",
             "button_link": "shopify://collections/blend",
             "accent_color": "#5a3523",
@@ -183,7 +183,7 @@
         "kicker": "",
         "heading": "Quattro modi di",
         "heading_accent": "bere Tomassi.",
-        "subheading": "Scegli da dove partire.\nOgni linea ha un carattere preciso, nessuna sbagliata.",
+        "subheading": "Scegli da dove partire.\nTre linee di caffè, dal più rotondo al più sorprendente. Oppure lascia scegliere a noi.",
         "bg_color": "#f6eedc",
         "text_color": "#1b1814",
         "padding_top": 72,
@@ -199,16 +199,16 @@
             "prefix": "",
             "number": "2",
             "suffix": "×",
-            "label": "Campioni Italiani di Tostatura"
+            "label": "Titoli italiani di tostatura per Emanuele"
           }
         },
         "s2": {
           "type": "stat",
           "settings": {
             "prefix": "",
-            "number": "86",
-            "suffix": "+",
-            "label": "Punteggio specialty in tazza"
+            "number": "6",
+            "suffix": "°",
+            "label": "Emanuele ai Mondiali di tostatura 2024"
           }
         },
         "s3": {

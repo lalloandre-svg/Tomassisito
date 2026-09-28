@@ -108,7 +108,7 @@
           "type": "step",
           "settings": {
             "title": "Bevi meglio",
-            "text": "Ogni invio è diverso ma coerente. Nei formati grandi può capitare un doppione: vuol dire che valeva la pena."
+            "text": "Ogni mese cambiamo selezione. Con 4 o 6 buste può capitare di ricevere due buste dello stesso caffè: dipende dai lotti disponibili quel mese."
           }
         },
         "faq_1": {
@@ -176,11 +176,11 @@
         "hero_cta2_link": "#subl-come-funziona",
         "hero_note": "Da 2 buste al mese · fino al 20% di sconto dal primo invio",
         "benefits_title": "Perché abbonarsi",
-        "plans_title": "Scegli il tuo ritmo",
+        "plans_title": "Il caffè arriva ogni mese. Tu scegli come pagare.",
         "steps_title": "Come funziona",
         "faq_title": "Domande frequenti",
         "final_title": "Pronto a non rimanere più senza caffè buono?",
-        "final_text": "Tu scegli il ritmo. Noi pensiamo a selezione e tostatura.",
+        "final_text": "Tu scegli quante buste e come pagare. Noi pensiamo a selezione e tostatura.",
         "final_button_label": "Attiva il tuo abbonamento",
         "final_button_link": "/products/abbonamento-bi-settimanale",
         "bg_color": "#F6EEDC",

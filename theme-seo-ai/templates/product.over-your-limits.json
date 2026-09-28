@@ -100,7 +100,7 @@
         "trust": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div class=\"oyl-trust\">{% if request.locale.iso_code == 'en' %}<span>Off the charts</span><span>Not for everyone</span><span>Collector's lots</span>{% else %}<span>Fuori scala</span><span>Non per tutti</span><span>Pezzi da collezione</span>{% endif %}</div>"
+            "custom_liquid": "<div class=\"oyl-trust\">{% if request.locale.iso_code == 'en' %}<span>Micro-lot</span><span>Tiny quantities</span><span>Roasted to order</span>{% else %}<span>Microlotto</span><span>Quantità minime</span><span>Tostato su ordinazione</span>{% endif %}</div>"
           }
         },
         "pairing": {
@@ -154,7 +154,7 @@
     "sticky_atc": {
       "type": "sticky-atc",
       "settings": {
-        "label": "Rivendicalo",
+        "label": "Aggiungi al carrello",
         "bg_color": "#1b1814",
         "text_color": "#ffffff",
         "accent_color": "#c99a24"
