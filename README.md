@@ -25,7 +25,14 @@ Esiste anche un tema duplicato intatto su Shopify: **"Backup prima di SEO AI (26
 | `templates/page.grammatica.json` | Pagina Grammatica sensoriale rifatta in stile OYL: al posto delle 30 righe Craft su fondo chiaro ora c'è la griglia `oyl-grammatica` (fondo nero, oro) con i 30 gusti, icona = immagine del prodotto, nota breve e link al prodotto; bottone finale verso i caffè Over Your Limits |
 | `assets/oyl.css` | Newsletter del footer scura (nero/oro) sulle pagine OYL; sul resto del sito resta chiara |
 | `templates/page.contatti-2.json` | Contatti Over Your Limits: aggiunta la sezione invisibile "OYL — Stili" (serve per la newsletter scura) |
+| `sections/oyl-sentore.liquid` (nuovo) | Scheda del singolo sentore in stile OYL: icona grande su alone oro, titolo, attacco, testo, "Dove lo trovi in tazza" (caffè OYL che citano il sentore), link a grammatica e caffè |
+| `templates/product.grammatica.json` | Usa `oyl-sentore` al posto della scheda prodotto Craft (tolto anche il blocco "Torna allo shop" / "Etichetta pulsante") |
+| `assets/gram-*.webp` (nuovi) | Icone dei nuovi sentori (Violetta, Uva viola, Uva verde, Timo, Nib di cacao), scontornate; copiate anche in Shopify Files |
 
 ## Come tornare indietro
 - **Tutto:** pubblicare il tema "Backup prima di SEO AI (26-09-2026)", oppure ricaricare i file di `backup-pre-seo-ai/` ed eliminare `snippets/seo-ai-schema.liquid` e `templates/robots.txt.liquid`.
 - **Un solo file:** ricaricare quel file da `backup-pre-seo-ai/`.
+
+## Modifiche ai prodotti (dati del negozio, valgono anche sul tema live)
+- Nuovi prodotti sentore (Non in elenco, template `grammatica`, collezione Grammatica): Violetta, Uva viola, Uva verde, Timo, Nib di cacao.
+- Handle corretti con reindirizzamento dal vecchio URL: ciliegia-copia→mirtillo, lampone-copia→melone, miele-copia→fragola, melone-copia→rosa, fragola-copia→lampone, mirtillo-copia→miele, rosa-copia→camomilla, camomilla-copia→sciroppo, sciroppo-copia→rosa-nera, lemongrass-copia→bubblegum, caramello→prugna.

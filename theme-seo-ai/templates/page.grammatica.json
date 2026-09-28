@@ -23,7 +23,7 @@
             "title": "Mirtillo",
             "text": "Dolce e vinoso, come il bosco dopo la pioggia.",
             "link_label": "Scopri di più",
-            "link": "shopify://products/ciliegia-copia"
+            "link": "shopify://products/mirtillo"
           }
         },
         "flavor_02": {
@@ -43,7 +43,7 @@
             "title": "Melone",
             "text": "Polpa matura, dolcezza rotonda.",
             "link_label": "Scopri di più",
-            "link": "shopify://products/lampone-copia"
+            "link": "shopify://products/melone"
           }
         },
         "flavor_04": {
@@ -53,7 +53,7 @@
             "title": "Fragola",
             "text": "La dolcezza immediata della frutta matura.",
             "link_label": "Scopri di più",
-            "link": "shopify://products/miele-copia"
+            "link": "shopify://products/fragola"
           }
         },
         "flavor_05": {
@@ -63,7 +63,7 @@
             "title": "Rosa",
             "text": "Petali freschi, profumo persistente.",
             "link_label": "Scopri di più",
-            "link": "shopify://products/melone-copia"
+            "link": "shopify://products/rosa"
           }
         },
         "flavor_06": {
@@ -73,7 +73,7 @@
             "title": "Lampone",
             "text": "Freschezza rossa e brillante.",
             "link_label": "Scopri di più",
-            "link": "shopify://products/fragola-copia"
+            "link": "shopify://products/lampone"
           }
         },
         "flavor_07": {
@@ -93,7 +93,7 @@
             "title": "Miele",
             "text": "Dolce, morbido e vellutato.",
             "link_label": "Scopri di più",
-            "link": "shopify://products/mirtillo-copia"
+            "link": "shopify://products/miele"
           }
         },
         "flavor_09": {
@@ -113,7 +113,7 @@
             "title": "Camomilla",
             "text": "Floreale, dolce e rilassante.",
             "link_label": "Scopri di più",
-            "link": "shopify://products/rosa-copia"
+            "link": "shopify://products/camomilla"
           }
         },
         "flavor_11": {
@@ -123,7 +123,7 @@
             "title": "Sciroppo",
             "text": "Zucchero fuso, corpo avvolgente.",
             "link_label": "Scopri di più",
-            "link": "shopify://products/camomilla-copia"
+            "link": "shopify://products/sciroppo"
           }
         },
         "flavor_12": {
@@ -133,7 +133,7 @@
             "title": "Rosa nera",
             "text": "Floreale e speziata, elegante e intensa.",
             "link_label": "Scopri di più",
-            "link": "shopify://products/sciroppo-copia"
+            "link": "shopify://products/rosa-nera"
           }
         },
         "flavor_13": {
@@ -153,7 +153,7 @@
             "title": "Prugna",
             "text": "Frutto scuro, dolcezza profonda.",
             "link_label": "Scopri di più",
-            "link": "shopify://products/caramello"
+            "link": "shopify://products/prugna"
           }
         },
         "flavor_15": {
@@ -163,7 +163,7 @@
             "title": "Bubblegum",
             "text": "Caramella e frutta tropicale.",
             "link_label": "Scopri di più",
-            "link": "shopify://products/lemongrass-copia"
+            "link": "shopify://products/bubblegum"
           }
         },
         "flavor_16": {
@@ -315,6 +315,56 @@
             "link_label": "Scopri di più",
             "link": "shopify://products/frutto-della-passione"
           }
+        },
+        "flavor_31": {
+          "type": "flavor",
+          "settings": {
+            "image": "shopify://shop_images/gram-violetta.webp",
+            "title": "Violetta",
+            "text": "Petali viola, dolcezza cipriata.",
+            "link_label": "Scopri di più",
+            "link": "shopify://products/violetta"
+          }
+        },
+        "flavor_32": {
+          "type": "flavor",
+          "settings": {
+            "image": "shopify://shop_images/gram-uva-viola.webp",
+            "title": "Uva viola",
+            "text": "Succo scuro, dolcezza vinosa.",
+            "link_label": "Scopri di più",
+            "link": "shopify://products/uva-viola"
+          }
+        },
+        "flavor_33": {
+          "type": "flavor",
+          "settings": {
+            "image": "shopify://shop_images/gram-uva-verde.webp",
+            "title": "Uva verde",
+            "text": "Acino croccante, acidità brillante.",
+            "link_label": "Scopri di più",
+            "link": "shopify://products/uva-verde"
+          }
+        },
+        "flavor_34": {
+          "type": "flavor",
+          "settings": {
+            "image": "shopify://shop_images/gram-timo.webp",
+            "title": "Timo",
+            "text": "Erba aromatica, nota balsamica.",
+            "link_label": "Scopri di più",
+            "link": "shopify://products/timo"
+          }
+        },
+        "flavor_35": {
+          "type": "flavor",
+          "settings": {
+            "image": "shopify://shop_images/gram-nib-di-cacao.webp",
+            "title": "Nib di cacao",
+            "text": "Cacao tostato, amaro elegante.",
+            "link_label": "Scopri di più",
+            "link": "shopify://products/nib-di-cacao"
+          }
         }
       },
       "block_order": [
@@ -347,7 +397,12 @@
         "flavor_27",
         "flavor_28",
         "flavor_29",
-        "flavor_30"
+        "flavor_30",
+        "flavor_31",
+        "flavor_32",
+        "flavor_33",
+        "flavor_34",
+        "flavor_35"
       ],
       "settings": {
         "kicker": "Grammatica sensoriale",

@@ -1,0 +1,223 @@
+{%- comment -%}
+  Tomassi — OYL · Scheda sentore (template product.grammatica).
+  Sostituisce la scheda prodotto Dawn per i prodotti "sentore" della Grammatica sensoriale:
+  icona grande su alone oro, titolo, attacco (primo paragrafo), testo, caffè OYL che
+  contengono il sentore (ricerca nel testo dei prodotti della collezione scelta), link di ritorno.
+  Palette OYL: nero #1B1814 · panna #F6EEDC · oro #C99A24.
+{%- endcomment -%}
+
+{%- liquid
+  assign en = false
+  if request.locale.iso_code == 'en'
+    assign en = true
+  endif
+
+  assign paragraphs = product.description | split: '</p>'
+  assign lead = paragraphs | first | strip_html | strip
+  assign body = ''
+  for p in paragraphs offset: 1
+    assign p_clean = p | strip
+    if p_clean != blank
+      assign body = body | append: p_clean | append: '</p>'
+    endif
+  endfor
+
+  assign needle = product.title | downcase | replace: '’', "'"
+  assign needle_w = ' ' | append: needle | append: ' '
+  assign coll = section.settings.collection
+  assign matches = 0
+-%}
+
+{%- style -%}
+  #OylSent-{{ section.id }} {
+    --os-bg: {{ section.settings.bg_color }};
+    --os-fg: {{ section.settings.text_color }};
+    --os-acc: {{ section.settings.accent_color }};
+    --os-line: rgba(201, 154, 36, 0.3);
+    background: var(--os-bg);
+    color: var(--os-fg);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding-block: clamp(4rem, 2rem + 5vw, 8rem);
+  }
+  #OylSent-{{ section.id }} *, #OylSent-{{ section.id }} *::before, #OylSent-{{ section.id }} *::after { box-sizing: border-box; }
+  #OylSent-{{ section.id }} .os-wrap { position: relative; z-index: 1; width: 100%; max-width: 120rem; margin-inline: auto; padding-inline: clamp(1.6rem, 1rem + 3vw, 4rem); }
+
+  /* Hero: icona + testo */
+  #OylSent-{{ section.id }} .os-hero { display: grid; gap: clamp(3rem, 1rem + 5vw, 7rem); align-items: center; }
+  @media screen and (min-width: 750px) { #OylSent-{{ section.id }} .os-hero { grid-template-columns: 0.9fr 1.1fr; } }
+
+  #OylSent-{{ section.id }} .os-media {
+    position: relative; aspect-ratio: 1 / 1; border-radius: 24px; border: 1px solid var(--os-line);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+    background: radial-gradient(90% 90% at 50% 40%, color-mix(in srgb, var(--os-acc) 22%, transparent), color-mix(in srgb, var(--os-fg) 3%, transparent) 70%);
+  }
+  #OylSent-{{ section.id }} .os-media::after {
+    content: ""; position: absolute; inset: auto 18% 10% 18%; height: 8%; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(0, 0, 0, 0.45), transparent); filter: blur(6px);
+  }
+  #OylSent-{{ section.id }} .os-img {
+    position: relative; z-index: 1; width: 70%; height: 70%; object-fit: contain; display: block;
+    animation: os-float 7s ease-in-out infinite;
+  }
+  @keyframes os-float { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+
+  #OylSent-{{ section.id }} .os-kicker {
+    display: inline-flex; align-items: center; gap: 1rem; margin: 0 0 1.6rem;
+    font-size: 1.3rem; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600;
+    color: var(--os-acc); text-decoration: none;
+  }
+  #OylSent-{{ section.id }} .os-kicker:hover { text-decoration: underline; text-underline-offset: 0.4rem; }
+  #OylSent-{{ section.id }} .os-title {
+    margin: 0; font-size: clamp(4rem, 2.4rem + 5vw, 7.2rem); line-height: 0.95; letter-spacing: -0.02em; color: var(--os-acc);
+  }
+  #OylSent-{{ section.id }} .os-lead {
+    margin: 2.4rem 0 0; max-width: 34ch; font-size: clamp(2rem, 1.6rem + 1vw, 2.6rem); line-height: 1.3; font-weight: 600; color: var(--os-fg);
+  }
+  #OylSent-{{ section.id }} .os-body { margin-top: 2.4rem; max-width: 60ch; }
+  #OylSent-{{ section.id }} .os-body p {
+    margin: 0 0 1.4rem; font-size: clamp(1.5rem, 1.35rem + 0.3vw, 1.7rem); line-height: 1.7;
+    color: color-mix(in srgb, var(--os-fg) 82%, transparent);
+  }
+  #OylSent-{{ section.id }} .os-body p:last-child {
+    margin-top: 2.4rem; padding-left: 1.6rem; border-left: 2px solid var(--os-acc);
+    color: var(--os-fg); font-style: italic;
+  }
+  #OylSent-{{ section.id }} .os-body meta { display: none; }
+
+  /* Caffè che lo contengono */
+  #OylSent-{{ section.id }} .os-coffees { margin-top: clamp(5rem, 3rem + 4vw, 8rem); padding-top: clamp(3rem, 2rem + 2vw, 4.8rem); border-top: 1px solid var(--os-line); }
+  #OylSent-{{ section.id }} .os-h2 { margin: 0 0 2.4rem; font-size: clamp(2.2rem, 1.8rem + 1.4vw, 3.2rem); line-height: 1.1; color: var(--os-fg); }
+  #OylSent-{{ section.id }} .os-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.6rem; grid-template-columns: 1fr; }
+  @media screen and (min-width: 750px) { #OylSent-{{ section.id }} .os-grid { grid-template-columns: repeat(3, 1fr); } }
+  #OylSent-{{ section.id }} .os-card {
+    display: flex; align-items: center; gap: 1.6rem; padding: 1.4rem; height: 100%;
+    border: 1px solid var(--os-line); border-radius: 16px; text-decoration: none; color: inherit;
+    background: color-mix(in srgb, var(--os-fg) 4%, transparent);
+    transition: transform 0.35s cubic-bezier(0.2, 1, 0.3, 1), border-color 0.35s ease;
+  }
+  #OylSent-{{ section.id }} .os-card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--os-acc) 60%, transparent); }
+  #OylSent-{{ section.id }} .os-card__img { width: 7.2rem; height: 7.2rem; flex: none; border-radius: 10px; object-fit: cover; display: block; }
+  #OylSent-{{ section.id }} .os-card__origin { display: block; font-size: 1.1rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--os-acc); }
+  #OylSent-{{ section.id }} .os-card__title { display: block; margin-top: 0.4rem; font-size: 1.6rem; line-height: 1.25; font-weight: 700; }
+  #OylSent-{{ section.id }} .os-card__price { display: block; margin-top: 0.4rem; font-size: 1.35rem; opacity: 0.75; }
+
+  /* Link finali */
+  #OylSent-{{ section.id }} .os-foot { margin-top: clamp(4rem, 3rem + 2vw, 6rem); display: flex; flex-wrap: wrap; gap: 1.2rem; }
+  #OylSent-{{ section.id }} .os-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem; min-height: 4.8rem; padding: 1.2rem 2.8rem;
+    border-radius: 999px; font-size: 1.45rem; font-weight: 700; text-decoration: none; line-height: 1.2;
+    transition: transform 0.18s ease-out, box-shadow 0.2s ease;
+  }
+  #OylSent-{{ section.id }} .os-btn--gold { background: var(--os-acc); color: #1B1814; }
+  #OylSent-{{ section.id }} .os-btn--gold:hover { box-shadow: 0 12px 32px -6px color-mix(in srgb, var(--os-acc) 60%, transparent); }
+  #OylSent-{{ section.id }} .os-btn--ghost { color: var(--os-fg); border: 1.5px solid color-mix(in srgb, var(--os-fg) 40%, transparent); }
+  #OylSent-{{ section.id }} .os-btn:hover { transform: translateY(-2px); }
+  #OylSent-{{ section.id }} .os-btn:focus-visible, #OylSent-{{ section.id }} .os-card:focus-visible, #OylSent-{{ section.id }} .os-kicker:focus-visible { outline: 3px solid var(--os-acc); outline-offset: 3px; }
+
+  #OylSent-{{ section.id }} .os-glow {
+    position: absolute; z-index: 0; top: -12%; left: -10%; width: 56rem; height: 56rem; border-radius: 50%;
+    pointer-events: none; filter: blur(80px); opacity: 0.22;
+    background: radial-gradient(circle, color-mix(in srgb, var(--os-acc) 55%, transparent), transparent 70%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #OylSent-{{ section.id }} .os-img { animation: none; }
+    #OylSent-{{ section.id }} .os-card, #OylSent-{{ section.id }} .os-btn { transition: none; }
+    #OylSent-{{ section.id }} .os-card:hover, #OylSent-{{ section.id }} .os-btn:hover { transform: none; }
+  }
+{%- endstyle -%}
+
+<section id="OylSent-{{ section.id }}" class="oyl-sentore" aria-labelledby="OylSentTitle-{{ section.id }}">
+  <span class="os-glow" aria-hidden="true"></span>
+  <div class="os-wrap">
+    <div class="os-hero">
+      <div class="os-media">
+        {%- if product.featured_image -%}
+          {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '450, 700, 900', sizes: '(min-width: 750px) 40vw, 90vw', class: 'os-img', alt: product.title }}
+        {%- endif -%}
+      </div>
+
+      <div class="os-text">
+        <a class="os-kicker" href="{{ section.settings.back_link | default: '/pages/grammatica-sensoriale' }}">
+          {%- if en -%}Sensory grammar{%- else -%}Grammatica sensoriale{%- endif -%}
+        </a>
+        <h1 class="os-title" id="OylSentTitle-{{ section.id }}">{{ product.title | escape }}</h1>
+        {%- if lead != blank -%}
+          <p class="os-lead">{{ lead }}</p>
+        {%- endif -%}
+        {%- if body != blank -%}
+          <div class="os-body">{{ body }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if coll != blank and coll.products_count > 0 -%}
+      {%- capture cards -%}
+        {%- for c in coll.products limit: 50 -%}
+          {%- liquid
+            assign hay = c.description | append: ' ' | append: c.metafields.custom.in_tazza | strip_html | strip_newlines | downcase
+            assign hay = hay | replace: ',', ' ' | replace: '.', ' ' | replace: ':', ' ' | replace: ';', ' ' | replace: '(', ' ' | replace: ')', ' ' | replace: '/', ' ' | replace: '–', ' ' | replace: '—', ' ' | replace: '’', "'"
+            assign hay = ' ' | append: hay | append: ' '
+          -%}
+          {%- if hay contains needle_w and matches < 6 -%}
+            {%- assign matches = matches | plus: 1 -%}
+            <li>
+              <a class="os-card" href="{{ c.url }}">
+                {%- if c.featured_image -%}
+                  {{ c.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', class: 'os-card__img', alt: c.title }}
+                {%- endif -%}
+                <span>
+                  {%- assign origine = c.metafields.custom.origine -%}
+                  {%- if origine != blank -%}<span class="os-card__origin">{{ origine | escape }}</span>{%- endif -%}
+                  <span class="os-card__title">{{ c.title | escape }}</span>
+                  <span class="os-card__price">{{ c.price | money }}</span>
+                </span>
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- if matches > 0 -%}
+        <div class="os-coffees">
+          <h2 class="os-h2">
+            {%- if en -%}Where you’ll find it in the cup{%- else -%}Dove lo trovi in tazza{%- endif -%}
+          </h2>
+          <ul class="os-grid" role="list">{{ cards }}</ul>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="os-foot">
+      <a class="os-btn os-btn--ghost" href="{{ section.settings.back_link | default: '/pages/grammatica-sensoriale' }}">
+        <span aria-hidden="true">&larr;</span>
+        {%- if en -%}Back to the grammar{%- else -%}Torna alla grammatica{%- endif -%}
+      </a>
+      {%- if coll != blank -%}
+        <a class="os-btn os-btn--gold" href="{{ coll.url }}">
+          {%- if en -%}Explore the competition coffees{%- else -%}Esplora i caffè competition{%- endif -%}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "OYL — Scheda sentore",
+  "tag": "div",
+  "class": "section section--oyl-sentore",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Caffè in cui cercare il sentore" },
+    { "type": "url", "id": "back_link", "label": "Link \"Torna alla grammatica\"" },
+    { "type": "header", "content": "Colori OYL" },
+    { "type": "color", "id": "bg_color", "label": "Sfondo", "default": "#1B1814" },
+    { "type": "color", "id": "text_color", "label": "Testo", "default": "#FFFFFF" },
+    { "type": "color", "id": "accent_color", "label": "Accento (oro)", "default": "#C99A24" }
+  ],
+  "presets": [
+    { "name": "OYL — Scheda sentore" }
+  ]
+}
+{% endschema %}

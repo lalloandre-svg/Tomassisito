@@ -1,0 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "oyl_styles": {
+      "type": "oyl-styles",
+      "settings": {}
+    },
+    "oyl_sentore": {
+      "type": "oyl-sentore",
+      "settings": {
+        "collection": "over-your-limits",
+        "back_link": "shopify://pages/grammatica-sensoriale",
+        "bg_color": "#1b1814",
+        "text_color": "#ffffff",
+        "accent_color": "#c99a24"
+      }
+    }
+  },
+  "order": [
+    "oyl_styles",
+    "oyl_sentore"
+  ]
+}
