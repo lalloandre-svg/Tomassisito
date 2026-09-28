@@ -1,0 +1,198 @@
+{%- comment -%}
+  Tomassi — traduzione EN "di pagina" per la copy salvata nelle impostazioni del tema
+  (sezioni standard Craft, footer, barra annunci, landing Abbonamento, Chi siamo, B2B…).
+  Richiamato SOLO su /en da layout/theme.liquid: sostituisce le frasi italiane nell'HTML già renderizzato.
+  Parametri: html (stringa), scope ('header' | 'footer' | 'c_<template>[_<suffisso>]').
+  Formato coppie: ITALIANO¦ENGLISH separate da §. In italiano non viene mai eseguito.
+  Nota: le traduzioni native (Translate & Adapt) funzionano solo sul tema pubblicato;
+  dopo la pubblicazione questo dizionario resta innocuo (se il testo è già inglese non trova nulla).
+{%- endcomment -%}
+{%- assign pairs = '' -%}
+{%- case scope -%}
+  {%- when 'header' -%}
+{%- capture pairs -%}
+Tostiamo solo su richiesta, ogni martedì, per garantirvi sempre un caffè il più fresco possibile¦We roast only to order, every Tuesday, so your coffee is always as fresh as it gets§
+Chi siamo¦About us
+{%- endcapture -%}
+  {%- when 'footer' -%}
+{%- capture pairs -%}
+Micro torrefazione specialty ad Aprilia dal 2013. Tostiamo su ordinazione ogni martedì.¦Specialty micro-roastery in Aprilia since 2013. We roast to order every Tuesday.§
+Entra nella Tomassi Family¦Join the Tomassi Family§
+Coffee Crush: trova il tuo caffè¦Coffee Crush: find your coffee§
+>Tutti i caffè<¦>All coffees<§
+>Abbonamento<¦>Subscription<§
+>Gestisci abbonamento<¦>Manage subscription<§
+>Aiuto<¦>Help<§
+>Contatti<¦>Contact<§
+>Spedizioni<¦>Shipping<§
+>Pagamenti<¦>Payments<§
+>Bar e ristorazione<¦>Cafés &amp; restaurants<§
+>Campioni del caffè<¦>Coffee champions<§
+>Entra nel team<¦>Join the team<§
+>Trasparenza<¦>Transparency<§
+>Progetto UE — FESR<¦>EU project — ERDF<§
+>Articolo UE — FESR<¦>EU article — ERDF<
+{%- endcapture -%}
+  {%- when 'c_index' -%}
+{%- capture pairs -%}
+Impara a bere meglio, senza complicarti la vita.¦Learn to drink better, without overcomplicating it.
+{%- endcapture -%}
+  {%- when 'c_product' -%}
+{%- capture pairs -%}
+Condividi¦Share
+{%- endcapture -%}
+  {%- when 'c_blog' -%}
+{%- capture pairs -%}
+Dalla teoria alla tazza¦From theory to cup§
+Adesso provalo davvero.¦Now try it for real.§
+Scegli un caffè e mettilo alla prova con quello che hai appena letto.¦Pick a coffee and put what you just read to the test.
+{%- endcapture -%}
+  {%- when 'c_page_forms---wholesale' -%}
+{%- capture pairs -%}
+Ingrosso¦Wholesale
+{%- endcapture -%}
+  {%- when 'c_page_chi-siamo' -%}
+{%- capture pairs -%}
+Non nasce da una formula di marketing.¦It didn’t start as a marketing formula.§
+Nasce da una scelta controcorrente fatta ad Aprilia nel 2013.¦It started with a contrarian choice, made in Aprilia in 2013.§
+Tomassi Specialty Coffee è una torrefazione nata dalla visione di Emanuele Tomassi e cresciuta con Andrè attraverso ricerca, tostatura artigianale, competizioni, assaggio ed educazione.¦Tomassi Specialty Coffee is a roastery born from Emanuele Tomassi’s vision and grown with Andrè through research, craft roasting, competitions, cupping and education.§
+Emanuele. La tostatura come scelta.¦Emanuele. Roasting as a choice.§
+Nel 2009, in Danimarca, Emanuele incontra il mondo delle micro roastery e dello specialty coffee internazionale. Da quel momento il caffè diventa origine, tostatura, studio, assaggio e relazione. Tornato in Italia, porta questa visione ad Aprilia e la trasforma in un progetto reale.¦In 2009, in Denmark, Emanuele discovers the world of micro-roasteries and international specialty coffee. From then on, coffee means origin, roasting, study, cupping and relationships. Back in Italy, he brings that vision to Aprilia and turns it into something real.§
+Andrè. La nuova generazione.¦Andrè. The new generation.§
+Andrè cresce osservando il padre tostare. Oggi porta Tomassicoffee nelle gare, nella selezione dei caffè, nello sviluppo delle ricette e nella divulgazione. Il suo lavoro è rendere il caffè più comprensibile senza togliere profondità.¦Andrè grew up watching his father roast. Today he takes Tomassicoffee into competitions, coffee selection, recipe development and education. His job is to make coffee easier to understand without taking away its depth.§
+Padre e figlio sono la radice. La tazza è la promessa.¦Father and son are the roots. The cup is the promise.§
+La storia familiare è vera, ma non è una scorciatoia commerciale. Il motivo per scegliere Tomassicoffee è il lavoro che quella storia produce: qualità del crudo, tostatura, assaggio continuo, competenze testate in gara ed educazione.¦The family story is real, but it’s not a sales shortcut. The reason to choose Tomassicoffee is the work that story produces: green coffee quality, roasting, constant cupping, skills tested in competition, and education.§
+I nostri valori¦Our values§
+>Artigianalità<¦>Craft<§
+Mani, tempo e attenzione su ogni lotto.¦Hands, time and care on every lot.§
+>Ricerca<¦>Research<§
+Origini, processi e profili, sempre in studio.¦Origins, processes and profiles, always under study.§
+>Tecnica<¦>Technique<§
+Tostatura ed estrazione misurate, non a caso.¦Roasting and extraction by measure, not by chance.§
+>Educazione<¦>Education<§
+Rendere il caffè comprensibile, senza togliere profondità.¦Making coffee understandable, without losing depth.§
+>Competizione<¦>Competition<§
+Competenze testate in gara, riportate in tazza.¦Skills tested in competition, brought back to the cup.§
+>Relazione<¦>Relationships<§
+Rapporto diretto con chi coltiva e con chi beve.¦A direct line to those who grow it and those who drink it.§
+>Leggerezza<¦>Lightness<§
+Qualità seria, tono leggero, zero posa.¦Serious quality, light tone, zero posing.§
+>Famiglia<¦>Family<§
+La radice da cui nasce tutto il resto.¦The roots everything else grows from.§
+Dalla radice alla tazza¦From roots to cup§
+Adesso tocca a te assaggiare.¦Now it’s your turn to taste.§
+Scegli il caffè che racconta tutto questo lavoro.¦Choose the coffee that tells all this work.
+{%- endcapture -%}
+  {%- when 'c_page_b2b' -%}
+{%- capture pairs -%}
+Porta Tomassicoffee nel tuo locale.¦Bring Tomassicoffee to your venue.§
+Caffè specialty, blend per espresso, formazione, ricette e supporto reale da una torrefazione che lavora ogni settimana sul prodotto.¦Specialty coffee, espresso blends, training, recipes and real support from a roastery that works on the product every week.§
+>Richiedi una consulenza<¦>Book a consultation<§
+>Richiedi sample<¦>Request samples<§
+Per chi è¦Who it’s for§
+Espresso solido e costante, ricette pronte.¦Solid, consistent espresso, recipes ready to go.§
+Caffè che regge accanto a lievitati e dolci.¦Coffee that holds its own next to pastries and cakes.§
+>Ristoranti<¦>Restaurants<§
+Chiusura pasto all'altezza della cucina.¦A finish to the meal that matches the kitchen.§
+Colazione e camera, qualità sempre uguale.¦Breakfast or room service, the same quality every time.§
+>Uffici<¦>Offices<§
+Caffè buono anche fuori dal bar.¦Good coffee, even away from the bar.§
+>Rivenditori<¦>Retailers<§
+Una torrefazione vera con cui costruire.¦A real roastery to build with.§
+Cosa offriamo¦What we offer§
+Caffè per espresso¦Espresso coffee§
+Grani per bar, costanti e leggibili.¦Beans for bars, consistent and easy to read.§
+Caffè per filtro¦Filter coffee§
+Monorigine per chi vuole esplorare.¦Single origins for those who want to explore.§
+Blend dedicati¦Custom blends§
+Costruiti sul tuo locale e sulla tua macchina.¦Built around your venue and your machine.§
+Formazione staff¦Staff training§
+Estrazione, ricette, gusto: il tuo team cresce.¦Extraction, recipes, taste: your team grows.§
+Supporto ricette¦Recipe support§
+Macinatura ed estrazione tarate con te.¦Grind and extraction dialled in with you.§
+>Tostatura su ordinazione<¦>Roasted to order<§
+Contatto diretto con la torrefazione.¦Direct contact with the roastery.§
+Come lavoriamo insieme¦How we work together§
+1 · Ci racconti il locale¦1 · Tell us about your venue§
+Capiamo come lavori e cosa servi.¦We learn how you work and what you serve.§
+2 · Scegliamo il caffè¦2 · We choose the coffee§
+Ti aiutiamo a trovare il profilo giusto.¦We help you find the right profile.§
+3 · Sample o proposta¦3 · Samples or proposal§
+Provi in tazza prima di decidere.¦You taste it in the cup before deciding.§
+4 · Ricette e metodo¦4 · Recipes and method§
+Tariamo estrazione e formiamo lo staff.¦We dial in extraction and train your staff.§
+5 · Servi Tomassi¦5 · Serve Tomassi§
+E continuiamo a seguirti, settimana dopo settimana.¦And we keep supporting you, week after week.§
+Non vendiamo solo sacchi di caffè.¦We don’t just sell bags of coffee.§
+Costruiamo un modo più serio, semplice e sostenibile di servirlo. Parliamone.¦We build a more serious, simpler and more sustainable way to serve it. Let’s talk.§
+>Scrivici ora<¦>Write to us now<
+{%- endcapture -%}
+  {%- when 'c_page_abbonamento' -%}
+{%- capture pairs -%}
+Abbonamento Tomassi¦Tomassi Subscription§
+Caffè specialty scelto da noi, a casa tua ogni mese.¦Specialty coffee chosen by us, at your door every month.§
+Scegli tostatura, formato e quante buste ricevere. Noi selezioniamo i lotti che ci convincono in tazza e te li spediamo freschi. Meno pensieri, più tazze buone.¦Choose the roast, the format and how many bags you get. We pick the lots that win us over in the cup and ship them to you fresh. Less thinking, more good cups.§
+Scegli il tuo piano¦Choose your plan§
+Scopri come funziona¦See how it works§
+Da 2 buste al mese · fino al 20% di sconto dal primo invio¦From 2 bags a month · up to 20% off from the first delivery§
+Perché abbonarsi¦Why subscribe§
+Fresco davvero¦Truly fresh§
+Tostiamo su ordinazione: il caffè non resta fermo in magazzino ad aspettarti.¦We roast to order: your coffee never sits in a warehouse waiting for you.§
+Scelto da noi¦Chosen by us§
+Ogni mese selezioniamo lotti 100% Arabica per stagione, origine e processo. Classici o più spinti, sempre tracciabili.¦Every month we select 100% Arabica lots by season, origin and process. Classic or more daring, always traceable.§
+Fatto a modo tuo¦Your way§
+Tostatura chiara o media, in grani o macinato per espresso, moka o filtro. 2, 4 o 6 buste da 250 g.¦Light or medium roast, whole beans or ground for espresso, moka or filter. 2, 4 or 6 bags of 250 g.§
+Lo sconto cresce¦The discount grows§
+Dal 10 al 20% di sconto dal primo invio. Dal secondo anno sale fino al 25%.¦10 to 20% off from the first delivery. From the second year it rises to 25%.§
+Ricette incluse¦Recipes included§
+Ti aiutiamo a estrarre meglio, con consigli semplici e utili.¦We help you brew better, with simple, useful tips.§
+Scegli il tuo ritmo¦Choose your rhythm§
+>Mensile<¦>Monthly<§
+10% di sconto¦10% off§
+Paghi ogni mese, ricevi ogni mese. Dal 13° mese lo sconto sale al 15%. Impegno minimo: 3 mesi.¦Pay monthly, receive monthly. From month 13 the discount rises to 15%. Minimum commitment: 3 months.§
+Scegli mensile¦Choose monthly§
+>Consigliato<¦>Recommended<§
+>Trimestrale<¦>Quarterly<§
+15% di sconto¦15% off§
+Paghi ogni 3 mesi, ricevi ogni mese. Dal secondo anno lo sconto sale al 20%. Impegno minimo: 6 mesi.¦Pay every 3 months, receive monthly. From the second year the discount rises to 20%. Minimum commitment: 6 months.§
+Scegli trimestrale¦Choose quarterly§
+>Semestrale<¦>Six-monthly<§
+20% di sconto¦20% off§
+Paghi ogni 6 mesi, ricevi ogni mese. Dal secondo anno lo sconto sale al 25%. Impegno minimo: 6 mesi.¦Pay every 6 months, receive monthly. From the second year the discount rises to 25%. Minimum commitment: 6 months.§
+Scegli semestrale¦Choose six-monthly§
+>Come funziona<¦>How it works<§
+Tostatura, formato, numero di buste e ogni quanto pagare.¦Roast, format, number of bags and how often to pay.§
+>Selezioniamo<¦>We select<§
+>Scegli<¦>Choose<§
+Scegliamo i lotti del mese in base a stagione, origini e profili che ci convincono in tazza.¦We pick the month’s lots by season, origin and the profiles that win us over in the cup.§
+Spediamo il 28¦We ship on the 28th§
+Se ti abboni entro il 25 spediamo il 28 del mese. Dopo il 25, il primo invio parte il 28 del mese successivo.¦Subscribe by the 25th and we ship on the 28th. After the 25th, your first delivery ships on the 28th of the following month.§
+Bevi meglio¦Drink better§
+Ogni invio è diverso ma coerente. Nei formati grandi può capitare un doppione: vuol dire che valeva la pena.¦Every delivery is different but consistent. In larger formats you might get a repeat: that means it was worth it.§
+Domande frequenti¦Frequently asked questions§
+Posso modificare, saltare o annullare?¦Can I change, skip or cancel?§
+Sì, dopo l’impegno minimo: 3 invii consecutivi con il piano mensile, 2 pagamenti con il trimestrale, 1 con il semestrale. Poi gestisci tutto dalla pagina Gestisci abbonamento.¦Yes, after the minimum commitment: 3 consecutive deliveries on the monthly plan, 2 payments on the quarterly, 1 on the six-monthly. Then you manage everything from the Manage subscription page.§
+Quando arriva il caffè?¦When does the coffee arrive?§
+Se ti abboni entro il 25 del mese spediamo il 28 (se non è festivo). Dal 25 in poi il primo invio parte il 28 del mese successivo.¦Subscribe by the 25th and we ship on the 28th (unless it’s a public holiday). From the 25th on, your first delivery ships on the 28th of the following month.§
+Che caffè ricevo?¦Which coffee will I get?§
+Una selezione di specialty 100% Arabica scelta dal nostro team, diversa a ogni invio: varietà classiche, lavorazioni più spinte, lotti iconici o nuove micro produzioni.¦A 100% Arabica specialty selection chosen by our team, different every time: classic varieties, bolder processes, iconic lots or new micro-lots.§
+Quanto risparmio?¦How much do I save?§
+Mensile: 10% il primo anno, poi 15%. Trimestrale: 15%, poi 20%. Semestrale: 20%, poi 25%. Lo sconto si applica a ogni invio.¦Monthly: 10% the first year, then 15%. Quarterly: 15%, then 20%. Six-monthly: 20%, then 25%. The discount applies to every delivery.§
+È solo per espresso?¦Is it only for espresso?§
+No. Scegli tostatura chiara o media e il formato: in grani oppure macinato per espresso, moka o filtro.¦No. Choose a light or medium roast and the format: whole beans or ground for espresso, moka or filter.§
+Pronto a non rimanere più senza caffè buono?¦Ready to never run out of good coffee?§
+Tu scegli il ritmo. Noi pensiamo a selezione e tostatura.¦You set the rhythm. We take care of selection and roasting.§
+Attiva il tuo abbonamento¦Start your subscription
+{%- endcapture -%}
+{%- endcase -%}
+{%- assign t_out = html -%}
+{%- if pairs != '' -%}
+  {%- assign t_list = pairs | split: '§' -%}
+  {%- for t_pair in t_list -%}
+    {%- assign t_kv = t_pair | strip | split: '¦' -%}
+    {%- if t_kv.size == 2 -%}
+      {%- assign t_out = t_out | replace: t_kv[0], t_kv[1] -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{{- t_out -}}

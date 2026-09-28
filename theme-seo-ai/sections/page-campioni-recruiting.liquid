@@ -1,0 +1,191 @@
+{% comment %}
+  Tomassi — Pagina Campioni recruiting "Entra a far parte / Allenati con i campioni" (direzione A).
+  Hero nero agonistico + intro + 3 benefici + discipline + FORM candidatura nativo Shopify.
+  Palette verde #0F4A27 / crema / nero #14100C / ocra #C2922D. Motion reveal observer interno.
+  Bilingue IT/EN via request.locale.iso_code.
+{% endcomment %}
+
+{%- assign pid = section.id -%}
+{%- assign L = request.locale.iso_code -%}
+
+{% style %}
+  #cr-{{ pid }} {
+    --cr-green:#0F4A27; --cr-cream:#F5ECD7; --cr-ink:#14100C; --cr-ocra:#C2922D; --cr-gold:#D9AE4E;
+    --cr-fg-dark:#F6EEDC; --cr-fg-cream:#33503F; overflow:hidden;
+  }
+  #cr-{{ pid }} *{box-sizing:border-box;}
+  #cr-{{ pid }} .cr-wrap{max-width:108rem;margin:0 auto;padding:0 clamp(2rem,5vw,5rem);}
+  #cr-{{ pid }} .cr-band{padding:clamp(3.4rem,6vw,6.4rem) 0;}
+  #cr-{{ pid }} .cr-title{font-family:var(--font-heading-family,inherit);font-weight:700;line-height:1.02;letter-spacing:-0.01em;margin:0;}
+  #cr-{{ pid }} .cr-kicker{display:inline-flex;align-items:center;gap:1rem;font-size:1.2rem;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:var(--cr-ocra);}
+  #cr-{{ pid }} .cr-kicker::before{content:"";width:2.6rem;height:2px;background:var(--cr-ocra);display:inline-block;}
+  #cr-{{ pid }} .cr-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:0.8rem;background:var(--cr-ocra);color:#20160A;font-size:1.5rem;font-weight:700;padding:1.3rem 3rem;border:0;border-radius:999px;text-decoration:none;cursor:pointer;transition:transform 0.2s ease;}
+  #cr-{{ pid }} .cr-btn:hover{transform:translateY(-2px);}
+  #cr-{{ pid }} .cr-btn::after{content:"";position:absolute;top:0;bottom:0;left:0;width:55%;background:linear-gradient(105deg,transparent,rgba(255,255,255,0.4),transparent);transform:translateX(-160%) skewX(-18deg);transition:transform 0.7s ease;pointer-events:none;}
+  #cr-{{ pid }} .cr-btn:hover::after{transform:translateX(320%) skewX(-18deg);}
+
+  #cr-{{ pid }} .cr-hero{background:var(--cr-ink);color:var(--cr-fg-dark);position:relative;}
+  #cr-{{ pid }} .cr-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 80% 0%,rgba(194,146,45,0.16),transparent 70%);pointer-events:none;}
+  #cr-{{ pid }} .cr-hero .cr-wrap{position:relative;}
+  #cr-{{ pid }} .cr-hero__title{color:var(--cr-fg-dark);font-size:clamp(3.4rem,6vw,6rem);margin:1.4rem 0 0;max-width:16ch;}
+  #cr-{{ pid }} .cr-hero__intro{color:#CFC6B4;font-size:clamp(1.6rem,1.3rem + 0.6vw,2rem);line-height:1.5;margin:1.8rem 0 2.6rem;max-width:40ch;font-weight:500;}
+
+  #cr-{{ pid }} .cr-ed{background:var(--cr-cream);}
+  #cr-{{ pid }} .cr-ed__p{color:var(--cr-fg-cream);font-size:clamp(1.5rem,1.3rem + 0.3vw,1.8rem);line-height:1.8;margin:0 0 1.4rem;max-width:64ch;}
+  #cr-{{ pid }} .cr-ed__p b{color:var(--cr-green);font-weight:600;}
+
+  #cr-{{ pid }} .cr-ben{background:var(--cr-cream);padding-top:0;}
+  #cr-{{ pid }} .cr-ben__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2vw,2rem);}
+  #cr-{{ pid }} .cr-bcard{background:#fff;border:1px solid #E4D6B6;border-radius:14px;padding:2.4rem 2rem;transition:transform 0.25s ease,border-color 0.25s ease,box-shadow 0.25s ease;}
+  #cr-{{ pid }} .cr-bcard:hover{transform:translateY(-4px);border-color:var(--cr-ocra);box-shadow:0 1.4rem 3rem rgba(15,74,39,0.12);}
+  #cr-{{ pid }} .cr-bcard__ic{width:3.2rem;height:3.2rem;color:var(--cr-ocra);}
+  #cr-{{ pid }} .cr-bcard__ic svg{width:100%;height:100%;}
+  #cr-{{ pid }} .cr-bcard__t{color:var(--cr-green);font-size:1.9rem;font-weight:600;margin:1rem 0 0.5rem;}
+  #cr-{{ pid }} .cr-bcard__d{color:#5F7566;font-size:1.35rem;line-height:1.55;margin:0;}
+
+  #cr-{{ pid }} .cr-disc{background:var(--cr-green);color:var(--cr-fg-dark);}
+  #cr-{{ pid }} .cr-disc__title{color:var(--cr-fg-dark);font-size:clamp(2rem,1.6rem + 1.2vw,2.8rem);margin:1rem 0 2rem;max-width:24ch;}
+  #cr-{{ pid }} .cr-disc__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(0.8rem,1.6vw,1.4rem);}
+  #cr-{{ pid }} .cr-dchip{border:1px solid rgba(217,174,78,0.4);border-radius:12px;padding:1.6rem 1.2rem;text-align:center;}
+  #cr-{{ pid }} .cr-dchip__ic{width:2.6rem;height:2.6rem;color:var(--cr-gold);margin:0 auto 0.8rem;}
+  #cr-{{ pid }} .cr-dchip__ic svg{width:100%;height:100%;}
+  #cr-{{ pid }} .cr-dchip__t{color:var(--cr-fg-dark);font-size:1.4rem;font-weight:600;}
+
+  #cr-{{ pid }} .cr-form{background:var(--cr-cream);}
+  #cr-{{ pid }} .cr-form__box{background:#fff;border:1px solid #E4D6B6;border-radius:18px;padding:clamp(2.2rem,4vw,4rem);max-width:76rem;margin:0 auto;}
+  #cr-{{ pid }} .cr-form__t{color:var(--cr-green);font-family:var(--font-heading-family,inherit);font-weight:700;font-size:clamp(2.2rem,1.8rem + 1vw,3rem);margin:0 0 0.6rem;text-align:center;}
+  #cr-{{ pid }} .cr-form__s{color:var(--cr-fg-cream);font-size:1.4rem;margin:0 0 2rem;text-align:center;}
+  #cr-{{ pid }} .cr-fields{display:flex;flex-direction:column;gap:1rem;}
+  #cr-{{ pid }} .cr-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  #cr-{{ pid }} .cr-input{width:100%;background:#FBF6EA;border:1px solid #E0D2B2;border-radius:10px;padding:1.2rem 1.4rem;font-size:1.4rem;color:#2b3d33;font-family:inherit;transition:border-color 0.2s ease,box-shadow 0.2s ease;}
+  #cr-{{ pid }} .cr-input::placeholder{color:#9aa89e;}
+  #cr-{{ pid }} select.cr-input{cursor:pointer;}
+  #cr-{{ pid }} .cr-input:focus{outline:none;border-color:var(--cr-ocra);box-shadow:0 0 0 3px rgba(194,146,45,0.18);}
+  #cr-{{ pid }} .cr-textarea{min-height:12rem;resize:vertical;}
+  #cr-{{ pid }} .cr-form .cr-btn{align-self:center;margin-top:0.6rem;}
+  #cr-{{ pid }} .cr-note{border-radius:10px;padding:1.2rem 1.4rem;font-size:1.3rem;}
+  #cr-{{ pid }} .cr-note--ok{background:#E6F0E1;color:#27500A;border:1px solid #C0DD97;}
+  #cr-{{ pid }} .cr-note--err{background:#FBE9E9;color:#7a1f1f;border:1px solid #f0b3b3;}
+
+  #cr-{{ pid }}.cr-js .cr-rev{opacity:0;transform:translateY(2rem);transition:opacity 0.7s ease,transform 0.7s ease;transition-delay:calc(var(--i,0)*90ms);}
+  #cr-{{ pid }}.cr-js .cr-band.cr-in .cr-rev{opacity:1;transform:none;}
+
+  @media screen and (max-width:749px){
+    #cr-{{ pid }} .cr-ben__grid{grid-template-columns:1fr;}
+    #cr-{{ pid }} .cr-disc__grid{grid-template-columns:1fr 1fr;}
+    #cr-{{ pid }} .cr-row{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #cr-{{ pid }} .cr-bcard,#cr-{{ pid }} .cr-btn{transition:none;}
+    #cr-{{ pid }} .cr-btn::after{display:none;}
+  }
+{% endstyle %}
+
+<div id="cr-{{ pid }}" data-cr-root>
+
+  <section class="cr-band cr-hero">
+    <div class="cr-wrap">
+      <span class="cr-kicker cr-rev" style="--i:0">{% if L == 'en' %}Training future pros{% else %}Training future pros{% endif %}</span>
+      <h1 class="cr-title cr-hero__title cr-rev" style="--i:1">{% if L == 'en' %}Train with the champions{% else %}Allenati con i campioni{% endif %}</h1>
+      <p class="cr-hero__intro cr-rev" style="--i:2">{% if L == 'en' %}Want to train with the best and live competitions at the highest level?{% else %}Vuoi allenarti con i migliori e vivere le competizioni al massimo livello?{% endif %}</p>
+      <div class="cr-rev" style="--i:3"><a class="cr-btn" href="#cr-form-{{ pid }}">{% if L == 'en' %}Apply{% else %}Candidati{% endif %}</a></div>
+    </div>
+  </section>
+
+  <section class="cr-band cr-ed">
+    <div class="cr-wrap">
+      <p class="cr-ed__p cr-rev" style="--i:0">{% if L == 'en' %}<b>Tomassi Coffee</b> gives you a place on a <b>winning team</b>, led by champions who share passion, drive and excellence in the world of coffee competitions.{% else %}<b>Tomassi Coffee</b> ti offre un posto in una <b>squadra vincente</b>, guidata da campioni che condividono passione, determinazione ed eccellenza nel mondo delle gare di caffè.{% endif %}</p>
+      <p class="cr-ed__p cr-rev" style="--i:1">{% if L == 'en' %}Training with us means <b>growing, improving and pushing past your limits</b> — with the support of professionals who truly live competition.{% else %}Allenarti con noi significa <b>crescere, migliorarti e superare i tuoi limiti</b> — con il supporto di professionisti che le gare le vivono davvero.{% endif %}</p>
+    </div>
+  </section>
+
+  <section class="cr-band cr-ben">
+    <div class="cr-wrap">
+      <div class="cr-ben__grid">
+        <div class="cr-bcard cr-rev" style="--i:0">
+          <span class="cr-bcard__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14l4-4M14 4l6 6M9 15l-3 3-2-2 3-3M15 9l3-3 2 2-3 3"/><path d="M9 15l6-6"/></svg></span>
+          <h3 class="cr-bcard__t">{% if L == 'en' %}Coaching{% else %}Allenamento{% endif %}</h3>
+          <p class="cr-bcard__d">{% if L == 'en' %}Tailored coaching from the people who take the stage — and win.{% else %}Preparazione su misura con chi sul palco ci sale — e vince.{% endif %}</p>
+        </div>
+        <div class="cr-bcard cr-rev" style="--i:1">
+          <span class="cr-bcard__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span>
+          <h3 class="cr-bcard__t">{% if L == 'en' %}Real competitions{% else %}Gare vere{% endif %}</h3>
+          <p class="cr-bcard__d">{% if L == 'en' %}From the national stage to the international one, for real.{% else %}Dal palco nazionale a quello internazionale, sul serio.{% endif %}</p>
+        </div>
+        <div class="cr-bcard cr-rev" style="--i:2">
+          <span class="cr-bcard__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6 4 4 6-7"/><path d="M20 8v4h-4"/></svg></span>
+          <h3 class="cr-bcard__t">{% if L == 'en' %}Growth{% else %}Crescita{% endif %}</h3>
+          <p class="cr-bcard__d">{% if L == 'en' %}Beyond the limit, contest after contest, as a person and a pro.{% else %}Oltre il limite, gara dopo gara, come persona e professionista.{% endif %}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cr-band cr-disc">
+    <div class="cr-wrap">
+      <span class="cr-kicker cr-rev" style="--i:0">{% if L == 'en' %}The disciplines{% else %}Le discipline{% endif %}</span>
+      <h2 class="cr-title cr-disc__title cr-rev" style="--i:1">{% if L == 'en' %}We prepare you for every competition{% else %}Ti prepariamo per ogni competizione{% endif %}</h2>
+      <div class="cr-disc__grid">
+        <div class="cr-dchip cr-rev" style="--i:1"><span class="cr-dchip__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6.4 8.4V19l-3.2 1.6v-7.2z"/></svg></span><div class="cr-dchip__t">Brewing</div></div>
+        <div class="cr-dchip cr-rev" style="--i:2"><span class="cr-dchip__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M16 9h2.5a2.5 2.5 0 0 1 0 5H16"/><path d="M7 3v2M11 3v2"/></svg></span><div class="cr-dchip__t">Barista Championship</div></div>
+        <div class="cr-dchip cr-rev" style="--i:3"><span class="cr-dchip__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v5l-4.6 8.4A2 2 0 0 0 7.2 20h9.6a2 2 0 0 0 1.8-3.6L14 8V3"/></svg></span><div class="cr-dchip__t">Ibrik</div></div>
+        <div class="cr-dchip cr-rev" style="--i:4"><span class="cr-dchip__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.5 2 3 3.5 3 6a3 3 0 0 1-6 0c0-1 .4-1.8 1-2.6M7 13c-1 3 1 8 5 8s6-5 5-8"/></svg></span><div class="cr-dchip__t">Roasting</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cr-band cr-form" id="cr-form-{{ pid }}">
+    <div class="cr-wrap">
+      <div class="cr-form__box cr-rev" style="--i:0">
+        <h2 class="cr-form__t">{% if L == 'en' %}Fill in the form, start your journey{% else %}Compila il modulo, inizia il tuo percorso{% endif %}</h2>
+        <p class="cr-form__s">{% if L == 'en' %}Tell us who you are and which competition you want to train for.{% else %}Raccontaci chi sei e per quale competizione vuoi prepararti.{% endif %}</p>
+        {%- form 'contact', id: 'CandidaturaForm', class: 'cr-fields' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="cr-note cr-note--ok">{% if L == 'en' %}Got it! We'll be in touch to start your journey.{% else %}Ricevuto! Ti ricontattiamo per iniziare il tuo percorso.{% endif %}</div>
+          {%- elsif form.errors -%}
+            <div class="cr-note cr-note--err">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <div class="cr-row">
+            <input class="cr-input" type="text" name="contact[name]" placeholder="{% if L == 'en' %}Name{% else %}Nome{% endif %}" autocomplete="name" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            <input class="cr-input" type="email" name="contact[email]" placeholder="Email" required autocomplete="email" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+          </div>
+          <div class="cr-row">
+            <input class="cr-input" type="tel" name="contact[phone]" placeholder="{% if L == 'en' %}Phone{% else %}Telefono{% endif %}" autocomplete="tel" value="{% if form.phone %}{{ form.phone }}{% endif %}">
+            <select class="cr-input" name="contact[Disciplina]" aria-label="{% if L == 'en' %}Discipline{% else %}Disciplina{% endif %}">
+              <option value="" disabled selected>{% if L == 'en' %}Discipline of interest{% else %}Disciplina d'interesse{% endif %}</option>
+              <option>Brewing</option>
+              <option>Barista Championship</option>
+              <option>Ibrik</option>
+              <option>Roasting</option>
+            </select>
+          </div>
+          <textarea class="cr-input cr-textarea" name="contact[body]" placeholder="{% if L == 'en' %}Tell us about your background and your goals{% else %}Raccontaci il tuo percorso e i tuoi obiettivi{% endif %}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          <button type="submit" class="cr-btn">{% if L == 'en' %}Apply{% else %}Candidati{% endif %}</button>
+        {%- endform -%}
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('cr-{{ pid }}');
+    if (!root) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+    root.classList.add('cr-js');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('cr-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+    root.querySelectorAll('.cr-band').forEach(function (b) { io.observe(b); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Campioni recruiting",
+  "settings": [],
+  "presets": [{ "name": "Campioni recruiting" }]
+}
+{% endschema %}

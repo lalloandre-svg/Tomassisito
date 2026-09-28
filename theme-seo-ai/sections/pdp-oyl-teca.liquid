@@ -1,0 +1,251 @@
+{%- comment -%}
+  Teca OYL: la galleria prodotto in cornice oro con targhetta, buy-box da reliquia.
+  Sezione solo CSS+JS, additiva sopra oyl-product-styles. Nessuna numerazione lotto.
+{%- endcomment -%}
+
+<style>
+  /* la teca sulla GALLERIA: scorre col testo e si aggancia solo a fine corsa (top dal JS) */
+  .product__media-wrapper media-gallery { display: block; position: sticky; top: 12rem; padding: 2.2rem; border: 2px solid rgba(201,154,36,.8); border-radius: .8rem; }
+  .product__media-wrapper media-gallery::before { content: ''; position: absolute; inset: -8% -10% 6% -10%; background: radial-gradient(46% 42% at 50% 46%, rgba(201,154,36,.17), transparent 70%); pointer-events: none; z-index: 0; animation: oylBreath 7s ease-in-out infinite alternate; }
+  @keyframes oylBreath { from { opacity: .55; transform: scale(1); } to { opacity: 1; transform: scale(1.06); } }
+  .product__media-wrapper .product__media { position: relative; z-index: 1; background: #14100C; border-radius: .6rem; overflow: hidden; }
+  .product__media-wrapper media-gallery::after { content: 'OVER YOUR LIMITS'; position: absolute; top: -1.15rem; left: 50%; transform: translateX(-50%); background: #1B1814; padding: .2rem 1.8rem; color: #C99A24; font-size: 1.15rem; font-weight: 700; letter-spacing: .32em; white-space: nowrap; z-index: 2; transition: text-shadow .25s ease, color .25s ease; }
+  .product__media-wrapper media-gallery:hover { border-color: #C99A24; box-shadow: 0 0 34px rgba(201,154,36,.22); }
+  .product__media-wrapper media-gallery:hover::after { color: #E8C766; text-shadow: 0 0 18px rgba(201,154,36,.75); }
+  .product__media-wrapper .product__media img { animation: oylTecaKb 20s ease-in-out infinite alternate; }
+  @keyframes oylTecaKb { from { transform: scale(1); } to { transform: scale(1.045); } }
+  .product__media-wrapper .skip-to-content-link { display: none !important; }
+
+  /* larghezze uniformi: pillole, quantita e bottoni allineati alla stessa colonna */
+  .product__info-wrapper .product-form,
+  .product__info-wrapper .product-form__buttons,
+  .product__info-wrapper .product-form__input,
+  .product__info-wrapper .product-form__quantity { max-width: 100% !important; }
+  /* Shop Pay in coppia con la CTA: stessa pillola, stessa altezza */
+  .product__info-wrapper .shopify-payment-button__button,
+  .product__info-wrapper .shopify-payment-button__button--branded,
+  .product__info-wrapper .shopify-payment-button__button--unbranded { border-radius: 999px !important; min-height: 5.4rem; overflow: hidden; }
+  .product__info-wrapper .shopify-payment-button { margin-top: 1rem; }
+
+  /* pannello scuro rialzato sul contenitore INTERNO (sticky): abbraccia solo il contenuto */
+  .product__info-wrapper .product__info-container { max-width: 100%; background: #221C15; border: 1px solid rgba(201,154,36,.4); border-radius: 2.4rem; padding: 3.2rem 3rem 3.6rem; box-shadow: 0 30px 70px rgba(0,0,0,.45); }
+  @media (max-width: 749px) { .product__info-wrapper .product__info-container { padding: 2.2rem 1.8rem 2.6rem; border-radius: 1.8rem; } }
+
+  /* bottone: via ogni contorno doppio di Dawn, resta la pillola */
+  .product-form__submit { border: 0 !important; outline: 0 !important; min-height: 5.4rem; font-size: 1.6rem; background: #C99A24 !important; color: #1B1814 !important; border-radius: 999px !important; font-weight: 800 !important; }
+  .product-form__submit::before, .product-form__submit::after { content: none !important; display: none !important; box-shadow: none !important; border: 0 !important; }
+  .product-form__submit:hover { background: #FFFFFF !important; color: #1B1814 !important; }
+
+  /* accordion descrizione, livrea oro */
+  .tpdp-acc { margin-top: .6rem; }
+  .tpdp-acc__item { border-bottom: 1px solid rgba(201,154,36,.35); }
+  .tpdp-acc__item summary { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.5rem 0; cursor: pointer; font-weight: 700; font-size: 1.45rem; color: #FFFFFF; list-style: none; }
+  .tpdp-acc__item summary::-webkit-details-marker { display: none; }
+  .tpdp-acc__icon { position: relative; width: 1.4rem; height: 1.4rem; flex: 0 0 auto; }
+  .tpdp-acc__icon::before, .tpdp-acc__icon::after { content: ''; position: absolute; inset: 0; margin: auto; background: #C99A24; transition: transform .2s ease; }
+  .tpdp-acc__icon::before { width: 100%; height: 2px; }
+  .tpdp-acc__icon::after { width: 2px; height: 100%; }
+  .tpdp-acc__item[open] .tpdp-acc__icon::after { transform: rotate(90deg); }
+  .tpdp-acc__body { padding: 0 0 1.6rem; font-size: 1.35rem; line-height: 1.6; color: rgba(255,255,255,.82); }
+  .tpdp-acc__table { width: 100%; border-collapse: collapse; }
+  .tpdp-acc__table td { padding: .45rem 1rem .45rem 0; vertical-align: top; font-size: 1.3rem; }
+  .tpdp-acc__table td:first-child { width: 11rem; color: #C99A24; font-weight: 700; text-transform: uppercase; font-size: 1.1rem; letter-spacing: .08em; padding-top: .6rem; }
+
+  /* titolo monumentale, prezzo oro */
+  .product__info-wrapper .product__title h1,
+  .product__info-wrapper .product__title .h1 { font-size: clamp(3.2rem, 4vw, 4.8rem); line-height: 1.02; color: #FFFFFF; }
+  .product__info-wrapper .price .price-item--regular,
+  .product__info-wrapper .price .price-item--sale { font-family: var(--font-heading-family); font-size: 2.8rem; font-weight: 700; color: #C99A24; }
+
+  /* varianti a pillola oro */
+  .product__info-wrapper .product-form__input input[type="radio"] + label { border: 1px solid rgba(201,154,36,.55); border-radius: 999px; background: transparent; color: #FFFFFF; transition: all .15s ease; }
+  .product__info-wrapper .product-form__input input[type="radio"]:checked + label { background: #C99A24; color: #1B1814; border-color: #C99A24; }
+  .product__info-wrapper .form__label { font-size: 1.15rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.65); }
+  /* quantita: UN solo bordo (Dawn ne disegna un secondo con gli pseudo-elementi) */
+  .product__info-wrapper .quantity { border-radius: 999px; border: 1px solid rgba(201,154,36,.55); background: transparent; box-shadow: none !important; }
+  .product__info-wrapper .quantity::before,
+  .product__info-wrapper .quantity::after { content: none !important; box-shadow: none !important; border: 0 !important; display: none !important; }
+  .product__info-wrapper .quantity__input { box-shadow: none !important; border: 0 !important; }
+
+  /* pezzi dello snippet tomassi-pdp, in livrea oro */
+  .tpdp-kicker { margin: 0; font-size: 1.2rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #C99A24; display: flex; align-items: center; gap: .6rem; }
+  .tpdp-kicker svg { width: 1.6rem; height: 1.6rem; flex: 0 0 auto; }
+  .tpdp-chips { display: flex; flex-wrap: wrap; gap: .7rem; margin: .5rem 0 .2rem; }
+  .tpdp-chip { border: 1px solid rgba(201,154,36,.65); color: #C99A24; border-radius: 999px; padding: .35rem 1.15rem; font-size: 1.2rem; line-height: 1.4; }
+  .tpdp-roast { display: flex; align-items: center; gap: 1rem; margin: 1.4rem 0 0; padding: 1.1rem 1.5rem; border: 1px dashed rgba(201,154,36,.65); border-radius: 1.4rem; background: rgba(201,154,36,.08); }
+  .tpdp-roast__dot { width: .9rem; height: .9rem; border-radius: 50%; background: #C99A24; flex: 0 0 auto; animation: oylTecaPulse 2.2s ease-in-out infinite; }
+  @keyframes oylTecaPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(201,154,36,.5); } 50% { box-shadow: 0 0 0 .6rem rgba(201,154,36,0); } }
+  .tpdp-roast__text { font-size: 1.35rem; color: #FFFFFF; font-weight: 600; }
+  .tpdp-pair { margin: 1.8rem 0 0; }
+  .tpdp-pair__kicker { margin: 0 0 .6rem; font-size: 1.15rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.6); font-weight: 700; }
+  .tpdp-pair__card { display: flex; align-items: center; gap: 1.2rem; background: rgba(255,255,255,.05); border-radius: 1.4rem; padding: 1rem 1.4rem; text-decoration: none; border: 1px solid rgba(201,154,36,.4); transition: transform .15s ease, border-color .15s ease; }
+  .tpdp-pair__card:hover { transform: translateY(-2px); border-color: #C99A24; }
+  .tpdp-pair__img { width: 6rem; height: 6rem; object-fit: cover; border-radius: 50%; flex: 0 0 auto; background: #14100C; }
+  .tpdp-pair__body { display: grid; gap: .2rem; }
+  .tpdp-pair__name { font-weight: 700; font-size: 1.4rem; color: #FFFFFF; line-height: 1.25; }
+  .tpdp-pair__price { font-size: 1.25rem; color: #C99A24; font-weight: 700; }
+
+  /* --- effetti: cascata d'ingresso, barre vive, sheen CTA, chips pop --- */
+  .tpdp-fx > * { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(.22,.9,.35,1); }
+  .tpdp-fx.tpdp-in > * { opacity: 1; transform: none; }
+  .product__info-wrapper .product-form__submit { position: relative; overflow: hidden; transition: transform .15s ease, background .2s ease, color .2s ease; }
+  .product__info-wrapper .product-form__submit:hover { transform: translateY(-2px); }
+  .product__info-wrapper .product-form__submit::after { content: '' !important; display: block !important; position: absolute; top: 0; height: 100%; width: 60%; left: -140%; background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,.5) 50%, transparent 80%); transform: skewX(-18deg); animation: oylSheen 4.5s ease-in-out 1s infinite; pointer-events: none; box-shadow: none !important; border: 0 !important; }
+  @keyframes oylSheen { 0% { left: -140%; } 30% { left: 150%; } 100% { left: 150%; } }
+  .tpdp-chip { transition: transform .15s ease, background .15s ease, color .15s ease; cursor: default; }
+  .tpdp-chip:hover { transform: translateY(-2px); background: #C99A24; color: #1B1814; }
+
+  /* -- effetti extra -- */
+  /* 1. chips a cascata */
+  .tpdp-fx.tpdp-in .tpdp-chip { animation: tpdpChip .55s cubic-bezier(.34,1.56,.64,1) backwards; }
+  .tpdp-fx.tpdp-in .tpdp-chip:nth-child(1) { animation-delay: .95s; }
+  .tpdp-fx.tpdp-in .tpdp-chip:nth-child(2) { animation-delay: 1.07s; }
+  .tpdp-fx.tpdp-in .tpdp-chip:nth-child(3) { animation-delay: 1.19s; }
+  .tpdp-fx.tpdp-in .tpdp-chip:nth-child(4) { animation-delay: 1.31s; }
+  .tpdp-fx.tpdp-in .tpdp-chip:nth-child(5) { animation-delay: 1.43s; }
+  .tpdp-fx.tpdp-in .tpdp-chip:nth-child(6) { animation-delay: 1.55s; }
+  @keyframes tpdpChip { from { opacity: 0; transform: translateY(16px) rotate(-8deg) scale(.85); } to { opacity: 1; transform: none; } }
+  /* 2. prezzo timbrato (parte a scena montata, dopo la cascata) */
+  .tpdp-fx.tpdp-in .price { animation: tpdpStamp .45s cubic-bezier(.34,1.56,.64,1) 1.25s backwards; }
+  @keyframes tpdpStamp { from { opacity: 0; transform: scale(1.6) rotate(-4deg); } to { opacity: 1; transform: none; } }
+  /* 4. titolo che si sottolinea, in oro */
+  .product__info-wrapper .product__title h1::after { content: ''; display: block; width: 11rem; height: .5rem; background: #C99A24; border-radius: 99px; margin-top: 1rem; }
+  .tpdp-fx.tpdp-in .product__title h1::after { animation: tpdpLine 1s cubic-bezier(.22,.9,.35,1) .6s backwards; }
+  @keyframes tpdpLine { from { width: 0; } }
+  /* 8. foto viva al hover */
+  .product__media-wrapper .product__media { transition: transform .5s ease; }
+  .product__media-wrapper .product__media:hover { transform: scale(1.045); }
+  /* 3. festa carrello */
+  .product__info-wrapper .product-form__submit.tpdp-added { background: #E8C766 !important; color: #1B1814 !important; }
+  /* 5. polvere d'oro nella teca (iniettata dal JS, salta con reduced-motion) */
+  .oyl-dust { position: absolute; width: var(--s, 1rem); height: var(--s, 1rem); border-radius: 50%; background: radial-gradient(circle, rgba(240,212,130,1), rgba(201,154,36,0) 70%); box-shadow: 0 0 12px rgba(232,199,102,.75); z-index: 2; pointer-events: none; opacity: .7; animation: oylDust var(--d, 12s) ease-in-out var(--dl, 0s) infinite alternate; }
+  @keyframes oylDust { from { transform: translate(0, 0); opacity: .25; } 50% { opacity: 1; } to { transform: translate(2.4rem, -4rem); opacity: .35; } }
+  /* 6. riflesso di vetrina sulla teca */
+  .product__media-wrapper .product__media::after { content: ''; position: absolute; top: 0; left: -130%; width: 60%; height: 100%; background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,.24) 50%, transparent 80%); transform: skewX(-18deg); animation: oylGlass 6s ease-in-out 2.5s infinite; pointer-events: none; z-index: 3; }
+  @keyframes oylGlass { 0% { left: -130%; } 25% { left: 150%; } 100% { left: 150%; } }
+
+  @media (max-width: 749px) {
+    .product__media-wrapper { padding: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .product__media-wrapper .product__media img { animation: none; }
+    .product__media-wrapper media-gallery::before { animation: none; }
+    .tpdp-roast__dot { animation: none; }
+    .product__info-wrapper .product-form__submit::after { animation: none; content: none !important; }
+    .product__media-wrapper .product__media::after { animation: none; content: none; }
+    .product__media-wrapper .product__media:hover { transform: none; }
+    .oyl-dust { animation: none; display: none; }
+  }
+</style>
+
+<script>
+  (function () {
+    var reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    var EN = ((document.documentElement.lang || '').toLowerCase().indexOf('en') === 0);
+    var CTA = EN ? 'Claim it' : 'Rivendicalo';
+    var ADDED = EN ? '✓ In your cart' : '✓ Nel carrello';
+    var DEFAULTS = ['Aggiungi al carrello', 'Add to cart'];
+
+    function label() {
+      document.querySelectorAll('.product-form__submit > span').forEach(function (s) {
+        if (DEFAULTS.indexOf(s.textContent.trim()) > -1) s.textContent = CTA;
+      });
+    }
+
+    function fx() {
+      var box = document.querySelector('.product__info-wrapper .product__info-container');
+      if (!box || box.dataset.fx) return;
+      box.dataset.fx = '1';
+      if (reduce || !('IntersectionObserver' in window)) return;
+      box.classList.add('tpdp-fx');
+      Array.prototype.forEach.call(box.children, function (c, i) { c.style.transitionDelay = Math.min(i * 70, 700) + 'ms'; });
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { box.classList.add('tpdp-in'); io.disconnect(); } });
+      }, { threshold: 0.12 });
+      io.observe(box);
+    }
+
+    function magnet() {
+      var b = document.querySelector('.product-form__submit');
+      if (!b || b.dataset.mag) return;
+      b.dataset.mag = '1';
+      if (reduce) return;
+      b.addEventListener('mousemove', function (e) {
+        var r = b.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width / 2) / r.width;
+        var y = (e.clientY - r.top - r.height / 2) / r.height;
+        b.style.transform = 'translate(' + (x * 12).toFixed(1) + 'px,' + (y * 7).toFixed(1) + 'px) scale(1.02)';
+      });
+      b.addEventListener('mouseleave', function () { b.style.transform = ''; });
+    }
+
+    function party() {
+      var b = document.querySelector('.product-form__submit');
+      if (!b || b.dataset.party) return;
+      b.dataset.party = '1';
+      b.addEventListener('click', function () {
+        if (b.getAttribute('aria-disabled') === 'true' || b.classList.contains('tpdp-added')) return;
+        setTimeout(function () {
+          var s = b.querySelector('span');
+          if (!s) return;
+          var old = s.textContent;
+          b.classList.add('tpdp-added');
+          s.textContent = ADDED;
+          setTimeout(function () { b.classList.remove('tpdp-added'); s.textContent = old; }, 2200);
+        }, 700);
+      });
+    }
+
+    function dust() {
+      if (reduce) return;
+      var g = document.querySelector('.product__media-wrapper media-gallery');
+      if (!g || g.dataset.dust) return;
+      g.dataset.dust = '1';
+      for (var i = 0; i < 7; i++) {
+        var s = document.createElement('span');
+        s.className = 'oyl-dust';
+        s.style.left = (8 + i * 13) + '%';
+        s.style.top = (15 + (i * 23) % 60) + '%';
+        s.style.setProperty('--s', (0.6 + (i % 3) * 0.35).toFixed(2) + 'rem');
+        s.style.setProperty('--d', (8 + i * 1.7) + 's');
+        s.style.setProperty('--dl', (i * 1.1) + 's');
+        g.appendChild(s);
+      }
+    }
+
+    function stick() {
+      var g = document.querySelector('.product__media-wrapper media-gallery');
+      if (!g) return;
+      function set() {
+        var top = Math.round(window.innerHeight - g.offsetHeight - 24);
+        if (top > 120) top = 120;
+        g.style.top = top + 'px';
+      }
+      if (!g.dataset.stick) {
+        g.dataset.stick = '1';
+        window.addEventListener('resize', set);
+        window.addEventListener('load', set);
+        setTimeout(set, 900);
+      }
+      set();
+    }
+
+    function init() { label(); fx(); magnet(); party(); dust(); stick(); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+    document.addEventListener('shopify:section:load', function () {
+      var b = document.querySelector('.product__info-wrapper .product__info-container');
+      if (b) { delete b.dataset.fx; b.classList.remove('tpdp-fx', 'tpdp-in'); }
+      init();
+    });
+    new MutationObserver(label).observe(document.documentElement, { childList: true, subtree: true });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Teca OYL PDP",
+  "settings": [],
+  "presets": [{ "name": "Teca OYL PDP" }]
+}
+{% endschema %}

@@ -1,0 +1,265 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Non nasce da una formula di marketing.",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nasce da una scelta controcorrente fatta ad Aprilia nel 2013.</p><p>Tomassi Specialty Coffee è una torrefazione nata dalla visione di Emanuele Tomassi e cresciuta con Andrè attraverso ricerca, tostatura artigianale, competizioni, assaggio ed educazione.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 72,
+        "padding_bottom": 48
+      }
+    },
+    "emanuele": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Emanuele. La tostatura come scelta.",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Nel 2009, in Danimarca, Emanuele incontra il mondo delle micro roastery e dello specialty coffee internazionale. Da quel momento il caffè diventa origine, tostatura, studio, assaggio e relazione. Tornato in Italia, porta questa visione ad Aprilia e la trasforma in un progetto reale.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/tomassi-emanuele-tostatrice.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "andre": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Andrè. La nuova generazione.",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Andrè cresce osservando il padre tostare. Oggi porta Tomassicoffee nelle gare, nella selezione dei caffè, nello sviluppo delle ricette e nella divulgazione. Il suo lavoro è rendere il caffè più comprensibile senza togliere profondità.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/tomassi-padre-figlio-scatoloni.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "scheme-97de98e8-7d3c-49cf-8b71-e2c9466962eb",
+        "color_scheme": "scheme-97de98e8-7d3c-49cf-8b71-e2c9466962eb",
+        "mobile_content_alignment": "left",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "sintesi": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Padre e figlio sono la radice. La tazza è la promessa.",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La storia familiare è vera, ma non è una scorciatoia commerciale. Il motivo per scegliere Tomassicoffee è il lavoro che quella storia produce: qualità del crudo, tostatura, assaggio continuo, competenze testate in gara ed educazione.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "valori": {
+      "type": "multicolumn",
+      "blocks": {
+        "v1": {
+          "type": "column",
+          "settings": {
+            "title": "Artigianalità",
+            "text": "<p>Mani, tempo e attenzione su ogni lotto.</p>"
+          }
+        },
+        "v2": {
+          "type": "column",
+          "settings": {
+            "title": "Ricerca",
+            "text": "<p>Origini, processi e profili, sempre in studio.</p>"
+          }
+        },
+        "v3": {
+          "type": "column",
+          "settings": {
+            "title": "Tecnica",
+            "text": "<p>Tostatura ed estrazione misurate, non a caso.</p>"
+          }
+        },
+        "v4": {
+          "type": "column",
+          "settings": {
+            "title": "Educazione",
+            "text": "<p>Rendere il caffè comprensibile, senza togliere profondità.</p>"
+          }
+        },
+        "v5": {
+          "type": "column",
+          "settings": {
+            "title": "Competizione",
+            "text": "<p>Competenze testate in gara, riportate in tazza.</p>"
+          }
+        },
+        "v6": {
+          "type": "column",
+          "settings": {
+            "title": "Relazione",
+            "text": "<p>Rapporto diretto con chi coltiva e con chi beve.</p>"
+          }
+        },
+        "v7": {
+          "type": "column",
+          "settings": {
+            "title": "Leggerezza",
+            "text": "<p>Qualità seria, tono leggero, zero posa.</p>"
+          }
+        },
+        "v8": {
+          "type": "column",
+          "settings": {
+            "title": "Famiglia",
+            "text": "<p>La radice da cui nasce tutto il resto.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5",
+        "v6",
+        "v7",
+        "v8"
+      ],
+      "settings": {
+        "title": "I nostri valori",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 4,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "cta": {
+      "type": "cta-band",
+      "settings": {
+        "kicker": "Dalla radice alla tazza",
+        "heading": "Adesso tocca a te assaggiare.",
+        "text": "Scegli il caffè che racconta tutto questo lavoro.",
+        "button_label": "Scegli il tuo caffè",
+        "button_link": "shopify://collections/tutti-i-caffe",
+        "bg_color": "#0F4A27",
+        "text_color": "#F6EEDC",
+        "accent_color": "#C2922D",
+        "text_align": "center",
+        "max_width": 64,
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "polish": {
+      "type": "page-polish",
+      "settings": {
+        "accent_color": "#C2922D"
+      }
+    }
+  },
+  "order": [
+    "intro",
+    "emanuele",
+    "andre",
+    "sintesi",
+    "valori",
+    "cta",
+    "polish"
+  ]
+}

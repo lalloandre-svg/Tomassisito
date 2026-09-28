@@ -1,0 +1,336 @@
+{%- comment -%}
+  Tomassi Family — landing del programma fedelta (app Essential Loyalty / widget "honeypop").
+  La landing dell'app non renderizza nulla: questa sezione racconta il programma.
+  ⚠ I valori (punti e premi) rispecchiano la configurazione dell'app al 2026-09-23:
+    iscrizione +100 · newsletter +100 · primo ordine +200 · 1 punto/€ · compleanno +50 · visita +1
+    500 = 5% · 1000 = 10% o spedizione gratuita · 2000 = 20% · invita un amico 10% / 10%
+  Livelli (Chicco → Tostatore): snippet tomassi-family-tiers, dati letti live dall'app.
+  Se cambiano nell'app, aggiornarli qui. Bilingue IT/EN via request.locale.
+  "Iscriviti"/"Apri i tuoi punti" aprono il pannello dell'app (#honeypop-app) se presente,
+  altrimenti portano a registrazione/login.
+{%- endcomment -%}
+{%- liquid
+  assign L = request.locale.iso_code
+  assign sid = section.id
+  if L == 'en'
+    assign t_kicker = 'Tomassi Family'
+    assign t_title_a = 'The more coffee you drink,'
+    assign t_title_b = 'the more family you become.'
+    assign t_sub = 'Our loyalty club. Every order earns points, points become discounts and free shipping. Signing up is free and takes one minute.'
+    assign t_cta_join = 'Join the Family · +100 points'
+    assign t_cta_open = 'See your points'
+    assign t_cta_how = 'How it works'
+    assign t_card_label = 'Welcome gift'
+    assign t_card_pts = 'points'
+    assign t_card_note = 'as soon as you sign up'
+    assign t_earn_k = 'Earn'
+    assign t_earn_h = 'How you earn points'
+    assign t_redeem_k = 'Redeem'
+    assign t_redeem_h = 'How you use them'
+    assign t_redeem_sub = 'Points never feel like homework: you choose when to cash them in.'
+    assign t_ex_h = 'A real example'
+    assign t_ex = 'Sign up (+100), place your first order of €45 (+200 bonus, +45 for the euros spent): you already have <b>345 points</b>. One more order and you’re at 5% off.'
+    assign t_ref_k = 'Invite a friend'
+    assign t_ref_h = 'Good coffee is better shared.'
+    assign t_ref_you = 'You get'
+    assign t_ref_friend = 'Your friend gets'
+    assign t_ref_off = '10% off'
+    assign t_ref_note = 'When your friend places their first order. Find your invite link in the rewards panel.'
+    assign t_final_h = 'Pull up a chair.'
+    assign t_final_t = 'Since 2013 Tomassi has been a family. Now there’s room for you too.'
+    assign t_login = 'Already a member? Log in'
+  else
+    assign t_kicker = 'Tomassi Family'
+    assign t_title_a = 'Più caffè bevi,'
+    assign t_title_b = 'più diventi di famiglia.'
+    assign t_sub = 'Il nostro club fedeltà. Ogni ordine ti dà punti, i punti diventano sconti e spedizioni gratuite. Iscriversi è gratis e ci vuole un minuto.'
+    assign t_cta_join = 'Entra nella Family · +100 punti'
+    assign t_cta_open = 'Vedi i tuoi punti'
+    assign t_cta_how = 'Come funziona'
+    assign t_card_label = 'Regalo di benvenuto'
+    assign t_card_pts = 'punti'
+    assign t_card_note = 'appena ti iscrivi'
+    assign t_earn_k = 'Guadagna'
+    assign t_earn_h = 'Come guadagni punti'
+    assign t_redeem_k = 'Riscatta'
+    assign t_redeem_h = 'Come li usi'
+    assign t_redeem_sub = 'Nessun compito a casa: decidi tu quando trasformare i punti in vantaggi.'
+    assign t_ex_h = 'Un esempio vero'
+    assign t_ex = 'Ti iscrivi (+100), fai il primo ordine da €45 (+200 di bonus, +45 per gli euro spesi): hai già <b>345 punti</b>. Un altro ordine e sei al 5% di sconto.'
+    assign t_ref_k = 'Invita un amico'
+    assign t_ref_h = 'Il caffè buono si condivide.'
+    assign t_ref_you = 'Tu ricevi'
+    assign t_ref_friend = 'Il tuo amico riceve'
+    assign t_ref_off = '10% di sconto'
+    assign t_ref_note = 'Quando il tuo amico fa il suo primo ordine. Il tuo link invito è nel pannello premi.'
+    assign t_final_h = 'Aggiungi un posto a tavola.'
+    assign t_final_t = 'Dal 2013 Tomassi è una famiglia. Adesso c’è posto anche per te.'
+    assign t_login = 'Sei già dei nostri? Accedi'
+  endif
+  if customer
+    assign join_label = t_cta_open
+    assign join_href = routes.account_url
+  else
+    assign join_label = t_cta_join
+    assign join_href = routes.account_register_url
+  endif
+-%}
+
+<style>
+  #Fam-{{ sid }} {
+    --f-bg: #F6EEDC; --f-card: #FCF8EE; --f-ink: #1B1814; --f-green: #0F4A27;
+    --f-brown: #5A3523; --f-acc: #C2922D; --f-line: rgba(27,24,20,.12);
+    background: var(--f-bg); color: var(--f-ink); overflow: hidden;
+  }
+  #Fam-{{ sid }} .fam-wrap { width: min(112rem, 100% - 3.2rem); margin-inline: auto; }
+  #Fam-{{ sid }} .fam-kicker { display: inline-flex; align-items: center; gap: .8rem; margin: 0 0 1.4rem; font-size: 1.2rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--f-acc); }
+  #Fam-{{ sid }} .fam-kicker::before { content: ''; width: 2.4rem; height: 2px; background: currentColor; }
+  #Fam-{{ sid }} .fam-h2 { margin: 0 0 1.2rem; font-family: var(--font-heading-family); font-size: clamp(2.8rem, 4vw, 4.4rem); line-height: 1.05; color: var(--f-ink); }
+  #Fam-{{ sid }} .fam-lead { margin: 0; max-width: 56ch; font-size: 1.6rem; line-height: 1.6; color: var(--f-brown); }
+
+  /* bottoni */
+  #Fam-{{ sid }} .fam-btn { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-height: 5.2rem; padding: 0 2.8rem; border-radius: 999px; border: 0; font: inherit; font-size: 1.5rem; font-weight: 800; text-decoration: none; cursor: pointer; transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease; }
+  #Fam-{{ sid }} .fam-btn--acc { background: var(--f-acc); color: #14100C; box-shadow: 0 10px 26px rgba(194,146,45,.35); }
+  #Fam-{{ sid }} .fam-btn--acc:hover { transform: translateY(-2px); background: #F6EEDC; color: var(--f-green); }
+  #Fam-{{ sid }} .fam-btn--ghost { background: transparent; color: #F6EEDC; box-shadow: inset 0 0 0 1.5px rgba(246,238,220,.55); }
+  #Fam-{{ sid }} .fam-btn--ghost:hover { box-shadow: inset 0 0 0 1.5px #F6EEDC; transform: translateY(-2px); }
+  #Fam-{{ sid }} .fam-btn--green { background: var(--f-green); color: #F6EEDC; }
+  #Fam-{{ sid }} .fam-btn--green:hover { background: var(--f-acc); color: #14100C; transform: translateY(-2px); }
+  #Fam-{{ sid }} .fam-btn:focus-visible, #Fam-{{ sid }} .fam-link:focus-visible { outline: 2px solid var(--f-acc); outline-offset: 3px; }
+  #Fam-{{ sid }} .fam-link { color: inherit; font-size: 1.35rem; font-weight: 700; text-underline-offset: .35rem; }
+
+  /* hero */
+  #Fam-{{ sid }} .fam-hero { position: relative; background: var(--f-green); color: #F6EEDC; padding: clamp(5.6rem, 9vw, 10rem) 0 clamp(6.4rem, 9vw, 10rem); isolation: isolate; }
+  #Fam-{{ sid }} .fam-hero::before, #Fam-{{ sid }} .fam-hero::after { content: ''; position: absolute; border-radius: 50%; filter: blur(60px); z-index: -1; animation: famGlow-{{ sid }} 9s ease-in-out infinite alternate; }
+  #Fam-{{ sid }} .fam-hero::before { width: 42rem; height: 42rem; right: -8rem; top: -10rem; background: rgba(194,146,45,.35); }
+  #Fam-{{ sid }} .fam-hero::after { width: 30rem; height: 30rem; left: -10rem; bottom: -12rem; background: rgba(246,238,220,.12); animation-delay: -4s; }
+  @keyframes famGlow-{{ sid }} { from { transform: scale(1) translate(0,0); opacity: .8; } to { transform: scale(1.15) translate(-2rem, 2rem); opacity: 1; } }
+  #Fam-{{ sid }} .fam-hero__grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: clamp(3rem, 6vw, 8rem); align-items: center; }
+  #Fam-{{ sid }} .fam-hero h1 { margin: 0 0 2rem; font-family: var(--font-heading-family); font-size: clamp(3.8rem, 6.4vw, 7.2rem); line-height: .98; letter-spacing: -.01em; color: #F6EEDC; }
+  #Fam-{{ sid }} .fam-hero h1 em { display: block; font-style: normal; color: var(--f-acc); }
+  #Fam-{{ sid }} .fam-hero__sub { margin: 0 0 3rem; max-width: 52ch; font-size: 1.7rem; line-height: 1.6; color: rgba(246,238,220,.88); }
+  #Fam-{{ sid }} .fam-hero__ctas { display: flex; flex-wrap: wrap; gap: 1.2rem 1.6rem; align-items: center; }
+  #Fam-{{ sid }} .fam-hero__login { margin: 1.8rem 0 0; font-size: 1.35rem; color: rgba(246,238,220,.75); }
+
+  /* tessera punti */
+  #Fam-{{ sid }} .fam-card { position: relative; aspect-ratio: 1.58; max-width: 42rem; width: 100%; justify-self: end; padding: 2.6rem 2.8rem; border-radius: 2.2rem; background: linear-gradient(135deg, #F6EEDC 0%, #EBDDBB 100%); color: var(--f-ink); box-shadow: 0 30px 70px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.6); display: flex; flex-direction: column; justify-content: space-between; transform: rotate(-4deg); transition: transform .5s cubic-bezier(.22,.9,.35,1); overflow: hidden; }
+  #Fam-{{ sid }} .fam-card:hover { transform: rotate(-1deg) translateY(-6px); }
+  #Fam-{{ sid }} .fam-card::after { content: ''; position: absolute; top: 0; left: -80%; width: 50%; height: 100%; background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,.75) 50%, transparent 80%); transform: skewX(-18deg); animation: famSheen-{{ sid }} 5s ease-in-out 1.2s infinite; }
+  @keyframes famSheen-{{ sid }} { 0% { left: -80%; } 35% { left: 140%; } 100% { left: 140%; } }
+  #Fam-{{ sid }} .fam-card__top { display: flex; justify-content: space-between; align-items: center; font-size: 1.15rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--f-green); }
+  #Fam-{{ sid }} .fam-card__star { width: 3rem; height: 3rem; color: var(--f-acc); }
+  #Fam-{{ sid }} .fam-card__pts { margin: 0; font-family: var(--font-heading-family); font-size: clamp(5.6rem, 8vw, 8.4rem); line-height: .9; color: var(--f-green); }
+  #Fam-{{ sid }} .fam-card__pts small { font-size: .3em; margin-left: .4rem; color: var(--f-brown); }
+  #Fam-{{ sid }} .fam-card__note { margin: 0; font-size: 1.3rem; color: var(--f-brown); }
+
+  /* guadagna */
+  #Fam-{{ sid }} .fam-block { padding: clamp(5.6rem, 8vw, 9.6rem) 0; }
+  #Fam-{{ sid }} .fam-block + .fam-block { padding-top: 0; }
+  #Fam-{{ sid }} .fam-earn { list-style: none; margin: 4rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+  #Fam-{{ sid }} .fam-earn li { position: relative; padding: 2.4rem 2.4rem 2.2rem; border-radius: 1.8rem; background: var(--f-card); box-shadow: 0 1px 0 var(--f-line), 0 14px 34px rgba(27,24,20,.06); transition: transform .25s ease, box-shadow .25s ease; }
+  #Fam-{{ sid }} .fam-earn li:hover { transform: translateY(-4px); box-shadow: 0 1px 0 var(--f-line), 0 22px 44px rgba(27,24,20,.12); }
+  #Fam-{{ sid }} .fam-earn__pts { display: block; margin-bottom: .8rem; font-family: var(--font-heading-family); font-size: 3.4rem; line-height: 1; color: var(--f-green); }
+  #Fam-{{ sid }} .fam-earn__pts small { font-size: .42em; color: var(--f-acc); margin-left: .3rem; }
+  #Fam-{{ sid }} .fam-earn__label { margin: 0; font-size: 1.5rem; font-weight: 700; }
+  #Fam-{{ sid }} .fam-earn__hint { margin: .4rem 0 0; font-size: 1.3rem; color: var(--f-brown); }
+  #Fam-{{ sid }} .fam-earn li.is-hero { background: var(--f-green); color: #F6EEDC; }
+  #Fam-{{ sid }} .fam-earn li.is-hero .fam-earn__pts { color: var(--f-acc); }
+  #Fam-{{ sid }} .fam-earn li.is-hero .fam-earn__hint { color: rgba(246,238,220,.8); }
+
+  /* riscatta: scala premi */
+  #Fam-{{ sid }} .fam-redeem { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(3rem, 6vw, 8rem); align-items: start; }
+  #Fam-{{ sid }} .fam-ladder { list-style: none; margin: 0; padding: 0; position: relative; }
+  #Fam-{{ sid }} .fam-ladder::before { content: ''; position: absolute; left: 3.1rem; top: 3rem; bottom: 3rem; width: 2px; background: repeating-linear-gradient(to bottom, var(--f-acc) 0 6px, transparent 6px 12px); }
+  #Fam-{{ sid }} .fam-ladder li { position: relative; display: grid; grid-template-columns: 6.4rem 1fr; gap: 1.8rem; align-items: center; padding: 1.2rem 0; }
+  #Fam-{{ sid }} .fam-ladder__dot { position: relative; z-index: 1; width: 6.4rem; height: 6.4rem; border-radius: 50%; display: grid; place-items: center; background: var(--f-card); border: 2px solid var(--f-acc); font-family: var(--font-heading-family); font-size: 1.35rem; font-weight: 700; color: var(--f-green); line-height: 1; text-align: center; }
+  #Fam-{{ sid }} .fam-ladder__body { padding: 1.6rem 2rem; border-radius: 1.4rem; background: var(--f-card); box-shadow: 0 1px 0 var(--f-line); }
+  #Fam-{{ sid }} .fam-ladder__reward { margin: 0; font-family: var(--font-heading-family); font-size: 2.2rem; color: var(--f-ink); }
+  #Fam-{{ sid }} .fam-ladder__pts { margin: .2rem 0 0; font-size: 1.3rem; color: var(--f-brown); }
+  #Fam-{{ sid }} .fam-ladder li:last-child .fam-ladder__dot { background: var(--f-green); color: #F6EEDC; border-color: var(--f-green); }
+  #Fam-{{ sid }} .fam-example { margin-top: 3rem; padding: 2rem 2.2rem; border-radius: 1.6rem; border: 1px dashed var(--f-acc); background: rgba(194,146,45,.08); }
+  #Fam-{{ sid }} .fam-example h3 { margin: 0 0 .6rem; font-size: 1.2rem; letter-spacing: .16em; text-transform: uppercase; color: var(--f-brown); }
+  #Fam-{{ sid }} .fam-example p { margin: 0; font-size: 1.5rem; line-height: 1.6; }
+  #Fam-{{ sid }} .fam-example b { color: var(--f-green); }
+
+  /* invita */
+  #Fam-{{ sid }} .fam-ref { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 6vw, 8rem); align-items: center; padding: clamp(3.6rem, 6vw, 6.4rem); border-radius: 2.6rem; background: #1B1814; color: #F6EEDC; }
+  #Fam-{{ sid }} .fam-ref .fam-h2 { color: #F6EEDC; }
+  #Fam-{{ sid }} .fam-ref__note { margin: 1.2rem 0 0; font-size: 1.4rem; line-height: 1.6; color: rgba(246,238,220,.75); }
+  #Fam-{{ sid }} .fam-ref__split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  #Fam-{{ sid }} .fam-ref__half { padding: 2.4rem 2rem; border-radius: 1.8rem; background: rgba(246,238,220,.06); border: 1px solid rgba(194,146,45,.45); text-align: center; }
+  #Fam-{{ sid }} .fam-ref__who { margin: 0 0 .6rem; font-size: 1.2rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: rgba(246,238,220,.7); }
+  #Fam-{{ sid }} .fam-ref__val { margin: 0; font-family: var(--font-heading-family); font-size: clamp(3.2rem, 4.4vw, 4.8rem); line-height: 1; color: var(--f-acc); }
+  #Fam-{{ sid }} .fam-ref__val small { display: block; margin-top: .4rem; font-size: .32em; color: #F6EEDC; }
+
+  /* finale */
+  #Fam-{{ sid }} .fam-final { text-align: center; }
+  #Fam-{{ sid }} .fam-final .fam-lead { margin: 0 auto 2.8rem; }
+
+  /* reveal (observer interno: senza JS tutto visibile) */
+  #Fam-{{ sid }}.fam-js [data-fam-r] { opacity: 0; transform: translateY(2.4rem); transition: opacity .7s ease, transform .7s cubic-bezier(.22,.9,.35,1); transition-delay: calc(var(--fi, 0) * 90ms); }
+  #Fam-{{ sid }}.fam-js [data-fam-r].in { opacity: 1; transform: none; }
+  #Fam-{{ sid }}.fam-js .fam-card[data-fam-r] { transform: rotate(-4deg) translateY(2.4rem); }
+  #Fam-{{ sid }}.fam-js .fam-card[data-fam-r].in { transform: rotate(-4deg); }
+  #Fam-{{ sid }}.fam-js .fam-card[data-fam-r].in:hover { transform: rotate(-1deg) translateY(-6px); }
+
+  @media (max-width: 989px) {
+    #Fam-{{ sid }} .fam-hero__grid, #Fam-{{ sid }} .fam-redeem, #Fam-{{ sid }} .fam-ref { grid-template-columns: 1fr; }
+    #Fam-{{ sid }} .fam-card { justify-self: start; max-width: 36rem; }
+    #Fam-{{ sid }} .fam-earn { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 599px) {
+    #Fam-{{ sid }} .fam-earn { grid-template-columns: 1fr; }
+    #Fam-{{ sid }} .fam-ref__split { grid-template-columns: 1fr; }
+    #Fam-{{ sid }} .fam-btn { width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #Fam-{{ sid }} .fam-hero::before, #Fam-{{ sid }} .fam-hero::after, #Fam-{{ sid }} .fam-card::after { animation: none; }
+    #Fam-{{ sid }}.fam-js [data-fam-r] { opacity: 1; transform: none; transition: none; }
+    #Fam-{{ sid }}.fam-js .fam-card[data-fam-r] { transform: rotate(-4deg); }
+    #Fam-{{ sid }} .fam-btn, #Fam-{{ sid }} .fam-card, #Fam-{{ sid }} .fam-earn li { transition: none; }
+  }
+</style>
+
+<div id="Fam-{{ sid }}" class="fam">
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  <section class="fam-hero" aria-labelledby="FamTitle-{{ sid }}">
+    <div class="fam-wrap fam-hero__grid">
+      <div>
+        <p class="fam-kicker" data-fam-r>{{ t_kicker }}</p>
+        <h1 id="FamTitle-{{ sid }}" data-fam-r style="--fi:1">{{ t_title_a }} <em>{{ t_title_b }}</em></h1>
+        <p class="fam-hero__sub" data-fam-r style="--fi:2">{{ t_sub }}</p>
+        <div class="fam-hero__ctas" data-fam-r style="--fi:3">
+          <a class="fam-btn fam-btn--acc" href="{{ join_href }}" data-fam-open>{{ join_label }}</a>
+          <a class="fam-btn fam-btn--ghost" href="#FamEarn-{{ sid }}">{{ t_cta_how }}</a>
+        </div>
+        {%- unless customer -%}
+          <p class="fam-hero__login" data-fam-r style="--fi:4"><a class="fam-link" href="{{ routes.account_login_url }}" data-fam-open>{{ t_login }}</a></p>
+        {%- endunless -%}
+      </div>
+      <div class="fam-card" data-fam-r style="--fi:2" aria-hidden="true">
+        <div class="fam-card__top">
+          <span>Tomassi Family</span>
+          <svg class="fam-card__star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.8l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 16.8l-5.4 2.9 1-6.1L3.2 9.3l6.1-.9L12 2.8z"/></svg>
+        </div>
+        <div>
+          <p class="fam-card__note">{{ t_card_label }}</p>
+          <p class="fam-card__pts">+100<small>{{ t_card_pts }}</small></p>
+          <p class="fam-card__note">{{ t_card_note }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- GUADAGNA ---------- {%- endcomment -%}
+  <section id="FamEarn-{{ sid }}" class="fam-block" aria-labelledby="FamEarnH-{{ sid }}">
+    <div class="fam-wrap">
+      <p class="fam-kicker" data-fam-r>{{ t_earn_k }}</p>
+      <h2 id="FamEarnH-{{ sid }}" class="fam-h2" data-fam-r style="--fi:1">{{ t_earn_h }}</h2>
+      <ul class="fam-earn" role="list">
+        {%- if L == 'en' -%}
+          <li class="is-hero" data-fam-r style="--fi:1"><span class="fam-earn__pts">+200<small>pts</small></span><p class="fam-earn__label">Your first order</p><p class="fam-earn__hint">A welcome bonus on top of your euro points.</p></li>
+          <li data-fam-r style="--fi:2"><span class="fam-earn__pts">+1<small>pt / €</small></span><p class="fam-earn__label">Every order</p><p class="fam-earn__hint">One point per euro — up to 2× as you level up.</p></li>
+          <li data-fam-r style="--fi:3"><span class="fam-earn__pts">+100<small>pts</small></span><p class="fam-earn__label">Joining the Family</p><p class="fam-earn__hint">Create your free account.</p></li>
+          <li data-fam-r style="--fi:4"><span class="fam-earn__pts">+100<small>pts</small></span><p class="fam-earn__label">Newsletter sign-up</p><p class="fam-earn__hint">New lots, recipes and roasting news.</p></li>
+          <li data-fam-r style="--fi:5"><span class="fam-earn__pts">+50<small>pts</small></span><p class="fam-earn__label">Your birthday</p><p class="fam-earn__hint">We celebrate with you.</p></li>
+          <li data-fam-r style="--fi:6"><span class="fam-earn__pts">+1<small>pt</small></span><p class="fam-earn__label">Stopping by</p><p class="fam-earn__hint">Every visit to the site counts.</p></li>
+        {%- else -%}
+          <li class="is-hero" data-fam-r style="--fi:1"><span class="fam-earn__pts">+200<small>punti</small></span><p class="fam-earn__label">Il tuo primo ordine</p><p class="fam-earn__hint">Un bonus di benvenuto, in più dei punti per gli euro spesi.</p></li>
+          <li data-fam-r style="--fi:2"><span class="fam-earn__pts">+1<small>punto / €</small></span><p class="fam-earn__label">Ogni ordine</p><p class="fam-earn__hint">Un punto per ogni euro, fino a 2× salendo di livello.</p></li>
+          <li data-fam-r style="--fi:3"><span class="fam-earn__pts">+100<small>punti</small></span><p class="fam-earn__label">Entri nella Family</p><p class="fam-earn__hint">Crei il tuo account, gratis.</p></li>
+          <li data-fam-r style="--fi:4"><span class="fam-earn__pts">+100<small>punti</small></span><p class="fam-earn__label">Ti iscrivi alla newsletter</p><p class="fam-earn__hint">Nuovi lotti, ricette e novità dalla tostatura.</p></li>
+          <li data-fam-r style="--fi:5"><span class="fam-earn__pts">+50<small>punti</small></span><p class="fam-earn__label">Il tuo compleanno</p><p class="fam-earn__hint">Festeggiamo con te.</p></li>
+          <li data-fam-r style="--fi:6"><span class="fam-earn__pts">+1<small>punto</small></span><p class="fam-earn__label">Passi a trovarci</p><p class="fam-earn__hint">Anche una visita al sito conta.</p></li>
+        {%- endif -%}
+      </ul>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- RISCATTA ---------- {%- endcomment -%}
+  <section class="fam-block" aria-labelledby="FamRedH-{{ sid }}">
+    <div class="fam-wrap fam-redeem">
+      <div>
+        <p class="fam-kicker" data-fam-r>{{ t_redeem_k }}</p>
+        <h2 id="FamRedH-{{ sid }}" class="fam-h2" data-fam-r style="--fi:1">{{ t_redeem_h }}</h2>
+        <p class="fam-lead" data-fam-r style="--fi:2">{{ t_redeem_sub }}</p>
+        <div class="fam-example" data-fam-r style="--fi:3">
+          <h3>{{ t_ex_h }}</h3>
+          <p>{{ t_ex }}</p>
+        </div>
+      </div>
+      <ol class="fam-ladder" role="list">
+        {%- if L == 'en' -%}
+          <li data-fam-r style="--fi:1"><span class="fam-ladder__dot">500</span><div class="fam-ladder__body"><p class="fam-ladder__reward">5% off</p><p class="fam-ladder__pts">for 500 points</p></div></li>
+          <li data-fam-r style="--fi:2"><span class="fam-ladder__dot">1000</span><div class="fam-ladder__body"><p class="fam-ladder__reward">10% off</p><p class="fam-ladder__pts">for 1000 points</p></div></li>
+          <li data-fam-r style="--fi:3"><span class="fam-ladder__dot">1000</span><div class="fam-ladder__body"><p class="fam-ladder__reward">Free shipping</p><p class="fam-ladder__pts">for 1000 points</p></div></li>
+          <li data-fam-r style="--fi:4"><span class="fam-ladder__dot">2000</span><div class="fam-ladder__body"><p class="fam-ladder__reward">20% off</p><p class="fam-ladder__pts">for 2000 points</p></div></li>
+        {%- else -%}
+          <li data-fam-r style="--fi:1"><span class="fam-ladder__dot">500</span><div class="fam-ladder__body"><p class="fam-ladder__reward">5% di sconto</p><p class="fam-ladder__pts">con 500 punti</p></div></li>
+          <li data-fam-r style="--fi:2"><span class="fam-ladder__dot">1000</span><div class="fam-ladder__body"><p class="fam-ladder__reward">10% di sconto</p><p class="fam-ladder__pts">con 1000 punti</p></div></li>
+          <li data-fam-r style="--fi:3"><span class="fam-ladder__dot">1000</span><div class="fam-ladder__body"><p class="fam-ladder__reward">Spedizione gratuita</p><p class="fam-ladder__pts">con 1000 punti</p></div></li>
+          <li data-fam-r style="--fi:4"><span class="fam-ladder__dot">2000</span><div class="fam-ladder__body"><p class="fam-ladder__reward">20% di sconto</p><p class="fam-ladder__pts">con 2000 punti</p></div></li>
+        {%- endif -%}
+      </ol>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- LIVELLI (Chicco → Tostatore) ---------- {%- endcomment -%}
+  {%- render 'tomassi-family-tiers', sid: sid, L: L -%}
+
+  {%- comment -%} ---------- INVITA UN AMICO ---------- {%- endcomment -%}
+  <section class="fam-block" aria-labelledby="FamRefH-{{ sid }}">
+    <div class="fam-wrap">
+      <div class="fam-ref" data-fam-r>
+        <div>
+          <p class="fam-kicker">{{ t_ref_k }}</p>
+          <h2 id="FamRefH-{{ sid }}" class="fam-h2">{{ t_ref_h }}</h2>
+          <p class="fam-ref__note">{{ t_ref_note }}</p>
+        </div>
+        <div class="fam-ref__split">
+          <div class="fam-ref__half"><p class="fam-ref__who">{{ t_ref_you }}</p><p class="fam-ref__val">10%<small>{{ t_ref_off }}</small></p></div>
+          <div class="fam-ref__half"><p class="fam-ref__who">{{ t_ref_friend }}</p><p class="fam-ref__val">10%<small>{{ t_ref_off }}</small></p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ---------- FINALE ---------- {%- endcomment -%}
+  <section class="fam-block fam-final" aria-labelledby="FamFinH-{{ sid }}">
+    <div class="fam-wrap">
+      <h2 id="FamFinH-{{ sid }}" class="fam-h2" data-fam-r>{{ t_final_h }}</h2>
+      <p class="fam-lead" data-fam-r style="--fi:1">{{ t_final_t }}</p>
+      <div data-fam-r style="--fi:2"><a class="fam-btn fam-btn--green" href="{{ join_href }}" data-fam-open>{{ join_label }}</a></div>
+    </div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('Fam-{{ sid }}');
+    if (!root) return;
+    /* Apre il pannello dell'app fedelta se c'e; altrimenti il link porta a registrazione/login */
+    root.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('[data-fam-open]');
+      if (!a) return;
+      var launcher = document.querySelector('#honeypop-app button');
+      if (launcher) { e.preventDefault(); launcher.click(); }
+    });
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+    root.classList.add('fam-js');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .12 });
+    root.querySelectorAll('[data-fam-r]').forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Tomassi Family",
+  "tag": "div",
+  "class": "section-tomassi-family",
+  "settings": [],
+  "presets": [{ "name": "Tomassi Family" }]
+}
+{% endschema %}

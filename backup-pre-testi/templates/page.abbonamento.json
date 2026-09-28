@@ -1,0 +1,206 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "subscription_landing": {
+      "type": "subscription-landing",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "title": "Fresco davvero",
+            "text": "Tostiamo su ordinazione: il caffè non resta fermo in magazzino ad aspettarti."
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "title": "Scelto da noi",
+            "text": "Ogni mese selezioniamo lotti 100% Arabica per stagione, origine e processo. Classici o più spinti, sempre tracciabili."
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "title": "Fatto a modo tuo",
+            "text": "Tostatura chiara o media, in grani o macinato per espresso, moka o filtro. 2, 4 o 6 buste da 250 g."
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "title": "Lo sconto cresce",
+            "text": "Dal 10 al 20% di sconto dal primo invio. Dal secondo anno sale fino al 25%."
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "title": "Ricette incluse",
+            "text": "Ti aiutiamo a estrarre meglio, con consigli semplici e utili."
+          }
+        },
+        "plan_1": {
+          "type": "plan",
+          "settings": {
+            "title": "Mensile",
+            "discount": "10% di sconto",
+            "text": "Paghi ogni mese, ricevi ogni mese. Dal 13° mese lo sconto sale al 15%. Impegno minimo: 3 mesi.",
+            "highlight": false,
+            "badge": "",
+            "button_label": "Scegli mensile",
+            "button_link": "/products/abbonamento-bi-settimanale?selling_plan=695464034649"
+          }
+        },
+        "plan_2": {
+          "type": "plan",
+          "settings": {
+            "title": "Trimestrale",
+            "discount": "15% di sconto",
+            "text": "Paghi ogni 3 mesi, ricevi ogni mese. Dal secondo anno lo sconto sale al 20%. Impegno minimo: 6 mesi.",
+            "highlight": true,
+            "badge": "Consigliato",
+            "button_label": "Scegli trimestrale",
+            "button_link": "/products/abbonamento-bi-settimanale?selling_plan=695493034329"
+          }
+        },
+        "plan_3": {
+          "type": "plan",
+          "settings": {
+            "title": "Semestrale",
+            "discount": "20% di sconto",
+            "text": "Paghi ogni 6 mesi, ricevi ogni mese. Dal secondo anno lo sconto sale al 25%. Impegno minimo: 6 mesi.",
+            "highlight": false,
+            "badge": "",
+            "button_label": "Scegli semestrale",
+            "button_link": "/products/abbonamento-bi-settimanale?selling_plan=695493001561"
+          }
+        },
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Scegli",
+            "text": "Tostatura, formato, numero di buste e ogni quanto pagare."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Selezioniamo",
+            "text": "Scegliamo i lotti del mese in base a stagione, origini e profili che ci convincono in tazza."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Spediamo il 28",
+            "text": "Se ti abboni entro il 25 spediamo il 28 del mese. Dopo il 25, il primo invio parte il 28 del mese successivo."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Bevi meglio",
+            "text": "Ogni invio è diverso ma coerente. Nei formati grandi può capitare un doppione: vuol dire che valeva la pena."
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Posso modificare, saltare o annullare?",
+            "answer": "Sì, dopo l’impegno minimo: 3 invii consecutivi con il piano mensile, 2 pagamenti con il trimestrale, 1 con il semestrale. Poi gestisci tutto dalla pagina Gestisci abbonamento. Finché non disdici, l’abbonamento si rinnova automaticamente e l’addebito continua."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Quando arriva il caffè?",
+            "answer": "Se ti abboni entro il 25 del mese spediamo il 28 (se non è festivo). Dal 26 in poi il primo invio parte il 28 del mese successivo."
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Che caffè ricevo?",
+            "answer": "Una selezione di specialty 100% Arabica scelta dal nostro team, diversa a ogni invio: varietà classiche, lavorazioni più spinte, lotti iconici o nuove micro produzioni."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Quanto risparmio?",
+            "answer": "Mensile: 10% il primo anno, poi 15%. Trimestrale: 15%, poi 20%. Semestrale: 20%, poi 25%. Lo sconto si applica a ogni invio."
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "È solo per espresso?",
+            "answer": "No. Scegli tostatura chiara o media e il formato: in grani oppure macinato per espresso, moka o filtro."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "plan_1",
+        "plan_2",
+        "plan_3",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "hero_kicker": "Abbonamento Tomassi",
+        "hero_title": "Caffè specialty scelto da noi, a casa tua ogni mese.",
+        "hero_subtitle": "Scegli tostatura, formato e quante buste ricevere. Noi selezioniamo i lotti che ci convincono in tazza e te li spediamo freschi. Meno pensieri, più tazze buone.",
+        "hero_cta1_label": "Scegli il tuo piano",
+        "hero_cta1_link": "#subl-piani",
+        "hero_cta2_label": "Scopri come funziona",
+        "hero_cta2_link": "#subl-come-funziona",
+        "hero_note": "Da 2 buste al mese · fino al 20% di sconto dal primo invio",
+        "benefits_title": "Perché abbonarsi",
+        "plans_title": "Scegli il tuo ritmo",
+        "steps_title": "Come funziona",
+        "faq_title": "Domande frequenti",
+        "final_title": "Pronto a non rimanere più senza caffè buono?",
+        "final_text": "Tu scegli il ritmo. Noi pensiamo a selezione e tostatura.",
+        "final_button_label": "Attiva il tuo abbonamento",
+        "final_button_link": "/products/abbonamento-bi-settimanale",
+        "bg_color": "#F6EEDC",
+        "card_color": "#FCF8EE",
+        "text_color": "#1B1814",
+        "accent_color": "#C2922D",
+        "green_color": "#0F4A27",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "polish": {
+      "type": "page-polish",
+      "settings": {
+        "accent_color": "#C2922D"
+      }
+    }
+  },
+  "order": [
+    "subscription_landing",
+    "polish"
+  ]
+}

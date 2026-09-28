@@ -1,0 +1,213 @@
+{% comment %}
+  Tomassi — Pagina Campioni "Un team vincente, una famiglia di campioni" (redesign direzione A).
+  Hero verde + storytelling "Dietro le medaglie" + timeline palmarès (nera) + card campioni +
+  mosaico foto gara + CTA verso recruiting. Palette verde #0F4A27 / crema / ocra #C2922D.
+  Motion reveal observer interno (.ct-js/.ct-in). Copy on-brand concordata col cliente.
+  Foto reali del body: IMG_9791 (team), IMG_6790, IMG_6718, IMG_5925, IMG_5396 (gara).
+  Bilingue IT/EN via request.locale.iso_code.
+{% endcomment %}
+
+{%- assign pid = section.id -%}
+{%- assign L = request.locale.iso_code -%}
+{%- assign cta_link = section.settings.cta_link | default: '/pages/entra-a-far-parte-del-nostro-team-di-campioni' -%}
+{%- assign img_hero = 'https://cdn.shopify.com/s/files/1/0874/1932/2713/files/IMG_9791.jpg?v=1738320752' -%}
+{%- assign img_break = 'https://cdn.shopify.com/s/files/1/0874/1932/2713/files/IMG_6790.jpg?v=1738669362' -%}
+{%- assign img_m1 = 'https://cdn.shopify.com/s/files/1/0874/1932/2713/files/IMG_6718.jpg?v=1738668751' -%}
+{%- assign img_m2 = 'https://cdn.shopify.com/s/files/1/0874/1932/2713/files/IMG_5925.jpg?v=1738668654' -%}
+{%- assign img_m3 = 'https://cdn.shopify.com/s/files/1/0874/1932/2713/files/IMG_5396.jpg?v=1738668586' -%}
+
+{% style %}
+  #ct-{{ pid }} {
+    --ct-green:#0F4A27; --ct-green-deep:#0B3A1E; --ct-cream:#F5ECD7; --ct-ink:#14100C;
+    --ct-ocra:#C2922D; --ct-gold:#D9AE4E; --ct-fg-dark:#F6EEDC; --ct-fg-cream:#33503F;
+    overflow:hidden;
+  }
+  #ct-{{ pid }} *{box-sizing:border-box;}
+  #ct-{{ pid }} .ct-wrap{max-width:108rem;margin:0 auto;padding:0 clamp(2rem,5vw,5rem);}
+  #ct-{{ pid }} .ct-band{padding:clamp(3.4rem,6vw,6.4rem) 0;}
+  #ct-{{ pid }} .ct-title{font-family:var(--font-heading-family,inherit);font-weight:700;line-height:1.02;letter-spacing:-0.01em;margin:0;}
+  #ct-{{ pid }} .ct-kicker{display:inline-flex;align-items:center;gap:1rem;font-size:1.2rem;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:var(--ct-ocra);}
+  #ct-{{ pid }} .ct-kicker::before{content:"";width:2.6rem;height:2px;background:var(--ct-ocra);display:inline-block;}
+
+  #ct-{{ pid }} .ct-hero{background:var(--ct-green);color:var(--ct-fg-dark);}
+  #ct-{{ pid }} .ct-hero .ct-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(2rem,4vw,4rem);align-items:center;}
+  #ct-{{ pid }} .ct-hero__title{color:var(--ct-fg-dark);font-size:clamp(3.2rem,5vw,5.4rem);margin:1.4rem 0 0;max-width:16ch;}
+  #ct-{{ pid }} .ct-hero__intro{color:#CFE0D3;font-size:clamp(1.5rem,1.2rem + 0.5vw,1.8rem);line-height:1.6;margin:1.8rem 0 0;max-width:42ch;}
+  #ct-{{ pid }} .ct-hero__media{position:relative;aspect-ratio:4/3.2;border-radius:14px;overflow:hidden;border:1px solid rgba(217,174,78,0.35);}
+  #ct-{{ pid }} .ct-hero__img{width:100%;height:100%;object-fit:cover;display:block;animation:ct-kb-{{ pid }} 16s ease-in-out infinite alternate;}
+  @keyframes ct-kb-{{ pid }}{from{transform:scale(1.03);}to{transform:scale(1.13);}}
+
+  #ct-{{ pid }} .ct-ed{background:var(--ct-cream);}
+  #ct-{{ pid }} .ct-ed__body{max-width:66ch;}
+  #ct-{{ pid }} .ct-ed__p{color:var(--ct-fg-cream);font-size:clamp(1.5rem,1.3rem + 0.3vw,1.7rem);line-height:1.85;margin:1.4rem 0 0;}
+  #ct-{{ pid }} .ct-quote{border-left:3px solid var(--ct-ocra);padding:0.4rem 0 0.4rem 2rem;margin:2.6rem 0 0;color:var(--ct-green);font-style:italic;font-weight:500;font-size:clamp(2rem,1.6rem + 1.2vw,2.8rem);line-height:1.3;max-width:22ch;}
+
+  #ct-{{ pid }} .ct-break{height:clamp(22rem,40vw,42rem);overflow:hidden;}
+  #ct-{{ pid }} .ct-break__img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04);transition:transform 1.2s ease;}
+  #ct-{{ pid }} .ct-break:hover .ct-break__img{transform:scale(1.09);}
+
+  #ct-{{ pid }} .ct-pal{background:var(--ct-ink);color:var(--ct-fg-dark);}
+  #ct-{{ pid }} .ct-pal__title{color:var(--ct-fg-dark);font-size:clamp(2.2rem,1.7rem + 1.4vw,3rem);margin:1rem 0 2.6rem;max-width:24ch;}
+  #ct-{{ pid }} .ct-time{border-left:2px solid rgba(217,174,78,0.35);padding-left:2rem;display:flex;flex-direction:column;gap:2rem;}
+  #ct-{{ pid }} .ct-time__it{position:relative;}
+  #ct-{{ pid }} .ct-time__it::before{content:"";position:absolute;left:-2.75rem;top:0.4rem;width:1.3rem;height:1.3rem;border-radius:50%;background:var(--ct-gold);box-shadow:0 0 0 4px rgba(217,174,78,0.15);}
+  #ct-{{ pid }} .ct-time__yr{color:var(--ct-gold);font-weight:700;font-size:1.6rem;letter-spacing:0.02em;}
+  #ct-{{ pid }} .ct-time__tx{color:#C9BDA6;font-size:1.4rem;line-height:1.6;margin:0.3rem 0 0;max-width:60ch;}
+  #ct-{{ pid }} .ct-time__tx b{color:var(--ct-fg-dark);font-weight:600;}
+
+  #ct-{{ pid }} .ct-team{background:var(--ct-cream);}
+  #ct-{{ pid }} .ct-team__title{color:var(--ct-green);font-size:clamp(2.2rem,1.7rem + 1.4vw,3rem);margin:1rem 0 2.4rem;}
+  #ct-{{ pid }} .ct-team__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1rem,2vw,1.6rem);}
+  #ct-{{ pid }} .ct-mcard{background:#fff;border:1px solid #E4D6B6;border-radius:14px;padding:2rem 1.6rem;transition:transform 0.25s ease,border-color 0.25s ease,box-shadow 0.25s ease;}
+  #ct-{{ pid }} .ct-mcard:hover{transform:translateY(-4px);border-color:var(--ct-ocra);box-shadow:0 1.4rem 3rem rgba(15,74,39,0.12);}
+  #ct-{{ pid }} .ct-mcard__ic{width:2.8rem;height:2.8rem;color:var(--ct-ocra);}
+  #ct-{{ pid }} .ct-mcard__ic svg{width:100%;height:100%;}
+  #ct-{{ pid }} .ct-mcard__n{color:var(--ct-green);font-size:1.7rem;font-weight:600;margin:1rem 0 0.2rem;}
+  #ct-{{ pid }} .ct-mcard__r{color:var(--ct-ocra);font-size:1.15rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;}
+  #ct-{{ pid }} .ct-mcard__d{color:#5F7566;font-size:1.3rem;line-height:1.5;margin:0.8rem 0 0;}
+
+  #ct-{{ pid }} .ct-mosaic{display:grid;grid-template-columns:2fr 1fr 1fr;gap:0.6rem;height:clamp(20rem,32vw,34rem);}
+  #ct-{{ pid }} .ct-mosaic img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  #ct-{{ pid }} .ct-cta{background:var(--ct-green);color:var(--ct-fg-dark);text-align:center;}
+  #ct-{{ pid }} .ct-cta__title{color:var(--ct-fg-dark);font-size:clamp(2.4rem,1.9rem + 1.6vw,3.6rem);margin:1.2rem 0 1rem;max-width:22ch;margin-left:auto;margin-right:auto;}
+  #ct-{{ pid }} .ct-cta__tx{color:#CFE0D3;font-size:1.5rem;line-height:1.6;margin:0 auto 2rem;max-width:52ch;}
+  #ct-{{ pid }} .ct-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:0.8rem;background:var(--ct-ocra);color:#20160A;font-size:1.5rem;font-weight:700;padding:1.3rem 3rem;border-radius:999px;text-decoration:none;transition:transform 0.2s ease;}
+  #ct-{{ pid }} .ct-btn:hover{transform:translateY(-2px);}
+  #ct-{{ pid }} .ct-btn::after{content:"";position:absolute;top:0;bottom:0;left:0;width:55%;background:linear-gradient(105deg,transparent,rgba(255,255,255,0.4),transparent);transform:translateX(-160%) skewX(-18deg);transition:transform 0.7s ease;pointer-events:none;}
+  #ct-{{ pid }} .ct-btn:hover::after{transform:translateX(320%) skewX(-18deg);}
+
+  #ct-{{ pid }}.ct-js .ct-rev{opacity:0;transform:translateY(2rem);transition:opacity 0.7s ease,transform 0.7s ease;transition-delay:calc(var(--i,0)*90ms);}
+  #ct-{{ pid }}.ct-js .ct-band.ct-in .ct-rev{opacity:1;transform:none;}
+
+  @media screen and (max-width:749px){
+    #ct-{{ pid }} .ct-hero .ct-wrap{grid-template-columns:1fr;}
+    #ct-{{ pid }} .ct-hero__media{order:-1;aspect-ratio:16/10;}
+    #ct-{{ pid }} .ct-team__grid{grid-template-columns:1fr 1fr;}
+    #ct-{{ pid }} .ct-mosaic{grid-template-columns:1fr 1fr;height:auto;}
+    #ct-{{ pid }} .ct-mosaic img{height:16rem;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #ct-{{ pid }} .ct-hero__img{animation:none;}
+    #ct-{{ pid }} .ct-break__img,#ct-{{ pid }} .ct-mcard,#ct-{{ pid }} .ct-btn{transition:none;}
+    #ct-{{ pid }} .ct-btn::after{display:none;}
+  }
+{% endstyle %}
+
+<div id="ct-{{ pid }}" data-ct-root>
+
+  <section class="ct-band ct-hero">
+    <div class="ct-wrap">
+      <div>
+        <span class="ct-kicker ct-rev" style="--i:0">Coffee Champions</span>
+        <h1 class="ct-title ct-hero__title ct-rev" style="--i:1">{% if L == 'en' %}A winning team, a family of champions{% else %}Un team vincente, una famiglia di campioni{% endif %}</h1>
+        <p class="ct-hero__intro ct-rev" style="--i:2">{% if L == 'en' %}Competing isn't just racing: it's sharing a journey, growing together, being part of a family that always aims higher.{% else %}Competere non è solo gareggiare: è condividere un percorso, crescere insieme, far parte di una famiglia che punta sempre oltre.{% endif %}</p>
+      </div>
+      <div class="ct-hero__media ct-rev" style="--i:2">
+        <img class="ct-hero__img" src="{{ img_hero }}" alt="{% if L == 'en' %}The Tomassi Coffee team{% else %}Il team Tomassi Coffee{% endif %}" loading="lazy" width="1200" height="960">
+      </div>
+    </div>
+  </section>
+
+  <section class="ct-band ct-ed">
+    <div class="ct-wrap">
+      <span class="ct-kicker ct-rev" style="--i:0">{% if L == 'en' %}Behind the medals{% else %}Dietro le medaglie{% endif %}</span>
+      <div class="ct-ed__body">
+        <p class="ct-ed__p ct-rev" style="--i:1">{% if L == 'en' %}We're not just coaches: we're competitors, we're champions, we're a team. Here every member is more than a colleague — a brother, a sister, a fellow traveller.{% else %}Non siamo solo allenatori: siamo competitor, siamo campioni, siamo una squadra. Qui ogni membro del team è più di un collega — è un fratello, una sorella, un compagno di viaggio.{% endif %}</p>
+        <p class="ct-ed__p ct-rev" style="--i:2">{% if L == 'en' %}We dream together, we sweat together, we win together. United by a passion for coffee and the drive to keep pushing further.{% else %}Si sogna insieme, si fatica insieme, si vince insieme. Uniti dalla passione per il caffè e dal desiderio di spingerci sempre oltre.{% endif %}</p>
+        <blockquote class="ct-quote ct-rev" style="--i:2">{% if L == 'en' %}Medals fade. The team stays.{% else %}Le medaglie passano. La squadra resta.{% endif %}</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <div class="ct-break">
+    <img class="ct-break__img" src="{{ img_break }}" alt="{% if L == 'en' %}Tomassi Coffee competing{% else %}Tomassi Coffee in gara{% endif %}" loading="lazy" width="1800" height="1000">
+  </div>
+
+  <section class="ct-band ct-pal">
+    <div class="ct-wrap">
+      <span class="ct-kicker ct-rev" style="--i:0">{% if L == 'en' %}A story of success{% else %}Una storia di successo{% endif %}</span>
+      <h2 class="ct-title ct-pal__title ct-rev" style="--i:1">{% if L == 'en' %}Hours of work, turned into milestones{% else %}Ore di lavoro, trasformate in traguardi{% endif %}</h2>
+      <div class="ct-time">
+        <div class="ct-time__it ct-rev" style="--i:1"><div class="ct-time__yr">2018</div><p class="ct-time__tx">{% if L == 'en' %}Emanuele, <b>Italian Roasting Champion</b>. Italy heads to the Worlds: finishing in the <b>top 10</b>.{% else %}Emanuele <b>Campione Italiano di Roasting</b>. L'Italia va ai Mondiali: chiusura in <b>top 10</b>.{% endif %}</p></div>
+        <div class="ct-time__it ct-rev" style="--i:2"><div class="ct-time__yr">2024</div><p class="ct-time__tx">{% if L == 'en' %}<b>Italian Roasting Champion</b> again and <b>6th overall at the Worlds</b>.{% else %}Di nuovo <b>Campione Italiano di Roasting</b> e <b>6° posto assoluto ai Mondiali</b>.{% endif %}</p></div>
+        <div class="ct-time__it ct-rev" style="--i:3"><div class="ct-time__yr">2025</div><p class="ct-time__tx">{% if L == 'en' %}Roasting: <b>2nd place</b> — consistency and limitless commitment rewarded.{% else %}Roasting: <b>2° posto</b> — la costanza e l'impegno senza limiti premiati.{% endif %}</p></div>
+        <div class="ct-time__it ct-rev" style="--i:4"><div class="ct-time__yr">2025 · Andrè</div><p class="ct-time__tx">{% if L == 'en' %}<b>2nd at the Italian Ibrik Championships</b>; <b>Chiara Ressa</b> among the national finalists.{% else %}<b>2° ai Campionati Italiani Ibrik</b>; <b>Chiara Ressa</b> tra i finalisti nazionali.{% endif %}</p></div>
+        <div class="ct-time__it ct-rev" style="--i:5"><div class="ct-time__yr">2025 · Brewers</div><p class="ct-time__tx">{% if L == 'en' %}Andrè among the best at the <b>Italian Brewers Championship</b> for the <b>fourth year running</b> (filter coffee).{% else %}Andrè tra i migliori del <b>Campionato Italiano Brewers</b> per il <b>quarto anno di fila</b> (caffè filtro).{% endif %}</p></div>
+        <div class="ct-time__it ct-rev" style="--i:6"><div class="ct-time__yr">Barista Championship</div><p class="ct-time__tx">{% if L == 'en' %}Semi-finalists: <b>Andrè (2024)</b> and <b>Sacha Pompucci (2025)</b>.{% else %}Semifinalisti: <b>Andrè (2024)</b> e <b>Sacha Pompucci (2025)</b>.{% endif %}</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ct-band ct-team">
+    <div class="ct-wrap">
+      <h2 class="ct-title ct-team__title ct-rev" style="--i:0">{% if L == 'en' %}The champions in the family{% else %}I campioni della famiglia{% endif %}</h2>
+      <div class="ct-team__grid">
+        <div class="ct-mcard ct-rev" style="--i:0">
+          <span class="ct-mcard__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span>
+          <div class="ct-mcard__n">Emanuele Tomassi</div>
+          <div class="ct-mcard__r">Master roaster</div>
+          <p class="ct-mcard__d">{% if L == 'en' %}Italian Roasting Champion 2018 &amp; 2024 · 6th at the Worlds.{% else %}Campione Italiano Roasting 2018 &amp; 2024 · 6° ai Mondiali.{% endif %}</p>
+        </div>
+        <div class="ct-mcard ct-rev" style="--i:1">
+          <span class="ct-mcard__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span>
+          <div class="ct-mcard__n">Andrè Tomassi</div>
+          <div class="ct-mcard__r">Barista &amp; brewer</div>
+          <p class="ct-mcard__d">{% if L == 'en' %}2nd Ibrik 2025 · top Brewers for 4 years · Barista semi-finalist.{% else %}2° Ibrik 2025 · top Brewers da 4 anni · semifinalista Barista.{% endif %}</p>
+        </div>
+        <div class="ct-mcard ct-rev" style="--i:2">
+          <span class="ct-mcard__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span>
+          <div class="ct-mcard__n">Chiara Ressa</div>
+          <div class="ct-mcard__r">{% if L == 'en' %}Competing{% else %}In gara{% endif %}</div>
+          <p class="ct-mcard__d">{% if L == 'en' %}National finalist 2025.{% else %}Finalista nazionale 2025.{% endif %}</p>
+        </div>
+        <div class="ct-mcard ct-rev" style="--i:3">
+          <span class="ct-mcard__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span>
+          <div class="ct-mcard__n">Sacha Pompucci</div>
+          <div class="ct-mcard__r">{% if L == 'en' %}Competing{% else %}In gara{% endif %}</div>
+          <p class="ct-mcard__d">{% if L == 'en' %}Barista Championship semi-finalist 2025.{% else %}Semifinalista Barista Championship 2025.{% endif %}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ct-mosaic ct-rev" style="--i:0">
+    <img src="{{ img_m1 }}" alt="{% if L == 'en' %}Tomassi competition moment{% else %}Momento di gara Tomassi{% endif %}" loading="lazy" width="1000" height="1000">
+    <img src="{{ img_m2 }}" alt="{% if L == 'en' %}Filter coffee preparation{% else %}Preparazione caffè filtro{% endif %}" loading="lazy" width="700" height="1000">
+    <img src="{{ img_m3 }}" alt="{% if L == 'en' %}Barista in competition{% else %}Barista in competizione{% endif %}" loading="lazy" width="700" height="1000">
+  </div>
+
+  <section class="ct-band ct-cta">
+    <div class="ct-wrap">
+      <span class="ct-kicker ct-rev" style="--i:0">{% if L == 'en' %}One of us?{% else %}Sei dei nostri?{% endif %}</span>
+      <h2 class="ct-title ct-cta__title ct-rev" style="--i:1">{% if L == 'en' %}Ready to join a family of champions?{% else %}Sei pronto a far parte di una famiglia di campioni?{% endif %}</h2>
+      <p class="ct-cta__tx ct-rev" style="--i:2">{% if L == 'en' %}If your goal is to push past your limits and compete with the best, you're in the right place.{% else %}Se il tuo obiettivo è superare i tuoi limiti e competere con i migliori, sei nel posto giusto.{% endif %}</p>
+      <div class="ct-rev" style="--i:3"><a class="ct-btn" href="{{ cta_link }}">{% if L == 'en' %}Join the team{% else %}Entra nel team{% endif %}</a></div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('ct-{{ pid }}');
+    if (!root) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+    root.classList.add('ct-js');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('ct-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+    root.querySelectorAll('.ct-band, .ct-mosaic').forEach(function (b) { io.observe(b); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Campioni team — pagina",
+  "settings": [
+    { "type": "url", "id": "cta_link", "label": "Link bottone 'Entra nel team'" }
+  ],
+  "presets": [{ "name": "Campioni team — pagina" }]
+}
+{% endschema %}
