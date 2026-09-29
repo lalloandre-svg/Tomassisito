@@ -1,0 +1,535 @@
+{%- comment -%}
+  Tomassi — Hero homepage (redesign audace, versione cinematica)
+  Foto full-bleed + scrim direzionale, badge credenziale (campionati),
+  titolo Clash Display a due toni (panna + accento ocra), CTA forti, trust row,
+  etichetta verticale editoriale. Focus: il caffè buono.
+  Motion: coreografia d'ingresso (titolo parola-per-parola, badge/CTA/trust a cascata),
+  ken-burns lento sulla foto, parallax leggero allo scroll, sheen sulla CTA,
+  indicatore di scroll. Tutto JS-driven: senza JS o con reduced-motion la hero
+  è statica e completamente visibile.
+  A11y: heading h2 (h1 = logo header), colori forzati per contrasto AA,
+  focus-visible, target ≥44px; immagine fetchpriority high (LCP).
+  Copy bilingue IT/EN via snippet tomassi-i18n (mappa sul valore delle impostazioni).
+{%- endcomment -%}
+
+{%- style -%}
+  #HomeHero-{{ section.id }} {
+    --hh-fg: {{ section.settings.text_color }};
+    --hh-accent: {{ section.settings.accent_color }};
+    --hh-ink: #140e0a;
+    --hh-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    min-height: {{ section.settings.min_height }}px;
+  }
+{%- endstyle -%}
+
+{%- comment -%} Nel titolo "|" = a capo voluto su desktop (su mobile diventa uno spazio). {%- endcomment -%}
+{%- assign hh_plain = section.settings.heading | replace: '|', ' ' -%}
+<section
+  id="HomeHero-{{ section.id }}"
+  class="home-hero"
+  aria-label="{% render 'tomassi-i18n', s: hh_plain %}"
+>
+  <div class="home-hero__media">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 3000
+        | image_tag:
+          widths: '750, 1100, 1500, 2000, 3000',
+          sizes: '100vw',
+          fetchpriority: 'high',
+          class: 'home-hero__img',
+          alt: hh_plain
+      }}
+    {%- else -%}
+      <div class="home-hero__img home-hero__img--placeholder"></div>
+    {%- endif -%}
+  </div>
+  <span class="home-hero__scrim" aria-hidden="true"></span>
+
+  {%- if section.settings.edge_label != blank -%}
+    <span class="home-hero__edge" aria-hidden="true">{% render 'tomassi-i18n', s: section.settings.edge_label %}</span>
+  {%- endif -%}
+
+  <div class="home-hero__content page-width">
+    {%- if section.settings.badge != blank -%}
+      <p class="home-hero__badge">
+        <span class="home-hero__badge-dot" aria-hidden="true"></span>
+        {% render 'tomassi-i18n', s: section.settings.badge %}
+      </p>
+    {%- endif -%}
+
+    <h2 class="home-hero__title">
+      {%- if request.locale.iso_code == 'en' -%}
+        {%- render 'tomassi-i18n', s: hh_plain -%}
+      {%- else -%}
+        {{- section.settings.heading | escape | replace: '|', ' <br class="hh-br">' -}}
+      {%- endif -%}
+      {%- if section.settings.heading_accent != blank -%}
+        <span class="home-hero__title-accent"> {% render 'tomassi-i18n', s: section.settings.heading_accent %}</span>
+      {%- endif -%}
+    </h2>
+
+    {%- if section.settings.subheading != blank -%}
+      <p class="home-hero__sub">{% render 'tomassi-i18n', s: section.settings.subheading %}</p>
+    {%- endif -%}
+
+    <div class="home-hero__actions">
+      {%- if section.settings.button_label_1 != blank -%}
+        <a class="home-hero__btn home-hero__btn--primary" href="{{ section.settings.button_link_1 | default: '#' }}">
+          <span class="home-hero__btn-label">{% render 'tomassi-i18n', s: section.settings.button_label_1 %}</span>
+        </a>
+      {%- endif -%}
+      {%- if section.settings.button_label_2 != blank -%}
+        <a class="home-hero__btn home-hero__btn--secondary" href="{{ section.settings.button_link_2 | default: '#' }}">
+          {%- render 'tomassi-i18n', s: section.settings.button_label_2 -%}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="home-hero__trust" role="list">
+        {%- for block in section.blocks -%}
+          <li class="home-hero__trust-item" style="--ti: {{ forloop.index0 }};" {{ block.shopify_attributes }}>
+            <span class="home-hero__trust-dot" aria-hidden="true"></span>
+            {% render 'tomassi-i18n', s: block.settings.text %}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_scroll_cue -%}
+    <button type="button" class="home-hero__scroll" aria-label="{% if request.locale.iso_code == 'en' %}Scroll to content{% else %}Scorri ai contenuti{% endif %}">
+      <span class="home-hero__scroll-dot" aria-hidden="true"></span>
+    </button>
+  {%- endif -%}
+</section>
+
+{%- style -%}
+  .home-hero {
+    position: relative;
+    display: flex;
+    align-items: {{ section.settings.vertical_align }};
+    overflow: hidden;
+    color: var(--hh-fg);
+  }
+  /* Media estesa in alto: margine per il parallax verso il basso senza scoprire bordi. */
+  .home-hero__media {
+    position: absolute;
+    inset: -18% 0 0 0;
+    z-index: 0;
+    will-change: transform;
+  }
+  .home-hero__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .home-hero__img--placeholder { background: #2a211a; }
+
+  /* Scrim a due strati, ancorato alla sezione (non si muove col parallax):
+     direzionale dall'angolo basso-sinistra + velo dal basso.
+     Garantisce contrasto AA anche sopra finestre/zone chiare della foto. */
+  .home-hero__scrim {
+    position: absolute; inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(
+        102deg,
+        rgba(15, 10, 6, calc(var(--hh-overlay) + 0.55)) 0%,
+        rgba(15, 10, 6, calc(var(--hh-overlay) + 0.18)) 44%,
+        rgba(15, 10, 6, 0) 84%
+      ),
+      linear-gradient(
+        to top,
+        rgba(15, 10, 6, calc(var(--hh-overlay) + 0.40)) 0%,
+        rgba(15, 10, 6, var(--hh-overlay)) 38%,
+        rgba(15, 10, 6, 0) 70%
+      );
+  }
+
+  /* Etichetta verticale editoriale (bordo destro). */
+  .home-hero__edge {
+    position: absolute;
+    top: 3rem; right: 1.8rem;
+    z-index: 1;
+    writing-mode: vertical-rl;
+    font-size: 1.15rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--hh-accent);
+    opacity: 0.9;
+  }
+
+  .home-hero__content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 92rem;
+    padding-top: 9rem;
+    padding-bottom: 7rem;
+    text-align: {{ section.settings.text_align }};
+    {% if section.settings.text_align == 'center' %}margin-inline: auto;{% endif %}
+  }
+
+  /* Badge credenziale: pillola contornata d'ocra — il vero segnale distintivo. */
+  .home-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0 0 2.2rem;
+    padding: 0.7rem 1.5rem;
+    border: 1.5px solid var(--hh-accent);
+    border-radius: 999px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--hh-fg);
+    background: rgba(15, 10, 6, 0.4);
+  }
+  .home-hero__badge-dot {
+    width: 0.8rem; height: 0.8rem;
+    border-radius: 50%;
+    background: var(--hh-accent);
+    animation: hhPulse 2.6s ease-out infinite;
+  }
+  @keyframes hhPulse {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--hh-accent) 55%, transparent); }
+    70% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--hh-accent) 0%, transparent); }
+    100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--hh-accent) 0%, transparent); }
+  }
+
+  .home-hero__title {
+    color: var(--hh-fg);
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    margin: 0 0 2rem;
+    font-size: clamp(4rem, 2.4rem + 6.4vw, 6.4rem);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    text-shadow: 0 3px 26px rgba(15, 10, 6, 0.45);
+  }
+  /* la seconda frase va sempre su una riga sua: il cambio di riga segue il cambio di significato */
+  .home-hero__title-accent { display: block; margin-top: 0.08em; color: var(--hh-accent); }
+
+  .home-hero__sub {
+    color: var(--hh-fg);
+    margin: 0 0 3rem;
+    font-size: clamp(1.6rem, 1.35rem + 0.7vw, 2.1rem);
+    line-height: 1.5;
+    max-width: 50ch;
+    {% if section.settings.text_align == 'center' %}margin-inline: auto;{% endif %}
+    opacity: 0.92;
+  }
+
+  .home-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    {% if section.settings.text_align == 'center' %}justify-content: center;{% endif %}
+  }
+  .home-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5.2rem;
+    padding: 1.4rem 3.2rem;
+    border-radius: 999px;
+    font-size: 1.55rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease;
+  }
+  .home-hero__btn--primary {
+    position: relative;
+    overflow: hidden;
+    background: var(--hh-accent);
+    color: var(--hh-ink);
+    box-shadow: 0 8px 24px rgba(15, 10, 6, 0.3);
+  }
+  /* Sheen che attraversa la CTA primaria all'hover. */
+  .home-hero__btn--primary::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 55%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: translateX(-160%) skewX(-18deg);
+    transition: transform 0.65s ease;
+    pointer-events: none;
+  }
+  .home-hero__btn--primary:hover::after,
+  .home-hero__btn--primary:focus-visible::after { transform: translateX(320%) skewX(-18deg); }
+  .home-hero__btn-label { position: relative; z-index: 1; }
+  .home-hero__btn--secondary {
+    background: rgba(15, 10, 6, 0.28);
+    color: var(--hh-fg);
+    box-shadow: inset 0 0 0 1.5px var(--hh-fg);
+  }
+  .home-hero__btn:hover { transform: translateY(-2px); }
+  .home-hero__btn--primary:hover { box-shadow: 0 12px 30px rgba(15, 10, 6, 0.42); }
+  .home-hero__btn:focus-visible { outline: 3px solid var(--hh-fg); outline-offset: 3px; }
+
+  .home-hero__trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.8rem;
+    margin: 3.4rem 0 0;
+    padding: 2.4rem 0 0;
+    border-top: 1px solid rgba(246, 238, 220, 0.2);
+    list-style: none;
+    {% if section.settings.text_align == 'center' %}justify-content: center;{% endif %}
+  }
+  .home-hero__trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    opacity: 0.88;
+  }
+  .home-hero__trust-dot {
+    width: 0.6rem; height: 0.6rem;
+    border-radius: 50%;
+    background: var(--hh-accent);
+  }
+
+  /* Indicatore di scroll (solo desktop): pillola "mouse" con puntino che scende. */
+  .home-hero__scroll {
+    position: absolute;
+    z-index: 1;
+    right: 2.6rem; bottom: 2.6rem;
+    width: 4.4rem; height: 6.6rem;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0 0;
+    border: 2px solid color-mix(in srgb, var(--hh-fg) 55%, transparent);
+    border-radius: 999px;
+    background: rgba(15, 10, 6, 0.25);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+  .home-hero__scroll:hover { border-color: var(--hh-accent); }
+  .home-hero__scroll:focus-visible { outline: 3px solid var(--hh-fg); outline-offset: 3px; }
+  .home-hero__scroll-dot {
+    width: 0.7rem; height: 0.7rem;
+    border-radius: 50%;
+    background: var(--hh-accent);
+    animation: hhScrollDot 1.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  @keyframes hhScrollDot {
+    0% { transform: translateY(0); opacity: 1; }
+    70% { transform: translateY(2.8rem); opacity: 0; }
+    100% { transform: translateY(0); opacity: 0; }
+  }
+
+  /* ——— Coreografia d'ingresso (attiva SOLO con JS: .hh-anim nasconde, .hh-ready rivela) ——— */
+  #HomeHero-{{ section.id }}.hh-anim .home-hero__img {
+    animation: hhKenburns 7.5s cubic-bezier(0.2, 1, 0.3, 1) both;
+  }
+  @keyframes hhKenburns { from { transform: scale(1.09); } to { transform: scale(1); } }
+
+  #HomeHero-{{ section.id }}.hh-anim .hh-w {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+  #HomeHero-{{ section.id }}.hh-anim .hh-w > span {
+    display: inline-block;
+    transform: translateY(118%);
+    transition: transform 0.85s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+  #HomeHero-{{ section.id }}.hh-ready .hh-w > span { transform: none; }
+
+  #HomeHero-{{ section.id }}.hh-anim .home-hero__badge,
+  #HomeHero-{{ section.id }}.hh-anim .home-hero__sub,
+  #HomeHero-{{ section.id }}.hh-anim .home-hero__actions,
+  #HomeHero-{{ section.id }}.hh-anim .home-hero__trust-item {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.8s cubic-bezier(0.2, 1, 0.3, 1), transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+  #HomeHero-{{ section.id }}.hh-anim .home-hero__edge {
+    opacity: 0;
+    transform: translateX(14px);
+    transition: opacity 0.8s cubic-bezier(0.2, 1, 0.3, 1), transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+  #HomeHero-{{ section.id }}.hh-anim .home-hero__scroll {
+    opacity: 0;
+    transition: opacity 0.8s ease, border-color 0.2s ease;
+  }
+  #HomeHero-{{ section.id }}.hh-ready .home-hero__badge { opacity: 1; transform: none; transition-delay: 0.05s; }
+  #HomeHero-{{ section.id }}.hh-ready .home-hero__sub { opacity: 0.92; transform: none; transition-delay: 0.75s; }
+  #HomeHero-{{ section.id }}.hh-ready .home-hero__actions { opacity: 1; transform: none; transition-delay: 0.9s; }
+  #HomeHero-{{ section.id }}.hh-ready .home-hero__trust-item {
+    opacity: 0.88; transform: none;
+    transition-delay: calc(1.05s + var(--ti, 0) * 80ms);
+  }
+  #HomeHero-{{ section.id }}.hh-ready .home-hero__edge { opacity: 0.9; transform: none; transition-delay: 1.15s; }
+  #HomeHero-{{ section.id }}.hh-ready .home-hero__scroll { opacity: 1; transition-delay: 1.35s; }
+
+  @media screen and (max-width: 749px) {
+    .home-hero__content { padding-top: 7rem; padding-bottom: 5rem; max-width: 100%; }
+    .home-hero__title .hh-br { display: none; }
+    .home-hero__edge { display: none; }
+    .home-hero__scroll { display: none; }
+    .home-hero__badge { font-size: 1.05rem; }
+    .home-hero__btn { width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-hero__btn { transition: none; }
+    .home-hero__btn:hover { transform: none; }
+    .home-hero__btn--primary::after { display: none; }
+    .home-hero__badge-dot { animation: none; }
+    .home-hero__scroll-dot { animation: none; opacity: 1; }
+    #HomeHero-{{ section.id }}.hh-anim .home-hero__img { animation: none; }
+    #HomeHero-{{ section.id }}.hh-anim .hh-w > span,
+    #HomeHero-{{ section.id }}.hh-anim .home-hero__badge,
+    #HomeHero-{{ section.id }}.hh-anim .home-hero__sub,
+    #HomeHero-{{ section.id }}.hh-anim .home-hero__actions,
+    #HomeHero-{{ section.id }}.hh-anim .home-hero__trust-item,
+    #HomeHero-{{ section.id }}.hh-anim .home-hero__edge,
+    #HomeHero-{{ section.id }}.hh-anim .home-hero__scroll {
+      opacity: 1; transform: none; transition: none;
+    }
+  }
+{%- endstyle -%}
+
+<script>
+  (function () {
+    var s = document.getElementById('HomeHero-{{ section.id }}');
+    if (!s || s.dataset.hhInit) return;
+    s.dataset.hhInit = '1';
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var cue = s.querySelector('.home-hero__scroll');
+    if (cue) {
+      cue.addEventListener('click', function () {
+        var top = s.getBoundingClientRect().bottom + window.pageYOffset - 56;
+        window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    }
+
+    if (reduce) return;
+
+    /* Titolo parola-per-parola: ogni parola in una maschera con delay crescente. */
+    var title = s.querySelector('.home-hero__title');
+    if (title && !title.dataset.split) {
+      title.dataset.split = '1';
+      var wi = 0;
+      var walk = function (node) {
+        Array.prototype.slice.call(node.childNodes).forEach(function (k) {
+          if (k.nodeType === 3) {
+            if (!k.textContent.trim()) return;
+            var frag = document.createDocumentFragment();
+            k.textContent.split(/(\s+)/).forEach(function (p) {
+              if (!p) return;
+              if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+              var w = document.createElement('span');
+              w.className = 'hh-w';
+              var inner = document.createElement('span');
+              inner.textContent = p;
+              inner.style.transitionDelay = (0.16 + wi * 0.07).toFixed(2) + 's';
+              w.appendChild(inner);
+              frag.appendChild(w);
+              wi++;
+            });
+            node.replaceChild(frag, k);
+          } else if (k.nodeType === 1) {
+            walk(k);
+          }
+        });
+      };
+      walk(title);
+    }
+
+    s.classList.add('hh-anim');
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { s.classList.add('hh-ready'); });
+    });
+
+    /* Parallax leggero: la foto scende più lentamente della pagina. */
+    var media = s.querySelector('.home-hero__media');
+    if (media) {
+      var ticking = false;
+      var move = function () {
+        var r = s.getBoundingClientRect();
+        var y = Math.min(Math.max(-r.top, 0) * 0.22, r.height * 0.15);
+        media.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
+        ticking = false;
+      };
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(move); }
+      }, { passive: true });
+      move();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hero homepage",
+  "tag": "section",
+  "class": "section section--home-hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Immagine di sfondo" },
+    { "type": "text", "id": "badge", "label": "Badge credenziale", "default": "Campioni Italiani di Tostatura · 2018 & 2024" },
+    { "type": "textarea", "id": "heading", "label": "Headline", "default": "Lo specialty serio," },
+    { "type": "text", "id": "heading_accent", "label": "Headline — parte in ocra", "default": "senza prendersi sul serio." },
+    { "type": "textarea", "id": "subheading", "label": "Subheadline", "default": "Caffè specialty selezionato e tostato ad Aprilia da una famiglia che gareggia. Qualità da gara, alla portata di tutti." },
+    { "type": "text", "id": "edge_label", "label": "Etichetta verticale", "default": "Est. 2013 — Aprilia" },
+    { "type": "header", "content": "Bottoni" },
+    { "type": "text", "id": "button_label_1", "label": "CTA primaria", "default": "Scegli il tuo caffè" },
+    { "type": "url", "id": "button_link_1", "label": "Link CTA primaria" },
+    { "type": "text", "id": "button_label_2", "label": "CTA secondaria", "default": "Scopri l’abbonamento" },
+    { "type": "url", "id": "button_link_2", "label": "Link CTA secondaria" },
+    { "type": "header", "content": "Stile" },
+    { "type": "color", "id": "text_color", "label": "Colore testo", "default": "#F6EEDC" },
+    { "type": "color", "id": "accent_color", "label": "Colore accento (ocra)", "default": "#C2922D" },
+    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 70, "step": 5, "unit": "%", "label": "Intensità velo", "default": 30 },
+    { "type": "range", "id": "min_height", "min": 400, "max": 900, "step": 20, "unit": "px", "label": "Altezza minima", "default": 700 },
+    { "type": "checkbox", "id": "show_scroll_cue", "label": "Mostra indicatore di scroll", "default": true },
+    {
+      "type": "select", "id": "vertical_align", "label": "Allineamento verticale",
+      "options": [
+        { "value": "flex-start", "label": "Alto" },
+        { "value": "center", "label": "Centro" },
+        { "value": "flex-end", "label": "Basso" }
+      ],
+      "default": "flex-end"
+    },
+    {
+      "type": "select", "id": "text_align", "label": "Allineamento testo",
+      "options": [
+        { "value": "left", "label": "Sinistra" },
+        { "value": "center", "label": "Centro" }
+      ],
+      "default": "left"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Elemento di fiducia",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Testo", "default": "Tostatura su ordinazione" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Hero homepage",
+      "blocks": [
+        { "type": "trust", "settings": { "text": "Solo Arabica" } },
+        { "type": "trust", "settings": { "text": "Tostato su ordinazione" } },
+        { "type": "trust", "settings": { "text": "Ricette e supporto" } },
+        { "type": "trust", "settings": { "text": "Spedizione gratuita sopra €70" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
