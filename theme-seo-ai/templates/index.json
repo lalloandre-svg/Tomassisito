@@ -174,10 +174,10 @@
         }
       },
       "block_order": [
-        "p1",
-        "p2",
+        "p4",
         "p3",
-        "p4"
+        "p2",
+        "p1"
       ],
       "settings": {
         "kicker": "",
