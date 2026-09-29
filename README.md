@@ -47,6 +47,20 @@ Backup su Shopify: tema **"Backup prima dei testi (28-09-2026)"**; originali dei
 | `snippets/tomassi-i18n.liquid`, `snippets/tomassi-en.liquid` | Traduzioni EN dei nuovi testi |
 | Blog «notizie» (16 articoli) | Titoli che dicono di cosa parla l’articolo; URL invariati. Vecchi titoli in `backup-pre-testi/blog/titoli-articoli.md` |
 
+### Terza tornata (29-09-2026)
+| File / dato | Modifica |
+|---|---|
+| `sections/subscription-landing.liquid`, `templates/page.abbonamento.json` | Per ogni piano, riquadro «Quanto paghi» con il prezzo di 2/4/6 buste (dal prodotto `abbonamento-caffe-specialty`, primo anno, spedizione inclusa) |
+| `templates/product.json` | Pill: «Tostato da Emanuele Tomassi · Campione italiano di tostatura 2018 & 2024»; via «Specialty 86+» |
+| `snippets/tomassi-pdp.liquid`, `sections/product-spec.liquid` | Le note in chip vengono dal nuovo metafield `custom.note_brevi`; la frase `in_tazza` resta intera sotto le chip; nei blend vale il profilo della miscela |
+| `sections/oyl-collection*.liquid` | Formato della busta accanto al prezzo |
+| `templates/page.mi-sorella-zoccola.json`, `templates/collection.json` | Via «Scelti con metro da gara»; testo monorigine più preciso |
+| `templates/page.chi-siamo.json`, `sections/page-campioni-*.liquid` | Andrè finalista Brewers 2021–2026; 2° posto Roasting 2025 di Emanuele; Chiara finalista Ibrik 2025 |
+| `sections/tomassi-family.liquid` | «arrivi a 500 punti» |
+| `sections/pdp-oyl-teca.liquid`, `templates/product.over-your-limits.json` | «Rivendicalo» mantenuto |
+| `snippets/tomassi-en.liquid` | Traduzioni EN dei nuovi testi |
+| Dati negozio | `note_brevi` e `in_tazza` su 8 caffè; varietà Blend 1969; Mikava Extended e Java Fruit Forward tolti dalla collezione OYL; pagina Spedizioni: consegna in 24–48 ore |
+
 ## Come tornare indietro
 - **Tutto:** pubblicare il tema "Backup prima di SEO AI (26-09-2026)", oppure ricaricare i file di `backup-pre-seo-ai/` ed eliminare `snippets/seo-ai-schema.liquid` e `templates/robots.txt.liquid`.
 - **Un solo file:** ricaricare quel file da `backup-pre-seo-ai/`.
