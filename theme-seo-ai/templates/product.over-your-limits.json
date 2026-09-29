@@ -154,7 +154,7 @@
     "sticky_atc": {
       "type": "sticky-atc",
       "settings": {
-        "label": "Aggiungi al carrello",
+        "label": "Rivendicalo",
         "bg_color": "#1b1814",
         "text_color": "#ffffff",
         "accent_color": "#c99a24"

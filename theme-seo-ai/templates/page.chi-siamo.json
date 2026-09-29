@@ -89,7 +89,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Andrè cresce osservando il padre tostare. Oggi segue la selezione dei caffè, le ricette e la divulgazione, e porta Tomassicoffee in gara: secondo ai Campionati italiani Ibrik nel 2025, tra i migliori ai Campionati italiani Brewers da quattro anni.</p>",
+            "text": "<p>Andrè cresce osservando il padre tostare. Oggi segue la selezione dei caffè, le ricette e la divulgazione, e porta Tomassicoffee in gara: secondo ai Campionati italiani Ibrik nel 2025, finalista ai Campionati italiani Brewers ogni anno dal 2021 al 2026.</p>",
             "text_style": "body"
           }
         }
@@ -235,7 +235,7 @@
       "settings": {
         "kicker": "Dalla radice alla tazza",
         "heading": "Adesso tocca a te assaggiare.",
-        "text": "Parti da un blend per l’espresso o da un monorigine per il filtro.",
+        "text": "Blend o monorigine, per espresso, moka o filtro: scegli il tuo, o fatti aiutare da noi.",
         "button_label": "Scegli il tuo caffè",
         "button_link": "shopify://collections/tutti-i-caffe",
         "bg_color": "#0F4A27",

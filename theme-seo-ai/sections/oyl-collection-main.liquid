@@ -1,0 +1,230 @@
+{%- comment -%}
+  Tomassi — OYL · Main collection (banner + griglia paginata).
+  Palette OYL: nero #1B1814 · bianco #FFFFFF · oro #C99A24 (unico accento).
+  Card con origine/note da metafield custom.*, add-to-cart diretto se mono-variante.
+  Osservatore interno (classe .in) — non dipende dal sistema globale.
+{%- endcomment -%}
+
+{%- style -%}
+  #OylCM-{{ section.id }} {
+    --om-bg: {{ section.settings.bg_color }};
+    --om-fg: {{ section.settings.text_color }};
+    --om-acc: {{ section.settings.accent_color }};
+    --om-line: rgba(201, 154, 36, 0.3);
+    background: var(--om-bg);
+    color: var(--om-fg);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+{%- endstyle -%}
+
+<section id="OylCM-{{ section.id }}" class="oylcm" aria-label="{{ collection.title | escape }}">
+  <span class="oylcm-glow oylcm-glow--a" aria-hidden="true"></span>
+  <span class="oylcm-glow oylcm-glow--b" aria-hidden="true"></span>
+  <div class="oylcm-wrap">
+
+    <header class="oylcm-head">
+      {%- if section.settings.kicker != blank -%}
+        <p class="oylcm-kicker" data-reveal style="--ri: 0;">{% render 'tomassi-i18n', s: section.settings.kicker %}</p>
+      {%- endif -%}
+      <h1 class="oylcm-title" data-reveal style="--ri: 1;">{{ collection.title | escape }}</h1>
+      {%- if section.settings.show_description and collection.description != blank -%}
+        <div class="oylcm-desc" data-reveal style="--ri: 2;">{{ collection.description }}</div>
+      {%- endif -%}
+      <p class="oylcm-count" data-reveal style="--ri: 3;">{{ collection.products_count }} {% if request.locale.iso_code == 'en' %}{% if collection.products_count == 1 %}lot available{% else %}lots available{% endif %}{% else %}{% if collection.products_count == 1 %}lotto disponibile{% else %}lotti disponibili{% endif %}{% endif %}</p>
+    </header>
+
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      {%- if collection.products_count > 0 -%}
+        <ul class="oylcm-grid" role="list" style="--cols: {{ section.settings.columns_desktop }};">
+          {%- for product in collection.products -%}
+            <li class="oylcm-card" data-reveal style="--ri: {{ forloop.index0 | modulo: 6 }};">
+              <a class="oylcm-card__media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+                {%- if product.featured_image -%}
+                  {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '350, 550, 700', sizes: '(min-width: 750px) 30vw, 50vw', class: 'oylcm-card__img', alt: product.title }}
+                {%- else -%}
+                  {{ 'product-2' | placeholder_svg_tag: 'oylcm-card__img oylcm-card__img--ph' }}
+                {%- endif -%}
+                {%- unless product.available -%}<span class="oylcm-card__soldout">{% if request.locale.iso_code == 'en' %}Sold out{% else %}Esaurito{% endif %}</span>{%- endunless -%}
+              </a>
+              <div class="oylcm-card__body">
+                {%- assign origine = product.metafields.custom.origine -%}
+                {%- if origine != blank -%}<span class="oylcm-card__origin">{{ origine | escape }}</span>{%- endif -%}
+                <h2 class="oylcm-card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h2>
+                {%- assign notes = product.metafields.custom.in_tazza -%}
+                {%- if notes != blank -%}<p class="oylcm-card__notes">{{ notes | escape }}</p>{%- endif -%}
+                <div class="oylcm-card__foot">
+                  {%- assign oy_cheap = product.variants | sort: 'price' | first -%}{%- assign oy_size = '' -%}{%- if oy_cheap.option1 contains 'g' and oy_cheap.option1.size < 7 -%}{%- assign oy_size = oy_cheap.option1 | replace: 'kg', ' kg' | replace: '0g', '0 g' -%}{%- endif -%}
+                  <span class="oylcm-card__price">{{ product.price | money }}{% if oy_size != '' %} · {{ oy_size }}{% endif %}</span>
+                  {%- if product.available and product.variants.size == 1 -%}
+                    {%- form 'product', product, class: 'oylcm-card__form' -%}
+                      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                      <button type="submit" class="oylcm-card__buy" name="add">{%- assign oylcm_buy = section.settings.buy_label | default: 'Aggiungi' -%}{%- render 'tomassi-i18n', s: oylcm_buy -%}</button>
+                    {%- endform -%}
+                  {%- else -%}
+                    <a class="oylcm-card__buy" href="{{ product.url }}">{%- assign oylcm_choose = section.settings.choose_label | default: 'Scegli' -%}{%- render 'tomassi-i18n', s: oylcm_choose -%}</a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="oylcm-pag" role="navigation" aria-label="{% if request.locale.iso_code == 'en' %}Pagination{% else %}Paginazione{% endif %}">
+            {%- if paginate.previous -%}<a class="oylcm-pag__btn" href="{{ paginate.previous.url }}">&larr;</a>{%- endif -%}
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a class="oylcm-pag__btn" href="{{ part.url }}">{{ part.title }}</a>
+              {%- else -%}
+                <span class="oylcm-pag__btn {% if part.title == paginate.current_page %}is-cur{% endif %}">{{ part.title }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if paginate.next -%}<a class="oylcm-pag__btn" href="{{ paginate.next.url }}">&rarr;</a>{%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- else -%}
+        <p class="oylcm-empty">{% if request.locale.iso_code == 'en' %}No coffees available right now. Check back soon: the series lots are limited.{% else %}Nessun caffè disponibile al momento. Torna presto: i lotti della serie sono limitati.{% endif %}</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{%- style -%}
+  #OylCM-{{ section.id }} *, #OylCM-{{ section.id }} *::before, #OylCM-{{ section.id }} *::after { box-sizing: border-box; }
+  #OylCM-{{ section.id }} .oylcm-glow { position: absolute; z-index: 0; border-radius: 50%; pointer-events: none; filter: blur(80px); }
+  #OylCM-{{ section.id }} .oylcm-glow--a {
+    top: -8%; right: -6%; width: 48rem; height: 48rem; opacity: 0.2;
+    background: radial-gradient(circle, color-mix(in srgb, var(--om-acc) 55%, transparent), transparent 70%);
+    animation: oylcm-breathe 16s ease-in-out infinite;
+  }
+  #OylCM-{{ section.id }} .oylcm-glow--b {
+    bottom: -10%; left: -8%; width: 40rem; height: 40rem; opacity: 0.14;
+    background: radial-gradient(circle, color-mix(in srgb, #5A3523 80%, transparent), transparent 70%);
+    animation: oylcm-breathe 19s ease-in-out infinite reverse;
+  }
+  @keyframes oylcm-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12) translate(-2rem, 1.5rem); } }
+  #OylCM-{{ section.id }} .oylcm-wrap { position: relative; z-index: 1; width: 100%; max-width: 120rem; margin-inline: auto; padding-inline: clamp(1.6rem, 1rem + 3vw, 4rem); }
+
+  #OylCM-{{ section.id }} .oylcm-head { max-width: 72rem; margin: 0 auto 4.4rem; text-align: center; }
+  #OylCM-{{ section.id }} .oylcm-kicker { margin: 0 0 1.4rem; font-size: 1.3rem; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600; color: var(--om-acc); }
+  #OylCM-{{ section.id }} .oylcm-title { margin: 0; text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.95; font-size: clamp(3.6rem, 2.2rem + 5vw, 7rem); color: var(--om-fg); }
+  #OylCM-{{ section.id }} .oylcm-desc { margin: 2rem auto 0; max-width: 58ch; font-size: clamp(1.45rem, 1.3rem + 0.4vw, 1.7rem); line-height: 1.6; opacity: 0.88; }
+  #OylCM-{{ section.id }} .oylcm-desc p { margin: 0 0 0.8rem; }
+  #OylCM-{{ section.id }} .oylcm-count { margin: 1.8rem 0 0; display: inline-block; padding: 0.7rem 1.6rem; border: 1px solid var(--om-line); border-radius: 999px; font-size: 1.25rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: var(--om-acc); }
+
+  #OylCM-{{ section.id }} .oylcm-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(1.6rem, 1rem + 1.5vw, 2.4rem); grid-template-columns: 1fr; }
+  @media screen and (min-width: 600px) { #OylCM-{{ section.id }} .oylcm-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media screen and (min-width: 990px) { #OylCM-{{ section.id }} .oylcm-grid { grid-template-columns: repeat(var(--cols, 3), 1fr); } }
+
+  #OylCM-{{ section.id }} .oylcm-card {
+    position: relative; display: flex; flex-direction: column; border: 1px solid var(--om-line); border-radius: 14px; overflow: hidden;
+    background: color-mix(in srgb, var(--om-fg) 4%, transparent);
+    transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  #OylCM-{{ section.id }} .oylcm-card::before {
+    content: ""; position: absolute; z-index: 2; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, color-mix(in srgb, var(--om-acc) 20%, transparent), transparent);
+    transform: skewX(-18deg); transition: left 0.8s cubic-bezier(0.2, 1, 0.3, 1); pointer-events: none;
+  }
+  #OylCM-{{ section.id }} .oylcm-card:hover::before { left: 130%; }
+  #OylCM-{{ section.id }} .oylcm-card:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in srgb, var(--om-acc) 55%, transparent);
+    box-shadow: 0 26px 52px rgba(0, 0, 0, 0.45), 0 0 0 1px color-mix(in srgb, var(--om-acc) 35%, transparent) inset;
+  }
+  #OylCM-{{ section.id }} .oylcm-card__media { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; }
+  #OylCM-{{ section.id }} .oylcm-card__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1); }
+  #OylCM-{{ section.id }} .oylcm-card:hover .oylcm-card__img { transform: scale(1.06); }
+  #OylCM-{{ section.id }} .oylcm-card__soldout { position: absolute; top: 1.2rem; left: 1.2rem; padding: 0.5rem 1.2rem; border-radius: 999px; background: rgba(27, 24, 20, 0.85); color: var(--om-fg); font-size: 1.15rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+  #OylCM-{{ section.id }} .oylcm-card__body { display: flex; flex-direction: column; gap: 0.8rem; padding: 2rem; flex: 1; }
+  #OylCM-{{ section.id }} .oylcm-card__origin { font-size: 1.15rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--om-acc); }
+  #OylCM-{{ section.id }} .oylcm-card__title { margin: 0; font-size: 1.9rem; line-height: 1.2; color: var(--om-fg); }
+  #OylCM-{{ section.id }} .oylcm-card__title a { color: inherit; text-decoration: none; }
+  #OylCM-{{ section.id }} .oylcm-card__title a:hover { color: var(--om-acc); }
+  #OylCM-{{ section.id }} .oylcm-card__notes { margin: 0; font-size: 1.4rem; line-height: 1.5; opacity: 0.8; }
+  #OylCM-{{ section.id }} .oylcm-card__foot { margin-top: auto; padding-top: 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; }
+  #OylCM-{{ section.id }} .oylcm-card__price { font-size: 1.7rem; font-weight: 700; }
+  #OylCM-{{ section.id }} .oylcm-card__form { margin: 0; }
+  #OylCM-{{ section.id }} .oylcm-card__buy {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 4.4rem; padding: 0.9rem 1.8rem;
+    border-radius: 999px; font-size: 1.3rem; font-weight: 700; text-decoration: none; cursor: pointer;
+    background: transparent; color: var(--om-acc); border: 1.5px solid var(--om-acc); font-family: inherit;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
+  #OylCM-{{ section.id }} .oylcm-card:hover .oylcm-card__buy,
+  #OylCM-{{ section.id }} .oylcm-card__buy:focus-visible { background: var(--om-acc); color: #1B1814; }
+  #OylCM-{{ section.id }} .oylcm-card__buy:hover { box-shadow: 0 10px 26px -6px color-mix(in srgb, var(--om-acc) 60%, transparent); }
+  #OylCM-{{ section.id }} .oylcm-card__buy:focus-visible { outline: 3px solid var(--om-acc); outline-offset: 3px; }
+
+  #OylCM-{{ section.id }} .oylcm-pag { margin-top: 4rem; display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; }
+  #OylCM-{{ section.id }} .oylcm-pag__btn {
+    display: inline-flex; align-items: center; justify-content: center; min-width: 4.4rem; min-height: 4.4rem; padding: 0.6rem 1.2rem;
+    border: 1px solid var(--om-line); border-radius: 999px; color: var(--om-fg); text-decoration: none; font-size: 1.4rem; font-weight: 600;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  #OylCM-{{ section.id }} a.oylcm-pag__btn:hover { border-color: var(--om-acc); color: var(--om-acc); }
+  #OylCM-{{ section.id }} .oylcm-pag__btn.is-cur { background: var(--om-acc); color: #1B1814; border-color: var(--om-acc); }
+  #OylCM-{{ section.id }} .oylcm-empty { text-align: center; opacity: 0.75; font-size: 1.5rem; }
+
+  /* reveal con stagger */
+  #OylCM-{{ section.id }} [data-reveal] {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.2, 1, 0.3, 1), transform 0.7s cubic-bezier(0.2, 1, 0.3, 1);
+    transition-delay: calc(var(--ri, 0) * 70ms);
+  }
+  #OylCM-{{ section.id }} [data-reveal].in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #OylCM-{{ section.id }} .oylcm-glow { animation: none; }
+    #OylCM-{{ section.id }} .oylcm-card, #OylCM-{{ section.id }} .oylcm-card__img, #OylCM-{{ section.id }} .oylcm-card::before, #OylCM-{{ section.id }} .oylcm-card__buy { transition: none; }
+    #OylCM-{{ section.id }} .oylcm-card:hover { transform: none; }
+    #OylCM-{{ section.id }} [data-reveal] { opacity: 1; transform: none; transition: none; }
+  }
+{%- endstyle -%}
+
+<script>
+  (function () {
+    var root = document.getElementById('OylCM-{{ section.id }}');
+    if (!root) return;
+    var els = Array.prototype.slice.call(root.querySelectorAll('[data-reveal]'));
+    if (!els.length) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "OYL — Collection main",
+  "tag": "section",
+  "class": "section section--oyl-collection-main",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Sopratitolo", "default": "The Competition Series" },
+    { "type": "checkbox", "id": "show_description", "label": "Mostra descrizione collezione", "default": true },
+    { "type": "range", "id": "products_per_page", "min": 6, "max": 24, "step": 3, "label": "Prodotti per pagina", "default": 12 },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 4, "step": 1, "label": "Colonne desktop", "default": 3 },
+    { "type": "text", "id": "buy_label", "label": "Bottone (mono-variante)", "default": "Aggiungi" },
+    { "type": "text", "id": "choose_label", "label": "Bottone (multi-variante)", "default": "Scegli" },
+    { "type": "header", "content": "Colori OYL" },
+    { "type": "color", "id": "bg_color", "label": "Sfondo", "default": "#1B1814" },
+    { "type": "color", "id": "text_color", "label": "Testo", "default": "#FFFFFF" },
+    { "type": "color", "id": "accent_color", "label": "Accento (oro)", "default": "#C99A24" },
+    { "type": "header", "content": "Spaziatura" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Spazio sopra", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Spazio sotto", "default": 80 }
+  ],
+  "presets": [
+    { "name": "OYL — Collection main" }
+  ]
+}
+{% endschema %}

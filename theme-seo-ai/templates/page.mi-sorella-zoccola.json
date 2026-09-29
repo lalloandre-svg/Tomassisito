@@ -46,18 +46,11 @@
           "settings": {
             "text": "Quantità minime"
           }
-        },
-        "pill3": {
-          "type": "pill",
-          "settings": {
-            "text": "Scelti con metro da gara"
-          }
         }
       },
       "block_order": [
         "pill1",
-        "pill2",
-        "pill3"
+        "pill2"
       ],
       "settings": {
         "kicker": "The Competition Series",

@@ -1,0 +1,212 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "pdp_styles": {
+      "type": "pdp-tomassi-styles",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "kicker": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-pdp', product: product, part: 'kicker' %}"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "chips": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-pdp', product: product, part: 'chips' %}"
+          }
+        },
+        "bars": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-pdp', product: product, part: 'bars' %}"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "joy_subscription_subscription_widget_DL8gWU": {
+          "type": "shopify://apps/joy-subscription-app/blocks/subscription-widget/6aa30d9c-ff0b-4f29-a82d-a633d8e04b9a",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "roast": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-roast-line' %}"
+          }
+        },
+        "champ": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>.tomassi-champ{display:inline-flex;align-items:center;gap:8px;margin:14px 0 0;padding:7px 14px;border-radius:999px;background:rgba(15,74,39,.1);color:#0F4A27;font-family:var(--font-heading-family);font-weight:700;font-size:1.2rem;letter-spacing:.02em}.tomassi-champ svg{width:1.6rem;height:1.6rem}.product-form__submit{background:#C2922D !important;color:#1B1814 !important;border:0 !important;box-shadow:0 8px 20px rgba(194,146,45,.35) !important;border-radius:999px !important;font-weight:800 !important;letter-spacing:.01em}.product-form__submit::after{display:none !important}.product-form__submit:hover{background:#1B1814 !important;color:#F6EEDC !important;box-shadow:0 10px 24px rgba(27,24,20,.3) !important}</style><span class='tomassi-champ'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7'><path d='M8 4h8v3a4 4 0 0 1-8 0V4Z'/><path d='M8 5H5v1a3 3 0 0 0 3 3M16 5h3v1a3 3 0 0 1-3 3M10 13h4M9 20h6M12 13v7'/></svg>{% if request.locale.iso_code == 'en' %}Roasted by Emanuele Tomassi · Italian Roasting Champion 2018 &amp; 2024{% else %}Tostato da Emanuele Tomassi · Campione italiano di tostatura 2018 &amp; 2024{% endif %}</span>"
+          }
+        },
+        "trust": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>.tomassi-trust{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:16px;font-size:1.2rem;font-weight:600;color:#5A3523}.tomassi-trust span{display:inline-flex;align-items:center;gap:6px}.tomassi-trust svg{width:1.6rem;height:1.6rem;color:#0F4A27;flex:0 0 auto}</style><div class='tomassi-trust'><span><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.7'><path d='M3 7h11v8H3zM14 10h4l3 3v2h-7z'/><circle cx='7' cy='17' r='1.6'/><circle cx='17' cy='17' r='1.6'/></svg>{% if request.locale.iso_code == 'en' %}Roasted on Tuesday, shipped within 24h{% else %}Tostato il martedì, spedito entro 24h{% endif %}</span></div>"
+          }
+        },
+        "perks": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-perks', product: product %}"
+          }
+        },
+        "pairing": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-pdp', product: product, part: 'pairing' %}"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "acc": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'tomassi-pdp', product: product, part: 'accordion' %}"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Condividi"
+          }
+        }
+      },
+      "block_order": [
+        "kicker",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "joy_subscription_subscription_widget_DL8gWU",
+        "buy_buttons",
+        "roast",
+        "chips",
+        "bars",
+        "champ",
+        "trust",
+        "perks",
+        "pairing",
+        "description",
+        "acc",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 44
+      }
+    },
+    "product_spec": {
+      "type": "product-spec",
+      "settings": {
+        "heading": "Quello che c’è da sapere",
+        "bg_color": "#161210",
+        "text_color": "#F6EEDC",
+        "accent_color": "#C2922D",
+        "padding_top": 72,
+        "padding_bottom": 80
+      }
+    },
+    "product_story": {
+      "type": "product-story",
+      "settings": {
+        "image_position": "left",
+        "kicker": "Come lo tostiamo",
+        "heading": "Profilo costruito al banco,",
+        "heading_accent": "tostato il martedì.",
+        "text": "<p>Tostiamo il martedì ad Aprilia, in piccoli lotti, con un profilo costruito al banco per questo caffè. Chi l’ha coltivato, dove e come è stato lavorato lo trovi nella scheda qui sopra.</p>",
+        "button_label": "Scopri come tostiamo",
+        "bg_color": "#F6EEDC",
+        "text_color": "#1B1814",
+        "accent_color": "#C2922D",
+        "padding_top": 64,
+        "padding_bottom": 72
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Potrebbe piacerti anche",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 68
+      }
+    },
+    "sticky_atc": {
+      "type": "sticky-atc",
+      "settings": {
+        "label": "Aggiungi al carrello",
+        "bg_color": "#1B1814",
+        "text_color": "#F6EEDC",
+        "accent_color": "#C2922D"
+      }
+    }
+  },
+  "order": [
+    "pdp_styles",
+    "main",
+    "product_spec",
+    "product_story",
+    "related-products",
+    "sticky_atc"
+  ]
+}

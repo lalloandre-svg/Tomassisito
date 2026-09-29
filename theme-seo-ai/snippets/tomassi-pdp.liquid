@@ -1,0 +1,189 @@
+{%- comment -%}
+  tomassi-pdp: pezzi della buy-box "scheda d'assaggio" (e teca OYL).
+  Uso: {% render 'tomassi-pdp', product: product, part: 'kicker' %}
+  part: kicker | chips | bars | roast | pairing | accordion
+  Tutto derivato dalla descrizione prodotto. Bilingue IT/EN (request.locale.iso_code).
+{%- endcomment -%}
+
+{%- assign d = product.description | strip_html -%}
+{%- assign L = request.locale.iso_code -%}
+
+{%- if part == 'kicker' -%}
+  {%- assign country = '' -%}
+  {%- if product.title contains ':' -%}{%- assign country = product.title | split: ':' | first | strip -%}{%- endif -%}
+  {%- assign place = '' -%}
+  {%- if d contains 'Regione:' -%}{%- assign rarr = d | split: 'Regione:' -%}
+  {%- elsif d contains 'Region:' -%}{%- assign rarr = d | split: 'Region:' -%}
+  {%- else -%}{%- assign rarr = d | split: '~~none~~' -%}{%- endif -%}
+  {%- if rarr.size > 1 -%}
+    {%- assign place = rarr[1] | split: 'Altitudine' | first | split: 'Altitude' | first | split: 'Azienda' | first | split: 'Company' | first | split: 'Farm' | first | split: 'Anno' | first | split: 'Year' | first | split: 'Paese' | first | split: 'Country' | first | split: 'Variet' | first | strip | truncatewords: 4, '' -%}
+  {%- endif -%}
+  {%- if place == '' -%}
+    {%- if d contains 'Origine:' -%}{%- assign oarr = d | split: 'Origine:' -%}
+    {%- elsif d contains 'Origin:' -%}{%- assign oarr = d | split: 'Origin:' -%}
+    {%- else -%}{%- assign oarr = d | split: '~~none~~' -%}{%- endif -%}
+    {%- if oarr.size > 1 -%}
+      {%- assign place = oarr[1] | split: 'Altitudine' | first | split: 'Altitude' | first | split: 'Azienda' | first | split: 'Company' | first | split: 'Farm' | first | split: 'Anno' | first | split: 'Year' | first | split: 'Variet' | first | strip | truncatewords: 4, '' -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- assign alt = '' -%}
+  {%- if d contains 'Altitudine:' -%}{%- assign aarr = d | split: 'Altitudine:' -%}
+  {%- elsif d contains 'Altitude:' -%}{%- assign aarr = d | split: 'Altitude:' -%}
+  {%- else -%}{%- assign aarr = d | split: '~~none~~' -%}{%- endif -%}
+  {%- if aarr.size > 1 -%}
+    {%- assign alt = aarr[1] | strip | split: ' m' | first | strip | append: ' m' -%}
+    {%- if alt.size > 20 -%}{%- assign alt = '' -%}{%- endif -%}
+  {%- endif -%}
+  <p class="tpdp-kicker">
+    <svg width="15" height="15" style="width:1.5rem;height:1.5rem;flex:0 0 auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-6-5.2-6-10a6 6 0 1 1 12 0c0 4.8-6 10-6 10Z"/><circle cx="12" cy="11" r="2.3"/></svg>
+    <span>
+      {%- if country == '' -%}
+        {%- if L == 'en' -%}House blend &middot; Aprilia (IT){%- else -%}La miscela della casa &middot; Aprilia (LT){%- endif -%}
+      {%- else -%}
+        {%- if place != '' -%}{{ place }}{%- unless place contains ',' %}, {{ country }}{% endunless -%}{%- else -%}{{ country }}{%- endif -%}
+        {%- if alt != '' %} &middot; {{ alt }}{% endif -%}
+      {%- endif -%}
+    </span>
+  </p>
+
+{%- elsif part == 'chips' -%}
+  {%- comment -%} Note brevi: custom.note_brevi (separate da virgola). Senza, la prima riga di profilo nella descrizione:
+      "Profilo aromatico" (nei blend è la miscela) prima di "Profilo sensoriale" (nei blend è un componente). {%- endcomment -%}
+  {%- assign prof = '' -%}
+  {%- assign nb = product.metafields.custom.note_brevi.value | append: '' -%}
+  {%- if nb != blank -%}
+    {%- assign prof = nb -%}
+  {%- elsif d contains 'Profilo aromatico:' -%}
+    {%- assign prof = d | split: 'Profilo aromatico:' -%}{%- assign prof = prof[1] -%}
+  {%- elsif d contains 'Profilo sensoriale:' -%}
+    {%- assign prof = d | split: 'Profilo sensoriale:' -%}{%- assign prof = prof[1] -%}
+  {%- elsif d contains 'Sensory profile:' -%}
+    {%- assign prof = d | split: 'Sensory profile:' -%}{%- assign prof = prof[1] -%}
+  {%- elsif d contains 'Aromatic profile:' -%}
+    {%- assign prof = d | split: 'Aromatic profile:' -%}{%- assign prof = prof[1] -%}
+  {%- endif -%}
+  {%- if prof != '' and prof != blank -%}
+    {%- assign prof = prof | split: 'Variet' | first | split: 'Processo' | first | split: 'Process' | first | split: '40%' | first | split: '50%' | first -%}
+    {%- assign notes = prof | split: ',' -%}
+    <div class="tpdp-chips">
+      {%- assign shown = 0 -%}
+      {%- for n in notes -%}
+        {%- assign nn = n | strip | downcase -%}
+        {%- if nn != '' and nn.size < 34 and shown < 4 -%}
+          <span class="tpdp-chip">{{ nn }}</span>
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+{%- elsif part == 'bars' -%}
+  {%- comment -%} Valori da metafield prodotto (custom.dolcezza / corpo / acidita), grafica in tomassi-profilo. {%- endcomment -%}
+  {%- render 'tomassi-profilo', product: product -%}
+
+{%- elsif part == 'roast' -%}
+  {%- comment -%} Non più usato dai template prodotto: vedi snippets/tomassi-roast-line.liquid (orario unico martedì 12:00, Roma). {%- endcomment -%}
+  {%- render 'tomassi-roast-line' -%}
+
+{%- elsif part == 'pairing' -%}
+  {%- assign ph = '' -%}
+  {%- case product.handle -%}
+    {%- when 'colombia-el-vergel-bourbon-sidra-mosto' -%}{%- assign ph = 'blend-1969' -%}
+    {%- when 'colombia-finca-el-paraiso-lychee' -%}{%- assign ph = 'etiopia-messier-washed' -%}
+    {%- when 'colombia-zarza-bourbon-aji' -%}{%- assign ph = 'etiopia-makhore-natural' -%}
+    {%- when 'colombia-el-diviso-typica-mejorado' -%}{%- assign ph = 'family-blend' -%}
+    {%- when 'colombia-mikava-santuario-reserve' -%}{%- assign ph = 'kenya-nyeri-specialty-coffee' -%}
+    {%- when 'costa-rica-las-lajas-finca-carrizal' -%}{%- assign ph = 'colombia-zarza-bourbon-aji' -%}
+    {%- when 'kenya-nyeri-specialty-coffee' -%}{%- assign ph = 'etiopia-messier-washed' -%}
+    {%- when 'etiopia-messier-washed' -%}{%- assign ph = 'kenya-nyeri-specialty-coffee' -%}
+    {%- when 'family-blend' -%}{%- assign ph = 'etiopia-makhore-natural' -%}
+    {%- when 'peru-anas-blues-washed' -%}{%- assign ph = 'blend-futuro' -%}
+    {%- when 'etiopia-makhore-natural' -%}{%- assign ph = 'peru-anas-blues-washed' -%}
+    {%- when 'blend-futuro' -%}{%- assign ph = 'peru-anas-blues-washed' -%}
+    {%- when 'brasile-cerrado-mineiro-natural' -%}{%- assign ph = 'blend-1969' -%}
+    {%- when 'blend-1969' -%}{%- assign ph = 'brasile-cerrado-mineiro-natural' -%}
+    {%- when 'panama-hiu-los-lajones-21b' -%}{%- assign ph = 'panama-hacienda-la-esmeralda-lino' -%}
+    {%- when 'panama-hacienda-la-esmeralda-lino' -%}{%- assign ph = 'panama-janson-gn-474' -%}
+    {%- when 'panama-janson-gn-474' -%}{%- assign ph = 'colombia-ombligon-floral-symphony' -%}
+    {%- when 'colombia-ombligon-floral-symphony' -%}{%- assign ph = 'panama-hiu-los-lajones-21b' -%}
+    {%- else -%}{%- assign ph = 'blend-1969' -%}
+  {%- endcase -%}
+  {%- if ph == product.handle -%}{%- assign ph = 'brasile-cerrado-mineiro-natural' -%}{%- endif -%}
+  {%- assign pp = all_products[ph] -%}
+  {%- if pp and pp.available -%}
+    <div class="tpdp-pair">
+      <p class="tpdp-pair__kicker">{% if L == 'en' %}Goes well with{% else %}Sta bene con{% endif %}</p>
+      <a class="tpdp-pair__card" href="{{ pp.url }}">
+        {%- if pp.featured_image -%}
+          <img class="tpdp-pair__img" src="{{ pp.featured_image | image_url: width: 160 }}" alt="{{ pp.title | escape }}" width="80" height="80" loading="lazy">
+        {%- endif -%}
+        <span class="tpdp-pair__body">
+          <span class="tpdp-pair__name">{{ pp.title }}</span>
+          <span class="tpdp-pair__price">{{ pp.price | money }} &middot; {% if L == 'en' %}discover &rarr;{% else %}scoprilo &rarr;{% endif %}</span>
+        </span>
+      </a>
+    </div>
+  {%- endif -%}
+
+{%- elsif part == 'accordion' -%}
+  <script>
+    (function () {
+      var EN = {% if L == 'en' %}true{% else %}false{% endif %};
+      var LBL = EN
+        ? { sheet: 'The spec', story: 'The story of this coffee', details: 'Coffee details' }
+        : { sheet: 'La scheda', story: 'La storia di questo caffè', details: 'Dettagli del caffè' };
+      function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+      function det(t, c, open) {
+        return '<details class="tpdp-acc__item"' + (open ? ' open' : '') + '><summary>' + t +
+          '<span class="tpdp-acc__icon" aria-hidden="true"></span></summary><div class="tpdp-acc__body">' + c + '</div></details>';
+      }
+      function build() {
+        var box = document.querySelector('.product__description');
+        if (!box || box.dataset.tpdpAcc) return;
+        box.dataset.tpdpAcc = '1';
+        /* Teniamo gli a capo della descrizione (paragrafi, <br>, voci di elenco):
+           il valore di ogni voce finisce a fine riga, il resto va nella storia. */
+        var raw = (box.innerText || '').replace(/\r/g, '').replace(/[ \t ]+/g, ' ').replace(/ *\n */g, '\n').replace(/\n{2,}/g, '\n').trim();
+        var text = raw.replace(/\n/g, ' ');
+        if (text.length < 60) return;
+        var re = /\b(Profilo sensoriale|Profilo aromatico|Sensory profile|Aromatic profile|Varietà|Variety|Processo|Process|Paese|Country|Origine|Origin|Regione|Region|Altitudine|Altitude|Anno di raccolta|Harvest year|Raccolto|Harvest|Anno|Year|Farm|Azienda|Company|Produttore|Producer|Metodo consigliato|Recommended method|Essiccazione|Drying|Fermentazione|Fermentation)\s*:|\b(Consigliato per|Recommended for)\b/g;
+        var marks = [], m;
+        while ((m = re.exec(raw))) marks.push({ label: m[1] || m[2], start: m.index, valStart: re.lastIndex });
+        var html = '<div class="tpdp-acc">';
+        if (marks.length >= 2) {
+          var rows = [], story = '';
+          if (marks[0].start > 60) story += raw.slice(0, marks[0].start).replace(/\n/g, ' ').trim() + ' ';
+          for (var i = 0; i < marks.length; i++) {
+            var end = (i + 1 < marks.length) ? marks[i + 1].start : raw.length;
+            var lines = raw.slice(marks[i].valStart, end).replace(/^:\s*/, '').split('\n');
+            var val = (lines.shift() || '').trim();
+            if (!val && lines.length) val = (lines.shift() || '').trim();
+            var rest = lines.join(' ').trim();
+            if (rest) story += rest + ' ';
+            val = val.replace(/\s+/g, ' ');
+            var cutd = val.search(/\s+(?=(?:Un|Una|Il|Lo|La|Le|Gli|Questo|Questa|Questi|Queste|Nel|Nella|Dal|Dalla|È|The|A|An|This|These|In|At|From|Here|Every|Each)\s+(?:[a-zàèéìòù]|[A-ZÈÀ][\wàèéìòù'’]*\s+[a-z]))/);
+            if (cutd > 2) { story += val.slice(cutd).trim() + ' '; val = val.slice(0, cutd).trim(); }
+            if (val.length > 150) {
+              var cut = val.search(/[.!?]\s+(?=[A-ZÈÀ“"])/);
+              if (cut > -1 && cut < 170) { story += val.slice(cut + 1).trim() + ' '; val = val.slice(0, cut + 1).trim(); }
+              else { story += val.slice(150).trim() + ' '; val = val.slice(0, 150).trim() + '…'; }
+            }
+            if (val) rows.push([marks[i].label, val]);
+          }
+          var table = '<table class="tpdp-acc__table"><tbody>' + rows.map(function (r) {
+            return '<tr><td>' + esc(r[0]) + '</td><td>' + esc(r[1]) + '</td></tr>';
+          }).join('') + '</tbody></table>';
+          html += det(LBL.sheet, table, true);
+          story = story.replace(/\s+/g, ' ').trim();
+          if (story.length > 80) html += det(LBL.story, '<p>' + esc(story) + '</p>', false);
+        } else {
+          html += det(LBL.details, '<p>' + esc(text) + '</p>', true);
+        }
+        html += '</div>';
+        box.innerHTML = html;
+      }
+      build();
+      document.addEventListener('shopify:section:load', build);
+    })();
+  </script>
+{%- endif -%}

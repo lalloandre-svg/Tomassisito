@@ -1,0 +1,204 @@
+{%- comment -%}
+  Tomassi — OYL · Griglia caffè della serie (collezione).
+  Card prodotto scure/oro con origine + note (metafield custom.*), prezzo e acquisto.
+  Palette OYL: nero #1B1814 · panna #F6EEDC · oro #C99A24 (unico). Hover scenografico + reveal.
+  Osservatore interno (classe .in) — non dipende dal sistema globale.
+  Copy bilingue IT/EN via snippet tomassi-i18n (mappa sul valore delle impostazioni).
+{%- endcomment -%}
+
+{%- style -%}
+  #OylColl-{{ section.id }} {
+    --oc-bg: {{ section.settings.bg_color }};
+    --oc-fg: {{ section.settings.text_color }};
+    --oc-acc: {{ section.settings.accent_color }};
+    --oc-line: rgba(201, 154, 36, 0.3);
+    background: var(--oc-bg);
+    color: var(--oc-fg);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+{%- endstyle -%}
+
+<section id="OylColl-{{ section.id }}" class="oylc" aria-label="{% render 'tomassi-i18n', s: section.settings.heading %}">
+  <span class="oylc-glow" aria-hidden="true"></span>
+  <div class="oylc-wrap">
+    <header class="oylc-head">
+      {%- if section.settings.kicker != blank -%}
+        <p class="oylc-kicker" data-reveal>{% render 'tomassi-i18n', s: section.settings.kicker %}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="oylc-title" data-reveal style="--ri: 1;">{% render 'tomassi-i18n', s: section.settings.heading %}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="oylc-desc" data-reveal style="--ri: 2;">{% render 'tomassi-i18n', s: section.settings.description, esc: false %}</div>
+      {%- endif -%}
+    </header>
+
+    {%- assign coll = section.settings.collection -%}
+    {%- if coll != blank and coll.products_count > 0 -%}
+      <ul class="oylc-grid" role="list" style="--cols: {{ section.settings.columns_desktop }};">
+        {%- for product in coll.products limit: section.settings.products_to_show -%}
+          <li class="oylc-card" data-reveal style="--ri: {{ forloop.index0 }};">
+            <a class="oylc-card__media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+              {%- if product.featured_image -%}
+                {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '350, 550, 700', sizes: '(min-width: 750px) 30vw, 100vw', class: 'oylc-card__img', alt: product.title }}
+              {%- else -%}
+                {{ 'product-2' | placeholder_svg_tag: 'oylc-card__img oylc-card__img--ph' }}
+              {%- endif -%}
+            </a>
+            <div class="oylc-card__body">
+              {%- assign origine = product.metafields.custom.origine -%}
+              {%- if origine != blank -%}<span class="oylc-card__origin">{{ origine | escape }}</span>{%- endif -%}
+              <h3 class="oylc-card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+              {%- assign notes = product.metafields.custom.in_tazza -%}
+              {%- if notes != blank -%}<p class="oylc-card__notes">{{ notes | escape }}</p>{%- endif -%}
+              <div class="oylc-card__foot">
+                {%- assign oy_cheap = product.variants | sort: 'price' | first -%}{%- assign oy_size = '' -%}{%- if oy_cheap.option1 contains 'g' and oy_cheap.option1.size < 7 -%}{%- assign oy_size = oy_cheap.option1 | replace: 'kg', ' kg' | replace: '0g', '0 g' -%}{%- endif -%}
+                <span class="oylc-card__price">{{ product.price | money }}{% if oy_size != '' %} · {{ oy_size }}{% endif %}</span>
+                {%- assign _buy = section.settings.buy_label | default: 'Acquista' -%}
+                <a class="oylc-card__buy" href="{{ product.url }}">{% render 'tomassi-i18n', s: _buy %}</a>
+              </div>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if section.settings.show_view_all and section.settings.view_all_label != blank -%}
+        <div class="oylc-foot" data-reveal>
+          <a class="oylc-btn" href="{{ section.settings.view_all_link | default: coll.url }}">{% render 'tomassi-i18n', s: section.settings.view_all_label %}</a>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <p class="oylc-empty">{% if request.locale.iso_code == 'en' %}Select a collection in the customizer to show the coffees.{% else %}Seleziona una collezione dal customizer per mostrare i caffè.{% endif %}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- style -%}
+  #OylColl-{{ section.id }} *, #OylColl-{{ section.id }} *::before, #OylColl-{{ section.id }} *::after { box-sizing: border-box; }
+  #OylColl-{{ section.id }} .oylc-glow {
+    position: absolute; z-index: 0; top: -10%; right: -8%; width: 50rem; height: 50rem;
+    border-radius: 50%; pointer-events: none; filter: blur(80px); opacity: 0.22;
+    background: radial-gradient(circle, color-mix(in srgb, var(--oc-acc) 55%, transparent), transparent 70%);
+    animation: oylc-breathe 17s ease-in-out infinite;
+  }
+  @keyframes oylc-breathe { 0%, 100% { opacity: 0.16; transform: scale(1); } 50% { opacity: 0.3; transform: translate(-3rem, 2rem) scale(1.12); } }
+  #OylColl-{{ section.id }} .oylc-wrap { position: relative; z-index: 1; width: 100%; max-width: 120rem; margin-inline: auto; padding-inline: clamp(1.6rem, 1rem + 3vw, 4rem); }
+  #OylColl-{{ section.id }} .oylc-head { max-width: 64rem; margin: 0 0 4rem; }
+  #OylColl-{{ section.id }} .oylc-kicker { margin: 0 0 1.4rem; font-size: 1.3rem; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600; color: var(--oc-acc); }
+  #OylColl-{{ section.id }} .oylc-title { margin: 0; font-size: clamp(2.6rem, 1.9rem + 2.4vw, 4rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--oc-fg); }
+  #OylColl-{{ section.id }} .oylc-desc { margin: 1.6rem 0 0; max-width: 60ch; font-size: clamp(1.45rem, 1.3rem + 0.4vw, 1.7rem); line-height: 1.6; opacity: 0.85; }
+  #OylColl-{{ section.id }} .oylc-desc p { margin: 0; }
+
+  #OylColl-{{ section.id }} .oylc-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(1.6rem, 1rem + 1.5vw, 2.4rem); grid-template-columns: 1fr; }
+  @media screen and (min-width: 600px) { #OylColl-{{ section.id }} .oylc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media screen and (min-width: 750px) { #OylColl-{{ section.id }} .oylc-grid { grid-template-columns: repeat(var(--cols, 3), 1fr); } }
+
+  #OylColl-{{ section.id }} .oylc-card {
+    position: relative; display: flex; flex-direction: column; border: 1px solid var(--oc-line); border-radius: 14px; overflow: hidden;
+    background: color-mix(in srgb, var(--oc-fg) 4%, transparent);
+    transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  #OylColl-{{ section.id }} .oylc-card::before {
+    content: ""; position: absolute; z-index: 2; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, color-mix(in srgb, var(--oc-acc) 20%, transparent), transparent);
+    transform: skewX(-18deg); transition: left 0.8s cubic-bezier(0.2, 1, 0.3, 1); pointer-events: none;
+  }
+  #OylColl-{{ section.id }} .oylc-card:hover::before { left: 130%; }
+  #OylColl-{{ section.id }} .oylc-card:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in srgb, var(--oc-acc) 55%, transparent);
+    box-shadow: 0 26px 52px rgba(0, 0, 0, 0.45), 0 0 0 1px color-mix(in srgb, var(--oc-acc) 35%, transparent) inset;
+  }
+  #OylColl-{{ section.id }} .oylc-card__media { display: block; aspect-ratio: 4 / 5; overflow: hidden; }
+  #OylColl-{{ section.id }} .oylc-card__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1); }
+  #OylColl-{{ section.id }} .oylc-card:hover .oylc-card__img { transform: scale(1.06); }
+  #OylColl-{{ section.id }} .oylc-card__body { display: flex; flex-direction: column; gap: 0.8rem; padding: 2rem; flex: 1; }
+  #OylColl-{{ section.id }} .oylc-card__origin { font-size: 1.15rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--oc-acc); }
+  #OylColl-{{ section.id }} .oylc-card__title { margin: 0; font-size: 1.9rem; line-height: 1.2; color: var(--oc-fg); }
+  #OylColl-{{ section.id }} .oylc-card__title a { color: inherit; text-decoration: none; }
+  #OylColl-{{ section.id }} .oylc-card__title a:hover { color: var(--oc-acc); }
+  #OylColl-{{ section.id }} .oylc-card__notes { margin: 0; font-size: 1.4rem; line-height: 1.5; opacity: 0.8; }
+  #OylColl-{{ section.id }} .oylc-card__foot { margin-top: auto; padding-top: 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; }
+  #OylColl-{{ section.id }} .oylc-card__price { font-size: 1.7rem; font-weight: 700; }
+  #OylColl-{{ section.id }} .oylc-card__buy {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 4.4rem; padding: 0.9rem 1.8rem;
+    border-radius: 999px; font-size: 1.3rem; font-weight: 700; text-decoration: none;
+    background: transparent; color: var(--oc-acc); border: 1.5px solid var(--oc-acc);
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  #OylColl-{{ section.id }} .oylc-card:hover .oylc-card__buy { background: var(--oc-acc); color: #1B1814; }
+
+  #OylColl-{{ section.id }} .oylc-foot { margin-top: 3.6rem; text-align: center; }
+  #OylColl-{{ section.id }} .oylc-btn {
+    display: inline-flex; align-items: center; justify-content: center; min-height: 4.8rem; padding: 1.2rem 2.8rem;
+    border-radius: 999px; background: transparent; color: var(--oc-fg); border: 1.5px solid color-mix(in srgb, var(--oc-fg) 40%, transparent);
+    font-size: 1.45rem; font-weight: 700; text-decoration: none; transition: transform 0.2s ease-out, border-color 0.2s ease, color 0.2s ease;
+  }
+  #OylColl-{{ section.id }} .oylc-btn:hover { transform: translateY(-2px); border-color: var(--oc-acc); color: var(--oc-acc); }
+  #OylColl-{{ section.id }} .oylc-btn:focus-visible { outline: 3px solid var(--oc-acc); outline-offset: 3px; }
+  #OylColl-{{ section.id }} .oylc-empty { opacity: 0.7; font-size: 1.4rem; }
+
+  #OylColl-{{ section.id }} [data-reveal] {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.2, 1, 0.3, 1), transform 0.7s cubic-bezier(0.2, 1, 0.3, 1);
+    transition-delay: calc(var(--ri, 0) * 70ms);
+  }
+  #OylColl-{{ section.id }} [data-reveal].in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #OylColl-{{ section.id }} .oylc-glow { animation: none; }
+    #OylColl-{{ section.id }} .oylc-card, #OylColl-{{ section.id }} .oylc-card__img, #OylColl-{{ section.id }} .oylc-card::before, #OylColl-{{ section.id }} .oylc-card__buy, #OylColl-{{ section.id }} .oylc-btn { transition: none; }
+    #OylColl-{{ section.id }} .oylc-card:hover { transform: none; }
+    #OylColl-{{ section.id }} [data-reveal] { opacity: 1; transform: none; transition: none; }
+  }
+{%- endstyle -%}
+
+<script>
+  (function () {
+    var root = document.getElementById('OylColl-{{ section.id }}');
+    if (!root) return;
+    var els = Array.prototype.slice.call(root.querySelectorAll('[data-reveal]'));
+    if (!els.length) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "OYL — Caffè",
+  "tag": "section",
+  "class": "section section--oyl-collection",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Sopratitolo (opzionale)" },
+    { "type": "text", "id": "heading", "label": "Titolo", "default": "I caffè della serie" },
+    { "type": "richtext", "id": "description", "label": "Descrizione", "default": "<p>Lotti rari e profili estremi. Ogni caffè è un pezzo da collezione, scelto per spostare il limite.</p>" },
+    { "type": "collection", "id": "collection", "label": "Collezione" },
+    { "type": "range", "id": "products_to_show", "min": 3, "max": 12, "step": 1, "label": "Numero prodotti", "default": 6 },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 4, "step": 1, "label": "Colonne desktop", "default": 3 },
+    { "type": "text", "id": "buy_label", "label": "Testo bottone card", "default": "Acquista" },
+    { "type": "checkbox", "id": "show_view_all", "label": "Mostra \"Vedi tutti\"", "default": true },
+    { "type": "text", "id": "view_all_label", "label": "Testo \"Vedi tutti\"", "default": "Vedi tutta la serie" },
+    { "type": "url", "id": "view_all_link", "label": "Link \"Vedi tutti\"" },
+    { "type": "header", "content": "Colori OYL" },
+    { "type": "color", "id": "bg_color", "label": "Sfondo", "default": "#1B1814" },
+    { "type": "color", "id": "text_color", "label": "Testo", "default": "#FFFFFF" },
+    { "type": "color", "id": "accent_color", "label": "Accento (oro)", "default": "#C99A24" },
+    { "type": "header", "content": "Spaziatura" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Spazio sopra", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Spazio sotto", "default": 80 }
+  ],
+  "presets": [
+    { "name": "OYL — Caffè" }
+  ]
+}
+{% endschema %}

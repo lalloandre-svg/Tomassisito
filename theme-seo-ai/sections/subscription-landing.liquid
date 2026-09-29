@@ -1,0 +1,314 @@
+{%- comment -%}
+  Tomassi — Landing commerciale Abbonamento
+  Pagina di scoperta del servizio (NON la pagina tecnica Joy di gestione).
+  Hero + Vantaggi + Piani + Come funziona + FAQ + CTA finale.
+  Tutto editabile da customizer. Classi proprie .subl__ per non sporcare altre sezioni.
+  Palette sito principale: niente oro #C99A24 — accento ocra #C77F2A.
+{%- endcomment -%}
+
+{%- liquid
+  assign benefits = section.blocks | where: 'type', 'benefit'
+  assign plans = section.blocks | where: 'type', 'plan'
+  assign steps = section.blocks | where: 'type', 'step'
+  assign faqs = section.blocks | where: 'type', 'faq'
+-%}
+
+{{ 'subscription-landing.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #SubLanding-{{ section.id }} {
+    --subl-bg: {{ section.settings.bg_color }};
+    --subl-fg: {{ section.settings.text_color }};
+    --subl-accent: {{ section.settings.accent_color }};
+    --subl-green: {{ section.settings.green_color }};
+    --subl-card: {{ section.settings.card_color }};
+    --subl-pt: {{ section.settings.padding_top }}px;
+    --subl-pb: {{ section.settings.padding_bottom }}px;
+  }
+  /* Quanto paghi: importi per numero di buste (2026-09-29) */
+  #SubLanding-{{ section.id }} .subl__plan-prices { margin: 1.6rem 0 2rem; padding: 1.4rem 1.6rem; border-radius: 1.4rem; background: rgba(27, 24, 20, 0.05); text-align: left; }
+  #SubLanding-{{ section.id }} .subl__plan-prices-title { margin: 0 0 0.8rem; font-size: 1.15rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7; }
+  #SubLanding-{{ section.id }} .subl__plan-prices ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+  #SubLanding-{{ section.id }} .subl__plan-prices li { display: flex; justify-content: space-between; align-items: baseline; gap: 1.2rem; font-size: 1.45rem; line-height: 1.35; }
+  #SubLanding-{{ section.id }} .subl__pp-qty { font-weight: 700; white-space: nowrap; }
+  #SubLanding-{{ section.id }} .subl__pp-val { text-align: right; font-weight: 700; }
+  #SubLanding-{{ section.id }} .subl__pp-val small { display: block; font-size: 1.2rem; font-weight: 500; opacity: 0.75; }
+  #SubLanding-{{ section.id }} .subl__plan-prices-note { margin: 1rem 0 0; font-size: 1.2rem; opacity: 0.7; }
+{%- endstyle -%}
+
+<section id="SubLanding-{{ section.id }}" class="subl color-scheme-custom">
+  {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
+  <header class="subl__hero">
+    <div class="subl__wrap subl__hero-inner">
+      {%- if section.settings.hero_kicker != blank -%}
+        <p class="subl__kicker">{{ section.settings.hero_kicker | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.hero_title != blank -%}
+        <h1 class="subl__hero-title">{{ section.settings.hero_title | escape }}</h1>
+      {%- endif -%}
+      {%- if section.settings.hero_subtitle != blank -%}
+        <p class="subl__hero-subtitle">{{ section.settings.hero_subtitle | escape }}</p>
+      {%- endif -%}
+      <div class="subl__cta-row">
+        {%- if section.settings.hero_cta1_label != blank -%}
+          <a class="subl__btn subl__btn--primary" href="{{ section.settings.hero_cta1_link | default: '#subl-piani' }}">
+            {{- section.settings.hero_cta1_label | escape -}}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.hero_cta2_label != blank -%}
+          <a class="subl__btn subl__btn--ghost" href="{{ section.settings.hero_cta2_link | default: '#subl-come-funziona' }}">
+            {{- section.settings.hero_cta2_label | escape -}}
+          </a>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.hero_note != blank -%}
+        <p class="subl__note">{{ section.settings.hero_note | escape }}</p>
+      {%- endif -%}
+    </div>
+  </header>
+
+  {%- comment -%} ---------- VANTAGGI ---------- {%- endcomment -%}
+  {%- if benefits.size > 0 -%}
+    <div class="subl__block subl__wrap">
+      {%- if section.settings.benefits_title != blank -%}
+        <h2 class="subl__h2">{{ section.settings.benefits_title | escape }}</h2>
+      {%- endif -%}
+      <ul class="subl__benefits" role="list">
+        {%- for block in benefits -%}
+          <li class="subl__benefit" {{ block.shopify_attributes }}>
+            <span class="subl__benefit-dot" aria-hidden="true"></span>
+            {%- if block.settings.title != blank -%}
+              <h3 class="subl__benefit-title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="subl__benefit-text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ---------- PIANI ---------- {%- endcomment -%}
+  {%- if plans.size > 0 -%}
+    <div id="subl-piani" class="subl__block subl__wrap">
+      {%- if section.settings.plans_title != blank -%}
+        <h2 class="subl__h2">{{ section.settings.plans_title | escape }}</h2>
+      {%- endif -%}
+      <div class="subl__plans">
+        {%- for block in plans -%}
+          <div class="subl__plan{% if block.settings.highlight %} subl__plan--featured{% endif %}" {{ block.shopify_attributes }}>
+            {%- if block.settings.highlight and block.settings.badge != blank -%}
+              <span class="subl__plan-flag">{{ block.settings.badge | escape }}</span>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="subl__plan-title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.discount != blank -%}
+              <p class="subl__plan-discount">{{ block.settings.discount | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="subl__plan-text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.prices != blank -%}
+              <div class="subl__plan-prices">
+                <p class="subl__plan-prices-title">{% if request.locale.iso_code == 'en' %}What you pay{% else %}Quanto paghi{% endif %}</p>
+                <ul role="list">
+                  {%- assign pp_rows = block.settings.prices | newline_to_br | split: '<br />' -%}
+                  {%- for pp_row in pp_rows -%}
+                    {%- assign pp_row = pp_row | strip -%}
+                    {%- if pp_row == blank -%}{%- continue -%}{%- endif -%}
+                    {%- assign pp = pp_row | split: '|' -%}
+                    <li><span class="subl__pp-qty">{{ pp[0] | strip | escape }}</span><span class="subl__pp-val">{{ pp[1] | strip | escape }}{%- if pp[2] != blank -%}<small>{{ pp[2] | strip | escape }}</small>{%- endif -%}</span></li>
+                  {%- endfor -%}
+                </ul>
+                {%- if section.settings.prices_note != blank -%}
+                  <p class="subl__plan-prices-note">{{ section.settings.prices_note | escape }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <a class="subl__btn subl__btn--primary subl__plan-btn" href="{{ block.settings.button_link | default: section.settings.hero_cta1_link | default: '#' }}">
+                {{- block.settings.button_label | escape -}}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ---------- COME FUNZIONA ---------- {%- endcomment -%}
+  {%- if steps.size > 0 -%}
+    <div id="subl-come-funziona" class="subl__block subl__block--green">
+      <div class="subl__wrap">
+        {%- if section.settings.steps_title != blank -%}
+          <h2 class="subl__h2 subl__h2--invert">{{ section.settings.steps_title | escape }}</h2>
+        {%- endif -%}
+        <ol class="subl__steps" role="list">
+          {%- for block in steps -%}
+            <li class="subl__step" {{ block.shopify_attributes }}>
+              <span class="subl__step-num">{{ forloop.index }}</span>
+              {%- if block.settings.title != blank -%}
+                <h3 class="subl__step-title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="subl__step-text">{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ---------- FAQ ---------- {%- endcomment -%}
+  {%- if faqs.size > 0 -%}
+    <div class="subl__block subl__wrap subl__wrap--narrow">
+      {%- if section.settings.faq_title != blank -%}
+        <h2 class="subl__h2">{{ section.settings.faq_title | escape }}</h2>
+      {%- endif -%}
+      <div class="subl__faq">
+        {%- for block in faqs -%}
+          <details class="subl__faq-item" {{ block.shopify_attributes }}>
+            <summary class="subl__faq-q">
+              <span>{{ block.settings.question | escape }}</span>
+              <span class="subl__faq-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="subl__faq-a">
+              <p>{{ block.settings.answer | escape }}</p>
+            </div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ---------- CTA FINALE ---------- {%- endcomment -%}
+  {%- if section.settings.final_title != blank or section.settings.final_button_label != blank -%}
+    <div class="subl__final">
+      <div class="subl__wrap subl__wrap--narrow subl__final-inner">
+        {%- if section.settings.final_title != blank -%}
+          <h2 class="subl__final-title">{{ section.settings.final_title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.final_text != blank -%}
+          <p class="subl__final-text">{{ section.settings.final_text | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.final_button_label != blank -%}
+          <a class="subl__btn subl__btn--primary subl__btn--lg" href="{{ section.settings.final_button_link | default: section.settings.hero_cta1_link | default: '#' }}">
+            {{- section.settings.final_button_label | escape -}}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Landing abbonamento",
+  "tag": "section",
+  "class": "section section--subl",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_kicker", "label": "Sopratitolo", "default": "Abbonamento Tomassi" },
+    { "type": "textarea", "id": "hero_title", "label": "Titolo", "default": "Caffè fresco ogni mese, tostato su ordinazione ogni martedì." },
+    { "type": "textarea", "id": "hero_subtitle", "label": "Sottotitolo", "default": "Scegli il tuo ritmo. Noi tostiamo, prepariamo e spediamo il caffè quando è davvero fresco. Meno pensieri, più tazze buone." },
+    { "type": "text", "id": "hero_cta1_label", "label": "CTA primaria", "default": "Attiva il tuo abbonamento" },
+    { "type": "url", "id": "hero_cta1_link", "label": "Link CTA primaria", "info": "Collega al prodotto o alla collection con piano abbonamento attivo." },
+    { "type": "text", "id": "hero_cta2_label", "label": "CTA secondaria", "default": "Scopri come funziona" },
+    { "type": "url", "id": "hero_cta2_link", "label": "Link CTA secondaria" },
+    { "type": "text", "id": "hero_note", "label": "Nota sotto CTA", "default": "Puoi modificare, mettere in pausa o cancellare quando vuoi." },
+
+    { "type": "header", "content": "Sezione vantaggi" },
+    { "type": "text", "id": "benefits_title", "label": "Titolo", "default": "Perché abbonarsi" },
+
+    { "type": "header", "content": "Sezione piani" },
+    { "type": "text", "id": "plans_title", "label": "Titolo", "default": "Scegli il tuo ritmo" },
+    { "type": "text", "id": "prices_note", "label": "Nota sotto i prezzi dei piani", "default": "Prezzi del primo anno, spedizione inclusa." },
+
+    { "type": "header", "content": "Sezione come funziona" },
+    { "type": "text", "id": "steps_title", "label": "Titolo", "default": "Come funziona" },
+
+    { "type": "header", "content": "Sezione FAQ" },
+    { "type": "text", "id": "faq_title", "label": "Titolo", "default": "Domande frequenti" },
+
+    { "type": "header", "content": "CTA finale" },
+    { "type": "textarea", "id": "final_title", "label": "Titolo", "default": "Pronto a non rimanere più senza caffè buono?" },
+    { "type": "textarea", "id": "final_text", "label": "Testo", "default": "Tu scegli il ritmo. Noi pensiamo alla tostatura." },
+    { "type": "text", "id": "final_button_label", "label": "Bottone", "default": "Attiva il tuo abbonamento" },
+    { "type": "url", "id": "final_button_link", "label": "Link bottone" },
+
+    { "type": "header", "content": "Colori" },
+    { "type": "color", "id": "bg_color", "label": "Sfondo", "default": "#F6EEDC" },
+    { "type": "color", "id": "card_color", "label": "Sfondo card", "default": "#FCF8EE" },
+    { "type": "color", "id": "text_color", "label": "Testo", "default": "#1B1814" },
+    { "type": "color", "id": "accent_color", "label": "Accento (ocra)", "default": "#C77F2A" },
+    { "type": "color", "id": "green_color", "label": "Verde (sezione come funziona)", "default": "#0F4A27" },
+
+    { "type": "header", "content": "Spaziatura" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Spazio sopra", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Spazio sotto", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Vantaggio",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titolo", "default": "Fresco davvero" },
+        { "type": "textarea", "id": "text", "label": "Testo", "default": "Ogni martedì tostiamo su ordinazione. Il caffè non resta fermo in magazzino ad aspettarti." }
+      ]
+    },
+    {
+      "type": "plan",
+      "name": "Piano",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titolo", "default": "Mensile" },
+        { "type": "text", "id": "discount", "label": "Sconto", "default": "15% di sconto" },
+        { "type": "textarea", "id": "text", "label": "Testo", "default": "Perfetto se vuoi iniziare senza pensarci troppo." },
+        { "type": "textarea", "id": "prices", "label": "Quanto paghi", "info": "Una riga per formato: buste | importo | nota (facoltativa). Es.: 2 buste | 29,75 € al mese | addebito di 89,25 € ogni 3 mesi" },
+        { "type": "checkbox", "id": "highlight", "label": "Evidenzia questo piano", "default": false },
+        { "type": "text", "id": "badge", "label": "Etichetta (se evidenziato)", "default": "Più scelto" },
+        { "type": "text", "id": "button_label", "label": "Bottone", "default": "Attiva" },
+        { "type": "url", "id": "button_link", "label": "Link bottone" }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titolo", "default": "Scegli" },
+        { "type": "textarea", "id": "text", "label": "Testo", "default": "Decidi il caffè e la frequenza più adatta a te." }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Domanda", "default": "Posso modificare l’abbonamento?" },
+        { "type": "textarea", "id": "answer", "label": "Risposta", "default": "Sì. Puoi modificare frequenza, quantità e dati dell’abbonamento dalla pagina di gestione." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing abbonamento",
+      "blocks": [
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "plan" },
+        { "type": "plan" },
+        { "type": "plan" },
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "faq" },
+        { "type": "faq" },
+        { "type": "faq" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -26,3 +26,10 @@ Cambiato solo il titolo: handle/URL, testo e title SEO restano invariati.
 | Titolo | UN TEAM VINCENTE, UNA FAMIGLIA DI CAMPIONI | Le nostre gare di caffè: risultati e campioni |
 | Title SEO | Un team vincente: la famiglia di campioni Tomassi Coffee | Le nostre gare di caffè: risultati e campioni \| Tomassi Coffee |
 | Meta description | Unisciti a Tomassi Coffee, una squadra di campioni dove passione, impegno e successi si intrecciano. Vivi l’esperienza delle competizioni al massimo livello. | Emanuele Tomassi, due volte campione italiano di tostatura e 6° ai Mondiali 2024; Andrè 2° ai Campionati italiani Ibrik 2025. Risultati, discipline e chi gareggia con noi. |
+
+# Dati prodotto e pagine cambiati il 29-09-2026 (valgono anche sul sito pubblicato)
+- Nuovo metafield `custom.note_brevi` (Note brevi): El Vergel, Blend 1969, Family Blend, Blend Futuro, Zarza, El Diviso, Las Lajas, Nyeri Shir.
+- `custom.in_tazza` scritto per Zarza, El Diviso, Las Lajas, Nyeri Shir (prima vuoto).
+- Blend 1969 `custom.varieta`: prima «Arabica (blend)», ora «Catuai, Mundo Novo, Catimor, Caturra, Typica, Heirloom».
+- Collezione Over Your Limits: tolti Colombia Mikava Santuario Extended e Colombia Java Fruit Forward (prodotti ancora attivi).
+- Pagina Spedizioni: aggiunta la riga «Consegna: in media 24–48 ore dopo la spedizione».

@@ -1,0 +1,420 @@
+{%- comment -%}
+  Tomassi — "Quello che c'è da sapere": scheda tecnica visiva, scura e audace.
+  Legge i metafield custom.* del prodotto e li trasforma in card a icona, tag di
+  gusto e gauge. Si mostra solo se almeno un campo è compilato.
+  A11y: lista semantica, gauge con aria-label, contrasto panna su nero.
+  Motion: scroll reveal con stagger (vedi tomassi-motion.*), degradabile.
+{%- endcomment -%}
+
+{%- liquid
+  assign m = product.metafields.custom
+  assign has_any = false
+  if m.per_chi_e != blank or m.in_tazza != blank or m.metodo_consigliato != blank or m.livello_stranezza != blank or m.ricetta_consigliata != blank or m.origine != blank or m.varieta != blank or m.processo != blank or m.perche_oyl != blank
+    assign has_any = true
+  endif
+
+  assign liv = m.livello_stranezza | default: '' | strip
+  assign liv_n = 0
+  if liv == 'Basso'
+    assign liv_n = 1
+  elsif liv == 'Medio'
+    assign liv_n = 2
+  elsif liv == 'Alto'
+    assign liv_n = 3
+  elsif liv == 'Fuori scala'
+    assign liv_n = 4
+  endif
+  assign liv_pct = liv_n | times: 25
+
+  assign flavors = ''
+  assign has_fl = false
+  assign nb = m.note_brevi.value | append: ''
+  if nb != blank
+    assign flavors = nb | strip | split: ','
+    assign has_fl = true
+  endif
+-%}
+
+{%- if has_any -%}
+  {%- style -%}
+    #ProductSpec-{{ section.id }} {
+      --ps-bg: {{ section.settings.bg_color }};
+      --ps-fg: {{ section.settings.text_color }};
+      --ps-accent: {{ section.settings.accent_color }};
+      --ps-card: {{ section.settings.card_color }};
+      background: var(--ps-bg);
+      color: var(--ps-fg);
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  {%- endstyle -%}
+
+  {%- liquid
+    assign tps_en = false
+    if request.locale.iso_code == 'en'
+      assign tps_en = true
+    endif
+    assign liv_label = liv
+    if tps_en
+      case liv
+        when 'Basso'
+          assign liv_label = 'Low'
+        when 'Medio'
+          assign liv_label = 'Medium'
+        when 'Alto'
+          assign liv_label = 'High'
+        when 'Fuori scala'
+          assign liv_label = 'Off the charts'
+      endcase
+    endif
+  -%}
+  <section id="ProductSpec-{{ section.id }}" class="product-spec tomassi-grain">
+    <span class="product-spec__glow product-spec__glow--a" aria-hidden="true"></span>
+    <span class="product-spec__glow product-spec__glow--b" aria-hidden="true"></span>
+    <div class="page-width">
+      <div class="product-spec__inner">
+        <header class="product-spec__head" data-reveal>
+          <span class="product-spec__eyebrow">{% if tps_en %}Technical sheet{% else %}La scheda tecnica{% endif %}</span>
+          {%- if section.settings.heading != blank -%}
+            <h2 class="product-spec__title">{% render 'tomassi-i18n', s: section.settings.heading %}</h2>
+          {%- endif -%}
+          {%- if section.settings.subheading != blank -%}
+            <p class="product-spec__sub">{% render 'tomassi-i18n', s: section.settings.subheading %}</p>
+          {%- endif -%}
+        </header>
+
+        <div class="product-spec__grid">
+          {%- if m.origine != blank -%}
+            <div class="ps-card" data-reveal data-reveal-group="spec">
+              <span class="ps-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+              <p class="ps-label">{% if tps_en %}Origin{% else %}Origine{% endif %}</p>
+              <p class="ps-value">{{ m.origine | escape }}</p>
+            </div>
+          {%- endif -%}
+
+          {%- if m.processo != blank -%}
+            <div class="ps-card" data-reveal data-reveal-group="spec">
+              <span class="ps-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3s6 6.4 6 10.5A6 6 0 0 1 6 13.5C6 9.4 12 3 12 3Z"/></svg></span>
+              <p class="ps-label">{% if tps_en %}Process{% else %}Processo{% endif %}</p>
+              <p class="ps-value">{{ m.processo | escape }}</p>
+            </div>
+          {%- endif -%}
+
+          {%- if m.varieta != blank -%}
+            <div class="ps-card" data-reveal data-reveal-group="spec">
+              <span class="ps-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 20v-7"/><path d="M12 13c0-3.5 2.4-6.5 6-7-.3 3.8-2.6 6.6-6 7Z"/><path d="M12 16c0-2.6-1.8-4.8-4.5-5.2C7.8 13.5 9.5 15.6 12 16Z"/></svg></span>
+              <p class="ps-label">{% if tps_en %}Variety{% else %}Varietà{% endif %}</p>
+              <p class="ps-value">{{ m.varieta | escape }}</p>
+            </div>
+          {%- endif -%}
+
+          {%- if m.metodo_consigliato != blank -%}
+            <div class="ps-card" data-reveal data-reveal-group="spec">
+              <span class="ps-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3c1.5 3-1.5 4.5-1.5 7A2.5 2.5 0 0 0 14 12c.4 2.5-1 4-1 4 3-.6 5-3.2 5-6.2C18 6 14.5 4 12 3Z"/><path d="M10 21h4"/></svg></span>
+              <p class="ps-label">{% if tps_en %}How we’d brew it{% else %}Come lo faremmo noi{% endif %}</p>
+              <p class="ps-value">{{ m.metodo_consigliato | escape }}</p>
+            </div>
+          {%- endif -%}
+
+          {%- if m.in_tazza != blank or has_fl -%}
+            <div class="ps-card ps-card--wide ps-card--flavor" data-reveal data-reveal-group="spec">
+              <div>
+                <p class="ps-label">{% if tps_en %}In the cup{% else %}Cosa trovi in tazza{% endif %}</p>
+                {%- if has_fl -%}
+                  <div class="ps-flavors">
+                    {%- for f in flavors -%}
+                      {%- assign ft = f | strip -%}
+                      {%- if ft != blank -%}<span class="ps-flavor" style="--fi: {{ forloop.index0 }};">{{ ft | escape }}</span>{%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+                {%- if m.in_tazza != blank -%}
+                  <p class="ps-value"{% if has_fl %} style="margin-top: 1.2rem;"{% endif %}>{{ m.in_tazza | escape | newline_to_br }}</p>
+                {%- endif -%}
+              </div>
+              <span class="ps-ic ps-ic--big" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h2.2a2 2 0 0 1 0 4H17"/><path d="M8 3.5c-.6.8-.6 1.6 0 2.4M12 3.5c-.6.8-.6 1.6 0 2.4"/></svg></span>
+            </div>
+          {%- endif -%}
+
+          {%- if liv_n > 0 -%}
+            <div class="ps-card ps-card--wide ps-card--gauge" data-reveal data-reveal-group="spec">
+              <p class="ps-label">{% if tps_en %}How far off the charts{% else %}Quanto è fuori dagli schemi{% endif %}</p>
+              <div class="ps-gauge" role="img" aria-label="{% if tps_en %}How far off the charts{% else %}Quanto è fuori dagli schemi{% endif %}: {{ liv_label | escape }}">
+                <div class="ps-gauge__track"><span class="ps-gauge__fill" style="--gauge: {{ liv_pct }}%;"></span></div>
+                <span class="ps-gauge__val">{{ liv_label | escape }}</span>
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if m.per_chi_e != blank -%}
+            <div class="ps-card ps-card--wide ps-card--note" data-reveal data-reveal-group="spec">
+              <p class="ps-label">{% if tps_en %}Who it’s for{% else %}Per chi è{% endif %}</p>
+              <p class="ps-value">{{ m.per_chi_e | newline_to_br }}</p>
+            </div>
+          {%- endif -%}
+
+          {%- if m.ricetta_consigliata != blank -%}
+            <div class="ps-card ps-card--wide ps-card--recipe" data-reveal data-reveal-group="spec">
+              <span class="ps-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3v8a2 2 0 0 0 2 2v8M6 3h2v6M10 3v6M14 3c-1 0-1.5 2-1.5 4.5S13 13 14 13v8"/></svg></span>
+              <p class="ps-label">{% if tps_en %}House recipe{% else %}La ricetta della casa{% endif %}</p>
+              <p class="ps-value">{{ m.ricetta_consigliata | newline_to_br }}</p>
+            </div>
+          {%- endif -%}
+
+          {%- if m.perche_oyl != blank -%}
+            <div class="ps-card ps-card--wide ps-card--oyl" data-reveal data-reveal-group="spec">
+              <p class="ps-label">{% if tps_en %}Why it’s Over Your Limits{% else %}Perché è Over Your Limits{% endif %}</p>
+              <p class="ps-value">{{ m.perche_oyl | newline_to_br }}</p>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- style -%}
+    .product-spec { position: relative; overflow: hidden; isolation: isolate; }
+    .product-spec__glow {
+      position: absolute; z-index: 0; border-radius: 50%;
+      pointer-events: none; filter: blur(60px);
+      opacity: 0.5;
+    }
+    .product-spec__glow--a {
+      top: -14%; left: -8%;
+      width: 46rem; height: 46rem;
+      background: radial-gradient(circle, color-mix(in srgb, var(--ps-accent) 60%, transparent), transparent 70%);
+      animation: ps-glow-a 13s ease-in-out infinite;
+    }
+    .product-spec__glow--b {
+      bottom: -18%; right: -10%;
+      width: 40rem; height: 40rem;
+      background: radial-gradient(circle, color-mix(in srgb, #0F4A27 75%, transparent), transparent 70%);
+      animation: ps-glow-b 17s ease-in-out infinite;
+    }
+    @keyframes ps-glow-a {
+      0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: 0.42; }
+      50% { transform: translate3d(4rem, 2.4rem, 0) scale(1.12); opacity: 0.6; }
+    }
+    @keyframes ps-glow-b {
+      0%, 100% { transform: translate3d(0,0,0) scale(1.05); opacity: 0.34; }
+      50% { transform: translate3d(-3.4rem, -2rem, 0) scale(1); opacity: 0.5; }
+    }
+    .product-spec__inner { max-width: 96rem; margin-inline: auto; position: relative; z-index: 2; }
+    .product-spec__head { text-align: center; max-width: 44rem; margin: 0 auto 3.4rem; }
+    .product-spec__eyebrow {
+      display: inline-block;
+      margin-bottom: 1.1rem;
+      font-size: 1.2rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--ps-accent);
+    }
+    .product-spec__title {
+      margin: 0;
+      font-family: var(--font-heading-family);
+      font-weight: 800;
+      font-size: clamp(2.6rem, 1.9rem + 2.4vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: var(--ps-fg);
+    }
+    .product-spec__sub {
+      margin: 1.2rem 0 0;
+      font-size: clamp(1.5rem, 1.35rem + 0.3vw, 1.7rem);
+      line-height: 1.5;
+      opacity: 0.78;
+    }
+    .product-spec__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.4rem;
+    }
+    @media screen and (min-width: 750px) {
+      .product-spec__grid { grid-template-columns: repeat(4, 1fr); gap: 1.6rem; }
+    }
+    .ps-card {
+      position: relative;
+      border: 1px solid color-mix(in srgb, var(--ps-accent) 24%, transparent);
+      border-radius: 16px;
+      padding: 2rem 1.9rem;
+      background:
+        linear-gradient(155deg, color-mix(in srgb, var(--ps-accent) 7%, transparent), transparent 46%),
+        var(--ps-card);
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    /* sheen che attraversa la card all'hover */
+    .ps-card::after {
+      content: "";
+      position: absolute; top: 0; left: -120%;
+      width: 70%; height: 100%;
+      background: linear-gradient(100deg, transparent, color-mix(in srgb, var(--ps-accent) 22%, transparent), transparent);
+      transform: skewX(-18deg);
+      transition: left 0.75s cubic-bezier(0.2, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .ps-card:hover::after { left: 130%; }
+    .ps-card:hover {
+      transform: translateY(-6px);
+      border-color: color-mix(in srgb, var(--ps-accent) 60%, transparent);
+      box-shadow: 0 22px 48px rgba(10, 7, 4, 0.45), 0 0 0 1px color-mix(in srgb, var(--ps-accent) 30%, transparent) inset;
+    }
+    .ps-card--wide { grid-column: 1 / -1; }
+    @media screen and (min-width: 750px) {
+      .ps-card--wide { grid-column: span 2; }
+      .ps-card--note, .ps-card--recipe, .ps-card--oyl { grid-column: 1 / -1; }
+    }
+    .ps-ic {
+      display: inline-flex;
+      width: 4.2rem; height: 4.2rem;
+      align-items: center; justify-content: center;
+      margin-bottom: 1.4rem;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--ps-accent) 14%, transparent);
+      color: var(--ps-accent);
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--ps-accent) 50%, transparent);
+      transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.4s ease, background 0.4s ease;
+    }
+    .ps-card:hover .ps-ic {
+      transform: translateY(-2px) scale(1.06) rotate(-3deg);
+      background: color-mix(in srgb, var(--ps-accent) 24%, transparent);
+      box-shadow: 0 0 26px -2px color-mix(in srgb, var(--ps-accent) 55%, transparent);
+    }
+    .ps-ic svg { width: 2.2rem; height: 2.2rem; }
+    .ps-ic--big { position: absolute; top: 1.8rem; right: 1.8rem; margin: 0; width: 5rem; height: 5rem; }
+    .ps-ic--big svg { width: 2.6rem; height: 2.6rem; }
+    .ps-label {
+      margin: 0 0 0.6rem;
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 700;
+      color: color-mix(in srgb, var(--ps-fg) 55%, transparent);
+    }
+    .ps-value {
+      margin: 0;
+      font-family: var(--font-heading-family);
+      font-weight: 700;
+      font-size: clamp(1.9rem, 1.6rem + 0.7vw, 2.4rem);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+    }
+    .ps-card--note .ps-value, .ps-card--recipe .ps-value, .ps-card--oyl .ps-value {
+      font-family: var(--font-body-family);
+      font-weight: 400;
+      font-size: clamp(1.5rem, 1.35rem + 0.3vw, 1.7rem);
+      line-height: 1.55;
+      letter-spacing: normal;
+      max-width: 62ch;
+    }
+    .ps-flavors { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 0.4rem; }
+    .ps-flavor {
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: color-mix(in srgb, var(--ps-accent) 78%, #fff);
+      background: color-mix(in srgb, var(--ps-accent) 14%, transparent);
+      border: 1px solid color-mix(in srgb, var(--ps-accent) 42%, transparent);
+      opacity: 1;
+    }
+    /* i tag entrano a cascata quando la sezione entra in vista */
+    #ProductSpec-{{ section.id }}.is-seen .ps-flavor {
+      opacity: 0;
+      animation: ps-flavor-pop 0.55s cubic-bezier(0.2, 1.3, 0.3, 1) forwards;
+      animation-delay: calc(var(--fi, 0) * 90ms + 200ms);
+    }
+    @keyframes ps-flavor-pop {
+      from { opacity: 0; transform: translateY(12px) scale(0.92); }
+      to { opacity: 1; transform: none; }
+    }
+    .ps-flavor:hover { background: color-mix(in srgb, var(--ps-accent) 26%, transparent); border-color: var(--ps-accent); }
+    .ps-card--flavor { display: flex; align-items: center; gap: 1.6rem; padding-right: 7rem; }
+    .ps-gauge { display: flex; align-items: center; gap: 1.4rem; margin-top: 1rem; }
+    .ps-gauge__track {
+      flex: 1;
+      height: 0.9rem;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--ps-fg) 14%, transparent);
+      overflow: hidden;
+    }
+    .ps-gauge__fill {
+      position: relative;
+      display: block; height: 100%; width: var(--gauge);
+      border-radius: 999px;
+      background: linear-gradient(90deg, color-mix(in srgb, var(--ps-accent) 70%, #5A3523), var(--ps-accent));
+    }
+    /* la barra parte da 0 e si riempie quando la sezione entra in vista */
+    #ProductSpec-{{ section.id }}.is-seen .ps-gauge__fill { animation: ps-gauge-fill 1.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    @keyframes ps-gauge-fill { from { width: 0; } to { width: var(--gauge); } }
+    .ps-gauge__val {
+      font-family: var(--font-heading-family);
+      font-weight: 800;
+      font-size: 1.7rem;
+      color: var(--ps-accent);
+      white-space: nowrap;
+    }
+    .ps-card--note {
+      background: color-mix(in srgb, var(--ps-accent) 12%, var(--ps-card));
+      border-color: color-mix(in srgb, var(--ps-accent) 45%, transparent);
+    }
+    .ps-card--oyl {
+      background: #16110d;
+      border: 1px solid #C99A24;
+    }
+    .ps-card--oyl .ps-label { color: #C99A24; }
+    .ps-card--recipe::before {
+      content: "";
+      position: absolute; inset: 0 auto 0 0; width: 4px;
+      background: var(--ps-accent);
+      opacity: 0.55;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ps-card, .ps-ic, .ps-flavor, .ps-card::after { transition: none; }
+      .ps-card:hover { transform: none; }
+      .ps-card:hover .ps-ic { transform: none; }
+      .product-spec__glow { animation: none; }
+      .ps-gauge__fill { animation: none; width: var(--gauge); }
+      .ps-flavor { opacity: 1; transform: none; animation: none; }
+    }
+  {%- endstyle -%}
+
+  <script>
+    (function () {
+      var s = document.getElementById('ProductSpec-{{ section.id }}');
+      if (!s) return;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) { s.classList.add('is-seen'); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { s.classList.add('is-seen'); io.disconnect(); }
+        });
+      }, { threshold: 0.18 });
+      io.observe(s);
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Scheda prodotto",
+  "tag": "section",
+  "class": "section section--product-spec",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titolo", "default": "Quello che c’è da sapere" },
+    { "type": "text", "id": "subheading", "label": "Sottotitolo (opzionale)" },
+    { "type": "header", "content": "Colori" },
+    { "type": "color", "id": "bg_color", "label": "Sfondo sezione", "default": "#161210" },
+    { "type": "color", "id": "text_color", "label": "Testo", "default": "#F6EEDC" },
+    { "type": "color", "id": "accent_color", "label": "Accento (ocra)", "default": "#C2922D" },
+    { "type": "color", "id": "card_color", "label": "Sfondo card", "default": "#221c16" },
+    { "type": "header", "content": "Spaziatura" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Spazio sopra", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Spazio sotto", "default": 80 }
+  ],
+  "presets": [
+    { "name": "Scheda prodotto" }
+  ]
+}
+{% endschema %}

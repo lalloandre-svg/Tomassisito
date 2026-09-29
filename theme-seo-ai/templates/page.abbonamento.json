@@ -56,7 +56,8 @@
             "highlight": false,
             "badge": "",
             "button_label": "Scegli mensile",
-            "button_link": "/products/abbonamento-bi-settimanale?selling_plan=695464034649"
+            "button_link": "/products/abbonamento-bi-settimanale?selling_plan=695464034649",
+            "prices": "2 buste | 31,50 € al mese\n4 buste | 58,50 € al mese\n6 buste | 81,00 € al mese"
           }
         },
         "plan_2": {
@@ -68,7 +69,8 @@
             "highlight": true,
             "badge": "Consigliato",
             "button_label": "Scegli trimestrale",
-            "button_link": "/products/abbonamento-bi-settimanale?selling_plan=695493034329"
+            "button_link": "/products/abbonamento-bi-settimanale?selling_plan=695493034329",
+            "prices": "2 buste | 29,75 € al mese | addebito di 89,25 € ogni 3 mesi\n4 buste | 55,25 € al mese | addebito di 165,75 € ogni 3 mesi\n6 buste | 76,50 € al mese | addebito di 229,50 € ogni 3 mesi"
           }
         },
         "plan_3": {
@@ -80,7 +82,8 @@
             "highlight": false,
             "badge": "",
             "button_label": "Scegli semestrale",
-            "button_link": "/products/abbonamento-bi-settimanale?selling_plan=695493001561"
+            "button_link": "/products/abbonamento-bi-settimanale?selling_plan=695493001561",
+            "prices": "2 buste | 28,00 € al mese | addebito di 168,00 € ogni 6 mesi\n4 buste | 52,00 € al mese | addebito di 312,00 € ogni 6 mesi\n6 buste | 72,00 € al mese | addebito di 432,00 € ogni 6 mesi"
           }
         },
         "step_1": {
@@ -189,7 +192,8 @@
         "accent_color": "#C2922D",
         "green_color": "#0F4A27",
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 0,
+        "prices_note": "Prezzi del primo anno, spedizione inclusa."
       }
     },
     "polish": {
